@@ -13,12 +13,25 @@ public class VillageoisImpl implements IVillageois {
 	private int quantiteOr;
     private boolean estMort;
     
+    @Override
+	public IVillageois init(ERace race, int largeur, int hauteur, int force,
+			double vitesse, int pointsDeVie) {
+		this.race         =   race; 
+		this.largeur      =   largeur; 
+		this.hauteur      =   hauteur; 
+		this.force        =   force; 
+		this.vitesse      =   vitesse; 
+		this.pointsDeVie  =   pointsDeVie; 
+		return this;
+		
+	}
+    
     public VillageoisImpl() {}
     
-
 	public int getPointsDeVie() {
 		return pointsDeVie;
 	}
+
 
 	public int getQuantiteOr() {
 		return quantiteOr;
@@ -51,24 +64,8 @@ public class VillageoisImpl implements IVillageois {
 	}
 
 
-
 	public double getVitesse() {
 		return vitesse;
-	}
-
-
-
-	@Override
-	public IVillageois init(ERace race, int largeur, int hauteur, int force,
-			double vitesse, int pointsDeVie) {
-		this.race         =   race; 
-		this.largeur      =   largeur; 
-		this.hauteur      =   hauteur; 
-		this.force        =   force; 
-		this.vitesse      =   vitesse; 
-		this.pointsDeVie  =   pointsDeVie; 
-		return this;
-		
 	}
 
 	@Override
@@ -79,8 +76,8 @@ public class VillageoisImpl implements IVillageois {
 
 	@Override
 	public boolean estMort() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.estMort;
+		
 	}
 
 }
