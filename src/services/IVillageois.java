@@ -6,7 +6,7 @@ import enums.ERace;
 
 public interface IVillageois {
 
-	//		Observators
+	/* ########### Observators ########### */	
 	ERace 	getRace();
 	int 	getLargeur();
 	int		getHauteur();
@@ -16,7 +16,7 @@ public interface IVillageois {
 	int		getQuantiteOr();
 	boolean	estMort();
 	
-	//		Constructors
+	/* ########### Constructors ########### */		
 	IVillageois init(ERace race, int largeur, int hauteur, int force, 
 			double vitesse, int pointsVie);
 	
@@ -28,18 +28,19 @@ public interface IVillageois {
 
 	
 	
-	//Operators
-	// pre retrait(V,s) require ¬estMort(V) ∧ s>0
+	/* ########### Operators ########### */
+	
+	// \pre retrait(V,s) require ¬estMort(V) ∧ s>0
 	
 	void retrait(int pointsVie);
 	
-	/* post
-	 * 	pointsDeVie(retrait(V,s))=pointsDeVie(V) -s
-	 *	quantiteOr(retrait(V,s))=quantiteOr(V)
+	/* \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
+	 * \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
 	 */
 	
 	
-	//Invariants
-	// estMort(V) min = pointsDeVie(V) ≤ 0
+	/* ########### Invariants ########### */
+	//	minimisation
+	// \inv: estMort(V) min= pointsDeVie(V) ≤ 0
 	
 }
