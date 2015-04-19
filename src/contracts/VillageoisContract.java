@@ -35,11 +35,11 @@ public class VillageoisContract extends VillageoisDecorator {
 		* 				force, vitesse, pointsVie > 0
 		*/
 		if( ! ( largeur % 2 == 1 ) ) 
-			throw new InvariantError("inv: largeur%2!=1");
+			throw new PreconditionError("inv: largeur%2!=1");
 		if( ! ( hauteur % 2 == 1 ) ) 
-			throw new InvariantError("inv: hauteur%2!=1");
+			throw new PreconditionError("inv: hauteur%2!=1");
 		if( ! ( force > 0 && vitesse > 0 && pointsDeVie > 0 ) ) 
-			throw new InvariantError("inv: force, vitesse, pointsVie <= 0");
+			throw new PreconditionError("inv: force, vitesse, pointsVie <= 0");
 	
 		
 		// Premier check des invariants
