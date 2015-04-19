@@ -18,7 +18,7 @@ public interface IVillageois {
 	
 	/* ########### Constructors ########### */		
 	IVillageois init(ERace race, int largeur, int hauteur, int force, 
-			double vitesse, int pointsVie);
+			double vitesse, int pointsDeVie);
 	
 	/* pre 	pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
 	* 	require 	largeur%2=1 ∧ 
@@ -34,9 +34,9 @@ public interface IVillageois {
 	
 	void retrait(int pointsVie);
 	
-	/* \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
-	 * \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
-	 */
+	// \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
+	// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
+	 
 	
 	
 	/* ########### Invariants ########### */
