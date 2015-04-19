@@ -20,7 +20,7 @@ public interface IVillageois {
 	IVillageois init(ERace race, int largeur, int hauteur, int force, 
 			double vitesse, int pointsDeVie);
 	
-	/* pre 	pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
+	/* \pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
 	* 	require 	largeur%2=1 ∧ 
 	* 				hauteur%2=1 ∧
 	* 				force, vitesse, pointsVie > 0
