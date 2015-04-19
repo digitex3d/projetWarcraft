@@ -1,9 +1,9 @@
 package decorators;
 
 import enums.ERace;
-import services.IBlocService;
 import services.IVillageois;
 
+//TODO: completare e verificare
 public class VillageoisDecorator implements IVillageois {
 	private IVillageois delegate;
 
@@ -56,6 +56,12 @@ public class VillageoisDecorator implements IVillageois {
 	@Override
 	public void retrait(int pointsVie) {
 		this.delegate.retrait(pointsVie);
+	}
+
+	@Override
+	public IVillageois init(ERace race, int largeur, int hauteur, int force,
+			double vitesse, int pointsDeVie) {
+		return this.delegate.init(race, largeur, hauteur, force, vitesse, pointsDeVie);
 	}
 
 }
