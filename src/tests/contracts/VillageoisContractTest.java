@@ -9,6 +9,7 @@ import contracts.VillageoisContract;
 import enums.ERace;
 
 import tests.AbstractVillageoisTest;
+import exceptions.PostconditionError;
 import exceptions.PreconditionError;
 
 public class VillageoisContractTest extends AbstractVillageoisTest {
@@ -50,14 +51,7 @@ public class VillageoisContractTest extends AbstractVillageoisTest {
 		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
 	}
 	
-	@Test(expected=PreconditionError.class)
-	public void testInitFail4() {
-		// condition initiale : aucune
-
-		// opération
-		villageois.init(ERace.HUMAN, 78, 75,10,10.0,-1 );
-
-		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
-	}
+	
+	
 
 }

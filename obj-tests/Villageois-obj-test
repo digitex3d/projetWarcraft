@@ -1,0 +1,15 @@
+Cas de test 0.1 : cas positif Villageois::testInit1
+	Condition initiales : 
+		aucune
+	Opérations : 
+		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
+	Oracle OK: 
+		getType(L0) == TYPE.VIDE
+		getTresor(L0) == TRESOR.BOMB_UP
+		eois.getRace() == ERace.HUMAN);
+		getLargeur() == 77        
+		getHauteur() == 75        
+		getForce() == 10            
+		getForce() == 10.0        
+		getVitesse() == 10 
+	

@@ -71,7 +71,7 @@ public class VillageoisImplError implements IVillageois {
 
 	@Override
 	public void retrait(int s) {
-		this.pointsDeVie -= s;
+		this.pointsDeVie -= s+1;
 
 	}
 
