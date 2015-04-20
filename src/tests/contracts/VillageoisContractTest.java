@@ -9,7 +9,6 @@ import contracts.VillageoisContract;
 import enums.ERace;
 
 import tests.AbstractVillageoisTest;
-import exceptions.PostconditionError;
 import exceptions.PreconditionError;
 
 public class VillageoisContractTest extends AbstractVillageoisTest {

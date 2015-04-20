@@ -5,14 +5,14 @@ import services.IVillageois;
 
 // TODO: completare e verificare
 public class VillageoisImpl implements IVillageois {
-	private ERace race;
-	private int largeur;
-	private int hauteur;
-	private int force;
-	private double vitesse;
-	private int pointsDeVie;
-	private int quantiteOr;
-    private boolean estMort;
+	protected ERace race;
+	protected int largeur;
+	protected int hauteur;
+	protected int force;
+	protected double vitesse;
+	protected int pointsDeVie;
+	protected int quantiteOr;
+    protected boolean estMort;
     
     @Override
 	public IVillageois init(ERace race, int largeur, int hauteur, int force,

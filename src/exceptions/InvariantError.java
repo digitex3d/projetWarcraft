@@ -1,6 +1,7 @@
 package exceptions;
 
 
+@SuppressWarnings("serial")
 public class InvariantError extends ContractError {
 
 

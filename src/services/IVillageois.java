@@ -44,8 +44,8 @@ public interface IVillageois {
 
 	void chargeOr(int s);
 
-	// \post: pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre -s
-	// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre
+	// \post: pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre 
+	// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre+s
 	// \post: estMort(chargeOr(V,s))= estMort(V)@pre
 	
 	// [dechargeOr]
@@ -55,8 +55,8 @@ public interface IVillageois {
 
 	void dechargeOr(int s);
 
-	// \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
-	// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
+	// \post: pointsDeVie(dechargeOr(V,s))= pointsDeVie(V)@pre 
+	// \post: quantiteOr(dechargeOr(V,s))= quantiteOr(V)@pre - s
 	// \post: estMort(dechargeOr(V,s))= estMort(V)@pre
 
 	/* ########### Invariants ########### */

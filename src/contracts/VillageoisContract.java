@@ -42,11 +42,10 @@ public class VillageoisContract extends VillageoisDecorator {
 			throw new PreconditionError("inv: force, vitesse, pointsVie <= 0");
 	
 		
-		// Premier check des invariants
-		this.checkInvariants();
-		
 		// execute function
 		super.init(race, largeur, hauteur, force, vitesse, pointsDeVie);
+		
+		//TODO:postcond
 
 		// Deuxième check des invariants
 		this.checkInvariants();
@@ -61,7 +60,7 @@ public class VillageoisContract extends VillageoisDecorator {
 		/* ######## Verification des préconditions ######### */
 	
 		// \pre retrait(V,s) require ¬estMort(V) ∧ s>0
-		if( super.estMort() || s <= 0 )
+		if( super.estMort() && s <= 0 )
 			throw new  PreconditionError("retrait(V,s) require ¬estMort(V) ∧ s>0");
 
 		/* ######## 	Sauvegarde contexte  		######### */
@@ -85,11 +84,6 @@ public class VillageoisContract extends VillageoisDecorator {
 
 		/* ######## Deuxième check des invariants ######### */
 		this.checkInvariants();
-		
-		// Deuxième check des invariants
-		this.checkInvariants();
-		
-		
 		
 	}
 	

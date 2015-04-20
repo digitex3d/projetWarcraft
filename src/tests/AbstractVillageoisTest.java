@@ -4,8 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.istack.internal.logging.Logger;
-
 import enums.ERace;
 import services.IVillageois;
 
@@ -42,6 +40,8 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		assertPerso("init, Le bloc est crée avec des mauvais points de vie", villageois.getPointsDeVie()== 10);
 	}
 	
+
+	
 	@Test
 	public void test1_0() {
 		// condition initiale 
@@ -51,7 +51,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		villageois.retrait(5);
 
 		// oracle 
-		assertPerso("Valeur de retrait faux", villageois.getPointsDeVie() == 5);
+		assertPerso("Valeur de retrait fausse", villageois.getPointsDeVie() == 5);
 		assertPerso("La quantité d'or a changé", villageois.getQuantiteOr() == 0);
 	}
 	
