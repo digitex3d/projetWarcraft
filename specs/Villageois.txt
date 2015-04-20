@@ -10,10 +10,18 @@ observators :
 	estMort : [Villageois] → boolean
 Constructors :
 	init : String × int × int × int × double × int → [Villageois]
-		pre init(race,largeur,hauteur,force,vitesse,pointsVie) require race 6= "" ∧ largeur%2=1 ∧ hauteur											%2=1
+		pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
+		require  ∧ largeur%2=1 ∧ 
+					hauteur%2=1 ∧
+					force, vitesse, pointsVie > 0
 Operators :
 	retrait : [Villageois] × int → [Villageois]
 		pre retrait(V,s) require ¬estMort(V) ∧ s>0
+	chargeOr : [Villageois] × int → [Villageois]
+		pre chargeOr(V,s) require ¬estMort(V) ∧ s>0
+	dechargeOr : [Villageois] × int → [Villageois]
+		pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0
+		
 Observations :
 	[invariants]
 	estMort(V) min = pointsDeVie(V) ≤ 0
@@ -28,5 +36,16 @@ Observations :
 	quantiteOr(init(s,l,h,f,v,p))=0
 
 	[retrait]
-	pointsDeVie(retrait(V,s))=pointsDeVie(V) -s
-	quantiteOr(retrait(V,s))=quantiteOr(V)
+	pointsDeVie(retrait(V,s))=pointsDeVie(V)@pre -s
+	quantiteOr(retrait(V,s))=quantiteOr(V)@pre
+	estMort(retrait(V,s))=estMort(V)@pre
+	
+	[chargeOr]
+	pointsDeVie(chargeOr(V,s))=pointsDeVie(V)
+	quantiteOr(chargeOr(V,s))=quantiteOr(V)@pre + s
+	estMort(chargeOr(V,s))=estMort(V)@pre
+	
+	[dechargeOr]
+	pointsDeVie(dechargeOr(V,s))=pointsDeVie(V)
+	quantiteOr(dechargeOr(V,s))=quantiteOr(V)@pre - s
+	estMort(dechargeOr)=estMort(V)@pre

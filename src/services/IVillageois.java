@@ -30,15 +30,33 @@ public interface IVillageois {
 	
 	/* ########### Operators ########### */
 	
+	// [retrait]
 	// \pre retrait(V,s) require ¬estMort(V) ∧ s>0
 	
-	void retrait(int pointsVie);
+	void retrait(int s);
 	
 	// \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
 	// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
+	// \post: estMort(retrait(V,s))= estMort(V)@pre
 	 
+	// [chargeOr]
+	// \pre chargeOr(V,s) require ¬estMort(V) ∧ s>0
+
+	void chargeOr(int s);
+
+	// \post: pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre -s
+	// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre
+	// \post: estMort(chargeOr(V,s))= estMort(V)@pre
 	
-	
+	// [dechargeOr]
+	// \pre retrait(V,s) require ¬estMort(V) ∧ s>0
+
+	void dechargeOr(int s);
+
+	// \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
+	// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
+	// \post: estMort(dechargeOr(V,s))= estMort(V)@pre
+
 	/* ########### Invariants ########### */
 	//	minimisation
 	// \inv: estMort(V) min= pointsDeVie(V) ≤ 0

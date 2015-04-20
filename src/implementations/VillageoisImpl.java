@@ -80,5 +80,17 @@ public class VillageoisImpl implements IVillageois {
 		return this.estMort;
 		
 	}
+	
+	@Override
+	public void chargeOr(int s) {
+		this.quantiteOr += s;
+		
+	}
+
+	@Override
+	public void dechargeOr(int s) {
+		this.quantiteOr -= s;
+		
+	}
 
 }

@@ -64,4 +64,16 @@ public class VillageoisDecorator implements IVillageois {
 		return this.delegate.init(race, largeur, hauteur, force, vitesse, pointsDeVie);
 	}
 
+	@Override
+	public void chargeOr(int s) {
+		this.delegate.chargeOr(s);
+		
+	}
+
+	@Override
+	public void dechargeOr(int s) {
+		this.delegate.dechargeOr(s);
+		
+	}
+
 }
