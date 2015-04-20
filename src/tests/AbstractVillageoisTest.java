@@ -43,7 +43,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 	}
 	
 	@Test
-	public void test0_2() {
+	public void test1_0() {
 		// condition initiale 
 		villageois.init(ERace.HUMAN, 77, 75,10,10.0,10 );
 		
@@ -51,10 +51,38 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		villageois.retrait(5);
 
 		// oracle 
-		assertPerso("Valeur de retrait fausse", villageois.getPointsDeVie() == 5);
+		assertPerso("Valeur de retrait faux", villageois.getPointsDeVie() == 5);
 		assertPerso("La quantité d'or a changé", villageois.getQuantiteOr() == 0);
 	}
 	
+	@Test
+	public void test2_0() {
+		// condition initiale 
+		villageois.init(ERace.HUMAN, 77, 75,10,10.0,10 );
+		
+		// opération
+		villageois.chargeOr(5);
+
+		// oracle 
+		assertPerso("La quantité d'or n'est pas la bonne", villageois.getQuantiteOr() == 5);
+		assertPerso("Les points de vie ont changé", villageois.getPointsDeVie() == 10);
+		assertPerso("Les points de vie ont changé", villageois.estMort() == false);
+	}
+	
+	@Test
+	public void test3_0() {
+		// condition initiale 
+		villageois.init(ERace.HUMAN, 77, 75,10,10.0,10 );
+		villageois.chargeOr(5);
+		
+		// opération
+		villageois.dechargeOr(2);
+
+		// oracle 
+		assertPerso("La quantité d'or n'est pas la bonne", villageois.getQuantiteOr() == 3);
+		assertPerso("Les points de vie ont changé", villageois.getPointsDeVie() == 10);
+		assertPerso("Les points de vie ont changé", villageois.estMort() == false);
+	}
 	
 	
 	

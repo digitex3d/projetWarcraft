@@ -49,7 +49,9 @@ public interface IVillageois {
 	// \post: estMort(chargeOr(V,s))= estMort(V)@pre
 	
 	// [dechargeOr]
-	// \pre retrait(V,s) require ¬estMort(V) ∧ s>0
+	// \pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0
+	// \pre dechargeOr(V,s) require s <= quantiteOr(V)
+	
 
 	void dechargeOr(int s);
 

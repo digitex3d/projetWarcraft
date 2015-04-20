@@ -70,6 +70,7 @@ public class VillageoisImplError implements IVillageois {
 	}
 
 	@Override
+	// Bug
 	public void retrait(int s) {
 		this.pointsDeVie -= s+1;
 
@@ -88,6 +89,7 @@ public class VillageoisImplError implements IVillageois {
 	}
 
 	@Override
+	// Bug
 	public void dechargeOr(int s) {
 		this.quantiteOr += s;
 		
