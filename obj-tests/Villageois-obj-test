@@ -6,10 +6,42 @@ Cas de test 0.1 : cas positif Villageois::testInit1
 	Oracle OK: 
 		getType(L0) == TYPE.VIDE
 		getTresor(L0) == TRESOR.BOMB_UP
-		eois.getRace() == ERace.HUMAN);
+		getRace() == ERace.HUMAN);
 		getLargeur() == 77        
 		getHauteur() == 75        
 		getForce() == 10            
 		getForce() == 10.0        
 		getVitesse() == 10 
-	
+***********************************************************
+Cas de test 1.0 : cas positif Villageois::testRetrait1
+	Condition initiales : 
+		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
+	Opérations : 
+		L1.0 = retrait(5)
+	Oracle OK: 
+		getPointsDeVie=5
+		getQuantiteOr=0
+		estMort=False
+***********************************************************
+Cas de test 2.0 : cas positif Villageois::testChargeOr1
+	Condition initiales : 
+		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
+	Opérations : 
+		L1.0 = chargeOr(5)
+	Oracle OK: 
+		getPointsDeVie=10
+		getQuantiteOr=5
+		estMort=False
+***********************************************************
+***********************************************************
+Cas de test 3.0 : cas positif Villageois::testChargeOr1
+	Condition initiales : 
+		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
+		L2=chargeOr(5)
+	Opérations : 
+		L1.0 = dechargeOr(2)
+	Oracle OK: 
+		getPointsDeVie=10
+		getQuantiteOr=3
+		estMort=False
+***********************************************************

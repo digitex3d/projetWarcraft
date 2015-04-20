@@ -78,7 +78,7 @@ public class VillageoisImplError implements IVillageois {
 
 	@Override
 	public boolean estMort() {
-		return this.estMort;
+		return !this.estMort;
 		
 	}
 

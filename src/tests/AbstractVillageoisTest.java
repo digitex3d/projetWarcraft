@@ -38,8 +38,8 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		assertPerso("init, Le bloc est crée avec une mauvaise largeur", villageois.getLargeur() == 77);
 		assertPerso("init, Le bloc est crée avec une mauvaise hauteur", villageois.getHauteur() == 75);
 		assertPerso("init, Le bloc est crée avec une mauvaise force", villageois.getForce() == 10);
-		assertPerso("init, Le bloc est crée avec une mauvaise vitesse", villageois.getForce() == 10.0);
-		assertPerso("init, Le bloc est crée avec des mauvais points de vie", villageois.getVitesse() == 10);
+		assertPerso("init, Le bloc est crée avec une mauvaise vitesse", villageois.getVitesse() == 10.0);
+		assertPerso("init, Le bloc est crée avec des mauvais points de vie", villageois.getPointsDeVie()== 10);
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		// oracle 
 		assertPerso("La quantité d'or n'est pas la bonne", villageois.getQuantiteOr() == 5);
 		assertPerso("Les points de vie ont changé", villageois.getPointsDeVie() == 10);
-		assertPerso("Les points de vie ont changé", villageois.estMort() == false);
+		assertPerso("Le villageois ne dois pas etre mort", villageois.estMort() == false);
 	}
 	
 	@Test
@@ -81,7 +81,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		// oracle 
 		assertPerso("La quantité d'or n'est pas la bonne", villageois.getQuantiteOr() == 3);
 		assertPerso("Les points de vie ont changé", villageois.getPointsDeVie() == 10);
-		assertPerso("Les points de vie ont changé", villageois.estMort() == false);
+		assertPerso("Le villageois ne dois pas etre mort", villageois.estMort() == false);
 	}
 	
 	
