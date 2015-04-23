@@ -112,6 +112,7 @@ public class MineContract extends MineDecorator {
 		
 	}
 	
+	//	------------------------------- [ acceuil ] -------------------------------
 	public void acceuil(){
 		// Premier check des invariants
 		this.checkInvariants();
@@ -121,18 +122,58 @@ public class MineContract extends MineDecorator {
 		if( super.estAbandonne() ) 
 			throw new  PreconditionError("pre acceuil(M) require ¬abandoned(M)");
 
-		//Sauvegarde contexte  
-
+		/* ######## 	Sauvegarde contexte  		######### */
+		int orRestant_pre = super.getOrRestant();
+		
 		/* ######## 	Execution  		######### */
+		super.acceuil();
 
 		/* ######## Verification des postcondition ######### */
-
+		
+		// \pre: orRestant(acceuil(M))=orRestant(M)@pre
+		if( super.getOrRestant() != orRestant_pre )                                     
+			throw new  PostconditionError("orRestant(acceuil(M))=orRestant(M)@pre"); 
+		
+		// \pre: abandonCompteur(accueil(M))=0
+		if( super.getAbandonCompteur() != 0)                                     
+			throw new  PostconditionError("abandonCompteur(accueil(M))=0"); 
+		
 		// Deuxième check des invariants
 		this.checkInvariants();
 		
 	}
 	
+	// --------------------- [abandoned] -----------------------------
+	public void abandoned(){
+		// Premier check des invariants
+		this.checkInvariants();
+		
+		/* ######## Verification des préconditions ######### */
+		// \pre: abandoned(M) require ¬acceuil(M)
+		if( ! super.estAbandonne() )
+			throw new PreconditionError(" abandoned(M) require ¬estAbandonne()");
+		
+		//Sauvegarde contexte  
+		int orRestant_pre = super.getOrRestant();
+		int abandonCompteur_pre = super.getAbandonCompteur();
+		
+		/* ######## 	Execution  		######### */
+		super.abandoned();
+		
+		/* ######## Verification des postcondition ######### */
+		// \pre: orRestant(acceuil(M))=orRestant(M)@pre
+		if( super.getOrRestant() != orRestant_pre )                                     
+			throw new  PostconditionError("orRestant(acceuil(M))=orRestant(M)@pre"); 
+
+		// \post: abandonCompteur(abandoned(M))=abandonCompteur()+1	
+		if( super.getAbandonCompteur() != abandonCompteur_pre+1)                                     
+				throw new  PostconditionError("abandonCompteur(abandoned(M))=abandonCompteur()+1"); 
+		
+		// Deuxième check des invariants
+		this.checkInvariants();
 	
+	}
+
 	
 	
 	
