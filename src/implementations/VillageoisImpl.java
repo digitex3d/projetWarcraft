@@ -13,6 +13,8 @@ public class VillageoisImpl implements IVillageois {
 	protected int pointsDeVie;
 	protected int quantiteOr;
     protected boolean estMort;
+    protected int posX;
+    protected int posY;
     
     @Override
 	public IVillageois init(ERace race, int largeur, int hauteur, int force,
@@ -90,6 +92,28 @@ public class VillageoisImpl implements IVillageois {
 	@Override
 	public void dechargeOr(int s) {
 		this.quantiteOr -= s;
+		
+	}
+
+	@Override
+	public int getX() {
+		return this.posX;
+	}
+
+	@Override
+	public int getY() {
+		return this.posY;
+	}
+
+	@Override
+	public void setX(int x) {
+		this.posX = x;
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		this.posY = y;
 		
 	}
 

@@ -1,9 +1,7 @@
 package services;
 
-public interface IMine {
+public interface IMine extends IEntite {
 	/* ########### Observators ########### */	
-	int 	getLargeur();
-	int		getHauteur();
 	int		getOrRestant();
 	boolean	estAbandonne();
 	boolean	estLaminee();

@@ -9,6 +9,8 @@ public class MineImpl implements IMine {
 	int abandonCompteur;
 	boolean estLaminee;
 	boolean estAbandonne;
+	int posX;
+	int posY;
 	
 	public MineImpl() {}
 		
@@ -73,6 +75,16 @@ public class MineImpl implements IMine {
 	public void abandoned() {
 			this.abandonCompteur += 1;
 		
+	}
+
+	@Override
+	public int getX() {
+		return this.posX;
+	}
+
+	@Override
+	public int getY() {
+		return this.posY;
 	}
 
 

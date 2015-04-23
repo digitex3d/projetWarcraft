@@ -1,5 +1,5 @@
 package services;
 
-public interface IHotelVille extends IMine{
+public interface IHotelVille extends IMine, IEntite{
 
 }

@@ -10,7 +10,6 @@ import enums.EResultat;
 import services.IHotelVille;
 import services.IMine;
 import services.IMoteurJeu;
-import services.IVilainService;
 import services.IVillageois;
 import utils.Utils;
 
@@ -23,12 +22,6 @@ public class MoteurJeuImpl implements IMoteurJeu{
     protected EResultat resultatFinal;
     protected Map<Integer, IMine> numeroesMine;
     protected Map<Integer, IVillageois> numeroesVillageois;
-    protected Map<Integer, Integer> posVillageoisX;
-    protected Map<Integer, Integer> posVillageoisY;
-    protected Map<Integer, Integer> posMineX;
-    protected Map<Integer, Integer> posMineY;
-    protected int posHoteldeVilleX;
-    protected int posHoteldeVilleY;
     protected List<IVillageois> villageois;
     protected List<IMine> mines;
     
@@ -80,12 +73,12 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	@Override
 	public int getPositionVillageoisX(int num) {
-		return this.posVillageoisX.get(num);
+		return this.villageois.get(num).getX();
 	}
 
 	@Override
 	public int getPositionVillageoisY(int num) {
-		return this.posVillageoisY.get(num);
+		return this.villageois.get(num).getY();
 	}
 
 	@Override
@@ -95,12 +88,12 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	@Override
 	public int getPositionMineX(int num) {
-		return this.posMineX.get(num);
+		return this.mines.get(num).getX();
 	}
 
 	@Override
 	public int getPositionMineY(int num) {
-		return this.posMineY.get(num);
+		return this.mines.get(num).getY();
 	}
 
 	@Override
@@ -111,12 +104,12 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	@Override
 	public int getPositionHotelVilleX() {
-		return this.posHoteldeVilleX;
+		return this.hotelDeVille.getX();
 	}
 
 	@Override
 	public int getPositionHotelVilleY() {
-		return this.posHoteldeVilleY;
+		return this.hotelDeVille.getY();
 	}
 
 	@Override
@@ -143,13 +136,13 @@ public class MoteurJeuImpl implements IMoteurJeu{
 				throw new Error("Vous devez binder le Hotel de ville avant de faire appel a init");
 		 
 		 // Initialisation Hotel de ville
-		 this.posHoteldeVilleX = Utils.randInt(0, 51);
-		 this.posHoteldeVilleY = Utils.randInt(0, 51);
+		 this.hotelDeVille.setX(Utils.randInt(0, 51));
+		 this.hotelDeVille.setY(Utils.randInt(0, 51));
 		 this.hotelDeVille.init(20, 20);
 		 
 		// Initialisation Villageois
-		int poshx = this.posHoteldeVilleX;
-		int poshy = this.posHoteldeVilleY;
+		int poshx = this.hotelDeVille.getX();
+		int poshy = this.hotelDeVille.getY();
 		for( int numv : this.getNumeroesVillageois()){
 			this.villageois.get(numv).init(ERace.HUMAN, 1, 2, 10, 10.0, 100);
 			this.posVillageoisX.put(numv, poshx + Utils.randInt(0, 51));
@@ -181,6 +174,14 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	@Override
 	public IMine getMine(int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Set<Integer> numeroesVillageois() {
 		// TODO Auto-generated method stub
 		return null;
 	}

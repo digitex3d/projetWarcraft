@@ -4,7 +4,7 @@ import enums.ERace;
 
 
 
-public interface IVillageois {
+public interface IVillageois extends IEntite{
 
 	/* ########### Observators ########### */	
 	ERace 	getRace();
