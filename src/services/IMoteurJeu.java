@@ -30,7 +30,7 @@ public interface IMoteurJeu {
 	//	num ∈ numeroesVillageois(M,num)
 	
 	Set<Integer> getNumeroesMine();
-	IMine getMine();
+	IMine getMine(int num);
 	// \pre getMine(M,num) require num ∈ numeroesMine(M,num)
 	
 	int getPositionMineX(int num);
@@ -60,13 +60,38 @@ public interface IMoteurJeu {
 	// \pre init(largeur,hauteur,maxPas) require 
 	// largeur≥ 600 ∧ hauteur≥ 400 ∧ maxPas≥ 0
 	
-	IMine init(int largeur, int hauteur);
+	IMoteurJeu init(int largeur, int hauteur, int maxPasJeu);
 	
-	/* \post: maxPasJeu(init(l,h,m))=m
-	* \post: pasJeuCourant(init(l,h,m))=0
-	* \post: largeurTerrain(init(l,h,m))=l
-	* \post: hauteurTerrain(init(l,h,m))=h
-	* \post: estFini(init(l,h,m))=False
+	// postconditions
+	/* maxPasJeu(init(l,h,m))=m
+	 * pasJeuCourant(init(l,h,m))=0
+	 * largeurTerrain(init(l,h,m))=l
+	 * hauteurTerrain(init(l,h,m))=h
+	 * estFini(init(l,h,m))=False
+	 * 
+	 * // Initialisation Hotel de ville
+	 * positionHotelVilleX( init(l,h,m) ) <= 51 
+	 * positionHotelVilleY( init(l,h,m) ) <= 51 
+	 * HotelVille::orRestant( getHotelVille( init(l,h,m) ) ) = 16
+	 * 
+	 * // Initialisation Villageois
+	 * \forall numV \in numeroesVillageois:
+	 * 	  positionVillageoisY(M, numV) - positionHotelVilleY(M) <= 51
+	 *      	Ʌ  positionVillageoisX(M, numV) - positionHotelVilleX(M) <= 51
+	 *  	    Ʌ Villageois::pointsDeVie( getVillageois(M, numV) ) = 100
+	 *     	Ʌ Villageois::quantiteOr( getVillageois(M, numV) ) = 0
+	 *  		Ʌ Villageois::estMort( getVillageois(M, numV) ) = False
+	 * 
+	 * // Initialisation Mines
+	 * \forall numM \in numeroesMine:
+	 * 	  positionMineY(M, numM) <= largeurTerrain
+	 *      	Ʌ  positionMineX(M, numM) <= hauteurTerrain
+	 * 	     	Ʌ Mine::estAbandonne( getVillageois(M, numV) ) = True
+	 */
+		
+		
+		
+		
 
 	/* ########### Operators ########### */
 	

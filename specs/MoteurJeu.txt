@@ -77,6 +77,7 @@ Observations :
 		  positionMineY(M, numM) <= largeurTerrain
 	     	Ʌ  positionMineX(M, numM) <= hauteurTerrain
      	     	Ʌ Mine::estAbandonne( getVillageois(M, numV) ) = True
+     	     	
 	[pasJeu]
 	pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M) +1
 	getMine(pasJeu(M,c,numVillageois,arg),numMine) =
