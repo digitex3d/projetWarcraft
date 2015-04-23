@@ -175,7 +175,4 @@ public class MineContract extends MineDecorator {
 	}
 
 	
-	
-	
-
 }

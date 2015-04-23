@@ -17,7 +17,7 @@ Operators :
 	acceuil : [Mine] → [Mine]
 		pre acceuil(M) require ¬abandoned(M)
 	abandoned : [Mine] → [Mine]
-		pre abandoned(M) require ¬acceuil(M)
+		 pre abandoned(M) require ¬estAbandonne()
 		
 Observations :
 	[invariants]
@@ -44,3 +44,5 @@ Observations :
 	[abandoned]
 	orRestant(abandoned(M))=orRestant(M)
 	abandonCompteur(abandoned(M))=abandonCompteur()+1
+
+	

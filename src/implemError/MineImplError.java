@@ -1,8 +1,9 @@
-package implementations;
+package implemError;
 
 import services.IMine;
 
-public class MineImpl implements IMine {
+// TODO: verificare
+public class MineImplError implements IMine {
 	int largeur;
 	int hauteur;
 	int orRestant;
@@ -10,7 +11,7 @@ public class MineImpl implements IMine {
 	boolean estLaminee;
 	boolean estAbandonne;
 	
-	public MineImpl() {}
+	public MineImplError() {}
 		
 	@Override
 	public IMine init(int largeur, int hauteur) {
@@ -18,40 +19,38 @@ public class MineImpl implements IMine {
 		this.hauteur = hauteur;
 		this.orRestant = 51;
 		this.abandonCompteur = 51;
-		this.estLaminee = false;
-		this.estAbandonne = true;
 		return this;
 		
 	}
 		
 	@Override
 	public int getLargeur() {
-		return this.largeur;
+		return this.getLargeur();
 	}
 
 	@Override
 	public int getHauteur() {
-		return this.hauteur;
+		return this.getHauteur();
 	}
 
 	@Override
 	public int getOrRestant() {
-		return this.orRestant;
+		return this.getOrRestant();
 	}
 
 	@Override
 	public boolean estAbandonne() {
-		return this.estAbandonne;
+		return this.estAbandonne();
 	}
 
 	@Override
 	public boolean estLaminee() {
-		return this.estLaminee;
+		return this.estLaminee();
 	}
 
 	@Override
 	public int getAbandonCompteur() {
-		return this.abandonCompteur;
+		return this.getAbandonCompteur();
 	}
 
 	
@@ -61,17 +60,14 @@ public class MineImpl implements IMine {
 		this.orRestant -= s;
 	}
 
-	//TODO: à revoir
 	@Override
 	public void acceuil() {
-		this.abandonCompteur = 0;
-		
+		this.abandonCompteur = 1;
 	}
 
-	//TODO: à revoir
 	@Override
 	public void abandoned() {
-			this.abandonCompteur += 1;
+		this.abandonCompteur -= 1;
 		
 	}
 

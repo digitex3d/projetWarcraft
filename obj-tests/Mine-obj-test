@@ -1,0 +1,17 @@
+Cas de test 0.1 : cas positif Mine::testInit1
+	Condition initiales : 
+		aucune
+	Opérations : 
+		L0 = init(77, 75)
+	Oracle OK: 
+		getLargeur() == 77        
+		getHauteur() == 75        
+***********************************************************
+Cas de test 1.0 : cas positif Villageois::testRetrait1
+	Condition initiales : 
+		L0 = init(77, 75)
+	Opérations : 
+		L1.0 = retrait(1)
+	Oracle OK: 
+		getQuantiteOr=50
+***********************************************************
