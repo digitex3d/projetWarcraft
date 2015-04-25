@@ -1,5 +1,8 @@
 package services;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import enums.ECommande;
@@ -14,8 +17,6 @@ public interface IMoteurJeu {
 	boolean estFini();
 	EResultat resultatFinal();
 	
-	// \pre resultatFinal(M) require estFini(M)
-	Set<Integer> getNumeroesVillageois();
 	
 	IVillageois getVillageois(int num);
     // \pre getVillageois(M,num) 
@@ -106,6 +107,7 @@ public interface IMoteurJeu {
 	//         \	
 	
 	void pasJeu(ECommande commande, int numVillageois, int argument);
+
 	
 	/* \post: pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M) +1
 	* 	getMine(pasJeu(M,c,numVillageois,arg),numMine) =
@@ -121,45 +123,15 @@ public interface IMoteurJeu {
 	*  						Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE 
 	*                       getHotelDeVille(M)@pre 
 	*  
-	*  
+	*/
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	void retrait(int s);
-	
-	// \post:orRestant(retrait(M,s))=orRestant(M)-s 
-	// \post: abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre 
-	// \post: estAbandonnee(retrait(M,s))= estAbandonnee(V)@pre
-	// \post: estLaminee(retrait(M,s))= estLaminee(V)@pre
-	 
-	// [acceuil]
-	// \pre acceuil(M) require ¬abandoned(M)
-
-	void acceuil();
-
-	// \post: 	orRestant(acceuil(M))=orRestant(M)@pre  
-	// \post:	abandonCompteur(accueil(M))=0 
+	//TODO: Specifier
+	ArrayList<IVillageois> getListVillageois();
+	ArrayList<IMine> getListMines();
+	void bind(ArrayList<IVillageois> villageois, ArrayList<IMine> mines);
+	void bind(IHotelVille hv);
 
 	
-	// [abandoned]
-	// \pre abandoned(M) require ¬acceuil(M)
 
-	void abandoned();
-
-	// \post: orRestant(abandoned(M))=orRestant(M)
-	// \post: abandonCompteur(abandoned(M))=abandonCompteur()+1
-	
-
-	/* ########### Invariants ########### */
-	// \inv:  estLaminee(M) min = orRestant(M) ≤ 0
-	// \inv:  estAbandonnee(M) min = abandonCompteur = 51
-	// \inv:  0 ≤abandonCompteur(M)≤ 51
 }
