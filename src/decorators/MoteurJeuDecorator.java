@@ -23,7 +23,7 @@ public class MoteurJeuDecorator extends MoteurJeuImpl{
 
 	@Override
 	public int getLargeurTerrain() {
-		return this.getLargeurTerrain();
+		return this.delegate.getLargeurTerrain();
 	}
 
 	@Override

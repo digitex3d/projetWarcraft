@@ -21,7 +21,7 @@ public class MineContractTest extends AbstractMineTest {
 	@Override
 	@Before
 	public void before() {
-		mine = new MineContract(new MineImpl());
+		moteur = new MineContract(new MineImpl());
 
 	}
 	
@@ -30,7 +30,7 @@ public class MineContractTest extends AbstractMineTest {
 		// condition initiale : aucune
 
 		// opération
-		mine.init(78, 75 );
+		moteur.init(78, 75 );
 
 		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
 	}
@@ -40,7 +40,7 @@ public class MineContractTest extends AbstractMineTest {
 		// condition initiale : aucune
 
 		// opération
-		mine.init(77, 76);
+		moteur.init(77, 76);
 
 		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
 	}

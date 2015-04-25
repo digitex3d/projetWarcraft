@@ -12,6 +12,6 @@ public class MineTestError extends AbstractMineTest{
 	@Override
 	@Before
 	public void before() {
-		mine = new MineImplError();
+		moteur = new MineImplError();
 	}
 }

@@ -10,7 +10,7 @@ import services.IMine;
 
 public abstract class AbstractMineTest extends AbstractAssertion{
 
-	protected IMine mine;
+	protected IMine moteur;
 	
 
 	@Before
@@ -18,7 +18,7 @@ public abstract class AbstractMineTest extends AbstractAssertion{
 
 	@After
 	public void after() {
-		mine = null;
+		moteur = null;
 	}
 	
 	@Test
@@ -26,11 +26,11 @@ public abstract class AbstractMineTest extends AbstractAssertion{
 		// condition initiale
 		
 		// opérations
-		mine = mine.init(77, 75);
+		moteur = moteur.init(77, 75);
 		
 		// oracle
-		assertPerso("init, La mine est crée avec une mauvaise largeur", mine.getLargeur() == 77);
-		assertPerso("init, La mine est crée avec une mauvaise hauteur", mine.getHauteur() == 75);
+		assertPerso("init, La mine est crée avec une mauvaise largeur", moteur.getLargeur() == 77);
+		assertPerso("init, La mine est crée avec une mauvaise hauteur", moteur.getHauteur() == 75);
 	
 	}
 	
@@ -39,13 +39,13 @@ public abstract class AbstractMineTest extends AbstractAssertion{
 	@Test
 	public void test1_0() {
 		// condition initiale 
-		mine.init(77, 75);
+		moteur.init(77, 75);
 		
 		// opération
-		mine.retrait(1);
+		moteur.retrait(1);
 
 		// oracle 
-		assertPerso("Valeur de retrait fausse", mine.getOrRestant() == 50);
+		assertPerso("Valeur de retrait fausse", moteur.getOrRestant() == 50);
 
 	}
 	

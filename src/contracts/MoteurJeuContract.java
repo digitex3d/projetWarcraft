@@ -73,9 +73,10 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		//     	Ʌ Villageois::quantiteOr( getVillageois(M, numV) ) = 0
 		//  		Ʌ Villageois::estMort( getVillageois(M, numV) ) = False
 		for( IVillageois v : this.getListVillageois() ){
-			if( v.getX() - this.hotelDeVille.getX() > 51 )
+			if( v.getX() - 
+					this.getHotelDeVille().getX() > 51 )
 				throw new PostconditionError("post: positionVillageoisY(M, numV) - positionHotelVilleY(M) <= 51 ");
-			if( v.getY() - this.hotelDeVille.getY() > 51 )
+			if( v.getY() - this.getHotelDeVille().getY() > 51 )
 				throw new PostconditionError("post: positionVillageoisY(M, numV) - positionHotelVilleY(M) <= 51 ");
 			if( v.getQuantiteOr() != 0)
 				throw new PostconditionError("post: Villageois::quantiteOr( getVillageois(M, numV) ) = 0");
@@ -93,9 +94,9 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		for( IMine m : this.getListMines() ){
 			if( m.getX() > this.getLargeurTerrain() )
 				throw new PostconditionError("post: positionMineX(M, numM) <= largeurTerrain ");
-			if( m.getY() - this.hotelDeVille.getY() > 51 )
+			if( m.getY() > this.getHauteurTerrain() )
 				throw new PostconditionError("post: positionMineY(M, numM) <= hauteurTerrain ");
-			if( m.estAbandonne() != false)
+			if( m.estAbandonne() != true)
 				throw new PostconditionError("post: Mine::estAbandonne( getMine(M, numM) ) = True");
 		
 		}

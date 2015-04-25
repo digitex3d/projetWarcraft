@@ -1,7 +1,7 @@
 package implementations;
 
 import services.IHotelVille;
-import services.IMine;
+
 
 public class HotelVilleImpl implements IHotelVille {
 	int largeur;
@@ -16,10 +16,10 @@ public class HotelVilleImpl implements IHotelVille {
 	public HotelVilleImpl() {}
 		
 	@Override
-	public IMine init(int largeur, int hauteur) {
+	public IHotelVille init(int largeur, int hauteur) {
 		this.largeur = largeur;
 		this.hauteur = hauteur;
-		this.orRestant = 51;
+		this.orRestant = 16;
 		this.abandonCompteur = 51;
 		this.estLaminee = false;
 		this.estAbandonne = true;
