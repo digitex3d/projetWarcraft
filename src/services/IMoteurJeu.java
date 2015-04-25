@@ -2,8 +2,6 @@ package services;
 
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import enums.ECommande;
 import enums.EResultat;
@@ -30,7 +28,6 @@ public interface IMoteurJeu {
 	// \pre positionVillageoisY(M,num) require
 	//	num ∈ numeroesVillageois(M,num)
 	
-	Set<Integer> getNumeroesMine();
 	IMine getMine(int num);
 	// \pre getMine(M,num) require num ∈ numeroesMine(M,num)
 	

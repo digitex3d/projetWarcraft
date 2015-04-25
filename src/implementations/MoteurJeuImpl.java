@@ -151,7 +151,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		int poshx = this.hotelDeVille.getX();
 		int poshy = this.hotelDeVille.getY();
 		for( IVillageois villageois : this.villageois){
-			villageois.init(ERace.HUMAN, 1, 2, 10, 10.0, 100);
+			villageois.init(ERace.HUMAN, 4, 4, 10, 10.0, 100);
 			villageois.setX(poshx + Utils.randInt(0, 51));
 			villageois.setY(poshy + Utils.randInt(0, 51));
 			
@@ -159,7 +159,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 		// Initialisation Mines
 		for( IMine mine: this.mines){
-			mine.init(3,3);
+			mine.init(7,7);
 			mine.setX(Utils.randInt(0, this.getLargeurTerrain()));
 			mine.setY(Utils.randInt(0, this.getLargeurTerrain()));
 
@@ -182,16 +182,6 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		this.villageois = villageois;
 		this.mines = mines;
 	}
-
-
-
-	@Override
-	public Set<Integer> getNumeroesMine() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 	@Override
 	public void bind(IHotelVille hv) {

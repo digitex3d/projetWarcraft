@@ -52,6 +52,7 @@ Observations :
 	positionMineX(M,numMine),positionMineY(M,numMine)) ≤ 51
 	peutEntrerHotelVille(M,numVillageois) min = distance(positionVillageoisX(M,numVillageois),positionVillageoisY(M,numVillageois),
 	positionHotelVilleX(M),positionHotelVilleY(M)) ≤ 51
+	
 	[init]
 	maxPasJeu(init(l,h,m))=m
 	pasJeuCourant(init(l,h,m))=0
@@ -76,7 +77,7 @@ Observations :
 	\forall numM \in numeroesMine:
 		  positionMineY(M, numM) <= largeurTerrain
 	     	Ʌ  positionMineX(M, numM) <= hauteurTerrain
-     	     	Ʌ Mine::estAbandonne( getVillageois(M, numV) ) = True
+     	     	Ʌ Mine::estAbandonne( getMine(M, numM) ) = True
      	     	
 	[pasJeu]
 	pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M) +1

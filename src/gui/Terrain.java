@@ -42,19 +42,20 @@ public class Terrain extends JPanel {
 	        g.setColor(Color.RED);
 	        IHotelVille hv = moteurJeu.getHotelDeVille();
 	        Ellipse2D.Double circle = new Ellipse2D.Double(hv.getX(),
-	        		hv.getY(), 20, 20);
+	        		hv.getY(), hv.getLargeur(), hv.getHauteur());
 	        g2d.fill(circle); 
+	      
 	        
 	        
-	        for( IVillageois villageois : moteurJeu.getListVillageois()){
+	        for( IVillageois v : moteurJeu.getListVillageois()){
 	        	g.setColor(Color.BLACK);
-	        	g.drawOval(villageois.getX(), villageois.getY(), 4, 4);    
+	        	g.drawOval(v.getX(), v.getY(), v.getLargeur(), v.getHauteur());    
 
 	        }
 	        
-	        for( IMine mine : moteurJeu.getListMines()){
+	        for( IMine m : moteurJeu.getListMines()){
 	        	g.setColor(Color.gray);
-	        	g.drawOval(mine.getX(), mine.getY(), 7, 7);    
+	        	g.drawOval(m.getX(), m.getY(), m.getLargeur(), m.getHauteur());    
 
 	        }
 	        
