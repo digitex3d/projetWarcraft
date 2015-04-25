@@ -10,6 +10,8 @@ public class MineImplError implements IMine {
 	int abandonCompteur;
 	boolean estLaminee;
 	boolean estAbandonne;
+	int posX;
+	int posY;
 	
 	public MineImplError() {}
 		
@@ -68,6 +70,30 @@ public class MineImplError implements IMine {
 	@Override
 	public void abandoned() {
 		this.abandonCompteur -= 1;
+		
+	}
+
+	@Override
+	public int getX() {
+		
+		return 0;
+	}
+
+	@Override
+	public int getY() {
+	
+		return this.getY();
+	}
+
+	@Override
+	public void setX(int x) {
+		this.posX= x;
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		this.posX= y;
 		
 	}
 

@@ -68,17 +68,17 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	@Override
 	public IVillageois getVillageois(int num) {
-		return this.numeroesVillageois.get(num);
+		return this.villageois.get(num);
 	}
 
 	@Override
 	public int getPositionVillageoisX(int num) {
-		return this.villageois.get(num).getX();
+		return this.getVillageois(num).getX();
 	}
 
 	@Override
 	public int getPositionVillageoisY(int num) {
-		return this.villageois.get(num).getY();
+		return this.getVillageois(num).getY();
 	}
 
 	@Override
@@ -87,19 +87,24 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	}
 
 	@Override
+	public IMine getMine(int num) {
+		return this.mines.get(num);
+		
+	}
+	
+	@Override
 	public int getPositionMineX(int num) {
-		return this.mines.get(num).getX();
+		return this.getMine(num).getX();
 	}
 
 	@Override
 	public int getPositionMineY(int num) {
-		return this.mines.get(num).getY();
+		return this.getMine(num).getY();
 	}
 
 	@Override
 	public IHotelVille getHotelDeVille() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.hotelDeVille;
 	}
 
 	@Override
@@ -134,6 +139,10 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		
 		 if (this.hotelDeVille == null)
 				throw new Error("Vous devez binder le Hotel de ville avant de faire appel a init");
+		 if (this.villageois == null)
+				throw new Error("Vous devez binder les villageois avent de faire appel a init");
+		 if (this.mines == null)
+				throw new Error("Vous devez binder les Mines  ville avant de faire appel a init");
 		 
 		 // Initialisation Hotel de ville
 		 this.hotelDeVille.setX(Utils.randInt(0, 51));
@@ -144,26 +153,25 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		int poshx = this.hotelDeVille.getX();
 		int poshy = this.hotelDeVille.getY();
 		for( int numv : this.getNumeroesVillageois()){
-			this.villageois.get(numv).init(ERace.HUMAN, 1, 2, 10, 10.0, 100);
-			this.posVillageoisX.put(numv, poshx + Utils.randInt(0, 51));
-			this.posVillageoisY.put(numv, poshy + Utils.randInt(0, 51));
+			IVillageois villageois = this.villageois.get(numv);
+			villageois.init(ERace.HUMAN, 1, 2, 10, 10.0, 100);
+			villageois.setX(poshx + Utils.randInt(0, 51));
+			villageois.setY(poshy + Utils.randInt(0, 51));
 			
 		}
-		
+
 		// Initialisation Mines
 		for( int numm : this.getNumeroesMine()){
-				this.mines.get(numm).init(3,3);
-				this.posMineX.put(numm, Utils.randInt(0, this.getLargeurTerrain()));
-				this.posMineY.put(numm, Utils.randInt(0, this.getLargeurTerrain()));
-					
-				}
-		 
+			IMine mine = this.mines.get(numm);
+			this.mines.get(numm).init(3,3);
+			mine.setX(Utils.randInt(0, this.getLargeurTerrain()));
+			mine.setY(Utils.randInt(0, this.getLargeurTerrain()));
+
+		}
+
 		 
 		 return this;
-		 
 		                                                
-		
-	
 	}
 
 	@Override
@@ -172,18 +180,5 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		
 	}
 
-	@Override
-	public IMine getMine(int num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public Set<Integer> numeroesVillageois() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

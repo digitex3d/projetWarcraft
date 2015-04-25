@@ -60,4 +60,25 @@ public class MineDecorator implements IMine{
 		this.delegate.abandoned();
 	}
 
+	@Override
+	public int getX() {
+		return this.delegate.getX();
+	}
+
+	@Override
+	public int getY() {
+		return this.delegate.getY();
+	}
+
+	@Override
+	public void setX(int x) {
+		this.delegate.setX(x);		
+	}
+
+	@Override
+	public void setY(int y) {
+		this.delegate.setY(y);		
+		
+	}
+
 }

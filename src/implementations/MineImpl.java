@@ -87,5 +87,16 @@ public class MineImpl implements IMine {
 		return this.posY;
 	}
 
+	@Override
+	public void setX(int x) {
+		this.posX = x;
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		this.posY = y;
+	}
+
 
 }

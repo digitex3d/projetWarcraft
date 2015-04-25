@@ -15,7 +15,7 @@ public interface IMoteurJeu {
 	EResultat resultatFinal();
 	
 	// \pre resultatFinal(M) require estFini(M)
-	Set<Integer> numeroesVillageois();
+	Set<Integer> getNumeroesVillageois();
 	
 	IVillageois getVillageois(int num);
     // \pre getVillageois(M,num) 

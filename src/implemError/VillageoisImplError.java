@@ -13,6 +13,8 @@ public class VillageoisImplError implements IVillageois {
 	private int pointsDeVie;
 	private int quantiteOr;
     private boolean estMort;
+	int posX;
+	int posY;
     
     @Override
 	public IVillageois init(ERace race, int largeur, int hauteur, int force,
@@ -93,6 +95,31 @@ public class VillageoisImplError implements IVillageois {
 	public void dechargeOr(int s) {
 		this.quantiteOr += s;
 		
+	}
+	
+	@Override
+	public int getY() {
+	
+		return this.getY();
+	}
+
+	
+	@Override
+	public void setX(int x) {
+		this.posX= x;
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		this.posX= y;
+		
+	}
+
+	@Override
+	public int getX() {
+	
+		return 0;
 	}
 
 }
