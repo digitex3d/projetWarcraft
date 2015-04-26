@@ -1,6 +1,8 @@
 package contracts;
 
 import decorators.MoteurJeuDecorator;
+import enums.EResultat;
+import exceptions.InvariantError;
 import exceptions.PostconditionError;
 import exceptions.PreconditionError;
 import services.IMine;
@@ -13,7 +15,34 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		
 	}
 	
-	public void checkInvariants() {}
+	public void checkInvariants() {
+		//      [invariants]
+		// \inv:0 ≤ pasJeuCourant(M) ≤ maxPasJeu(M)
+		if ( this.getPasJeuCourant() < 0 || this.getPasJeuCourant() > this.getMaxPasJeu())
+			throw new InvariantError("0 ≤ pasJeuCourant(M) ≤ maxPasJeu(M)");
+		
+		
+		// \inv:estFini(M) min = HotelVille::orRestant(hotelDeVille(M)) ≥ 1664 ∨ pasJeuCourant(M)=maxPasJeu(M))
+		if ( this.estFini() )
+			if ( this.hotelDeVille.getOrRestant() < 1664 && this.getPasJeuCourant() != this.getMaxPasJeu())
+				throw new InvariantError("estFini(M) min = HotelVille::orRestant(hotelDeVille(M)) ≥ 1664 ∨ pasJeuCourant(M)=maxPasJeu(M))");
+		
+		// \inv:resultatFinal(M)=GAGNE ⇔ HotelVille::orRestant(hotelDeVille(M)) ≥ 1664
+		if ( this.resultatFinal() == EResultat.GAGNE)
+			if ( this.hotelDeVille.getOrRestant() < 1664) 
+				throw new InvariantError("resultatFinal(M)=GAGNE ⇔ HotelVille::orRestant(hotelDeVille(M)) ≥ 1664");
+		if ( this.getHotelDeVille().getOrRestant() >= 1664)
+			if ( this.resultatFinal() != EResultat.GAGNE)			
+				throw new InvariantError("resultatFinal(M)=GAGNE ⇔ HotelVille::orRestant(hotelDeVille(M)) ≥ 1664");
+		
+		//TODO: implémenter
+		// \inv:peutEntrer(M,numVillageois,numMine) min = distance(positionVillageoisX(M,numVillageois),positionVillageoisY(M,numVillageois),
+		//      positionMineX(M,numMine),positionMineY(M,numMine)) ≤ 51
+		// \inv:peutEntrerHotelVille(M,numVillageois) min = distance(positionVillageoisX(M,numVillageois),positionVillageoisY(M,numVillageois),
+		//      positionHotelVilleX(M),positionHotelVilleY(M)) ≤ 51
+		
+	}
+		
 	
 	// --------------------- [init] -----------------------------
 	public IMoteurJeu init(int largeur, int hauteur, int maxPasJeu){
