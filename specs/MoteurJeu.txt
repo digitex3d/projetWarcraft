@@ -80,11 +80,22 @@ Observations :
      	     	Ʌ Mine::estAbandonne( getMine(M, numM) ) = True
      	     	
 	[pasJeu]
-	pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M) +1
+	pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1
+
+	// Mines
 	getMine(pasJeu(M,c,numVillageois,arg),numMine) =
-						Mine::abandoned(getMine(M,numMine)) si c6=ENTRERMINE ∨ arg6=numMine
-						Mine::acceuil(getMine(M,numMine)) sinon
-	getVillageois(pasJeu(M,c,numVillageois,arg),numVillageois) =                                                      							Villageois::dechargeOr(getVillageois(M,numVillageois),                                								Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE
+		Mine::abandoned(getMine(M,numMine)) si c=ENTRERMINE ∨ arg=numMine
+		Mine::acceuil(getMine(M,numMine)) sinon
+
+	// Villageois
+	getVillageois(pasJeu(M,c,numVillageois,arg),numVillageois) =                                                		
+		Villageois::dechargeOr(getVillageois(M,numVillageois),                            
+		Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE
+		positionVillageoisX(pasJeu(M,c,numVillageois,arg), numVillageois) = cos(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))
+		positionVillageoisY(pasJeu(M,c,numVillageois,arg), numVillageois) = sin(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))
+
+	// HotelDeVille
     getHotelDeVille(pasJeu(M,c,numVillageois,arg),numVillageois) =                                     
 			HotelVille:depot(getVillageois(M,numVillageois),                                          
-						Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE      						    						
+				Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE  
+    						    						

@@ -1,6 +1,7 @@
 package contracts;
 
 import decorators.MoteurJeuDecorator;
+import enums.ECommande;
 import enums.EResultat;
 import exceptions.InvariantError;
 import exceptions.PostconditionError;
@@ -137,6 +138,59 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		return this;
 
 	}
+	
+	// --------------------- [pasJeu] -----------------------------
+public void pasJeu(ECommande commande, int numVillageois, int argument){
+	// Premier check des invariants
+	this.checkInvariants();
+	
+	/* ######## Verification des préconditions ######### */
+	// \pre: pasJeu(M,commmand,numVillgeois,argument) require
+	//          ¬estFini(M)
+	if( this.estFini )
+		throw new PreconditionError(" ¬estFini(M)");
+	//          command=DEPLACER ⇒ 0 ≤argument≤ 360
+	if( commande == ECommande.DEPLACER )
+		if( argument > 360 || argument < 0 )
+			throw new PreconditionError("0 ≤argument≤ 360");
+	//          command=ENTRERMINE ⇒
+	//          		argument∈numeroesMines(M)
+	//          		peutEntrer(M,numVillageois,argument)
+	if( commande == ECommande.ENTREMINE){
+		if( argument > this.mines.size() || argument < 0 )
+			throw new PreconditionError("argument∈numeroesMines(M)");
+		if( ! this.peutEntrer(numVillageois, argument))
+			throw new PreconditionError("peutEntrer(M,numVillageois,argument)");
+	
+	//          command=ENTRERHOTELVILLE ⇒peutEntrerHotelVille(M,numVillageois)
+	if( commande == ECommande.ENTREHOTELVILLE)
+		if( ! this.peutEntrerHotelVille(numVillageois))
+			throw new PreconditionError("peutEntrerHotelVille(M,numVillageois)");
+		
+	
+	
+	
+	
+	
+	//Sauvegarde contexte  
+	int pasJeuCourant_pre = this.getPasJeuCourant();
+	
+	/* ######## 	Execution  		######### */
+	super.pasJeu(commande, numVillageois, argument);
+	
+	/* ######## Verification des postcondition ######### */
+	// \post: pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1
+	if( this.getPasJeuCourant() != pasJeuCourant_pre +1 )
+		throw new PostconditionError("pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1");
+	// \post:	
+	
+	// Deuxième check des invariants
+	this.checkInvariants();
+	
 }
+}
+}
+	
+
 
 
