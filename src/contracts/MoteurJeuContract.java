@@ -13,7 +13,16 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		
 	}
 	
-	public void checkInvariants() {}
+	public void checkInvariants() {
+		// \inv: 0 ≤ pasJeuCourant(M) ≤ maxPasJeu(M)
+		// \inv: estFini(M) min = HotelVille::orRestant(hotelDeVille(M)) ≥ 1664 ∨ pasJeuCourant(M)=maxPasJeu(M))
+		// \inv: resultatFinal(M)=GAGNE ⇔ HotelVille::orRestant(hotelDeVille(M)) ≥ 1664
+		// \inv: peutEntrer(M,numVillageois,numMine) min = distance(positionVillageoisX(M,numVillageois),positionVillageoisY(M,numVillageois),
+		// \inv: positionMineX(M,numMine),positionMineY(M,numMine)) ≤ 51
+		// \inv: peutEntrerHotelVille(M,numVillageois) min = distance(positionVillageoisX(M,numVillageois),positionVillageoisY(M,numVillageois),
+		// \inv: positionHotelVilleX(M),positionHotelVilleY(M)) ≤ 51
+		
+	}
 	
 	// --------------------- [init] -----------------------------
 	public IMoteurJeu init(int largeur, int hauteur, int maxPasJeu){
