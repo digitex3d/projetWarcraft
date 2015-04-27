@@ -44,8 +44,12 @@ public class MainGame {
 		
 		moteurJeu.init(800, 600, 1000);
 		
+		
+		
 		GuiMainWindow window = new GuiMainWindow(moteurJeu.getLargeurTerrain(),
 				moteurJeu.getHauteurTerrain());
+		
+		moteurJeu.bindWindow(window);
 		window.updateMoteur(moteurJeu);
 		window.setVisible(true);
 		

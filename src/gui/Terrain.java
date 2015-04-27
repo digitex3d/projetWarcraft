@@ -70,6 +70,7 @@ public class Terrain extends JPanel implements MouseListener {
 	 
 	 public void updateMoteur(IMoteurJeu moteurJeu){
 			this.moteurJeu = moteurJeu;
+			this.repaint();
 
 	}
 
@@ -78,7 +79,6 @@ public class Terrain extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Click");
 		this.moteurJeu.eventListener(e, EEvent.CLICK);
-		System.out.println("Click");
 		
 	}
 

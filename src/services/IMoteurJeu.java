@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import enums.ECommande;
 import enums.EResultat;
 import gui.EEvent;
+import gui.GuiMainWindow;
 
 public interface IMoteurJeu {
 	/* ########### Observators ########### */	
@@ -131,6 +132,7 @@ public interface IMoteurJeu {
 	void bind(ArrayList<IVillageois> villageois, ArrayList<IMine> mines);
 	void bind(IHotelVille hv);
 	public void eventListener(MouseEvent e, EEvent click);
+	public void bindWindow(GuiMainWindow gui);
 
 	
 

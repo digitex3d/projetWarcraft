@@ -7,6 +7,7 @@ import enums.ECommande;
 import enums.ERace;
 import enums.EResultat;
 import gui.EEvent;
+import gui.GuiMainWindow;
 import services.IHotelVille;
 import services.IMine;
 import services.IMoteurJeu;
@@ -22,6 +23,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
     protected EResultat resultatFinal;
     protected ArrayList<IVillageois> villageois;
     protected ArrayList<IMine> mines;
+    protected GuiMainWindow gui;
     
     protected IHotelVille hotelDeVille;
     
@@ -197,8 +199,20 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		}
 		
 		this.pasJeuCourant += 1;
+		
+		this.updateGui(this);
 	}
 	
+	private void updateGui(MoteurJeuImpl moteurJeuImpl) {
+		this.gui.updateMoteur(moteurJeuImpl);
+		
+	}
+
+	public void bindWindow(GuiMainWindow gui){
+		this.gui = gui;
+	}
+
+
 	@Override
 	public void bind(ArrayList<IVillageois> villageois,
 			ArrayList<IMine> mines) {
