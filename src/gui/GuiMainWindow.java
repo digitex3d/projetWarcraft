@@ -2,9 +2,10 @@ package gui;
 
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
-
 
 import services.IMoteurJeu;
 import services.IVillageois;
@@ -16,6 +17,8 @@ public class GuiMainWindow extends JFrame {
 
 	public GuiMainWindow(int largeur, int hauteur) {
 		this.terrain = new Terrain();
+		
+	
 		initUI(largeur, hauteur);
 	}
 
@@ -33,6 +36,10 @@ public class GuiMainWindow extends JFrame {
 	public void updateMoteur(IMoteurJeu moteur){
 		this.terrain.updateMoteur( moteur);
 	}
+	
+	
+	
+	
 	
 	
 }

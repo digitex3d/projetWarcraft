@@ -1,12 +1,12 @@
 package implementations;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
-import java.util.Set;
 
 import enums.ECommande;
 import enums.ERace;
 import enums.EResultat;
+import gui.EEvent;
 import services.IHotelVille;
 import services.IMine;
 import services.IMoteurJeu;
@@ -170,10 +170,33 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		                                                
 	}
 
+	public void eventListener(MouseEvent e, EEvent click){
+		switch( click ){
+		case CLICK:
+			this.pasJeu( ECommande.DEPLACER, 0, 90);
+			break;
+		}
+	}
+	
 	@Override
 	public void pasJeu(ECommande commande, int numVillageois, int argument) {
-		// TODO Auto-generated method stub
+		switch(commande){
+		case DEPLACER:
+			IVillageois v = this.getVillageois(numVillageois);
+			v.setX( (int ) (v.getX() + v.getVitesse()* Math.cos(argument)));
+			v.setY( (int ) (v.getY() + v.getVitesse()* Math.sin(argument)));
+			break;
+		case ENTREHOTELVILLE:
+			break;
+		case ENTREMINE:
+			break;
+		case RIEN:
+			break;
+		default:
+			break;
+		}
 		
+		this.pasJeuCourant += 1;
 	}
 	
 	@Override

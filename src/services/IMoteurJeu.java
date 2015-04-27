@@ -1,10 +1,12 @@
 package services;
 
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import enums.ECommande;
 import enums.EResultat;
+import gui.EEvent;
 
 public interface IMoteurJeu {
 	/* ########### Observators ########### */	
@@ -128,6 +130,7 @@ public interface IMoteurJeu {
 	ArrayList<IMine> getListMines();
 	void bind(ArrayList<IVillageois> villageois, ArrayList<IMine> mines);
 	void bind(IHotelVille hv);
+	public void eventListener(MouseEvent e, EEvent click);
 
 	
 

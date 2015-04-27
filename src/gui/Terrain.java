@@ -3,7 +3,10 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
+
 
 
 
@@ -19,17 +22,18 @@ import services.IVillageois;
 
 
 @SuppressWarnings("serial")
-public class Terrain extends JPanel {
+public class Terrain extends JPanel implements MouseListener {
 
 	IMoteurJeu moteurJeu;
 
     public  Terrain() {
 
-     
+    	addMouseListener(this);
         setFocusable(true);
         setBackground(Color.GREEN);
         setDoubleBuffered(true);
-
+        
+ 
   
     }
     
@@ -62,9 +66,44 @@ public class Terrain extends JPanel {
 	        
 	    }
 	 
+	
+	 
 	 public void updateMoteur(IMoteurJeu moteurJeu){
 			this.moteurJeu = moteurJeu;
 
+	}
+
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("Click");
+		this.moteurJeu.eventListener(e, EEvent.CLICK);
+		System.out.println("Click");
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	 
 
