@@ -79,23 +79,61 @@ Observations :
 	     	Ʌ  positionMineX(M, numM) <= hauteurTerrain
      	     	Ʌ Mine::estAbandonne( getMine(M, numM) ) = True
      	     	
-	[pasJeu]
+[pasJeu]
 	pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1
 
+	// Commande DEPLACER
+	si c = DEPLACER	
+
 	// Mines
-	getMine(pasJeu(M,c,numVillageois,arg),numMine) =
-		Mine::abandoned(getMine(M,numMine)) si c=ENTRERMINE ∨ arg=numMine
-		Mine::acceuil(getMine(M,numMine)) sinon
+	\forall numM \in numeroesMine:
+		getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
 
 	// Villageois
-	getVillageois(pasJeu(M,c,numVillageois,arg),numVillageois) =                                                		
-		Villageois::dechargeOr(getVillageois(M,numVillageois),                            
-		Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE
-		positionVillageoisX(pasJeu(M,c,numVillageois,arg), numVillageois) = cos(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))
-		positionVillageoisY(pasJeu(M,c,numVillageois,arg), numVillageois) = sin(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))
+	\forall numV \in numeroesVillageois:
+		getVillageois( pasJeu(M,c,numVillageois,arg), numV) =
+			getVillageois( M, numV) si  numVillageois != numV
+		
+			positionVillageoisX(pasJeu(M,c,numVillageois,arg), numVillageois) = cos(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))
+			positionVillageoisY(pasJeu(M,c,numVillageois,arg), numVillageois) = sin(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))
+			
 
 	// HotelDeVille
-    getHotelDeVille(pasJeu(M,c,numVillageois,arg),numVillageois) =                                     
-			HotelVille:depot(getVillageois(M,numVillageois),                                          
-				Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE  
+	getHotelDeVille(pasJeu(M,c,numVillageois,arg)) =  getHotelDeVille(M)
+	
+
+	// Commande ENTRERHOTELVILLE	
+	si c = ENTRERHOTELVILLE		
+	// Mines
+	\forall numM \in numeroesMine:
+		getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
+
+	// Villageois
+	\forall numV \in (numeroesVillageois \minus numVillageois):
+		getVillageois( pasJeu(M,c,numVillageois,arg), numV) =
+			
+	Villageois::quantiteOr(getVillageois(pasJeu(M,c,numVillageois,arg),numVillageois)))  = 0
+			
+	// HotelDeVille
+    	HotelVille::quantiteOr( getHotelDeVille( pasJeu(M,c,numVillageois,arg) )  ) = 
+		 HotelVille::quantiteOr( getHotelDeVille( M )) +
+                     Villageois::quantiteOr(getVillageois(M,numVillageois))) 
+
+	// Commande ENTRERMINE     
+	si c = ENTRERMINE	         
+	// Mines
+	\forall numM \in ( numeroesMine \minus arg ):
+		getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
+	
+	Mine::quatiteOr(getMine(  pasJeu(M,c,numVillageois,arg), arg )) = 
+		Mine::quatiteOr ( getMine( M , arg))-1
+
+	// Villageois
+	\forall numV \in (numeroesVillageois \minus numVillageois):
+		getVillageois( pasJeu(M,c,numVillageois,arg), numV) =
+			
+	Villageois::quantiteOr(getVillageois(pasJeu(M,c,numVillageois,arg),numVillageois)))  = Villageois::quantiteOr(getVillageois(M,numVillageois)))+1
+			
+	// HotelDeVille
+	getHotelDeVille(pasJeu(M,c,numVillageois,arg)) =  getHotelDeVille(M)
     						    						

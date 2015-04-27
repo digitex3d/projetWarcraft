@@ -1,5 +1,7 @@
 package contracts;
 
+import java.util.ArrayList;
+
 import decorators.MoteurJeuDecorator;
 import enums.ECommande;
 import enums.EResultat;
@@ -174,6 +176,8 @@ public void pasJeu(ECommande commande, int numVillageois, int argument){
 	
 	//Sauvegarde contexte  
 	int pasJeuCourant_pre = this.getPasJeuCourant();
+	ArrayList<IMine> mines_pre = new ArrayList<IMine>( this.getListMines() );
+	ArrayList<IVillageois> villageois_pre = new ArrayList<IVillageois>( this.getListVillageois());
 	
 	/* ######## 	Execution  		######### */
 	super.pasJeu(commande, numVillageois, argument);
@@ -182,7 +186,39 @@ public void pasJeu(ECommande commande, int numVillageois, int argument){
 	// \post: pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1
 	if( this.getPasJeuCourant() != pasJeuCourant_pre +1 )
 		throw new PostconditionError("pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1");
-	// \post:	
+	// Commande DEPLACER
+	if( commande == ECommande.DEPLACER ){
+		
+		// \forall numM \in numeroesMine:
+		// 	getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
+		for( int i = 0 ; i < this.getListMines().size(); i++){
+			if ( !this.getListMines().get(i).equals( mines_pre.get(i))  )
+				throw new PostconditionError("getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )");
+				
+		}
+		
+		// Villageois
+		//\forall numV \in numeroesVillageois:
+		//	getVillageois( pasJeu(M,c,numVillageois,arg), numV) =
+		//		getVillageois( M, numV) si  numVillageois != numV
+		//	
+		//		positionVillageoisX(pasJeu(M,c,numVillageois,arg), numVillageois) = cos(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))
+		//		positionVillageoisY(pasJeu(M,c,numVillageois,arg), numVillageois) = sin(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))	
+		for( int i = 0 ; i < this.getListVillageois().size(); i++){
+			if( i == numVillageois){
+				IVillageois v = this.getVillageois(numVillageois);
+				if ( v.getX() != Math.cos(argument) * v.getVitesse() )
+					throw new PostconditionError("positionVillageoisX(pasJeu(M,c,numVillageois,arg), numVillageois) = cos(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))");
+				if ( v.getY() != Math.cos(argument) * v.getVitesse() )
+					throw new PostconditionError("positionVillageoisY(pasJeu(M,c,numVillageois,arg), numVillageois) = sin(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))");
+
+			}
+			if ( !this.getListVillageois().get(i).equals( villageois_pre.get(i))  )
+				throw new PostconditionError("getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )");
+
+		}
+
+	}
 	
 	// Deuxième check des invariants
 	this.checkInvariants();

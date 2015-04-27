@@ -133,6 +133,7 @@ public interface IMoteurJeu {
 	void bind(IHotelVille hv);
 	public void eventListener(MouseEvent e, EEvent click);
 	public void bindWindow(GuiMainWindow gui);
+	
 
 	
 
