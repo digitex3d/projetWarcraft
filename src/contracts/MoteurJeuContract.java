@@ -81,47 +81,31 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		// \post: hauteurTerrain(init(l,h,m))=h
 		if( this.getHauteurTerrain() != hauteur)
 			throw new PostconditionError("post: hauteurTerrain(init(l,h,m))=h");
-		// \post: estFini(init(l,h,m))=False
-		if( this.estFini())
-			throw new PostconditionError("post: estFini(init(l,h,m))=False");
+
 		
 		// Initialisation Hotel de ville
-		// \post: positionHotelVilleX( init(l,h,m) ) <= 51 
-		if( this.getPositionHotelVilleX() > 51)
-			throw new PostconditionError("post: positionHotelVilleX( init(l,h,m) ) <= 51 ");
-		
-		// \post: positionHotelVilleY( init(l,h,m) ) <= 51 
-		if( this.getPositionHotelVilleY() > 51)
-			throw new PostconditionError("post: positionHotelVilleY( init(l,h,m) ) <= 51 ");
 		// \post: HotelVille::orRestant( getHotelVille( init(l,h,m) ) ) = 16
 		if( this.getHotelDeVille().getOrRestant() != 16)
 			throw new PostconditionError("post: HotelVille::orRestant( getHotelVille( init(l,h,m) ) ) = 16");
 		
-		// // Initialisation Villageois
-		// \forall numV \in numeroesVillageois:
-		// 	  positionVillageoisY(M, numV) - positionHotelVilleY(M) <= 51
-		//      	Ʌ  positionVillageoisX(M, numV) - positionHotelVilleX(M) <= 51
-	    //  	    Ʌ Villageois::pointsDeVie( getVillageois(M, numV) ) = 100
-		//     	Ʌ Villageois::quantiteOr( getVillageois(M, numV) ) = 0
-		//  		Ʌ Villageois::estMort( getVillageois(M, numV) ) = False
-		for( IVillageois v : this.getListVillageois() ){
-			if( v.getX() - 
-					this.getHotelDeVille().getX() > 51 )
-				throw new PostconditionError("post: positionVillageoisY(M, numV) - positionHotelVilleY(M) <= 51 ");
-			if( v.getY() - this.getHotelDeVille().getY() > 51 )
-				throw new PostconditionError("post: positionVillageoisY(M, numV) - positionHotelVilleY(M) <= 51 ");
-			if( v.getQuantiteOr() != 0)
+		/* Initialisation Villageois
+		 * \forall numV \in numeroesVillageois: peutEntrerHotelVille(M, getVillageois(M, numV))
+		 *  	    Ʌ Villageois::pointsDeVie( getVillageois(M, numV) ) = 100
+		 *     	Ʌ Villageois::quantiteOr( getVillageois(M, numV) ) = 0
+		 */
+		for (int i = 0; i < super.getListVillageois().size(); i++){
+			if ( ! super.peutEntrerHotelVille(i))
+				throw new PostconditionError("post: peutEntrerHotelVille(M, getVillageois(M, numV))");				
+			if( super.getVillageois(i).getQuantiteOr() != 0)
 				throw new PostconditionError("post: Villageois::quantiteOr( getVillageois(M, numV) ) = 0");
-			if( v.getPointsDeVie() != 100)
+			if( super.getVillageois(i).getPointsDeVie() != 100)
 				throw new PostconditionError("post: Villageois::pointsDeVie( getVillageois(M, numV) ) = 100");
-			if( v.estMort() != false)
-				throw new PostconditionError("post: Villageois::estMort( getVillageois(M, numV) ) = False");
 		}
 		
 		//// Initialisation Mines
 		//\forall numM \in numeroesMine:
-		//	  positionMineY(M, numM) <= largeurTerrain
-		//     	Ʌ  positionMineX(M, numM) <= hauteurTerrain
+		//	  positionMineX(M, numM) <= largeurTerrain
+		//     	Ʌ  positionMineY(M, numM) <= hauteurTerrain
 		// 	     Ʌ Mine::estAbandonne( getVillageois(M, numV) ) = True
 		for( IMine m : this.getListMines() ){
 			if( m.getX() > this.getLargeurTerrain() )
@@ -176,7 +160,6 @@ public void pasJeu(ECommande commande, int numVillageois, int argument){
 	
 	//Sauvegarde contexte  
 	int pasJeuCourant_pre = this.getPasJeuCourant();
-	ArrayList<IMine> mines_pre = new ArrayList<IMine>( this.getListMines() );
 	ArrayList<IVillageois> villageois_pre = new ArrayList<IVillageois>( this.getListVillageois());
 	
 	/* ######## 	Execution  		######### */
@@ -188,14 +171,6 @@ public void pasJeu(ECommande commande, int numVillageois, int argument){
 		throw new PostconditionError("pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1");
 	// Commande DEPLACER
 	if( commande == ECommande.DEPLACER ){
-
-		// \forall numM \in numeroesMine:
-		// 	getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
-		for( int i = 0 ; i < this.getListMines().size(); i++){
-			if ( !this.getListMines().get(i).equals( mines_pre.get(i))  )
-				throw new PostconditionError("getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )");
-
-		}
 
 		// Villageois
 		//\forall numV \in numeroesVillageois:

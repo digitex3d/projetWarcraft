@@ -34,8 +34,6 @@ Observations :
 	[retrait]
 	orRestant(retrait(M,s))=orRestant(M)-s
 	abandonCompteur(retrait(M,s))=abandonCompteur(M)
-	estAbandonnee(retrait(M,s))= estAbandonnee(V)@pre  
-	estLaminee(retrait(M,s))= estLaminee(V)@pre        
 	
 	[acceuil]
 	orRestant(acceuil(M))=orRestant(M)

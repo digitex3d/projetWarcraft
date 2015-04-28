@@ -28,8 +28,6 @@ public interface IMine extends IEntite {
 	
 	// \post:orRestant(retrait(M,s))=orRestant(M)-s 
 	// \post: abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre 
-	// \post: estAbandonnee(retrait(M,s))= estAbandonnee(V)@pre
-	// \post: estLaminee(retrait(M,s))= estLaminee(V)@pre
 	 
 	// [acceuil]
 	// \pre acceuil(M) require ¬abandoned(M)

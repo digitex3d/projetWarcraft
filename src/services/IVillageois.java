@@ -23,7 +23,9 @@ public interface IVillageois extends IEntite{
 	/* \pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
 	* 	require 	largeur%2=1 ∧ 
 	* 				hauteur%2=1 ∧
-	* 				force, vitesse, pointsVie > 0
+	* 				force > 0	∧
+	* 				vitesse > 0 ∧
+	* 				pointsVie > 0
 	*/
 
 	
@@ -37,7 +39,6 @@ public interface IVillageois extends IEntite{
 	
 	// \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
 	// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
-	// \post: estMort(retrait(V,s))= estMort(V)@pre
 	 
 	// [chargeOr]
 	// \pre chargeOr(V,s) require ¬estMort(V) ∧ s>0
@@ -46,18 +47,14 @@ public interface IVillageois extends IEntite{
 
 	// \post: pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre 
 	// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre+s
-	// \post: estMort(chargeOr(V,s))= estMort(V)@pre
 	
 	// [dechargeOr]
-	// \pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0
-	// \pre dechargeOr(V,s) require s <= quantiteOr(V)
-	
+	// \pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0 ∧ s <= quantiteOr(V)
 
 	void dechargeOr(int s);
 
 	// \post: pointsDeVie(dechargeOr(V,s))= pointsDeVie(V)@pre 
 	// \post: quantiteOr(dechargeOr(V,s))= quantiteOr(V)@pre - s
-	// \post: estMort(dechargeOr(V,s))= estMort(V)@pre
 
 	/* ########### Invariants ########### */
 	//	minimisation
