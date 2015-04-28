@@ -188,15 +188,15 @@ public void pasJeu(ECommande commande, int numVillageois, int argument){
 		throw new PostconditionError("pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1");
 	// Commande DEPLACER
 	if( commande == ECommande.DEPLACER ){
-		
+
 		// \forall numM \in numeroesMine:
 		// 	getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
 		for( int i = 0 ; i < this.getListMines().size(); i++){
 			if ( !this.getListMines().get(i).equals( mines_pre.get(i))  )
 				throw new PostconditionError("getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )");
-				
+
 		}
-		
+
 		// Villageois
 		//\forall numV \in numeroesVillageois:
 		//	getVillageois( pasJeu(M,c,numVillageois,arg), numV) =
@@ -219,11 +219,14 @@ public void pasJeu(ECommande commande, int numVillageois, int argument){
 		}
 
 	}
-	
+
 	// Deuxième check des invariants
 	this.checkInvariants();
 	
-}
+	}else if( commande == ECommande.ENTREMINE ){
+		
+		
+	}
 }
 }
 	
