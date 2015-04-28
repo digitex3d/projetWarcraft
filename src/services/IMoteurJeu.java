@@ -68,25 +68,19 @@ public interface IMoteurJeu {
 	 * pasJeuCourant(init(l,h,m))=0
 	 * largeurTerrain(init(l,h,m))=l
 	 * hauteurTerrain(init(l,h,m))=h
-	 * estFini(init(l,h,m))=False
 	 * 
 	 * // Initialisation Hotel de ville
-	 * positionHotelVilleX( init(l,h,m) ) <= 51 
-	 * positionHotelVilleY( init(l,h,m) ) <= 51 
 	 * HotelVille::orRestant( getHotelVille( init(l,h,m) ) ) = 16
 	 * 
 	 * // Initialisation Villageois
-	 * \forall numV \in numeroesVillageois:
-	 * 	  positionVillageoisY(M, numV) - positionHotelVilleY(M) <= 51
-	 *      	Ʌ  positionVillageoisX(M, numV) - positionHotelVilleX(M) <= 51
+	 * \forall numV \in numeroesVillageois: peutEntrerHotelVille(M, getVillageois(M, numV))
 	 *  	    Ʌ Villageois::pointsDeVie( getVillageois(M, numV) ) = 100
 	 *     	Ʌ Villageois::quantiteOr( getVillageois(M, numV) ) = 0
-	 *  		Ʌ Villageois::estMort( getVillageois(M, numV) ) = False
 	 * 
 	 * // Initialisation Mines
 	 * \forall numM \in numeroesMine:
-	 * 	  positionMineY(M, numM) <= largeurTerrain
-	 *      	Ʌ  positionMineX(M, numM) <= hauteurTerrain
+	 * 	  positionMineX(M, numM) <= largeurTerrain
+	 *      	Ʌ  positionMineY(M, numM) <= hauteurTerrain
 	 * 	     	Ʌ Mine::estAbandonne( getVillageois(M, numV) ) = True
 	 */
 		

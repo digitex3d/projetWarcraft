@@ -65,7 +65,6 @@ Observations :
 	// Initialisation Villageois
 	\forall numV \in numeroesVillageois(init(l,h,m)): peutEntrerHotelVille(M, getVillageois(M, numV)) Ʌ Villageois::pointsDeVie( getVillageois(M, numV) ) = 100
 	    	Ʌ Villageois::quantiteOr( getVillageois(M, numV) ) = 0
-	 	Ʌ ¬ Villageois::estMort( getVillageois(M, numV) )
 
 	// Initialisation Mines
 	\forall numM \in numeroesMine:
