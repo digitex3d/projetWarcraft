@@ -36,19 +36,19 @@ public class MineContract extends MineDecorator {
 		this.checkInvariants();
 
 		/* ######## Verification des préconditions ######### */
-		/* 	pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
+		/* \pre init(largeur,hauteur) 
 		* 	require 	largeur%2=1 ∧ 
-		* 				hauteur%2=1 ∧
+		* 				hauteur%2=1
 		*/
-		if( ! ( largeur % 2 == 1 ) ) 
+		if (largeur % 2 != 1) 
 			throw new PreconditionError("inv: largeur%2!=1");
-		if( ! ( hauteur % 2 == 1 ) ) 
+		if (hauteur % 2 != 1) 
 			throw new PreconditionError("inv: hauteur%2!=1");
 
 		//Sauvegarde contexte  
 
 		/* ######## 	Execution  		######### */
-		super.init( largeur, hauteur);
+		super.init(largeur, hauteur);
 
 		/* ######## Verification des postcondition ######### */
 		// \post :  largeur(init(l,h))=l
@@ -83,9 +83,7 @@ public class MineContract extends MineDecorator {
 
 		/* ######## 	Sauvegarde contexte  		######### */
 		int abandonCompteur_pre = super.getAbandonCompteur();
-		boolean estAbandonne_pre = super.estAbandonne();
 		int OrRestant_pre = super.getOrRestant();
-		boolean estLaminee_pre = super.estLaminee();
 		
 		// Execution
 		super.retrait(s);
@@ -100,13 +98,6 @@ public class MineContract extends MineDecorator {
 			if( super.getAbandonCompteur() != abandonCompteur_pre )                                     
 				throw new  PostconditionError("abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre");  
 			
-		// \post: estAbandonnee(retrait(M,s))= estAbandonnee(M)@pre 
-			if( super.estAbandonne() != estAbandonne_pre )                                     
-				throw new  PostconditionError("estAbandonnee(retrait(M,s))= estAbandonnee(M)@pre ");  
-		// \post: estLaminee(retrait(M,s))= estLaminee(M)@pre   
-			if( super.estLaminee() != estLaminee_pre)                                     
-				throw new  PostconditionError("estLaminee(retrait(M,s))= estLaminee(M)@pre");  
-
 		/* ######## Deuxième check des invariants ######### */
 		this.checkInvariants();
 		

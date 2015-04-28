@@ -32,14 +32,20 @@ public class VillageoisContract extends VillageoisDecorator {
 		/* 	pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
 		* 	require 	largeur%2=1 ∧ 
 		* 				hauteur%2=1 ∧
-		* 				force, vitesse, pointsVie > 0
+		* 				force > 0	∧
+		* 				vitesse > 0 ∧
+		* 				pointsVie > 0
 		*/
-		if( ! ( largeur % 2 == 1 ) ) 
+		if (largeur % 2 != 1) 
 			throw new PreconditionError("inv: largeur%2!=1");
-		if( ! ( hauteur % 2 == 1 ) ) 
+		if (hauteur % 2 != 1) 
 			throw new PreconditionError("inv: hauteur%2!=1");
-		if( ! ( force > 0 && vitesse > 0 && pointsDeVie > 0 ) ) 
-			throw new PreconditionError("inv: force, vitesse, pointsVie <= 0");
+		if (force <= 0)
+			throw new PreconditionError("inv: force <= 0");
+		if (vitesse <= 0)
+			throw new PreconditionError("inv: vitesse <= 0");
+		if (pointsDeVie <= 0) 
+			throw new PreconditionError("inv: pointsVie <= 0");
 	
 		
 		// execute function
@@ -99,7 +105,6 @@ public class VillageoisContract extends VillageoisDecorator {
 		//Sauvegarde contexte  
 		int pointsDeVie_pre = super.getPointsDeVie();
 		int quantiteOr_pre = super.getQuantiteOr();
-		boolean estMort_pre = super.estMort();
 		
 		/* ######## 	Execution  		######### */
 
@@ -113,11 +118,6 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre
 		if( super.getQuantiteOr() != quantiteOr_pre+s )
 			throw new  PostconditionError("quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre+s");
-
-		// \post: estMort(chargeOr(V,s))= estMort(V)@pre
-		
-		if( super.estMort() != estMort_pre)
-			throw new  PostconditionError("estMort(chargeOr(V,s))= estMort(V)@pre");
 		
 		// Deuxième check des invariants
 		this.checkInvariants();
@@ -139,7 +139,6 @@ public class VillageoisContract extends VillageoisDecorator {
 		//Sauvegarde contexte  
 		int pointsDeVie_pre = super.getPointsDeVie();
 		int quantiteOr_pre = super.getQuantiteOr();
-		boolean estMort_pre = super.estMort();
 		
 		/* ######## 	Execution  		######### */
 
@@ -153,11 +152,6 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \post: quantiteOr(dechargeOr(V,s))= quantiteOr(V)@pre
 		if( super.getQuantiteOr() != quantiteOr_pre-s )
 			throw new  PostconditionError("quantiteOr(deChargeOr(V,s))= quantiteOr(V)@pre-s");
-
-		// \post: estMort(dechargeOr(V,s))= estMort(V)@pre
-		
-		if( super.estMort() != estMort_pre)
-			throw new  PostconditionError("estMort(deChargeOr(V,s))= estMort(V)@pre");
 		
 		// Deuxième check des invariants
 		this.checkInvariants();

@@ -1,6 +1,7 @@
 service : Villageois
+types: int, double, boolean, enum ERace {ORC, HUMAN}
 observators :
-	const race : [Villageois] → String
+	const race : [Villageois] → ERace
 	const largeur : [Villageois] → int
 	const hauteur : [Villageois] → int
 	const force : [Villageois] → int
@@ -9,25 +10,25 @@ observators :
 	quantiteOr : [Villageois] → int
 	estMort : [Villageois] → boolean
 Constructors :
-	init : String × int × int × int × double × int → [Villageois]
+	init : ERace × int × int × int × double × int → [Villageois]
 		pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
-		require  ∧ largeur%2=1 ∧ 
+		require  largeur%2=1 ∧ 
 					hauteur%2=1 ∧
-					force, vitesse, pointsVie > 0
+					force > 0 ∧ vitesse > 0 ∧ pointsVie > 0
 Operators :
 	retrait : [Villageois] × int → [Villageois]
 		pre retrait(V,s) require ¬estMort(V) ∧ s>0
 	chargeOr : [Villageois] × int → [Villageois]
 		pre chargeOr(V,s) require ¬estMort(V) ∧ s>0
 	dechargeOr : [Villageois] × int → [Villageois]
-		pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0
+		pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0 ∧ s <= quantiteOr(V)
 		
 Observations :
 	[invariants]
 	estMort(V) min = pointsDeVie(V) ≤ 0
 
 	[init]
-	race(init(s,l,h,f,v,p))=r
+	race(init(s,l,h,f,v,p))=s
 	largeur(init(s,l,h,f,v,p))=l
 	hauteur(init(s,l,h,f,v,p))=h
 	force(init(s,l,h,f,v,p))=f
@@ -38,14 +39,11 @@ Observations :
 	[retrait]
 	pointsDeVie(retrait(V,s))=pointsDeVie(V)@pre -s
 	quantiteOr(retrait(V,s))=quantiteOr(V)@pre
-	estMort(retrait(V,s))=estMort(V)@pre
 	
 	[chargeOr]
 	pointsDeVie(chargeOr(V,s))=pointsDeVie(V)
 	quantiteOr(chargeOr(V,s))=quantiteOr(V)@pre + s
-	estMort(chargeOr(V,s))=estMort(V)@pre
 	
 	[dechargeOr]
 	pointsDeVie(dechargeOr(V,s))=pointsDeVie(V)
 	quantiteOr(dechargeOr(V,s))=quantiteOr(V)@pre - s
-	estMort(dechargeOr)=estMort(V)@pre
