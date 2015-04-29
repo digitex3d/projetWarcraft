@@ -1,0 +1,27 @@
+service : Route
+observators :
+	const largeur : [Route] → int
+	const hauteur : [Route] → int
+	const posx : [Route] -> int
+	const posy : [Route] -> int
+	const mult : [Route] -> int	
+
+Constructors :
+	init : int x int x int × int → [Route]
+		pre init(x,y, largeur,hauteur, mult) require 
+			largeur % 2=1 ∧ 
+			hauteur % 2=1 ∧
+			0 <= posx <= largeur ∧
+			0 <= posy <= hauteur ∧
+			mult
+		
+Operators :
+	//
+
+Observations :
+	[init]
+	posx(init(x,y,l,h,m))=x
+	posy(init(x,y,l,h,m))=y
+	largeur(init(x,y,l,h,m))=l
+	hauteur(init(x,y,l,h,m))=h
+	mult(init(x,y,l,h,m))=m
