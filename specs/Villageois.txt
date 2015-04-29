@@ -12,9 +12,11 @@ observators :
 Constructors :
 	init : ERace × int × int × int × double × int → [Villageois]
 		pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
-		require  largeur%2=1 ∧ 
+		require  	largeur%2=1 ∧ 
 					hauteur%2=1 ∧
-					force > 0 ∧ vitesse > 0 ∧ pointsVie > 0
+					force > 0 ∧ 
+					vitesse > 0 ∧ 
+					pointsVie > 0
 Operators :
 	retrait : [Villageois] × int → [Villageois]
 		pre retrait(V,s) require ¬estMort(V) ∧ s>0
