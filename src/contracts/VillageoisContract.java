@@ -17,10 +17,8 @@ public class VillageoisContract extends VillageoisDecorator {
 	
 	public void checkInvariants() {
 		// \inv: estMort(V) min= pointsDeVie(V) ≤ 0
-		if( super.estMort())
-			if(super.getPointsDeVie() > 0 )
-				throw new InvariantError("inv: estMort(V) min= pointsDeVie(V) > 0");
-		
+		if (super.estMort() && super.getPointsDeVie() > 0)
+			throw new InvariantError("inv: estMort(V) min= pointsDeVie(V) > 0");
 	}
 	
 	public IVillageois init(ERace race, int largeur, int hauteur, int force,
@@ -66,7 +64,7 @@ public class VillageoisContract extends VillageoisDecorator {
 		/* ######## Verification des préconditions ######### */
 	
 		// \pre retrait(V,s) require ¬estMort(V) ∧ s>0
-		if( super.estMort() && s <= 0 )
+		if (super.estMort() || s <= 0 )
 			throw new  PreconditionError("retrait(V,s) require ¬estMort(V) ∧ s>0");
 
 		/* ######## 	Sauvegarde contexte  		######### */
@@ -81,11 +79,11 @@ public class VillageoisContract extends VillageoisDecorator {
 		
 		// \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
 		if( super.getPointsDeVie() != pointsDeVie_pre - s )
-			throw new  PostconditionError("pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s");
+			throw new PostconditionError("pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s");
 		
 		// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
 		if( super.getQuantiteOr() != quantiteOr_pre )
-			throw new  PostconditionError("quantiteOr(retrait(V,s))= quantiteOr(V)@pre");
+			throw new PostconditionError("quantiteOr(retrait(V,s))= quantiteOr(V)@pre");
 		
 
 		/* ######## Deuxième check des invariants ######### */
@@ -99,8 +97,8 @@ public class VillageoisContract extends VillageoisDecorator {
 
 		/* ######## Verification des préconditions ######### */
 		// \pre chargeOr(V,s) require ¬estMort(V) ∧ s>0
-		if( super.estMort() || s <= 0 )
-			throw new  PreconditionError("chargeOr(V,s) require ¬estMort(V) ∧ s>0");
+		if (super.estMort() || s <= 0)
+			throw new PreconditionError("chargeOr(V,s) require ¬estMort(V) ∧ s>0");
 		
 		//Sauvegarde contexte  
 		int pointsDeVie_pre = super.getPointsDeVie();
@@ -112,12 +110,12 @@ public class VillageoisContract extends VillageoisDecorator {
 
 		/* ######## Verification des postcondition ######### */
 		// \post: pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre
-		if( super.getPointsDeVie() != pointsDeVie_pre )
-			throw new  PostconditionError("pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre");
+		if (super.getPointsDeVie() != pointsDeVie_pre)
+			throw new PostconditionError("pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre");
 		
 		// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre
-		if( super.getQuantiteOr() != quantiteOr_pre+s )
-			throw new  PostconditionError("quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre+s");
+		if (super.getQuantiteOr() != quantiteOr_pre+s)
+			throw new PostconditionError("quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre+s");
 		
 		// Deuxième check des invariants
 		this.checkInvariants();
@@ -130,11 +128,11 @@ public class VillageoisContract extends VillageoisDecorator {
 
 		/* ######## Verification des préconditions ######### */
 		// \pre deChargeOr(V,s) require ¬estMort(V) ∧ s>0
-		if( super.estMort() || s <= 0 )
-			throw new  PreconditionError("deChargeOr(V,s) require ¬estMort(V) ∧ s>0");
+		if (super.estMort() || s <= 0)
+			throw new PreconditionError("deChargeOr(V,s) require ¬estMort(V) ∧ s>0");
 		// \pre dechargeOr(V,s) require s <= quantiteOr(V)
-		if( s > super.getQuantiteOr() )
-			throw new  PreconditionError("dechargeOr(V,s) require s <= quantiteOr(V)");
+		if (s > super.getQuantiteOr())
+			throw new PreconditionError("dechargeOr(V,s) require s <= quantiteOr(V)");
 		
 		//Sauvegarde contexte  
 		int pointsDeVie_pre = super.getPointsDeVie();
@@ -146,12 +144,12 @@ public class VillageoisContract extends VillageoisDecorator {
 
 		/* ######## Verification des postcondition ######### */
 		// \post: pointsDeVie(dechargeOr(V,s))= pointsDeVie(V)@pre
-		if( super.getPointsDeVie() != pointsDeVie_pre )
-			throw new  PostconditionError("pointsDeVie(deChargeOr(V,s))= pointsDeVie(V)@pre");
+		if (super.getPointsDeVie() != pointsDeVie_pre)
+			throw new PostconditionError("pointsDeVie(deChargeOr(V,s))= pointsDeVie(V)@pre");
 		
 		// \post: quantiteOr(dechargeOr(V,s))= quantiteOr(V)@pre
-		if( super.getQuantiteOr() != quantiteOr_pre-s )
-			throw new  PostconditionError("quantiteOr(deChargeOr(V,s))= quantiteOr(V)@pre-s");
+		if (super.getQuantiteOr() != quantiteOr_pre-s)
+			throw new PostconditionError("quantiteOr(deChargeOr(V,s))= quantiteOr(V)@pre-s");
 		
 		// Deuxième check des invariants
 		this.checkInvariants();

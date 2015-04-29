@@ -40,10 +40,6 @@ public class VillageoisImpl implements IVillageois {
 		return quantiteOr;
 	}
 
-	public boolean isEstMort() {
-		return estMort;
-	}
-
 	public ERace getRace() {
 		return race;
 	}
