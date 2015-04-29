@@ -83,7 +83,6 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		assertPerso("Les points de vie ont changé", villageois.getPointsDeVie() == 10);
 		assertPerso("Le villageois ne dois pas etre mort", villageois.estMort() == false);
 	}
-	
-	
+
 	
 }
