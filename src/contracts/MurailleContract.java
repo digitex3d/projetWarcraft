@@ -19,8 +19,6 @@ public class MurailleContract extends MurailleDecorator {
 	}
 	
 	public IMuraille init(int x, int y, int largeur, int hauteur, int pointsVie) {
-		this.checkInvariants();
-		
 		// \pre: init(x, y, l, h, pv) require l%2 = 1 ∧ h%2 = 1 ∧ pv > 0
 		if (largeur % 2 != 1)
 			throw new PreconditionError("pre: largeur%2 != 1");

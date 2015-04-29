@@ -23,10 +23,7 @@ public class VillageoisContract extends VillageoisDecorator {
 	
 	public IVillageois init(ERace race, int largeur, int hauteur, int force,
 			double vitesse, int pointsDeVie) {
-		
-		// Check inv avant
-		this.checkInvariants();
-		
+				
 		/* 	pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
 		* 	require 	largeur%2=1 ∧ 
 		* 				hauteur%2=1 ∧
@@ -49,10 +46,11 @@ public class VillageoisContract extends VillageoisDecorator {
 		// execute function
 		super.init(race, largeur, hauteur, force, vitesse, pointsDeVie);
 		
-		//TODO:postcond
-
 		// Deuxième check des invariants
 		this.checkInvariants();
+		
+		//TODO:postcond
+
 		
 		return this;
 	}
@@ -73,7 +71,9 @@ public class VillageoisContract extends VillageoisDecorator {
 		
 		// Execution
 		super.retrait(s);
-		
+
+		/* ######## Deuxième check des invariants ######### */
+		this.checkInvariants();
 		
 		/* ######## Verification des postcondition ######### */
 		
@@ -84,11 +84,6 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
 		if( super.getQuantiteOr() != quantiteOr_pre )
 			throw new PostconditionError("quantiteOr(retrait(V,s))= quantiteOr(V)@pre");
-		
-
-		/* ######## Deuxième check des invariants ######### */
-		this.checkInvariants();
-		
 	}
 	
 	public void chargeOr(int s){
@@ -107,7 +102,10 @@ public class VillageoisContract extends VillageoisDecorator {
 		/* ######## 	Execution  		######### */
 
 		super.chargeOr(s);
-
+		
+		// Deuxième check des invariants
+		this.checkInvariants();
+		
 		/* ######## Verification des postcondition ######### */
 		// \post: pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre
 		if (super.getPointsDeVie() != pointsDeVie_pre)
@@ -116,10 +114,6 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre
 		if (super.getQuantiteOr() != quantiteOr_pre+s)
 			throw new PostconditionError("quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre+s");
-		
-		// Deuxième check des invariants
-		this.checkInvariants();
-		
 	}
 	
 	public void dechargeOr(int s){
@@ -141,6 +135,9 @@ public class VillageoisContract extends VillageoisDecorator {
 		/* ######## 	Execution  		######### */
 
 		super.dechargeOr(s);
+		
+		// Deuxième check des invariants
+		this.checkInvariants();
 
 		/* ######## Verification des postcondition ######### */
 		// \post: pointsDeVie(dechargeOr(V,s))= pointsDeVie(V)@pre
@@ -150,8 +147,5 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \post: quantiteOr(dechargeOr(V,s))= quantiteOr(V)@pre
 		if (super.getQuantiteOr() != quantiteOr_pre-s)
 			throw new PostconditionError("quantiteOr(deChargeOr(V,s))= quantiteOr(V)@pre-s");
-		
-		// Deuxième check des invariants
-		this.checkInvariants();
 	}
 }
