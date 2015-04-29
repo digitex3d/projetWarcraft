@@ -36,9 +36,9 @@ public class MineContract extends MineDecorator {
 		* 				hauteur%2=1
 		*/
 		if (largeur % 2 != 1) 
-			throw new PreconditionError("inv: largeur%2!=1");
+			throw new PreconditionError("pre: largeur%2!=1");
 		if (hauteur % 2 != 1) 
-			throw new PreconditionError("inv: hauteur%2!=1");
+			throw new PreconditionError("pre: hauteur%2!=1");
 
 		//Sauvegarde contexte  
 
