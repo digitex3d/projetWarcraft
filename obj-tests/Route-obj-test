@@ -1,0 +1,23 @@
+Cas de test 1.1 : cas positif Route::testInitPre1
+	Condition initiales : 
+		aucune
+	Opérations : 
+		L0 = init(10, 10, 10, 10, 2 )
+	Oracle OK: 
+		getX() == 10
+		getY() == 10
+		getLargeur() == 10
+		getHauteur() == 10        
+		getMult() == 2       
+	
+***********************************************************
+Cas de test 1.2 : cas negatif Villageois::testInitPre2
+	Condition initiales : 
+		aucune
+	Opérations : 
+		L0 = init(11, 11, 10, 10, -2 )
+	Oracle Exception:
+	 	PreconditionError
+	Rapport:
+	 	La variable mult doit etre positive
+***********************************************************
