@@ -15,9 +15,9 @@ Operators :
 	retrait : [Mine] × int → [Mine]
 		pre retrait(M,s) require ¬estLaminee(M) ∧ s>0
 	acceuil : [Mine] → [Mine]
-		pre acceuil(M) require ¬abandoned(M)
+		pre acceuil(M) require ¬abandoned(M) //bug???
 	abandoned : [Mine] → [Mine]
-		 pre abandoned(M) require ¬estAbandonne()
+		 pre abandoned(M) require ¬estAbandonne() //bug???
 		
 Observations :
 	[invariants]

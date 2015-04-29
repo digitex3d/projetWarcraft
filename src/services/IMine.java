@@ -30,7 +30,7 @@ public interface IMine extends IEntite {
 	// \post: abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre 
 	 
 	// [acceuil]
-	// \pre acceuil(M) require ¬abandoned(M)
+	// \pre acceuil(M) require ¬abandoned(M) //bug???
 
 	void acceuil();
 
@@ -39,7 +39,7 @@ public interface IMine extends IEntite {
 
 	
 	// [abandoned]
-	// \pre abandoned(M) require ¬acceuil(M)
+	// \pre abandoned(M) require ¬acceuil(M) //bug???
 
 	void abandoned();
 
