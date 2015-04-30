@@ -1,7 +1,8 @@
 package services;
 
 public interface IMuraille {
-	/* ########### Observators ########### */	
+	/* ########### Observators ########### */
+	//TODO: Estende IEntite?
 	public int getLargeur();
 	public int getHauteur();
 	public int getPosX();
