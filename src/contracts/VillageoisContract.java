@@ -49,7 +49,7 @@ public class VillageoisContract extends VillageoisDecorator {
 	
 		
 		// execute fonction
-		super.init(race, largeur, hauteur, force, vitesse, pointsDeVie);
+		super.init(x,y,race, largeur, hauteur, force, vitesse, pointsDeVie);
 		
 		/* ######## Verification des postcondition ######### */
 		
