@@ -59,9 +59,9 @@ public class VillageoisDecorator implements IVillageois {
 	}
 
 	@Override
-	public IVillageois init(ERace race, int largeur, int hauteur, int force,
+	public IVillageois init(int x, int y,ERace race, int largeur, int hauteur, int force,
 			double vitesse, int pointsDeVie) {
-		return this.delegate.init(race, largeur, hauteur, force, vitesse, pointsDeVie);
+		return this.delegate.init(x,y,race, largeur, hauteur, force, vitesse, pointsDeVie);
 	}
 
 	@Override
@@ -97,4 +97,6 @@ public class VillageoisDecorator implements IVillageois {
 		this.delegate.setY(y);		
 		
 	}
+
+
 }
