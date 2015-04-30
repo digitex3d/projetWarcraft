@@ -25,7 +25,7 @@ public class VillageoisContractTest extends AbstractVillageoisTest {
 		// condition initiale : aucune
 
 		// opération
-		villageois.init(ERace.HUMAN, 78, 75,10,10.0,10 );
+		villageois.init(10,10,ERace.HUMAN, 78, 75,10,10.0,10 );
 
 		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
 	}
@@ -35,7 +35,7 @@ public class VillageoisContractTest extends AbstractVillageoisTest {
 		// condition initiale : aucune
 
 		// opération
-		villageois.init(ERace.HUMAN, 77, 76,10,10.0,10 );
+		villageois.init(10,10,ERace.HUMAN, 77, 76,10,10.0,10 );
 
 		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
 	}
@@ -45,7 +45,7 @@ public class VillageoisContractTest extends AbstractVillageoisTest {
 		// condition initiale : aucune
 
 		// opération
-		villageois.init(ERace.HUMAN, 78, 75,10,10.0,10 );
+		villageois.init(10,10,ERace.HUMAN, 78, 75,10,10.0,10 );
 
 		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
 	}
@@ -53,7 +53,7 @@ public class VillageoisContractTest extends AbstractVillageoisTest {
 	@Test(expected=PreconditionError.class)
 	public void testDeChargeOrFail() {
 		// condition initiale : aucune
-		villageois.init(ERace.HUMAN, 78, 75,10,10.0,10 );
+		villageois.init(10,10,ERace.HUMAN, 78, 75,10,10.0,10 );
 		
 		// opération
 		villageois.dechargeOr(10);

@@ -20,7 +20,7 @@ public class VillageoisContract extends VillageoisDecorator {
 			throw new InvariantError("inv: estMort(V) min= pointsDeVie(V) > 0");
 	}
 	
-	public IVillageois init(ERace race, int largeur, int hauteur, int force,
+	public IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force,
 			double vitesse, int pointsDeVie) {
 				
 		/* 	pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
@@ -29,6 +29,8 @@ public class VillageoisContract extends VillageoisDecorator {
 		* 				force > 0	∧
 		* 				vitesse > 0 ∧
 		* 				pointsVie > 0
+		* 				x > 0
+		*               y > 0
 		*/
 		if (largeur % 2 != 1) 
 			throw new PreconditionError("inv: largeur%2!=1");
@@ -40,6 +42,10 @@ public class VillageoisContract extends VillageoisDecorator {
 			throw new PreconditionError("inv: vitesse > 0");
 		if (pointsDeVie <= 0) 
 			throw new PreconditionError("inv: pointsVie > 0");
+		if (vitesse <= 0)
+			throw new PreconditionError("inv: x > 0");
+		if (pointsDeVie <= 0) 
+			throw new PreconditionError("inv: y > 0");
 	
 		
 		// execute fonction
@@ -47,13 +53,18 @@ public class VillageoisContract extends VillageoisDecorator {
 		
 		/* ######## Verification des postcondition ######### */
 		
+		// \post: posX(init(x, y, l, h, pv)) = x
+		if (super.getX() != x)
+			throw new PostconditionError("post: posX(init(x, y, l, h, pv)) = x");
+		// \post: posY(init(x, y, l, h, pv)) = y
+		if (super.getY() != y)
+		
 		// \post: race(init(s,l,h,f,v,p))=s
 		if( super.getRace() != race )
 			throw new PostconditionError("race(init(s,l,h,f,v,p))=s");
 		
-		// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
-		if( super.getQuantiteOr() != quantiteOr_pre )
-			throw new PostconditionError("quantiteOr(retrait(V,s))= quantiteOr(V)@pre");
+		
+		
 		
 		// Deuxième check des invariants
 		this.checkInvariants();

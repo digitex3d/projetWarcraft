@@ -29,7 +29,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		// condition initiale
 		
 		// opérations
-		villageois.init(ERace.HUMAN, 77, 75,10,10.0,10 );
+		villageois.init(10,10,ERace.HUMAN, 77, 75,10,10.0,10 );
 		
 		// oracle
 		assertPerso("init, Le villageois est crée avec une mauvaise race", villageois.getRace() == ERace.HUMAN);
@@ -45,7 +45,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 	@Test
 	public void test1_0() {
 		// condition initiale 
-		villageois.init(ERace.HUMAN, 77, 75,10,10.0,10 );
+		villageois.init(10,10,ERace.HUMAN, 77, 75,10,10.0,10 );
 		
 		// opération
 		villageois.retrait(5);
@@ -58,7 +58,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 	@Test
 	public void test2_0() {
 		// condition initiale 
-		villageois.init(ERace.HUMAN, 77, 75,10,10.0,10 );
+		villageois.init(10,10,ERace.HUMAN, 77, 75,10,10.0,10 );
 		
 		// opération
 		villageois.chargeOr(5);
@@ -72,7 +72,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 	@Test
 	public void test3_0() {
 		// condition initiale 
-		villageois.init(ERace.HUMAN, 77, 75,10,10.0,10 );
+		villageois.init(10,10,ERace.HUMAN, 77, 75,10,10.0,10 );
 		villageois.chargeOr(5);
 		
 		// opération

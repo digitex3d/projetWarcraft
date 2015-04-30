@@ -17,8 +17,10 @@ public class VillageoisImpl implements IVillageois {
     protected int posY;
     
     @Override
-	public IVillageois init(ERace race, int largeur, int hauteur, int force,
+	public IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force,
 			double vitesse, int pointsDeVie) {
+    	this.posX 			  =   x;
+    	this.posY 			  =   y;
 		this.race         =   race; 
 		this.largeur      =   largeur; 
 		this.hauteur      =   hauteur; 

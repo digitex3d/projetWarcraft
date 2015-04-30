@@ -17,7 +17,7 @@ public class VillageoisImplError implements IVillageois {
 	int posY;
     
     @Override
-	public IVillageois init(ERace race, int largeur, int hauteur, int force,
+	public IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force,
 			double vitesse, int pointsDeVie) {
 		this.race         =   race; 
 		this.largeur      =   largeur; 

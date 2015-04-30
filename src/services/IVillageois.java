@@ -25,7 +25,7 @@ public interface IVillageois extends IEntite{
 	* 				vitesse > 0 ∧
 	* 				pointsVie > 0
 	*/
-	IVillageois init(ERace race, int largeur, int hauteur, int force, 
+	IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force, 
 			double vitesse, int pointsDeVie);
 	
 
