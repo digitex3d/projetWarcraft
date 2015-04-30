@@ -7,7 +7,6 @@ import exceptions.InvariantError;
 import exceptions.PostconditionError;
 import exceptions.PreconditionError;
 
-// TODO: à comppléter
 public class VillageoisContract extends VillageoisDecorator {
 
 	public VillageoisContract(IVillageois delegate) {
@@ -36,21 +35,30 @@ public class VillageoisContract extends VillageoisDecorator {
 		if (hauteur % 2 != 1) 
 			throw new PreconditionError("inv: hauteur%2!=1");
 		if (force <= 0)
-			throw new PreconditionError("inv: force <= 0");
+			throw new PreconditionError("inv: force > 0");
 		if (vitesse <= 0)
-			throw new PreconditionError("inv: vitesse <= 0");
+			throw new PreconditionError("inv: vitesse > 0");
 		if (pointsDeVie <= 0) 
-			throw new PreconditionError("inv: pointsVie <= 0");
+			throw new PreconditionError("inv: pointsVie > 0");
 	
 		
-		// execute function
+		// execute fonction
 		super.init(race, largeur, hauteur, force, vitesse, pointsDeVie);
+		
+		/* ######## Verification des postcondition ######### */
+		
+		// \post: race(init(s,l,h,f,v,p))=s
+		if( super.getRace() != race )
+			throw new PostconditionError("race(init(s,l,h,f,v,p))=s");
+		
+		// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
+		if( super.getQuantiteOr() != quantiteOr_pre )
+			throw new PostconditionError("quantiteOr(retrait(V,s))= quantiteOr(V)@pre");
 		
 		// Deuxième check des invariants
 		this.checkInvariants();
 		
-		//TODO:postcond
-
+		
 		
 		return this;
 	}

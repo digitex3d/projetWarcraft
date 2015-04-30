@@ -6,17 +6,21 @@ observators :
 	const hauteur : [Villageois] → int
 	const force : [Villageois] → int
 	const vitesse : [Villageois] → double
+	posx: [Villageois] → int
+	posy: [Villageois] → int
 	pointsDeVie : [Villageois] → int
 	quantiteOr : [Villageois] → int
 	estMort : [Villageois] → boolean
 Constructors :
-	init : ERace × int × int × int × double × int → [Villageois]
-		pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
+	init : int x int x ERace × int × int × int × double × int → [Villageois]
+		pre init(x,y, race,largeur,hauteur,force,vitesse,pointsVie) 
 		require  	largeur%2=1 ∧ 
 					hauteur%2=1 ∧
 					force > 0 ∧ 
 					vitesse > 0 ∧ 
-					pointsVie > 0
+					pointsVie > 0 ∧
+					x > 0 ∧
+					y > 0
 Operators :
 	retrait : [Villageois] × int → [Villageois]
 		pre retrait(V,s) require ¬estMort(V) ∧ s>0
@@ -30,13 +34,16 @@ Observations :
 	estMort(V) min = pointsDeVie(V) ≤ 0
 
 	[init]
-	race(init(s,l,h,f,v,p))=s
-	largeur(init(s,l,h,f,v,p))=l
-	hauteur(init(s,l,h,f,v,p))=h
-	force(init(s,l,h,f,v,p))=f
-	vitesse(init(s,l,h,f,v,p))=v
-	pointsDeVie(init(s,l,h,f,v,p))=p
-	quantiteOr(init(s,l,h,f,v,p))=0
+	posx(init(x,y,s,l,h,f,v,p))=x
+	posy(init(x,y,s,l,h,f,v,p))=y
+	race(init(x,y,s,l,h,f,v,p))=s
+	largeur(init(x,y,s,l,h,f,v,p))=l
+	hauteur(init(x,y,s,l,h,f,v,p))=h
+	force(init(x,y,s,l,h,f,v,p))=f
+	vitesse(init(x,y,s,l,h,f,v,p))=v
+	pointsDeVie(init(x,y,s,l,h,f,v,p))=p
+	quantiteOr(init(x,y,s,l,h,f,v,p))=0
+
 
 	[retrait]
 	pointsDeVie(retrait(V,s))=pointsDeVie(V)@pre -s
