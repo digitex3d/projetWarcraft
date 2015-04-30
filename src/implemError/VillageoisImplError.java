@@ -5,16 +5,15 @@ import services.IVillageois;
 
 // TODO: completare e verificare
 public class VillageoisImplError implements IVillageois {
-	private ERace race;
-	private int largeur;
-	private int hauteur;
-	private int force;
-	private double vitesse;
-	private int pointsDeVie;
-	private int quantiteOr;
-    private boolean estMort;
-	int posX;
-	int posY;
+	protected ERace race;
+	protected int largeur;
+	protected int hauteur;
+	protected int force;
+	protected double vitesse;
+	protected int pointsDeVie;
+	protected int quantiteOr;
+    protected int posX;
+    protected int posY;
     
     @Override
 	public IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force,
@@ -29,8 +28,6 @@ public class VillageoisImplError implements IVillageois {
 		
 	}
     
-    public VillageoisImplError() {}
-    
 	public int getPointsDeVie() {
 		return pointsDeVie;
 	}
@@ -38,10 +35,6 @@ public class VillageoisImplError implements IVillageois {
 
 	public int getQuantiteOr() {
 		return quantiteOr;
-	}
-
-	public boolean isEstMort() {
-		return estMort;
 	}
 
 	public ERace getRace() {
@@ -72,54 +65,49 @@ public class VillageoisImplError implements IVillageois {
 	}
 
 	@Override
-	// Bug
 	public void retrait(int s) {
-		this.pointsDeVie -= s+1;
+		this.pointsDeVie -= s + 1; //BUG
 
 	}
 
 	@Override
 	public boolean estMort() {
-		return !this.estMort;
+		return this.pointsDeVie <= 0;
 		
 	}
-
+	
 	@Override
 	public void chargeOr(int s) {
-		this.quantiteOr += s;
+		this.quantiteOr += s - 1; //BUG
 		
 	}
 
 	@Override
-	// Bug
 	public void dechargeOr(int s) {
-		this.quantiteOr += s;
-		
-	}
-	
-	@Override
-	public int getY() {
-	
-		return this.getY();
-	}
-
-	
-	@Override
-	public void setX(int x) {
-		this.posX= x;
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.posX= y;
+		this.quantiteOr -= s;
 		
 	}
 
 	@Override
 	public int getX() {
-	
-		return 0;
+		return this.posX;
+	}
+
+	@Override
+	public int getY() {
+		return this.posY;
+	}
+
+	@Override
+	public void setX(int x) {
+		this.posX = x;
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		this.posY = y;
+		
 	}
 
 }

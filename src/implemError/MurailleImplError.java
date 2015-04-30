@@ -1,8 +1,8 @@
-package implementations;
+package implemError;
 
 import services.IMuraille;
 
-public class Muraille implements IMuraille {
+public class MurailleImplError implements IMuraille {
 	private int largeur;
 	private int hauteur;
 	private int x;
@@ -36,16 +36,16 @@ public class Muraille implements IMuraille {
 
 	@Override
 	public boolean estDetruite() {
-		return pointsDeVie <= 0;
+		return pointsDeVie <= 1; //BUG
 	}
 
 	@Override
 	public IMuraille init(int x, int y, int largeur, int hauteur, int pointsVie) {
 		this.x = x;
 		this.y = y;
-		this.largeur = largeur;
+		this.largeur = largeur + 1; //BUG
 		this.hauteur = hauteur;
-		this.pointsDeVie = pointsVie;
+		this.pointsDeVie = pointsVie - 1; //BUG
 		return this;
 	}
 
