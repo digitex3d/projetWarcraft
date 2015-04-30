@@ -13,7 +13,7 @@ Constructors :
 			hauteur%2=1 ∧
 			0 <= posx <= largeur ∧
 			0 <= posy <= hauteur ∧
-		     	or > 0
+		    or > 0
 Operators :
 	depot : [HotelVille] × int → [HotelVille]
 		pre depot(H,s) require s>0
