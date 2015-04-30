@@ -11,8 +11,8 @@ Constructors :
 		pre init(x,y,largeur,hauteur,or) require 
 			largeur%2=1 ∧ 
 			hauteur%2=1 ∧
-			0 <= posx <= largeur ∧
-			0 <= posy <= hauteur ∧
+			x > 0 ∧
+			y > 0 ∧
 		    or >= 0
 Operators :
 	depot : [HotelVille] × int → [HotelVille]

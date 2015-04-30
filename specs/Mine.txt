@@ -1,6 +1,8 @@
 service : Mine
 types: int, boolean, enum ERace {ORC, HUMAN}
 observators :
+	const posx : [Mine] -> int
+	const posy : [Mine] -> int
 	const largeur : [Mine] → int
 	const hauteur : [Mine] → int
 	orRestant : [Mine] → int
