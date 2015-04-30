@@ -153,9 +153,10 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		int poshx = this.hotelDeVille.getX();
 		int poshy = this.hotelDeVille.getY();
 		for( IVillageois villageois : this.villageois){
-			villageois.init(ERace.HUMAN, 4, 4, 10, 10.0, 100);
-			villageois.setX(poshx + Utils.randInt(0, 51));
-			villageois.setY(poshy + Utils.randInt(0, 51));
+			int vx = poshx + Utils.randInt(0, 51);
+			int vy = poshy + Utils.randInt(0, 51);
+			villageois.init(vx,vy,ERace.HUMAN, 4, 4, 10, 10.0, 100);
+
 			
 		}
 
