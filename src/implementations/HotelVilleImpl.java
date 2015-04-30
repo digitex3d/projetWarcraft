@@ -4,25 +4,22 @@ import services.IHotelVille;
 
 
 public class HotelVilleImpl implements IHotelVille {
-	int largeur;
-	int hauteur;
-	int orRestant;
-	int abandonCompteur;
-	boolean estLaminee;
-	boolean estAbandonne;
-	int posX;
-	int posY;
+	protected int largeur;
+	protected int hauteur;
+	protected int orRestant;
+	protected int posX;
+	protected int posY;
 	
 	public HotelVilleImpl() {}
 		
 	@Override
-	public IHotelVille init(int largeur, int hauteur) {
+	public IHotelVille init(int x, int y, int largeur, int hauteur, int or) {
+		this.posX = x;
+		this.posY = y;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
-		this.orRestant = 16;
-		this.abandonCompteur = 51;
-		this.estLaminee = false;
-		this.estAbandonne = true;
+		this.orRestant = or;
+		
 		return this;
 		
 	}
@@ -40,42 +37,6 @@ public class HotelVilleImpl implements IHotelVille {
 	@Override
 	public int getOrRestant() {
 		return this.orRestant;
-	}
-
-	@Override
-	public boolean estAbandonne() {
-		return this.estAbandonne;
-	}
-
-	@Override
-	public boolean estLaminee() {
-		return this.estLaminee;
-	}
-
-	@Override
-	public int getAbandonCompteur() {
-		return this.abandonCompteur;
-	}
-
-	
-
-	@Override
-	public void retrait(int s) {
-		this.orRestant -= s;
-	}
-
-	//TODO: à revoir
-	@Override
-	public void acceuil() {
-		this.abandonCompteur = 0;
-		
-	}
-
-	//TODO: à revoir
-	@Override
-	public void abandoned() {
-			this.abandonCompteur += 1;
-		
 	}
 
 	@Override

@@ -145,9 +145,9 @@ public class MoteurJeuImpl implements IMoteurJeu{
 				throw new Error("Vous devez binder les Mines  ville avant de faire appel a init");
 		 
 		 // Initialisation Hotel de ville
-		 this.hotelDeVille.setX(Utils.randInt(0, 51));
-		 this.hotelDeVille.setY(Utils.randInt(0, 51));
-		 this.hotelDeVille.init(20, 20);
+		 int hvx = Utils.randInt(0, 51);
+		 int hvy = Utils.randInt(0, 51);
+		 this.hotelDeVille.init(hvx,hvy, 20, 20, 16);
 		 
 		// Initialisation Villageois
 		int poshx = this.hotelDeVille.getX();
