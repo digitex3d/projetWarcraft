@@ -12,7 +12,6 @@ public class VillageoisImpl implements IVillageois {
 	protected double vitesse;
 	protected int pointsDeVie;
 	protected int quantiteOr;
-    protected boolean estMort;
     protected int posX;
     protected int posY;
     
@@ -75,7 +74,7 @@ public class VillageoisImpl implements IVillageois {
 
 	@Override
 	public boolean estMort() {
-		return this.estMort;
+		return this.pointsDeVie <= 0;
 		
 	}
 	
