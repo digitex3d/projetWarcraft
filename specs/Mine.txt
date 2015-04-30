@@ -1,4 +1,5 @@
 service : Mine
+types: int, boolean, enum ERace {ORC, HUMAN}
 observators :
 	const largeur : [Mine] → int
 	const hauteur : [Mine] → int
@@ -6,7 +7,9 @@ observators :
 	estAbandonnee : [Mine] → boolean
 	estLaminee : [Mine] → boolean
 	abandonCompteur : [Mine] → int
-	
+	etatAppartenance : [Mine] → ERace
+		pre etatAppartenance(M) require ¬estAbandonnee()
+
 Constructors :
 	init : int × int → [Mine]
 		pre init(largeur,hauteur) require largeur%2=1 ∧ hauteur%2=1
@@ -14,10 +17,10 @@ Constructors :
 Operators :
 	retrait : [Mine] × int → [Mine]
 		pre retrait(M,s) require ¬estLaminee(M) ∧ s>0
-	acceuil : [Mine] → [Mine]
-		pre acceuil(M) require ¬abandoned(M) //bug???
+	acceuil : [Mine] × ERace → [Mine]
+		pre acceuil(M, r) require estAbandonnee(M) v etatAppartenance(M) = r
 	abandoned : [Mine] → [Mine]
-		 pre abandoned(M) require ¬estAbandonne() //bug???
+		pre abandoned(M) require ¬estAbandonne()
 		
 Observations :
 	[invariants]
@@ -26,21 +29,24 @@ Observations :
 	0 ≤abandonCompteur(M)≤ 51
 	
 	[init]
-	largeur(init(l,h))=l
-	hauteur(init(l,h))=h
-	orRestant(init(l,h))=51
-	abandonCompteur(init(l,h))=51
+	largeur(init(l,h)) = l
+	hauteur(init(l,h)) = h
+	orRestant(init(l,h)) = 51
+	abandonCompteur(init(l,h)) = 51
+	etatAppartenance(init(l, h)) = ORC
 	
 	[retrait]
-	orRestant(retrait(M,s))=orRestant(M)-s
-	abandonCompteur(retrait(M,s))=abandonCompteur(M)
+	orRestant(retrait(M,s)) = orRestant(M) - s
+	abandonCompteur(retrait(M,s)) = abandonCompteur(M)
+	etatAppartenance(retrait(M,s)) = etatAppartenance(M)
 	
 	[acceuil]
-	orRestant(acceuil(M))=orRestant(M)
-	abandonCompteur(accueil(M))=0
-	
-	[abandoned]
-	orRestant(abandoned(M))=orRestant(M)
-	abandonCompteur(abandoned(M))=abandonCompteur()+1
+	orRestant(acceuil(M, r)) = orRestant(M)
+	abandonCompteur(accueil(M, r)) = 0
+	etatAppartenance(accueil(M, r)) = r
 
+	[abandoned]
+	orRestant(abandoned(M)) = orRestant(M)
+	abandonCompteur(abandoned(M)) = abandonCompteur()+1
+	etatAppartenance(abandoned(M)) = etatAppartenance(M)
 	

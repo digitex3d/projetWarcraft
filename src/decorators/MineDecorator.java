@@ -1,5 +1,6 @@
 package decorators;
 
+import enums.ERace;
 import services.IMine;
 
 public class MineDecorator implements IMine{
@@ -51,8 +52,8 @@ public class MineDecorator implements IMine{
 	}
 
 	@Override
-	public void acceuil() {
-		this.delegate.acceuil();
+	public void acceuil(ERace race) {
+		this.delegate.acceuil(race);
 	}
 
 	@Override
@@ -81,4 +82,8 @@ public class MineDecorator implements IMine{
 		
 	}
 
+	@Override
+	public ERace getEtatAppartenance() {
+		return this.delegate.getEtatAppartenance();
+	}
 }

@@ -2,6 +2,7 @@ package contracts;
 
 import services.IMine;
 import decorators.MineDecorator;
+import enums.ERace;
 import exceptions.InvariantError;
 import exceptions.PostconditionError;
 import exceptions.PreconditionError;
@@ -58,6 +59,9 @@ public class MineContract extends MineDecorator {
 		// \post :  abandonCompteur(init(l,h))=51
 		if( super.getAbandonCompteur() != 51)
 			throw new PostconditionError("abandonCompteur(init(l,h))=51");
+		// \post: etatAppartenance(init(l, h)) = ORC
+		if (super.getEtatAppartenance() != ERace.ORC)
+			throw new PostconditionError("etatAppartenance(init(l, h)) = ORC");
 		
 		return this;
 	}
@@ -75,6 +79,7 @@ public class MineContract extends MineDecorator {
 		/* ######## 	Sauvegarde contexte  		######### */
 		int abandonCompteur_pre = super.getAbandonCompteur();
 		int OrRestant_pre = super.getOrRestant();
+		ERace etatAppartenance_pre = super.getEtatAppartenance();
 		
 		// Execution
 		super.retrait(s);
@@ -84,44 +89,51 @@ public class MineContract extends MineDecorator {
 		
 		/* ######## Verification des postcondition ######### */
 		// \post: orRestant(retrait(M,s))=orRestant(M)-s
-			if (super.getOrRestant() != OrRestant_pre - s)                                     
-				throw new PostconditionError("orRestant(retrait(M,s))=orRestant(M)-s");  
+		if (super.getOrRestant() != OrRestant_pre - s)                                     
+			throw new PostconditionError("orRestant(retrait(M,s))=orRestant(M)-s");  
 			
 		// \post: abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre
-			if (super.getAbandonCompteur() != abandonCompteur_pre)                                     
-				throw new PostconditionError("abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre");  
-	}
+		if (super.getAbandonCompteur() != abandonCompteur_pre)                                     
+			throw new PostconditionError("abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre");  
+
+		// \post: etatAppartenance(retrait(M,s)) = etatAppartenance(M)@pre
+		if (super.getEtatAppartenance() != etatAppartenance_pre)
+			throw new PostconditionError("etatAppartenance(retrait(M,s)) = etatAppartenance(M)@pre");
+}
 	
 	//	------------------------------- [ acceuil ] -------------------------------
-	public void acceuil(){
+	public void acceuil(ERace race){
 		// Premier check des invariants
 		this.checkInvariants();
 
 		/* ######## Verification des préconditions ######### */
 		
-		/* bug ??? 
-		// \pre: pre acceuil(M) require ¬abandoned(M)
-		if (super.estAbandonne()) 
-			throw new PreconditionError("pre acceuil(M) require ¬abandoned(M)");
-*/
+		// \pre: acceuil(M, r) require estAbandonnee(M) v etatAppartenance(M) = r
+		if ( ! (super.estAbandonne() || super.getEtatAppartenance() == race)) 
+			throw new PreconditionError("pre acceuil(M, r) require estAbandonnee(M) v etatAppartenance(M) = r");
+
 		/* ######## 	Sauvegarde contexte  		######### */
 		int orRestant_pre = super.getOrRestant();
 		
 		/* ######## 	Execution  		######### */
-		super.acceuil();
+		super.acceuil(race);
 		
 		// Deuxième check des invariants
 		this.checkInvariants();
 
 		/* ######## Verification des postcondition ######### */
 		
-		// \pre: orRestant(acceuil(M))=orRestant(M)@pre
+		// \post: orRestant(acceuil(M))=orRestant(M)@pre
 		if (super.getOrRestant() != orRestant_pre)                                     
 			throw new PostconditionError("orRestant(acceuil(M))=orRestant(M)@pre"); 
 		
-		// \pre: abandonCompteur(accueil(M))=0
+		// \post: abandonCompteur(accueil(M))=0
 		if (super.getAbandonCompteur() != 0)                                     
-			throw new PostconditionError("abandonCompteur(accueil(M))=0"); 
+			throw new PostconditionError("abandonCompteur(accueil(M))=0");
+		
+		// \post: etatAppartenance(accueil(M, r)) = r
+		if (super.getEtatAppartenance() != race)
+			throw new PostconditionError("etatAppartenance(accueil(M, r)) = r");
 	}
 	
 	// --------------------- [abandoned] -----------------------------
@@ -130,14 +142,14 @@ public class MineContract extends MineDecorator {
 		this.checkInvariants();
 		
 		/* ######## Verification des préconditions ######### */
-		/* bug???
-		// \pre: abandoned(M) require ¬acceuil(M)
-		if( ! super.estAbandonne() )
+		// \pre: abandoned(M) require ¬estAbandonne()
+		if (super.estAbandonne())
 			throw new PreconditionError(" abandoned(M) require ¬estAbandonne()");
-		*/
+
 		//Sauvegarde contexte  
 		int orRestant_pre = super.getOrRestant();
 		int abandonCompteur_pre = super.getAbandonCompteur();
+		ERace etatAppartenance_pre = super.getEtatAppartenance();
 		
 		/* ######## 	Execution  		######### */
 		super.abandoned();
@@ -152,6 +164,18 @@ public class MineContract extends MineDecorator {
 
 		// \post: abandonCompteur(abandoned(M))=abandonCompteur()+1	
 		if (super.getAbandonCompteur() != abandonCompteur_pre + 1)                                     
-				throw new PostconditionError("abandonCompteur(abandoned(M))=abandonCompteur()+1"); 
+			throw new PostconditionError("abandonCompteur(abandoned(M))=abandonCompteur()+1");
+		
+		// \post: etatAppartenance(abandoned(M)) = etatAppartenance(M)@pre
+		if (super.getEtatAppartenance() != etatAppartenance_pre)
+			throw new PostconditionError("etatAppartenance(abandoned(M)) = etatAppartenance(M)@pre");
+	}
+	
+	public ERace getEtatAppartenance() {
+		// \pre: etatAppartenance(M) require ¬estAbandonnee()
+		if (super.estAbandonne())
+			throw new PreconditionError("etatAppartenance(M) require ¬estAbandonnee()");
+		
+		return super.getEtatAppartenance();
 	}
 }

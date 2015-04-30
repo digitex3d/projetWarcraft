@@ -1,5 +1,6 @@
 package implementations;
 
+import enums.ERace;
 import services.IMine;
 
 public class MineImpl implements IMine {
@@ -9,6 +10,7 @@ public class MineImpl implements IMine {
 	int abandonCompteur;
 	boolean estLaminee;
 	boolean estAbandonne;
+	ERace etatAppartenance;
 	int posX;
 	int posY;
 	
@@ -22,8 +24,8 @@ public class MineImpl implements IMine {
 		this.abandonCompteur = 51;
 		this.estLaminee = false;
 		this.estAbandonne = true;
+		this.etatAppartenance = ERace.ORC;
 		return this;
-		
 	}
 		
 	@Override
@@ -65,7 +67,8 @@ public class MineImpl implements IMine {
 
 	//TODO: à revoir
 	@Override
-	public void acceuil() {
+	public void acceuil(ERace race) {
+		this.etatAppartenance = race;
 		this.abandonCompteur = 0;
 		
 	}
@@ -74,7 +77,6 @@ public class MineImpl implements IMine {
 	@Override
 	public void abandoned() {
 			this.abandonCompteur += 1;
-		
 	}
 
 	@Override
@@ -96,6 +98,11 @@ public class MineImpl implements IMine {
 	@Override
 	public void setY(int y) {
 		this.posY = y;
+	}
+
+	@Override
+	public ERace getEtatAppartenance() {
+		return etatAppartenance;
 	}
 
 
