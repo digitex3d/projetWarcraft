@@ -17,8 +17,6 @@ public interface IVillageois extends IEntite{
 	boolean	estMort();
 	
 	/* ########### Constructors ########### */		
-	IVillageois init(ERace race, int largeur, int hauteur, int force, 
-			double vitesse, int pointsDeVie);
 	
 	/* \pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
 	* 	require 	largeur%2=1 ∧ 
@@ -27,6 +25,10 @@ public interface IVillageois extends IEntite{
 	* 				vitesse > 0 ∧
 	* 				pointsVie > 0
 	*/
+	IVillageois init(ERace race, int largeur, int hauteur, int force, 
+			double vitesse, int pointsDeVie);
+	
+
 
 	
 	

@@ -1,5 +1,6 @@
 package implemError;
 
+import enums.ERace;
 import services.IMine;
 
 // TODO: verificare
@@ -62,10 +63,7 @@ public class MineImplError implements IMine {
 		this.orRestant -= s;
 	}
 
-	@Override
-	public void acceuil() {
-		this.abandonCompteur = 1;
-	}
+	
 
 	@Override
 	public void abandoned() {
@@ -94,6 +92,18 @@ public class MineImplError implements IMine {
 	@Override
 	public void setY(int y) {
 		this.posX= y;
+		
+	}
+
+	@Override
+	public ERace getEtatAppartenance() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void acceuil(ERace race) {
+		// TODO Auto-generated method stub
 		
 	}
 

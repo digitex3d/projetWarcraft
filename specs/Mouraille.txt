@@ -1,0 +1,36 @@
+service :  Mouraille
+observators :
+	const largeur : [Mouraille] → int
+	const hauteur : [Mouraille] → int
+	const posx : [Mouraille] → int
+	const posy : [Mouraille] →  int
+	pointsDeVie : [Mouraille] → int
+	estDetruite : [Mouraille] → boolean
+
+Constructors :
+	init : int x int x int × int → [Mouraille]
+		pre init(x,y, largeur,hauteur, pv) require 
+			largeur % 2=1 ∧ 
+			hauteur % 2=1 ∧
+			x > 0 ∧
+			y > 0 ∧
+			pv > 0
+		
+Operators :
+	retrait : [Muraille] × int → [Muraille]
+		pre retrait(M,s) require ¬estDetruite(M) ∧ s>0
+		
+
+Observations :
+	[invariants]
+	estDetruite(M) min = pointsDeVie(M) ≤ 0
+
+	[init]
+	posx(init(x,y,l,h,pv))=x
+	posy(init(x,y,l,h,pv))=y
+	largeur(init(x,y,l,h,pv))=l
+	hauteur(init(x,y,l,h,pv))=h
+	pointsDeVie(init(x,y,l,h,pv))=pv
+
+	[retrait]
+	pointsDeVie(retrait(M,s))=pointsDeVie(V)-s

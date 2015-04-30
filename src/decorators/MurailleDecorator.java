@@ -21,13 +21,13 @@ public class MurailleDecorator implements IMuraille{
 	}
 
 	@Override
-	public int getPosX() {
-		return delegate.getPosX();
+	public int getX() {
+		return delegate.getX();
 	}
 
 	@Override
-	public int getPosY() {
-		return delegate.getPosY();
+	public int getY() {
+		return delegate.getY();
 	}
 
 	@Override
@@ -48,5 +48,17 @@ public class MurailleDecorator implements IMuraille{
 	@Override
 	public void retrait(int s) {
 		delegate.retrait(s);
+	}
+
+	@Override
+	public void setX(int x) {
+		this.setX(x);
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		this.setY(y);
+		
 	}
 }

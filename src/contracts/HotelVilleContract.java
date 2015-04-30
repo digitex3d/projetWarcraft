@@ -1,11 +1,9 @@
 package contracts;
 
 import decorators.HotelVilleDecorator;
-import exceptions.InvariantError;
 import exceptions.PostconditionError;
 import exceptions.PreconditionError;
 import services.IHotelVille;
-import services.IMine;
 
 // Terminer
 public class HotelVilleContract extends HotelVilleDecorator {

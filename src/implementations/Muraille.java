@@ -20,12 +20,12 @@ public class Muraille implements IMuraille {
 	}
 
 	@Override
-	public int getPosX() {
+	public int getX() {
 		return x;
 	}
 
 	@Override
-	public int getPosY() {
+	public int getY() {
 		return y;
 	}
 
@@ -52,6 +52,18 @@ public class Muraille implements IMuraille {
 	@Override
 	public void retrait(int s) {
 		this.pointsDeVie -= s;
+	}
+
+	@Override
+	public void setX(int x) {
+		this.x = x;
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		this.y = y;
+		
 	}
 
 }

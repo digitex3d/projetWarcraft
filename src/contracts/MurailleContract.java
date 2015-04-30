@@ -32,10 +32,10 @@ public class MurailleContract extends MurailleDecorator {
 		this.checkInvariants();
 		
 		// \post: posX(init(x, y, l, h, pv)) = x
-		if (super.getPosX() != x)
+		if (super.getX() != x)
 			throw new PostconditionError("post: posX(init(x, y, l, h, pv)) = x");
 		// \post: posY(init(x, y, l, h, pv)) = y
-		if (super.getPosY() != y)
+		if (super.getY() != y)
 			throw new PostconditionError("post: posY(init(x, y, l, h, pv)) = y");
 		// \post: largeur(init(x, y, l, h, pv)) = l
 		if (super.getLargeur() != largeur)
