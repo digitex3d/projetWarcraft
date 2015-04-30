@@ -7,7 +7,7 @@ observators :
 	orRestant : [HotelVille] → int
 	
 Constructors :
-	init : int × int → [HotelVille]
+	init : int × int x int × int  → [HotelVille]
 		pre init(x,y,largeur,hauteur,or) require 
 			largeur%2=1 ∧ 
 			hauteur%2=1 ∧
