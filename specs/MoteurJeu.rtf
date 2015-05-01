@@ -1,0 +1,390 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf570
+{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\ftech\fcharset77 Symbol;\f2\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh15620\viewkind0
+\deftab720
+\pard\pardeftab720\pardirnatural
+
+\f0\b\fs20 \cf0 service: 
+\b0 MoteurJeu
+\b \
+types:
+\b0  enum RESULTAT\{ORC_GAGNE, HUMAN_GAGNE, NUL\},
+\fs24 \
+
+\fs20 enum COMMANDE\{RIEN, DEPLACER, ENTRERMINE, ENTRERHOTELVILLE\}\
+
+\b observators:\
+
+\b0 	
+\b const
+\b0  largeurTerrain : [MoteurJeu] 
+\f1 \uc0\u8594 
+\f0  int
+\fs24 \
+
+\fs20 	
+\b const
+\b0  hauteurTerrain : [MoteurJeu] 
+\f1 \uc0\u8594 
+\f0  int
+\fs24 \
+
+\fs20 	
+\b const
+\b0  maxPasJeu : [MoteurJeu] 
+\f1 \uc0\u8594 
+\f0  int
+\fs24 \
+
+\fs20 	pasJeuCourant : [MoteurJeu] 
+\f1 \uc0\u8594 
+\f0  int\
+	estFini : [MoteurJeu] 
+\f1 \uc0\u8594 
+\f0  boolean\
+	resultatFinal : [MoteurJeu] 
+\f1 \uc0\u8594 
+\f0  RESULTAT\
+		pre resultatFinal(M) require estFini(M)\
+	
+\b const
+\b0  getListeVillageois : [MoteurJeu] \'d7 ERace 
+\f1 \uc0\u8594 
+\f0  List<Villageois>\
+	
+\b const
+\b0  getListeMine : [MoteurJeu] 
+\f1 \uc0\u8594 
+\f0  List<Mine>\
+	
+\b const
+\b0  getHotelDeVille : [MoteurJeu]  \'d7 ERace 
+\f1 \uc0\u8594 
+\f0  H\'f4telVille\
+	peutEntrer : [MoteurJeu] \'d7 Villageois \'d7 Mine 
+\f1 \uc0\u8594 
+\f0  boolean
+\fs24 \
+
+\fs20 		
+\b pre
+\b0  peutEntrer(M, Vill, Mi) 
+\b require\
+			
+\b0 Mi 
+\f1 \uc0\u8712 
+\f0  getListeMine(M) 
+\f1 \uc0\u8743 
+\f0 \
+			(Vill 
+\f1 \uc0\u8712 
+\f0  getListeVillageois(M, ORC) 
+\f1 \uc0\u8744 
+\f0  Vill 
+\f1 \uc0\u8712 
+\f0  getListeVillageois(M, HUMAN)) 
+\f1 \uc0\u8743 
+\f0\fs24 \
+
+\fs20 			(
+\f2 \'ac
+\f0 Mine::estAbandonnee(Mi) 
+\f1 \uc0\u8658 
+\f0  Vill 
+\f1 \uc0\u8712 
+\f0  getListeVillageois(M, Mine::etatAppartenance(Mi)))\
+	peutEntrerHotelVille : [MoteurJeu] \'d7 Villageois \'d7 HotelVille 
+\f1 \uc0\u8594 
+\f0  boolean
+\fs24 \
+
+\fs20 		
+\b pre
+\b0  peutEntrerHotelVille(M, Vill, Hdv) 
+\b require
+\b0  \
+			(Hdv 
+\f1 \uc0\u8712 
+\f0  getHotelDeVille(M, ORC) 
+\f1 \uc0\u8744 
+\f0  Hdv 
+\f1 \uc0\u8712 
+\f0  getHotelDeVille(M, HUMAN)) 
+\f1 \uc0\u8743 
+\f0\fs24 \
+
+\fs20 			(Vill 
+\f1 \uc0\u8712 
+\f0  getListeVillageois(M, ORC) 
+\f1 \uc0\u8744 
+\f0  Vill 
+\f1 \uc0\u8712 
+\f0  getListeVillageois(M, HUMAN)) 
+\f1 \uc0\u8743  //
+\f2 TODO
+\f0 \
+
+\b Constructors:
+\b0\fs24 \
+
+\fs20 	init : int \'d7 int \'d7 int 
+\f1 \uc0\u8594 
+\f0  [MoteurJeu]\
+		pre init(largeur,hauteur,maxPas) require largeur\uc0\u8805  600 
+\f1 \uc0\u8743 
+\f0  hauteur\uc0\u8805  400 
+\f1 \uc0\u8743 
+\f0  maxPas\uc0\u8805  0\
+
+\b Operators:
+\b0 \
+	pasJeu : [MoteurJeu] \'d7 COMMANDE \'d7 Villageois \'d7 int \'d7 Mine \'d7 HotelVille 
+\f1 \uc0\u8594 
+\f0  [MoteurJeu]\
+		pre pasJeu(M, command, Vill, angle, Mi, Hdv) require\
+						\'acestFini(M)\
+						command = DEPLACER 
+\f1 \uc0\u8658 
+\f0  0 \uc0\u8804  angle \u8804  360\
+						command = ENTRERMINE 
+\f1 \uc0\u8658 
+\f0  Mi 
+\f1 \uc0\u8712  
+\f0 getListeMine(M)\
+						command = ENTRERHOTELVILLE 
+\f1 \uc0\u8658  
+\f0 Hdv 
+\f1 = 
+\f0 getHotelDeVille(M, ORC) 
+\f1 \uc0\u8744 
+\f0  Hdv 
+\f1 =
+\f0  getHotelDeVille(M, HUMAN)\
+
+\b Observations:
+\b0\fs24 \
+
+\b\fs20 	[invariants]\
+
+\b0 	0 \uc0\u8804  pasJeuCourant(M) \u8804  maxPasJeu(M)\
+	estFini(M) min= HotelVille::orRestant(getHotelDeVille(M, ORC)) \uc0\u8805  1664 
+\f1 \uc0\u8744 
+\f0  HotelVille::orRestant(getHotelDeVille(M, HUMAN)) \uc0\u8805  1664 
+\f1 \uc0\u8744 
+\f0  pasJeuCourant(M) = maxPasJeu(M)\
+			  	\{ ORC_GAGNE si HotelVille::orRestant(getHotelDeVille(M, ORC)) \uc0\u8805  1664\
+	resultatFinal(M) min=  	\{ HUMAN_GAGNE si HotelVille::orRestant(getHotelDeVille(M, HUMAN)) \uc0\u8805  1664\
+			  	\{ NUL sinon\
+	peutEntrer(M, Vill, Mi) min= distance(Villageois::getX(Vill), Villageois::getY(Vill), Mine::getX(Mi), Mine::getY(Mi)) \uc0\u8804  51\
+	peutEntrerHotelVille(M, Vill, Hdv) min= distance(Villageois::getX(Vill), Villageois::getY(Vill), HotelVille::getX(Hdv), HotelVille::getY(Hdv)) \uc0\u8804  51\
+\
+	
+\b\fs22 [init]
+\b0\fs24 \
+
+\fs20 	maxPasJeu(init(l,h,m))=m\
+	pasJeuCourant(init(l,h,m))=0\
+	largeurTerrain(init(l,h,m))=l\
+	hauteurTerrain(init(l,h,m))=h\
+	\
+	// Initialisation Hotel de ville\
+	HotelVille::getX(getHotelDeVille(init(l,h,m), ORC)) + HotelVille::largeur(getHotelDeVille(init(l,h,m), ORC)) 
+\f2 \uc0\u8804 
+\f0  l\
+	HotelVille::getY(getHotelDeVille(init(l,h,m), ORC)) + HotelVille::hauteur(getHotelDeVille(init(l,h,m), ORC)) 
+\f2 \uc0\u8804 
+\f0  h\
+	HotelVille::getX(getHotelDeVille(init(l,h,m), HUMAN)) + HotelVille::largeur(getHotelDeVille(init(l,h,m), HUMAN)) 
+\f2 \uc0\u8804 
+\f0  l\
+	HotelVille::getY(getHotelDeVille(init(l,h,m), HUMAN)) + HotelVille::hauteur(getHotelDeVille(init(l,h,m), HUMAN)) 
+\f2 \uc0\u8804 
+\f0  h\
+	HotelVille::orRestant(getHotelDeVille(init(l,h,m), ORC)) = 16
+\fs24 \
+
+\fs20 	HotelVille::orRestant(getHotelDeVille(init(l,h,m), HUMAN)) = 16
+\fs24 \
+\
+
+\fs20 	// Initialisation Villageois
+\fs24 \
+
+\fs20 	
+\b \\forall
+\b0  Vill 
+\b \\in
+\b0  getListeVillageois(init(l, h, m), ORC)
+\i  
+\f1\i0 \uc0\u8746 
+\f0\i  
+\i0 getListeVillageois(init(l, h, m), HUMAN):\
+		Villageois::getX(Vill) + Villageois::largeur(Vill) 
+\f2 \uc0\u8804 
+\f0  l 
+\f1 \uc0\u8743 
+\f0\fs24 \
+
+\fs20 		Villageois::getY(Vill) + Villageois::hauteur(Vill) 
+\f2 \uc0\u8804 
+\f0  h 
+\f1 \uc0\u8743 \
+		
+\f0 peutEntrerHotelVille(init(l, h, m), Vill, getHotelDeVille(init(l, h, m), Villageois::race(Vill))) 
+\f1 \uc0\u8743 
+\f0\fs24 \
+
+\fs20      	     	Villageois::pointsDeVie(Vill) = 100
+\fs24 \
+\
+
+\fs20 	// Initialisation Mines
+\fs24 \
+
+\fs20 	
+\b \\forall
+\b0  Mi 
+\b \\in
+\b0  getListeMine((init(l, h, m)):\
+		Mine::getX(Mi) + Mine::largeur(Mi) 
+\f2 \uc0\u8804  
+\f0 l 
+\f1 \uc0\u8743 
+\f0\fs24 \
+
+\fs20 		Mine::getY(Mi) + Mine::hauteur(Mi) 
+\f2 \uc0\u8804  
+\f0 h
+\fs24 \
+
+\fs20 \
+	
+\b [pasJeu]
+\b0\fs24 \
+
+\fs20 	pasJeuCourant(pasJeu(M, c, Vill, angle, Mi, Hdv)) = pasJeuCourant(M) + 1\
+
+\fs24 \
+	 // Commande DEPLACER\
+	si c = DEPLACER	\
+\
+	// Mines\
+	
+\b\fs20 \\forall
+\b0  
+\i numM
+\i0  
+\b \\in
+\b0  
+\i numeroesMine:
+\i0\fs24 \
+\pard\pardeftab720\pardirnatural
+
+\i\fs20 \cf0 		getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
+\i0\fs24 \
+\
+
+\i\fs20 	// Villageois
+\i0\fs24 \
+
+\i\fs20 	
+\b \\forall
+\b0  numV 
+\b \\in
+\b0  numeroesVillageois:
+\i0\fs24 \
+
+\i\fs20 		getVillageois( pasJeu(M,c,numVillageois,arg), numV) =\
+			getVillageois( M, numV) si  numVillageois != numV
+\i0\fs24 \
+
+\i\fs20 		\
+\pard\pardeftab720\pardirnatural
+
+\i0 \cf0 			positionVillageoisX(pasJeu(M,c,numVillageois,arg), numVillageois) = cos(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))\
+\pard\pardeftab720\pardirnatural
+
+\i \cf0 			positionVillageoisY(pasJeu(M,c,numVillageois,arg), numVillageois) = sin(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))\
+			\
+\pard\pardeftab720\pardirnatural
+
+\i0\fs24 \cf0 \
+	// Commande ENTRERHOTELVILLE	\
+	si c = ENTRERHOTELVILLE		\
+\pard\pardeftab720\pardirnatural
+
+\i\fs20 \cf0 	
+\i0 HotelVille::orRestant(getHotelDeVille(pasJeu(M, c, Vill, angle, Mi, Hdv), Vill::race)) = 	\{ HotelVille::orRestant(getHotelDeVille(M, Vill:race)) + Vill:race si peutEntrerHotelVille(M, Vill, Hdv)\
+											\{ HotelVille::orRestant(getHotelDeVille(M, Vill:race)) sinon
+\fs24 \
+\pard\pardeftab720\pardirnatural
+
+\fs20 \cf0 	\
+	
+\b \\forall
+\b0  Vi
+\i  
+\b \\
+\i0 in 
+\b0 getListeVillageois(pasJeu(M, c, Vill, angle, Mi, Hdv), Vill:race) \
+		Vi = Vill => Villageois::quantiteOr(Vi) =	\{0 si peutEntrerHotelVille(M, Vill, Hdv)\
+							\{Villageois::quantiteOr(Vill) sinon 			//TODO
+\i 			\
+
+\i0 \
+	// Commande ENTRERMINE     \
+	si c = ENTRERMINE	         \
+	// Mines\
+
+\fs24 	
+\b\fs20 \\forall
+\b0  
+\i numM
+\i0  
+\b \\in
+\b0  ( 
+\i numeroesMine 
+\b \\minus
+\b0  arg ):
+\i0\fs24 \
+\pard\pardeftab720\pardirnatural
+
+\i\fs20 \cf0 		getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
+\i0\fs24 \
+	\
+	
+\fs20 Mine::quatiteOr(
+\i getMine(  pasJeu(M,c,numVillageois,arg), arg )) = 
+\i0\fs24 \
+		
+\fs20 Mine::quatiteOr ( 
+\i getMine( M , arg))-1
+\i0\fs24 \
+
+\i\fs20 \
+	// Villageois
+\i0\fs24 \
+
+\i\fs20 	
+\b \\forall
+\b0  numV 
+\b \\in
+\b0  (numeroesVillageois 
+\b \\minus
+\b0  numVillageois):
+\i0\fs24 \
+
+\i\fs20 		getVillageois( pasJeu(M,c,numVillageois,arg), numV) =\
+			\
+	Villageois::quantiteOr(getVillageois(pasJeu(M,c,numVillageois,arg),numVillageois)))  = Villageois::quantiteOr(getVillageois(M,numVillageois)))+1
+\i0\fs24 \
+
+\i\fs20 			\
+	// HotelDeVille
+\i0\fs24 \
+
+\i\fs20 	getHotelDeVille(pasJeu(M,c,numVillageois,arg)) =  getHotelDeVille(M)
+\i0 \
+}
