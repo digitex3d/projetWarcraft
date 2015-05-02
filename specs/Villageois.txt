@@ -11,6 +11,9 @@ observators :
 	pointsDeVie : [Villageois] → int
 	quantiteOr : [Villageois] → int
 	estMort : [Villageois] → boolean
+	corvee: [Villageois] → int
+	estOccupe: [Villageois] → boolean
+
 Constructors :
 	init : int x int x ERace × int × int × int × double × int → [Villageois]
 		pre init(x,y, race,largeur,hauteur,force,vitesse,pointsVie) 
@@ -23,15 +26,21 @@ Constructors :
 					y > 0
 Operators :
 	retrait : [Villageois] × int → [Villageois]
-		pre retrait(V,s) require ¬estMort(V) ∧ s>0
+		pre retrait(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0
 	chargeOr : [Villageois] × int → [Villageois]
-		pre chargeOr(V,s) require ¬estMort(V) ∧ s>0
+		pre chargeOr(V, s) require ¬estMort(V) ∧ s > 0
 	dechargeOr : [Villageois] × int → [Villageois]
-		pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0 ∧ s <= quantiteOr(V)
-		
+		pre dechargeOr(V, s) require ¬estMort(V) ∧ s > 0 ∧ s <= quantiteOr(V)
+	setCorvee: [Villageois] × int → [Villageois]
+		pre setCorvee(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0
+	decrCorvee: [Villageois] → [Villageois]
+		pre decrCorvee(V) require ¬estMort(V) ∧ estOccupe(V)
+
 Observations :
 	[invariants]
 	estMort(V) min = pointsDeVie(V) ≤ 0
+	estOccupe(V) min= corvee > 0
+	corvee(V) >= 0
 
 	[init]
 	posx(init(x,y,s,l,h,f,v,p))=x
@@ -43,16 +52,39 @@ Observations :
 	vitesse(init(x,y,s,l,h,f,v,p))=v
 	pointsDeVie(init(x,y,s,l,h,f,v,p))=p
 	quantiteOr(init(x,y,s,l,h,f,v,p))=0
-
+	corvee(init(x,y,s,l,h,f,v,p)) = 0
 
 	[retrait]
-	pointsDeVie(retrait(V,s))=pointsDeVie(V)@pre -s
-	quantiteOr(retrait(V,s))=quantiteOr(V)@pre
-	
+	pointsDeVie(retrait(V,s)) = pointsDeVie(V) - s
+	quantiteOr(retrait(V,s)) = quantiteOr(V)
+	corvee(retrait(V,s)) = corvee(V)
+	posx(retrait(V,s)) = posx(V)	
+	posy(retrait(V,s)) = posy(V)	
+
 	[chargeOr]
-	pointsDeVie(chargeOr(V,s))=pointsDeVie(V)
-	quantiteOr(chargeOr(V,s))=quantiteOr(V)@pre + s
+	pointsDeVie(chargeOr(V,s)) = pointsDeVie(V)
+	quantiteOr(chargeOr(V,s)) = quantiteOr(V) + s
+	corvee(chargeOr(V,s)) = corvee(V)	
+	posx(chargeOr(V,s)) = posx(V)	
+	posy(chargeOr(V,s)) = posy(V)	
 	
 	[dechargeOr]
-	pointsDeVie(dechargeOr(V,s))=pointsDeVie(V)
-	quantiteOr(dechargeOr(V,s))=quantiteOr(V)@pre - s
+	pointsDeVie(dechargeOr(V,s)) = pointsDeVie(V)
+	quantiteOr(dechargeOr(V,s)) = quantiteOr(V) - s
+	corvee(dechargeOr(V,s)) = corvee(V)
+	posx(dechargeOr(V,s)) = posx(V)	
+	posy(dechargeOr(V,s)) = posy(V)	
+
+	[setCorvee]
+	pointsDeVie(setCorvee(V,s)) = pointsDeVie(V)
+	quantiteOr(setCorvee(V,s)) = quantiteOr(V)
+	corvee(setCorvee(V,s)) = s
+	posx(setCorvee(V,s)) = posx(V)	
+	posy(setCorvee(V,s)) = posy(V)	
+		
+	[decrCorvee]
+	pointsDeVie(decrCorvee(V)) = pointsDeVie(V)
+	quantiteOr(decrCorvee(V)) = quantiteOr(V)
+	corvee(decrCorvee(V)) = corvee(V) - 1
+	posx(decrCorvee(V)) = posx(V)	
+	posy(decrCorvee(V)) = posy(V)

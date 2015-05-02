@@ -335,25 +335,12 @@ types:
 
 \i0 \
 	// Commande ENTRERMINE     \
-	si c = ENTRERMINE	         \
-	// Mines\
-
-\fs24 	
-\b\fs20 \\forall
-\b0  
-\i numM
-\i0  
-\b \\in
-\b0  ( 
-\i numeroesMine 
-\b \\minus
-\b0  arg ):
-\i0\fs24 \
-\pard\pardeftab720\pardirnatural
-
-\i\fs20 \cf0 		getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )
-\i0\fs24 \
-	\
+	si c = ENTRERMINE\
+	
+\f2 \'ac
+\f0 Mine::estLaminee(Mi) => Villageois::\
+	// Mines
+\fs24 	\
 	
 \fs20 Mine::quatiteOr(
 \i getMine(  pasJeu(M,c,numVillageois,arg), arg )) = 
@@ -362,8 +349,9 @@ types:
 \fs20 Mine::quatiteOr ( 
 \i getMine( M , arg))-1
 \i0\fs24 \
+\pard\pardeftab720\pardirnatural
 
-\i\fs20 \
+\i\fs20 \cf0 \
 	// Villageois
 \i0\fs24 \
 

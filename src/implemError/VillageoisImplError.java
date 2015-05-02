@@ -5,15 +5,16 @@ import services.IVillageois;
 
 // TODO: completare e verificare
 public class VillageoisImplError implements IVillageois {
-	protected ERace race;
-	protected int largeur;
-	protected int hauteur;
-	protected int force;
-	protected double vitesse;
-	protected int pointsDeVie;
-	protected int quantiteOr;
-    protected int posX;
-    protected int posY;
+	private ERace race;
+	private int largeur;
+	private int hauteur;
+	private int force;
+	private double vitesse;
+	private int pointsDeVie;
+	private int quantiteOr;
+	private int posX;
+	private int posY;
+	private int corvee;
     
     @Override
 	public IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force,
@@ -110,4 +111,23 @@ public class VillageoisImplError implements IVillageois {
 		
 	}
 
+	@Override
+	public int getCorvee() {
+		return this.corvee; //BUG
+	}
+
+	@Override
+	public boolean estOccupe() {
+		return this.corvee >= 0; //BUG
+	}
+
+	@Override
+	public void setCorvee(int s) {
+		this.corvee += s; //BUG
+	}
+
+	@Override
+	public void decrCorvee() {
+		this.corvee -= 2; //BUG
+	}
 }

@@ -18,6 +18,12 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \inv: estMort(V) min= pointsDeVie(V) ≤ 0
 		if (super.estMort() && super.getPointsDeVie() > 0)
 			throw new InvariantError("inv: estMort(V) min= pointsDeVie(V) > 0");
+		// \inv: estOccupe(V) min= corvee > 0
+		if (super.estOccupe() && super.getCorvee() <= 0)
+			throw new InvariantError("inv: estOccupe(V) min= corvee > 0");
+		// \inv: corvee(V) >= 0
+		if (super.getCorvee() < 0)
+			throw new InvariantError("inv: corvee(V) >= 0");
 	}
 	
 	public IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force,
@@ -53,23 +59,39 @@ public class VillageoisContract extends VillageoisDecorator {
 		
 		/* ######## Verification des postcondition ######### */
 		
-		// \post: posX(init(x, y, l, h, pv)) = x
+		// \post: posx(init(x, y, l, h, pv)) = x
 		if (super.getX() != x)
-			throw new PostconditionError("post: posX(init(x, y, l, h, pv)) = x");
-		// \post: posY(init(x, y, l, h, pv)) = y
+			throw new PostconditionError("post: posx(init(x, y, l, h, pv)) = x");
+		// \post: posy(init(x, y, l, h, pv)) = y
 		if (super.getY() != y)
-		
+			throw new PostconditionError("post: posy(init(x, y, l, h, pv)) = y");
 		// \post: race(init(s,l,h,f,v,p))=s
-		if( super.getRace() != race )
+		if (super.getRace() != race)
 			throw new PostconditionError("race(init(s,l,h,f,v,p))=s");
-		
-		
-		
+		// \post: largeur(init(x,y,s,l,h,f,v,p))=l
+		if (super.getLargeur() != largeur)
+			throw new PostconditionError("largeur(init(x,y,s,l,h,f,v,p))=l");
+		// \post: hauteur(init(x,y,s,l,h,f,v,p))=h
+		if (super.getHauteur() != hauteur)
+			throw new PostconditionError("hauteur(init(x,y,s,l,h,f,v,p))=h");
+		// \post: force(init(x,y,s,l,h,f,v,p))=f
+		if (super.getForce() != force)
+			throw new PostconditionError("force(init(x,y,s,l,h,f,v,p))=f");
+		// \post: vitesse(init(x,y,s,l,h,f,v,p))=v
+		if (super.getVitesse() != vitesse)
+			throw new PostconditionError("vitesse(init(x,y,s,l,h,f,v,p))=v");
+		// \post: pointsDeVie(init(x,y,s,l,h,f,v,p))=p
+		if (super.getPointsDeVie() != pointsDeVie)
+			throw new PostconditionError("pointsDeVie(init(x,y,s,l,h,f,v,p))=p");
+		// \post: quantiteOr(init(x,y,s,l,h,f,v,p))=0
+		if (super.getQuantiteOr() != 0)
+			throw new PostconditionError("quantiteOr(init(x,y,s,l,h,f,v,p))=0");
+		// \post: corvee(init(x,y,s,l,h,f,v,p)) = 0
+		if (super.getCorvee() != 0)
+			throw new PostconditionError("corvee(init(x,y,s,l,h,f,v,p)) = 0");
 		
 		// Deuxième check des invariants
 		this.checkInvariants();
-		
-		
 		
 		return this;
 	}
@@ -80,13 +102,16 @@ public class VillageoisContract extends VillageoisDecorator {
 
 		/* ######## Verification des préconditions ######### */
 	
-		// \pre retrait(V,s) require ¬estMort(V) ∧ s>0
-		if (super.estMort() || s <= 0 )
-			throw new  PreconditionError("retrait(V,s) require ¬estMort(V) ∧ s>0");
+		// \pre retrait(V,s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s>0
+		if (super.estMort() || super.estOccupe() || s <= 0)
+			throw new  PreconditionError("retrait(V,s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s>0");
 
 		/* ######## 	Sauvegarde contexte  		######### */
 		int pointsDeVie_pre = super.getPointsDeVie();
 		int quantiteOr_pre = super.getQuantiteOr();
+		int corvee_pre = super.getCorvee();
+		int x_pre = super.getX();
+		int y_pre = super.getY();
 		
 		// Execution
 		super.retrait(s);
@@ -103,6 +128,15 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
 		if( super.getQuantiteOr() != quantiteOr_pre )
 			throw new PostconditionError("quantiteOr(retrait(V,s))= quantiteOr(V)@pre");
+		// \post: corvee(retrait(V,s)) = corvee(V)
+		if (super.getCorvee() != corvee_pre)
+			throw new PostconditionError("corvee(retrait(V,s)) = corvee(V)");
+		// \post: posx(retrait(V,s)) = posx(V)
+		if (super.getX() != x_pre)
+			throw new PostconditionError("posx(retrait(V,s)) = posx(V)");
+		// \post: posy(retrait(V,s)) = posy(V)
+		if (super.getY() != y_pre)
+			throw new PostconditionError("posy(retrait(V,s)) = posy(V)");
 	}
 	
 	public void chargeOr(int s){
@@ -117,6 +151,9 @@ public class VillageoisContract extends VillageoisDecorator {
 		//Sauvegarde contexte  
 		int pointsDeVie_pre = super.getPointsDeVie();
 		int quantiteOr_pre = super.getQuantiteOr();
+		int corvee_pre = super.getCorvee();
+		int x_pre = super.getX();
+		int y_pre = super.getY();
 		
 		/* ######## 	Execution  		######### */
 
@@ -133,6 +170,15 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre
 		if (super.getQuantiteOr() != quantiteOr_pre+s)
 			throw new PostconditionError("quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre+s");
+		// \post: corvee(chargeOr(V,s)) = corvee(V)
+		if (super.getCorvee() != corvee_pre)
+			throw new PostconditionError("corvee(chargeOr(V,s)) = corvee(V)");
+		// \post: posx(chargeOr(V,s)) = posx(V)
+		if (super.getX() != x_pre)
+			throw new PostconditionError("posx(chargeOr(V,s)) = posx(V)");
+		// \post: posy(chargeOr(V,s)) = posy(V)
+		if (super.getY() != y_pre)
+			throw new PostconditionError("posy(chargeOr(V,s)) = posy(V)");
 	}
 	
 	public void dechargeOr(int s){
@@ -140,7 +186,7 @@ public class VillageoisContract extends VillageoisDecorator {
 		this.checkInvariants();
 
 		/* ######## Verification des préconditions ######### */
-		// \pre deChargeOr(V,s) require ¬estMort(V) ∧ s>0
+		// \pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0
 		if (super.estMort() || s <= 0)
 			throw new PreconditionError("deChargeOr(V,s) require ¬estMort(V) ∧ s>0");
 		// \pre dechargeOr(V,s) require s <= quantiteOr(V)
@@ -150,6 +196,9 @@ public class VillageoisContract extends VillageoisDecorator {
 		//Sauvegarde contexte  
 		int pointsDeVie_pre = super.getPointsDeVie();
 		int quantiteOr_pre = super.getQuantiteOr();
+		int corvee_pre = super.getCorvee();
+		int x_pre = super.getX();
+		int y_pre = super.getY();
 		
 		/* ######## 	Execution  		######### */
 
@@ -161,10 +210,90 @@ public class VillageoisContract extends VillageoisDecorator {
 		/* ######## Verification des postcondition ######### */
 		// \post: pointsDeVie(dechargeOr(V,s))= pointsDeVie(V)@pre
 		if (super.getPointsDeVie() != pointsDeVie_pre)
-			throw new PostconditionError("pointsDeVie(deChargeOr(V,s))= pointsDeVie(V)@pre");
+			throw new PostconditionError("pointsDeVie(dechargeOr(V,s))= pointsDeVie(V)@pre");
 		
 		// \post: quantiteOr(dechargeOr(V,s))= quantiteOr(V)@pre
 		if (super.getQuantiteOr() != quantiteOr_pre-s)
-			throw new PostconditionError("quantiteOr(deChargeOr(V,s))= quantiteOr(V)@pre-s");
+			throw new PostconditionError("quantiteOr(dechargeOr(V,s))= quantiteOr(V)@pre-s");
+		// \post: corvee(dechargeOr(V,s)) = corvee(V)
+		if (super.getCorvee() != corvee_pre)
+			throw new PostconditionError("corvee(dechargeOr(V,s)) = corvee(V)");
+		// \post: posx(dechargeOr(V,s)) = posx(V)
+		if (super.getX() != x_pre)
+			throw new PostconditionError("posx(dechargeOr(V,s)) = posx(V)");
+		// \post: posy(dechargeOr(V,s)) = posy(V)
+		if (super.getY() != y_pre)
+			throw new PostconditionError("posy(dechargeOr(V,s)) = posy(V)");
+	}
+	
+	public void setCorvee(int s) {
+		this.checkInvariants();
+		
+		// \pre setCorvee(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0
+		if (super.estMort() || super.estOccupe() || s <= 0)
+			throw new PreconditionError("setCorvee(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0");
+		
+		//Sauvegarde contexte  
+		int pointsDeVie_pre = super.getPointsDeVie();
+		int quantiteOr_pre = super.getQuantiteOr();
+		int x_pre = super.getX();
+		int y_pre = super.getY();
+
+		super.setCorvee(s);
+		
+		/* ######## Verification des postcondition ######### */
+		// \post: pointsDeVie(setCorvee(V,s))= pointsDeVie(V)@pre
+		if (super.getPointsDeVie() != pointsDeVie_pre)
+			throw new PostconditionError("pointsDeVie(setCorvee(V,s))= pointsDeVie(V)@pre");
+		
+		// \post: quantiteOr(setCorvee(V,s))= quantiteOr(V)@pre
+		if (super.getQuantiteOr() != quantiteOr_pre)
+			throw new PostconditionError("quantiteOr(setCorvee(V,s))= quantiteOr(V)@pre");
+		// \post: corvee(setCorvee(V,s)) = corvee(V)
+		if (super.getCorvee() != s)
+			throw new PostconditionError("corvee(setCorvee(V,s)) = s");
+		// \post: posx(setCorvee(V,s)) = posx(V)
+		if (super.getX() != x_pre)
+			throw new PostconditionError("posx(setCorvee(V,s)) = posx(V)");
+		// \post: posy(setCorvee(V,s)) = posy(V)
+		if (super.getY() != y_pre)
+			throw new PostconditionError("posy(setCorvee(V,s)) = posy(V)");
+		
+	}
+	
+	public void decrCorvee() {
+		this.checkInvariants();
+		
+		// \pre decrCorvee(V) require ¬estMort(V) ∧ estOccupe(V)
+		if (super.estMort() || ! super.estOccupe())
+			throw new PreconditionError("decrCorvee(V) require ¬estMort(V) ∧ estOccupe(V)");
+		
+		//Sauvegarde contexte  
+		int pointsDeVie_pre = super.getPointsDeVie();
+		int quantiteOr_pre = super.getQuantiteOr();
+		int corvee_pre = super.getCorvee();
+		int x_pre = super.getX();
+		int y_pre = super.getY();
+
+		super.decrCorvee();
+		
+		/* ######## Verification des postcondition ######### */
+		// \post: pointsDeVie(decrCorvee(V)) = pointsDeVie(V)
+		if (super.getPointsDeVie() != pointsDeVie_pre)
+			throw new PostconditionError("pointsDeVie(decrCorvee(V))= pointsDeVie(V)@pre");
+		
+		// \post: quantiteOr(decrCorvee(V))= quantiteOr(V)@pre
+		if (super.getQuantiteOr() != quantiteOr_pre)
+			throw new PostconditionError("quantiteOr(decrCorvee(V))= quantiteOr(V)@pre");
+		// \post: corvee(decrCorvee(V)) = corvee(V) - 1
+		if (super.getCorvee() != corvee_pre - 1)
+			throw new PostconditionError("corvee(decrCorvee(V)) = corvee(V)@pre - 1");
+		// \post: posx(setCorvee(V,s)) = posx(V)
+		if (super.getX() != x_pre)
+			throw new PostconditionError("posx(decrCorvee(V)) = posx(V)");
+		// \post: posy(setCorvee(V,s)) = posy(V)
+		if (super.getY() != y_pre)
+			throw new PostconditionError("posy(decrCorvee(V)) = posy(V)");
+		
 	}
 }

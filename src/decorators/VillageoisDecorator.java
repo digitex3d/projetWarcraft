@@ -98,5 +98,25 @@ public class VillageoisDecorator implements IVillageois {
 		
 	}
 
+	@Override
+	public int getCorvee() {
+		return this.delegate.getCorvee();
+	}
+
+	@Override
+	public boolean estOccupe() {
+		return this.delegate.estOccupe();
+	}
+
+	@Override
+	public void setCorvee(int s) {
+		this.delegate.setCorvee(s);
+	}
+
+	@Override
+	public void decrCorvee() {
+		this.delegate.decrCorvee();
+	}
+
 
 }
