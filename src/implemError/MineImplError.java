@@ -85,17 +85,6 @@ public class MineImplError implements IMine {
 	}
 
 	@Override
-	public void setX(int x) {
-		this.posX = x;
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.posY = y;
-	}
-
-	@Override
 	public ERace getEtatAppartenance() {
 		return etatAppartenance;
 	}
