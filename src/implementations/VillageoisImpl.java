@@ -104,18 +104,6 @@ public class VillageoisImpl implements IVillageois {
 	}
 
 	@Override
-	public void setX(int x) {
-		this.posX = x;
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.posY = y;
-		
-	}
-
-	@Override
 	public int getCorvee() {
 		return this.corvee;
 	}
@@ -142,6 +130,5 @@ public class VillageoisImpl implements IVillageois {
 		this.corvee = s;
 		this.posX = corveeX;
 		this.posY = corveeY;
-
 	}
 }
