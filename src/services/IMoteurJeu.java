@@ -1,134 +1,120 @@
 package services;
 
-
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import enums.ECommande;
 import enums.EResultat;
-import gui.EEvent;
-import gui.GuiMainWindow;
 
 public interface IMoteurJeu {
 	/* ########### Observators ########### */	
-	int 	getLargeurTerrain();
-	int		getHauteurTerrain();
-	int		getMaxPasJeu();
-	int		getPasJeuCourant();
-	boolean estFini();
-	EResultat resultatFinal();
+	public int getMaxPasJeu();
+	public ITerrain getTerrain();
+	public int getPasJeuCourant();
+	public boolean estFini();
+	// pre: estFini()
+	public EResultat resultatFinal();
 	
+    // pre: 0 <= vill < terrain().getListeVillageois().size() 
+	public IVillageois getVillageois(int vill);
 	
-	IVillageois getVillageois(int num);
-    // \pre getVillageois(M,num) 
-	//	require num ∈ numeroesVillageois(M,num)
+    // pre: 0 <= mi < terrain().getListeMine().size() 	
+	public IMine getMine(int mi);
+
+    // pre: 0 <= mu < terrain().getListeMuraille().size() 	
+	public IMuraille getMuraille(int mu);
 	
-	int 	getPositionVillageoisX(int num);
-	// \pre positionVillageoisX(M,num) require
-	//	num ∈ numeroesVillageois(M,num)
+    // pre: 0 <= hdv < terrain().getListeMine().size() 	
+	public IHotelVille getHotelVille(int hdv);
 	
-	int 	getPositionVillageoisY(int num);
-	// \pre positionVillageoisY(M,num) require
-	//	num ∈ numeroesVillageois(M,num)
+	// pre: ! getVillageois(vilNum).estMort() && 0 <= minNum < terrain().getListeMine().size()
+	public boolean peutEntrer(int vilNum, int minNum);
 	
-	IMine getMine(int num);
-	// \pre getMine(M,num) require num ∈ numeroesMine(M,num)
+	// pre: ! getVillageois(vilNum).estMort() && 0 <= hdv < terrain().getListeMine().size()
+	public boolean peutEntrerHotelVille(int vilNum, int hdv);
 	
-	int getPositionMineX(int num);
-	// \pre getPositionMineX(M,num) require
-	//	num ∈ numeroesMine(M,num)
-	
-	int getPositionMineY(int num);
-	// \pre getPositionMineY(M,num) require
-	//	num ∈ numeroesMine(M,num)
-	
-	IHotelVille getHotelDeVille();
-	int getPositionHotelVilleX();
-	int getPositionHotelVilleY();
-	boolean peutEntrer(int numVillageois, int numMine);
-	// \pre peutEntrer(M,numVillageois,numMine) require 
-	// numVillageois ∈ numeroesVillageois(M,numVillageois)
-	// ∧ numMine ∈ numeroesMine(M,numMine)
-	
-	boolean peutEntrerHotelVille(int num);
-	// \pre peutEntrerHotelVille(M,numVillageois) 
-	// require numVillageois ∈ numeroesVillageois(M,numVillageois)
-	
+	// pre: ! getVillageois(vilNum).estMort() && ! getMuraille(mur).estDetruite()
+    public boolean peutTaperMuraille(int vilNum, int mur);
     
 	/* ########### Constructors ########### */	
 	
-	// [ init ]	
-	// \pre init(largeur,hauteur,maxPas) require 
-	// largeur≥ 600 ∧ hauteur≥ 400 ∧ maxPas≥ 0
-	
-	IMoteurJeu init(int largeur, int hauteur, int maxPasJeu);
-	
-	// postconditions
-	/* maxPasJeu(init(l,h,m))=m
-	 * pasJeuCourant(init(l,h,m))=0
-	 * largeurTerrain(init(l,h,m))=l
-	 * hauteurTerrain(init(l,h,m))=h
-	 * 
-	 * // Initialisation Hotel de ville
-	 * HotelVille::orRestant( getHotelVille( init(l,h,m) ) ) = 16
-	 * 
-	 * // Initialisation Villageois
-	 * \forall numV \in numeroesVillageois: peutEntrerHotelVille(M, getVillageois(M, numV))
-	 *  	    Ʌ Villageois::pointsDeVie( getVillageois(M, numV) ) = 100
-	 *     	Ʌ Villageois::quantiteOr( getVillageois(M, numV) ) = 0
-	 * 
-	 * // Initialisation Mines
-	 * \forall numM \in numeroesMine:
-	 * 	  positionMineX(M, numM) <= largeurTerrain
-	 *      	Ʌ  positionMineY(M, numM) <= hauteurTerrain
-	 * 	     	Ʌ Mine::estAbandonne( getVillageois(M, numV) ) = True
-	 */
-		
-		
-		
+    /**
+    	pre: maxPas > 0
+    	post: terrain() == terrain
+    	post: maxPasJeu() == maxPas
+    	post: pasJeuCourant() == 0
+     */
+	IMoteurJeu init(ITerrain terrain, int maxPas);
 		
 
 	/* ########### Operators ########### */
 	
-	// [pasJeu]
-	// \pre: pre pasJeu(M,commmand,numVillgeois,argument) require
-	//         / ¬estFini(M)
-	//         | command=DEPLACER ⇒ 0 ≤argument≤ 360
-	//         \ command=ENTRERMINE ⇒
-	//         	>		argument∈numeroesMines(M)
-	//		   /   		peutEntrer(M,numVillageois,argument)                       
-	//         |command=ENTRERHOTELVILLE ⇒ peutEntrerHotelVille(M,numVillageois)
-	//         \	
-	
-	void pasJeu(ECommande commande, int numVillageois, int argument);
+	/**
+		pre: ! getVillageois(vilNum).estMort() &&
+		 	 ! getVillageois(vilNum).estOccupe() && ! estFini() &&
+		 	 if command == DEPLACER then
+		 	 	0 <= arg <= 360
+		 	 if command == ENTRERMINE then
+		 	 	peutEntrer(vilNum, arg)
+		 	 if command == ENTRERHOTELVILLE then
+		 	 	peutEntrerHotelVille(vilNum, arg)
+		 	 if command == TAPERMURAILLE then
+		 	 	peutTaperMuraille(vilNum, arg)
 
+		 post: pasJeuCourant() == pasJeuCourant@pre + 1
+		 post: \forall x \in [0, terrain().getListeVillageois().size()[, 
+					if getVillageois(x)@pre.estOccupe() then
+						getVillageois(x) == getVillageois(x)@pre.decrCorvee())
+					if getVillageois(x)@pre.corvee() == 1 then
+					 	terrain() == terrain()@pre.reinsertVillageois(x)
+		 post: \forall x \in [0, terrain().getListeMine().size()[, 
+		 			if ! getMine(x)@pre.estAbandonee() then
+		 				if command != ENTRERMINE || x != arg then
+		 					getMine(x) == getMine(x)@pre.abandoned()
+		 					
+		 Soit pArrivee := init(terrain(), getVillageois(vilNum)@pre, arg).calcChemin().getPointArrivee()
+		 Soit Villpre := getVillageois(vilNum)@pre
+		 if command == DEPLACER then
+		 	getVillageois(vilNum) == Villpre.setXY(pArrivee.get(0), pArrivee.get(1)) && 
+			terrain() = terrain()@pre.moveVillageoisAt(vilNum, pArrivee.get(0), pArrivee.get(1))
+		 if command == ENTRERHOTELVILLE then
+		 	getHDV(arg) == getHDV(arg)@pre.depot(Villpre.quantiteOr()) && 
+			getVillageois(vilNum) == Villpre.dechargeOr(Villpre.quantiteOr())
+		 if command == ENTRERMINE then
+		 	getMine(arg) == getMine(arg)@pre.accueil().retrait() &&
+			getVillageois(vilNum) == Villpre.setCorvee(16).chargerOr(1) &&
+			terrain() == terrain()@pre.removeEntiteAt(EEntite.VILLAGEOIS, Villpre.posx(), Villpre.posy(), Villpre.largeur(), Villpre.hauteur()) &&
+			getVillageois(vilNum).posx() = getMine(arg).posx() && 
+			getVillageois(vilNum).posy() = getMine(arg).posy()
+		 Soit Mur := getMuraille(arg)@pre
+		 if command == TAPERMURAILLE then
+		 	getMuraille(arg) == Mur.retrait(Villpre.force()) &&
+			if getMuraille(arg).estDetruite() then
+				terrain() == terrain()@pre.removeEntiteAt(EEntite.MURAILLE, Mur.posx(), Mur.posy(), Mur.largeur(), Mur.hauteur())
+	 */
+	void pasJeu(ECommande command, int vilNum, int arg);
 	
-	/* \post: pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M) +1
-	* 	getMine(pasJeu(M,c,numVillageois,arg),numMine) =
-	* 							/	Mine::abandoned(getMine(M,numMine)) si c=ENTRERMINE ∨ arg=numMine
-	*							>
-	* 							\	Mine::acceuil(getMine(M,numMine)) sinon
-	* 	getVillageois(pasJeu(M,c,numVillageois,arg),numVillageois) = 
-	* 							/	Villageois::dechargeOr(getVillageois(M,numVillageois),
-	*									Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE
-	*							getVillageois(M,numVillageois)@pre
-	*  getHotelDeVille(pasJeu(M,c,numVillageois,arg),numVillageois) = 
-	*  			HotelVille:depot(getVillageois(M,numVillageois),
-	*  						Villageois::quantiteOr(getVillageois(M,numVillageois))) si c=ENTRERHOTELVILLE 
-	*                       getHotelDeVille(M)@pre 
-	*  
-	*/
+	/* ########### Invariants ########### */
+	// inv: 0 <= pasJeuCourant() <= maxPasJeu()
+	// inv: estFini() min= \exist x \verify 0 <= x <= terrain().getListeHotelVille().size() &&
+	//						getHDV(x).orRestant() >= 1664 || pasJeuCourant() == maxPasJeu()
+	// inv: if \exist x \verify 0 <= x <= terrain().getListeHotelVille().size() && getHDV(x).orRestant() >= 1664 then
+	//			if getHDV(x).etatAppartenance() == ORC then resultatFinal() min= ORC_GAGNE
+	//			if getHDV(x).etatAppartenance() == HUMAN then resultatFinal() min= HUMAN_GAGNE
+	//		else resultatFinal() min= NUL
 	
+	// inv: getVillageois(vill) min= terrain().getListeVillageois().get(vill)
+	// inv: getMine(mi) min= terrain().getListeMine().get(mi)
+	// inv: getMuraille(mu) min= terrain().getListeMuraille().get(mu)
+	// inv: getHDV(hdv) min= terrain().getListeHotelVille().get(hdv)
 	
-	//TODO: Specifier
-	ArrayList<IVillageois> getListVillageois();
-	ArrayList<IMine> getListMines();
-	void bind(ArrayList<IVillageois> villageois, ArrayList<IMine> mines);
-	void bind(IHotelVille hv);
-	public void eventListener(MouseEvent e, EEvent click);
-	public void bindWindow(GuiMainWindow gui);
+	// vilposX := getVillageois(vill).posx()
+	// vilposY := getVillageois(vill).posy()
+	// mineCenterX := (getMine(mi).posx() + getMine(M, mi).largeur()) / 2
+	// mineCenterY := (getMine(mi).posy() + getMine(M, mi).hauteur()) / 2
+	// hvCenterX := (getHDV(hdv).posx() + getHDV(M, hdv).largeur()) / 2
+	// hvCenterY := (getHDV(hdv).posy() + getHDV(M, hdv).hauteur()) / 2
+	// murCenterX := (getMuraille(mu).posx() + getMuraille(mu).largeur()) / 2
+	// murCenterY := (getMuraille(mu).posy() + getMuraille(mu).hauteur()) / 2
 	
-
-	
-
+	// inv: peutEntrer(vill, mi) min= distance(vilposX, vilposY, mineCenterX, mineCenterY) <= 51 && ! getMine(mi).estLaminee()
+	// inv: peutEntrerHotelVille(vill, hdv) min= distance(vilposX, vilposY, hvCenterX,  hvCenterY)) <= 51 && getVillageois(vill).race() == getHDV(hdv).etatAppartenance()
+	// inv: peutTaperMuraille(vill,mu) min= distance(vilposX, vilposY, murCenterX, murCenterY) ≤ 51
 }
