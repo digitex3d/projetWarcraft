@@ -22,17 +22,6 @@ public class RouteDecorator implements IRoute {
 	}
 
 	@Override
-	public void setX(int x) {
-		this.delegate.setX(x);
-	}
-
-	@Override
-	public void setY(int y) {
-		this.delegate.setY(y);
-
-	}
-
-	@Override
 	public int getLargeur() {
 		
 		return this.delegate.getLargeur();

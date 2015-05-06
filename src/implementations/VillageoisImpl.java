@@ -3,7 +3,6 @@ package implementations;
 import enums.ERace;
 import services.IVillageois;
 
-// TODO: completare e verificare
 public class VillageoisImpl implements IVillageois {
 	private ERace race;
 	private int largeur;
@@ -127,13 +126,22 @@ public class VillageoisImpl implements IVillageois {
 	}
 
 	@Override
-	public void setCorvee(int s) {
-		this.corvee = s;
-	}
-
-	@Override
 	public void decrCorvee() {
 		this.corvee--;
 	}
 
+	@Override
+	public void setXY(int x, int y) {
+		this.posX = x;
+		this.posY = y;
+
+	}
+	
+	@Override
+	public void setCorvee(int s, int corveeX, int corveeY) {
+		this.corvee = s;
+		this.posX = corveeX;
+		this.posY = corveeY;
+
+	}
 }

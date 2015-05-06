@@ -71,16 +71,6 @@ public class MineDecorator implements IMine{
 		return this.delegate.getY();
 	}
 
-	@Override
-	public void setX(int x) {
-		this.delegate.setX(x);		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.delegate.setY(y);		
-		
-	}
 
 	@Override
 	public ERace getEtatAppartenance() {

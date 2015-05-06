@@ -2,8 +2,6 @@ package services;
 
 import enums.ERace;
 
-
-
 public interface IVillageois extends IEntite{
 
 	/* ########### Observators ########### */	
@@ -20,81 +18,97 @@ public interface IVillageois extends IEntite{
 	
 	/* ########### Constructors ########### */		
 	
-	/* \pre init(race,largeur,hauteur,force,vitesse,pointsVie) 
-	* 	require 	largeur%2=1 ∧ 
-	* 				hauteur%2=1 ∧
-	* 				force > 0	∧
-	* 				vitesse > 0 ∧
-	* 				pointsVie > 0
+	/* init : int x int x ERace × int × int × int × double × int → [Villageois]
+	* 	\pre: 	largeur % 2=1 && 
+	*       	hauteur % 2=1 &&
+	*       	force > 0 && 
+	*     		vitesse > 0 && 
+	* 			pointsVie > 0 &&
+	* 			x >= 0 &&
+	*		 	y >= 0
 	*/
-	// \post: posx(init(x,y,s,l,h,f,v,p))=x
-	// \post: posy(init(x,y,s,l,h,f,v,p))=y
-	// \post: race(init(x,y,s,l,h,f,v,p))=s
-	// \post: largeur(init(x,y,s,l,h,f,v,p))=l
-	// \post: hauteur(init(x,y,s,l,h,f,v,p))=h
-	// \post: force(init(x,y,s,l,h,f,v,p))=f
-	// \post: vitesse(init(x,y,s,l,h,f,v,p))=v
-	// \post: pointsDeVie(init(x,y,s,l,h,f,v,p))=p
-	// \post: quantiteOr(init(x,y,s,l,h,f,v,p))=0
-	// \post: corvee(init(x,y,s,l,h,f,v,p)) = 0
+
 	IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force, 
 			double vitesse, int pointsDeVie);
 	
 	/* ########### Operators ########### */
 	
+	//	[setXY]
+	//	\pre: x >= 0 &&  
+	//  \pre: y >= 0
+	
+	void setXY(int x, int y);
+	
+	//  \post: pointsDeVie(setX(x))== pointsDeVie()@pre
+	//	\post: quantiteOr(setX(x)) == quantiteOr()@pre
+	//	\post: corvee(setX(x)) == corvee()@pre
+	//	\post: posx(setX(x)) == x	
+	//	\post: posy(setX(x)) == y	
+	 
+	
 	// [retrait]
-	// \pre retrait(V,s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s>0
-	// \post: pointsDeVie(retrait(V,s))= pointsDeVie(V)@pre -s
-	// \post: quantiteOr(retrait(V,s))= quantiteOr(V)@pre
-	// \post: corvee(retrait(V,s)) = corvee(V)
-	// \post: posx(retrait(V,s)) = posx(V)	
-	// \post: posy(retrait(V,s)) = posy(V)	
+	// \pre: !estMort() && !estOccupe() && s>0
 	
 	void retrait(int s);
 	
-	// [chargeOr]
-	// \pre chargeOr(V,s) require ¬estMort(V) ∧ s>0
-	// \post: pointsDeVie(chargeOr(V,s))= pointsDeVie(V)@pre 
-	// \post: quantiteOr(chargeOr(V,s))= quantiteOr(V)@pre+s
-	// \post: corvee(chargeOr(V,s)) = corvee(V)	
-	// \post: posx(chargeOr(V,s)) = posx(V)	
-	// \post: posy(chargeOr(V,s)) = posy(V)	
+	// \post: pointsDeVie() == pointsDeVie()@pre - s
+	// \post: quantiteOr() == quantiteOr()@pre
+	// \post: corvee() == corvee()@pre
+	// \post: posx() == posx()@pre
+	// \post: posy() == posy()@pre	
 
+	// [chargeOr]
+	// \pre: !estMort(V) && s>0
+	
 	void chargeOr(int s);
+	
+	// \post: pointsDeVie() == pointsDeVie()@pre
+	// \post: quantiteOr() == quantiteOr()@pre + s       
+	// \post: corvee() == corvee()@pre               
+	// \post: posx() == posx()@pre                   
+	// \post: posy() == posy()@pre	                
+
+	
 
 	// [dechargeOr]
-	// \pre dechargeOr(V,s) require ¬estMort(V) ∧ s>0 ∧ s <= quantiteOr(V)
-	// \post: pointsDeVie(dechargeOr(V,s))= pointsDeVie(V)@pre 
-	// \post: quantiteOr(dechargeOr(V,s))= quantiteOr(V)@pre - s
-	// \post: corvee(dechargeOr(V,s)) = corvee(V)
-	// \post: posx(dechargeOr(V,s)) = posx(V)	
-	// \post: posy(dechargeOr(V,s)) = posy(V)	
-
+	// \pre: !estMort() && s>0 && s <= quantiteOr()
+	
 	void dechargeOr(int s);
+	
+	// \post: pointsDeVie() == pointsDeVie()@pre   	
+	// \post: quantiteOr() == quantiteOr()@pre - s 	
+	// \post: corvee() == corvee()@pre             	
+	// \post: posx() == posx()@pre                 	
+	// \post: posy() == posy()@pre	               	
 
 	// [setCorvee]
-	// \pre setCorvee(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0
-	// \post: pointsDeVie(setCorvee(V,s)) = pointsDeVie(V)
-	// \post: quantiteOr(setCorvee(V,s)) = quantiteOr(V)
-	// \post: corvee(setCorvee(V,s)) = s
-	// \post: posx(setCorvee(V,s)) = posx(V)	
-	// \post: posy(setCorvee(V,s)) = posy(V)	
+	// \pre: !estMort(V) && !estOccupe(V) && s > 0 && corveeX >= 
+	// 			and corveeY >= 0
+	
+	void setCorvee(int s, int corveeX, int corveeY);
+	
+	// \post: pointsDeVie() == pointsDeVie()@pre   
+	// \post: quantiteOr() == quantiteOr()@pre 
+	// \post: corvee() == s          
+	// \post: posx() == corveeX                 
+	// \post: posy() == corveeY	               
 
-	void setCorvee(int s);
+
 	
 	// [decrCorvee]
-	// \pre decrCorvee(V) require ¬estMort(V) ∧ estOccupe(V)
-	// \post: pointsDeVie(decrCorvee(V)) = pointsDeVie(V)
-	// \post: quantiteOr(decrCorvee(V)) = quantiteOr(V)
-	// \post: corvee(decrCorvee(V)) = corvee(V) - 1
-	// \post: posx(decrCorvee(V)) = posx(V)	
-	// \post: posy(decrCorvee(V)) = posy(V)
+	// \pre: !estMort() && !estOccupe()
 	
 	void decrCorvee();
 	
+	// \post: pointsDeVie() == pointsDeVie()@pre 
+	// \post: quantiteOr() == quantiteOr()@pre   
+	// \post: corvee() == corvee()@pre -1                     
+	// \post: posx() == posx()@pre                  
+	// \post: posy() == posy()@pre	                 
+	
+	
 	/* ########### Invariants ########### */
-	//	minimisation
 	// \inv: estMort(V) min= pointsDeVie(V) ≤ 0
 	// \inv: estOccupe(V) min= corvee > 0
-	// \inv: corvee(V) >= 0
+
 }
