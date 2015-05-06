@@ -87,17 +87,6 @@ public class VillageoisDecorator implements IVillageois {
 	}
 
 	@Override
-	public void setX(int x) {
-		this.delegate.setX(x);		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.delegate.setY(y);		
-		
-	}
-
-	@Override
 	public int getCorvee() {
 		return this.delegate.getCorvee();
 	}
