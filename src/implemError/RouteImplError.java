@@ -7,16 +7,16 @@ public class RouteImplError implements IRoute{
 	protected int posY;
 	protected int largeur;
 	protected int hauteur;
-	protected int mult;
+	protected int bv;
 	
 	public RouteImplError() {}
 	
-	public IRoute init(int x, int y, int largeur, int hauteur, int mult) {
+	public IRoute init(int x, int y, int largeur, int hauteur, int bv) {
 		this.posX = x;
 		this.posY = y;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
-		this.mult = mult + 2; //BUG
+		this.bv = bv + 2; //BUG
 		return this;
 	}
 
@@ -31,17 +31,6 @@ public class RouteImplError implements IRoute{
 	}
 
 	@Override
-	public void setX(int x) {
-		this.posX = x;
-	}
-
-	@Override
-	public void setY(int y) {
-		this.posY = y;
-		
-	}
-
-	@Override
 	public int getLargeur() {
 		return this.largeur;
 	}
@@ -53,8 +42,8 @@ public class RouteImplError implements IRoute{
 
 
 	@Override
-	public int getMult() {
-		return this.mult;
+	public int getBonusVitesse() {
+		return this.bv;
 	}
 
 }

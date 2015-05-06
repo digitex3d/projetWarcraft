@@ -33,13 +33,13 @@ public class RouteDecorator implements IRoute {
 	}
 
 	@Override
-	public IRoute init(int x, int y, int largeur, int hauteur, int mult) {
-		return this.delegate.init(x, y, largeur, hauteur, mult);
+	public IRoute init(int x, int y, int largeur, int hauteur, int bv) {
+		return this.delegate.init(x, y, largeur, hauteur, bv);
 	}
 
 	@Override
-	public int getMult() {
-		return this.delegate.getMult();
+	public int getBonusVitesse() {
+		return this.delegate.getBonusVitesse();
 	}
 
 }
