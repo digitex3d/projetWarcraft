@@ -3,7 +3,6 @@ package implemError;
 import enums.ERace;
 import services.IVillageois;
 
-// TODO: completare e verificare
 public class VillageoisImplError implements IVillageois {
 	private ERace race;
 	private int largeur;
@@ -100,18 +99,6 @@ public class VillageoisImplError implements IVillageois {
 	}
 
 	@Override
-	public void setX(int x) {
-		this.posX = x;
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.posY = y;
-		
-	}
-
-	@Override
 	public int getCorvee() {
 		return this.corvee; //BUG
 	}
@@ -122,12 +109,21 @@ public class VillageoisImplError implements IVillageois {
 	}
 
 	@Override
-	public void setCorvee(int s) {
+	public void setCorvee(int s, int corveeX, int corveeY) {
 		this.corvee += s; //BUG
+		this.posX = corveeY; //BUG
+		this.posY = corveeX; //BUG
 	}
 
 	@Override
 	public void decrCorvee() {
 		this.corvee -= 2; //BUG
+	}
+
+	@Override
+	public void setXY(int x, int y) {
+		this.posX = 0; //BUG
+		this.posY = y; 
+		
 	}
 }
