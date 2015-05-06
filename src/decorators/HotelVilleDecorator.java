@@ -36,17 +36,6 @@ public class HotelVilleDecorator implements IHotelVille{
 	}
 
 	@Override
-	public void setX(int x) {
-		this.delegate.setX(x);		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.delegate.setY(y);		
-		
-	}
-
-	@Override
 	public void depot(int s) {
 		this.delegate.depot(s);
 	}

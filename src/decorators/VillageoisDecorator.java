@@ -75,7 +75,6 @@ public class VillageoisDecorator implements IVillageois {
 		
 	}
 
-
 	@Override
 	public int getX() {
 		return this.delegate.getX();

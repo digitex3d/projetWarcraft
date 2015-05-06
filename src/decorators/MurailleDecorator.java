@@ -50,15 +50,4 @@ public class MurailleDecorator implements IMuraille{
 		delegate.retrait(s);
 	}
 
-	@Override
-	public void setX(int x) {
-		this.setX(x);
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.setY(y);
-		
-	}
 }
