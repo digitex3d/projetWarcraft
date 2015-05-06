@@ -6,19 +6,23 @@ public interface IMuraille extends IEntite{
 	public boolean estDetruite();
 	
 	/* ########### Constructors ########### */		
-	// \pre: init(x, y, l, h, pv) require l%2 = 1 ∧ h%2 = 1 ∧ pv > 0
-	// \post: posX(init(x, y, l, h, pv)) = x
-	// \post: posY(init(x, y, l, h, pv)) = y
-	// \post: largeur(init(x, y, l, h, pv)) = l
-	// \post: hauteur(init(x, y, l, h, pv)) = h
-	// \post: pointsDeVie(init(x, y, l, h, pv)) = pv
+	/**
+		pre: largeur % 2 == 1 && hauteur % 2 == 1 && pointsVie > 0
+		post: posx() == x
+		post: posy() == y
+		post: largeur() == largeur
+		post: hauteur() == hauteur
+		post: pointsDeVie() == pointsVie
+	 */
 	public IMuraille init(int x, int y, int largeur, int hauteur, int pointsVie);
 	
 	/* ########### Operators ########### */
-	// \pre: retrait(M, s) require s > 0 ∧ ¬estDetruite(M)
-	// \post: pointsDeVie(retrait(M, s)) = pointsDeVie(M)@pre - s
+	/**
+		pre: s > 0 && ! estDetruite()
+		post: pointsDeVie() == pointsDeVie@pre - s
+	 */
 	public void retrait(int s);
 	
 	/* ########### Invariants ########### */
-	// \inv: estDetruite(M) min= pointsDeVie(M) <= 0 
+	// inv: estDetruite() min= pointsDeVie() <= 0 
 }

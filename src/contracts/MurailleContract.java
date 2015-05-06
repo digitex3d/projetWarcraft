@@ -13,39 +13,39 @@ public class MurailleContract extends MurailleDecorator {
 	}
 	
 	public void checkInvariants() {
-		// \inv: estDetruite(M) min= pointsDeVie(M) <= 0
+		// inv: estDetruite() min= pointsDeVie() <= 0 
 		if (super.estDetruite() && super.getPointsDeVie() > 0)
-			throw new InvariantError("estDetruite(M) min= pointsDeVie(M) <= 0");
+			throw new InvariantError("estDetruite() min= pointsDeVie() <= 0");
 	}
 	
 	public IMuraille init(int x, int y, int largeur, int hauteur, int pointsVie) {
-		// \pre: init(x, y, l, h, pv) require l%2 = 1 ∧ h%2 = 1 ∧ pv > 0
+		// pre: largeur % 2 == 1 && hauteur % 2 == 1 && pointsVie > 0
 		if (largeur % 2 != 1)
-			throw new PreconditionError("pre: largeur%2 != 1");
+			throw new PreconditionError("largeur % 2 == 1");
 		if (hauteur % 2 != 1) 
-			throw new PreconditionError("pre: hauteur%2 != 1");
+			throw new PreconditionError("hauteur % 2 == 1");
 		if (pointsVie <= 0)
-			throw new PreconditionError("pre: pv > 0");
+			throw new PreconditionError("pointsVie > 0");
 			
 		super.init(x, y, largeur, hauteur, pointsVie);
 		
 		this.checkInvariants();
 		
-		// \post: posX(init(x, y, l, h, pv)) = x
+		// post: posx() == x
 		if (super.getX() != x)
-			throw new PostconditionError("post: posX(init(x, y, l, h, pv)) = x");
-		// \post: posY(init(x, y, l, h, pv)) = y
+			throw new PostconditionError("posx() == x");
+		// post: posy() == y
 		if (super.getY() != y)
-			throw new PostconditionError("post: posY(init(x, y, l, h, pv)) = y");
-		// \post: largeur(init(x, y, l, h, pv)) = l
+			throw new PostconditionError("posy() == y");
+		// post: largeur() == largeur
 		if (super.getLargeur() != largeur)
-			throw new PostconditionError("post: largeur(init(x, y, l, h, pv)) = l");
-		// \post: hauteur(init(x, y, l, h, pv)) = h
+			throw new PostconditionError("largeur() == largeur");
+		// post: hauteur() == hauteur
 		if (super.getHauteur() != hauteur)
-			throw new PostconditionError("post: hauteur(init(x, y, l, h, pv)) = h");
-		// \post: pointsDeVie(init(x, y, l, h, pv)) = pv
+			throw new PostconditionError("hauteur() == hauteur");
+		// post: pointsDeVie() == pointsVie
 		if (super.getPointsDeVie() != pointsVie)
-			throw new PostconditionError("post: pointsDeVie(init(x, y, l, h, pv)) = pv");
+			throw new PostconditionError("pointsDeVie() == pointsVie");
 		
 		return this;
 	}
@@ -53,17 +53,17 @@ public class MurailleContract extends MurailleDecorator {
 	public void retrait(int s) {
 		this.checkInvariants();
 		
-		// \pre: retrait(M, s) require s > 0 ∧ ¬estDetruite(M)
+		// pre: s > 0 && ! estDetruite()
 		if (s <= 0 || super.estDetruite())
-			throw new PreconditionError("pre: retrait(M, s) require s > 0 ∧ ¬estDetruite(M)");
+			throw new PreconditionError("s > 0 && ! estDetruite()");
 		
 		int pv_pre = super.getPointsDeVie();
 		super.retrait(s);
 		
 		this.checkInvariants();
 		
-		// \post: pointsDeVie(retrait(M, s)) = pointsDeVie(M)@pre - s
+		// post: pointsDeVie() == pointsDeVie@pre - s
 		if (super.getPointsDeVie() != pv_pre - s)
-			throw new PostconditionError("post: pointsDeVie(retrait(M, s)) = pointsDeVie(M)@pre - s");
+			throw new PostconditionError("pointsDeVie() == pointsDeVie@pre - s");
 	}
 }
