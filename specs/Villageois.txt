@@ -23,36 +23,40 @@ Constructors :
 			force > 0 ∧ 
 			vitesse > 0 ∧ 
 			pointsVie > 0 ∧
-			x \gte 0 ∧
-			y \gte  0
+			x >= 0 ∧
+			y >= 0
+			
 Operators :
 	setXY: [Villageois] × int → [Villageois]
 		pre setX(V, x) require	
-x \gte 0 ∧
-	y \gte  0
+					x \gte 0 ∧
+					y \gte  0
+					
 	retrait : [Villageois] × int → [Villageois]
 		pre retrait(V, s) require 
-¬estMort(V) ∧ 
-¬estOccupe(V) ∧ s > 0
+			¬estMort(V) ∧ 
+			¬estOccupe(V) ∧ s > 0
+			
 	chargeOr : [Villageois] × int → [Villageois]
 		pre chargeOr(V, s) require 
-¬estMort(V) ∧
- s > 0
+			¬estMort(V) ∧
+			 s > 0
 	dechargeOr : [Villageois] × int → [Villageois]
 		pre dechargeOr(V, s) require 
-¬estMort(V) ∧ s > 0 ∧ 
-s \lte quantiteOr(V)
+				¬estMort(V) ∧ s > 0 ∧ 
+				s \lte quantiteOr(V)
+				
 	setCorvee: [Villageois] × int × int × int → [Villageois]
 		pre setCorvee(V, s, corveeX, corveeY) require
-¬estMort(V) ∧ 
-¬estOccupe(V) ∧
- s > 0 ∧ 
-corveeX ≥ 0 ∧
-corveeY ≥ 0
+				¬estMort(V) ∧ 
+				¬estOccupe(V) ∧
+				 s > 0 ∧ 
+				corveeX ≥ 0 ∧
+				corveeY ≥ 0
 	decrCorvee: [Villageois] → [Villageois]
 		pre decrCorvee(V) require
-¬estMort(V) ∧ 
-estOccupe(V)
+			¬estMort(V) ∧ 
+			estOccupe(V)
 
 Observations :
 	[invariants]
