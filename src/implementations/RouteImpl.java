@@ -3,20 +3,18 @@ package implementations;
 import services.IRoute;
 
 public class RouteImpl implements IRoute{
-	protected int posX;
-	protected int posY;
-	protected int largeur;
-	protected int hauteur;
-	protected int mult;
+	private int posX;
+	private int posY;
+	private int largeur;
+	private int hauteur;
+	private int bv;
 	
-	public RouteImpl() {}
-	
-	public IRoute init(int x, int y, int largeur, int hauteur, int mult) {
+	public IRoute init(int x, int y, int largeur, int hauteur, int bv) {
 		this.posX = x;
 		this.posY = y;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
-		this.mult = mult;
+		this.bv = bv;
 		return this;
 	}
 
@@ -31,17 +29,6 @@ public class RouteImpl implements IRoute{
 	}
 
 	@Override
-	public void setX(int x) {
-		this.posX = x;
-	}
-
-	@Override
-	public void setY(int y) {
-		this.posY = y;
-		
-	}
-
-	@Override
 	public int getLargeur() {
 		return this.largeur;
 	}
@@ -53,8 +40,8 @@ public class RouteImpl implements IRoute{
 
 
 	@Override
-	public int getMult() {
-		return this.mult;
+	public int getBonusVitesse() {
+		return this.bv;
 	}
 
 }

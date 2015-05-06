@@ -14,167 +14,143 @@ public class MineContract extends MineDecorator {
 	}
 	
 	public void checkInvariants(){
-		 // \inv : estLaminee(M) min = orRestant(M) ≤ 0
+		// inv: estLaminee() min= orRestant() <= 0
 		if (super.estLaminee() && super.getOrRestant() > 0)
-			throw new InvariantError("estLaminee(M) min = orRestant(M) ≤ 0");
+			throw new InvariantError("estLaminee() min= orRestant() <= 0");
 
-		 // \inv : estAbandonnee(M) min = abandonCompteur = 51
+		// inv: estAbandonnee() min= abandonCompteur == 51
 		if (super.estAbandonne() && super.getAbandonCompteur() != 51)
-			throw new InvariantError("estAbandonnee(M) min = abandonCompteur = 51");
+			throw new InvariantError("estAbandonnee() min= abandonCompteur == 51");
 
-		// \inv : 0 ≤abandonCompteur(M)≤ 51
+		// inv: 0 <= abandonCompteur() <= 51
 		if (super.getAbandonCompteur() > 51 || super.getAbandonCompteur() < 0)
-			throw new InvariantError("0 ≤abandonCompteur(M)≤ 51");
+			throw new InvariantError("0 <= abandonCompteur() <= 51");
 	}
 	
-	public IMine init(int largeur, int hauteur ){
-		/* ######## Verification des préconditions ######### */
-		/* \pre init(largeur,hauteur) 
-		* 	require 	largeur%2=1 ∧ 
-		* 				hauteur%2=1
-		*/
-		if (largeur % 2 != 1) 
-			throw new PreconditionError("pre: largeur%2!=1");
-		if (hauteur % 2 != 1) 
-			throw new PreconditionError("pre: hauteur%2!=1");
+	public IMine init(int x, int y, int l, int h){
+		/** 
+		 * pre l % 2 = 1 && h % 2 = 1 && x > 0 && y > 0
+		 */
+		if (l % 2 != 1) 
+			throw new PreconditionError("l % 2 = 1");
+		if (h % 2 != 1) 
+			throw new PreconditionError("h % 2 = 1");
 
-		//Sauvegarde contexte  
+		super.init(x, y, l, h);
 
-		/* ######## 	Execution  		######### */
-		super.init(largeur, hauteur);
-
-		// Deuxième check des invariants
 		this.checkInvariants();
 		
-		/* ######## Verification des postcondition ######### */
-		// \post :  largeur(init(l,h))=l
-		if( super.getLargeur() != largeur)
-			throw new PostconditionError("largeur(init(l,h))=l");
-		// \post :  hauteur(init(l,h))=h
-		if( super.getHauteur() != hauteur)
-			throw new PostconditionError("hauteur(init(l,h))=h");
-		// \post :  orRestant(init(l,h))=51
+		// post: posx() == x
+		if (super.getX() != x)
+			throw new PostconditionError("posx() == x");
+		// post: posy() == y
+		if (super.getY() != y)
+			throw new PostconditionError("posy() == y");
+		// post: largeur() == l
+		if( super.getLargeur() != l)
+			throw new PostconditionError("largeur() == l");
+		// post: hauteur() == h
+		if( super.getHauteur() != h)
+			throw new PostconditionError("hauteur() == h");
+		// post: orRestant() == 51
 		if( super.getOrRestant() != 51)
-			throw new PostconditionError("orRestant(init(l,h))=51");
-		// \post :  abandonCompteur(init(l,h))=51
+			throw new PostconditionError("orRestant() == 51");
+		// post: abandonCompteur() == 51
 		if( super.getAbandonCompteur() != 51)
-			throw new PostconditionError("abandonCompteur(init(l,h))=51");
-		// \post: etatAppartenance(init(l, h)) = ORC
+			throw new PostconditionError("abandonCompteur() == 51");
+		// post: etatAppartenance() == ORC
 		if (super.getEtatAppartenance() != ERace.ORC)
-			throw new PostconditionError("etatAppartenance(init(l, h)) = ORC");
+			throw new PostconditionError("etatAppartenance() == ORC");
 		
 		return this;
 	}
 	
 	public void retrait(int s){
-		/* ######## Premier check des invariants ######### */
 		this.checkInvariants();
 
-		/* ######## Verification des préconditions ######### */
-	
-		// \pre retrait(M,s) require ¬estLaminee(M) ∧ s>0
+		// pre: ! estLaminee() && s > 0
 		if( super.estLaminee() || s <= 0)
-			throw new PreconditionError("retrait(M,s) require ¬estLaminee(M) ∧ s>0");
+			throw new PreconditionError(" ! estLaminee() && s > 0");
 
-		/* ######## 	Sauvegarde contexte  		######### */
 		int abandonCompteur_pre = super.getAbandonCompteur();
 		int OrRestant_pre = super.getOrRestant();
 		ERace etatAppartenance_pre = super.getEtatAppartenance();
 		
-		// Execution
 		super.retrait(s);
 		
-		/* ######## Deuxième check des invariants ######### */
 		this.checkInvariants();
 		
-		/* ######## Verification des postcondition ######### */
-		// \post: orRestant(retrait(M,s))=orRestant(M)-s
+		// post: orRestant() == orRestant()@pre - s 
 		if (super.getOrRestant() != OrRestant_pre - s)                                     
-			throw new PostconditionError("orRestant(retrait(M,s))=orRestant(M)-s");  
+			throw new PostconditionError("orRestant() == orRestant()@pre - s");  
 			
-		// \post: abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre
+		// post: abandonCompteur() == abandonCompteur()@pre 
 		if (super.getAbandonCompteur() != abandonCompteur_pre)                                     
-			throw new PostconditionError("abandonCompteur(retrait(M,s))=abandonCompteur(M)@pre");  
+			throw new PostconditionError("abandonCompteur() == abandonCompteur()@pre");  
 
-		// \post: etatAppartenance(retrait(M,s)) = etatAppartenance(M)@pre
+		// post: etatAppartenance() == etatAppartenance()@pre
 		if (super.getEtatAppartenance() != etatAppartenance_pre)
-			throw new PostconditionError("etatAppartenance(retrait(M,s)) = etatAppartenance(M)@pre");
-}
-	
-	//	------------------------------- [ acceuil ] -------------------------------
-	public void acceuil(ERace race){
-		// Premier check des invariants
-		this.checkInvariants();
-
-		/* ######## Verification des préconditions ######### */
-		
-		// \pre: acceuil(M, r) require estAbandonnee(M) v etatAppartenance(M) = r
-		if ( ! (super.estAbandonne() || super.getEtatAppartenance() == race)) 
-			throw new PreconditionError("pre acceuil(M, r) require estAbandonnee(M) v etatAppartenance(M) = r");
-
-		/* ######## 	Sauvegarde contexte  		######### */
-		int orRestant_pre = super.getOrRestant();
-		
-		/* ######## 	Execution  		######### */
-		super.acceuil(race);
-		
-		// Deuxième check des invariants
-		this.checkInvariants();
-
-		/* ######## Verification des postcondition ######### */
-		
-		// \post: orRestant(acceuil(M))=orRestant(M)@pre
-		if (super.getOrRestant() != orRestant_pre)                                     
-			throw new PostconditionError("orRestant(acceuil(M))=orRestant(M)@pre"); 
-		
-		// \post: abandonCompteur(accueil(M))=0
-		if (super.getAbandonCompteur() != 0)                                     
-			throw new PostconditionError("abandonCompteur(accueil(M))=0");
-		
-		// \post: etatAppartenance(accueil(M, r)) = r
-		if (super.getEtatAppartenance() != race)
-			throw new PostconditionError("etatAppartenance(accueil(M, r)) = r");
+			throw new PostconditionError("etatAppartenance() == etatAppartenance()@pre");
 	}
 	
-	// --------------------- [abandoned] -----------------------------
+	public void acceuil(ERace race){
+		this.checkInvariants();
+
+		// pre: estAbandonnee() || etatAppartenance() == race
+		if ( ! (super.estAbandonne() || super.getEtatAppartenance() == race)) 
+			throw new PreconditionError("estAbandonnee() || etatAppartenance() == race");
+
+		int orRestant_pre = super.getOrRestant();
+		
+		super.acceuil(race);
+		
+		this.checkInvariants();
+
+		// post: orRestant() == orRestant()@pre  
+		if (super.getOrRestant() != orRestant_pre)                                     
+			throw new PostconditionError("orRestant() == orRestant()@pre"); 
+		
+		// post: abandonCompteur() == 0 
+		if (super.getAbandonCompteur() != 0)                                     
+			throw new PostconditionError("abandonCompteur() == 0");
+		
+		// post: etatAppartenance() == race
+		if (super.getEtatAppartenance() != race)
+			throw new PostconditionError("etatAppartenance() == race");
+	}
+	
 	public void abandoned(){
-		// Premier check des invariants
 		this.checkInvariants();
 		
-		/* ######## Verification des préconditions ######### */
-		// \pre: abandoned(M) require ¬estAbandonne()
+		// pre: ! estAbandonne()
 		if (super.estAbandonne())
-			throw new PreconditionError(" abandoned(M) require ¬estAbandonne()");
+			throw new PreconditionError(" ! estAbandonne()");
 
-		//Sauvegarde contexte  
 		int orRestant_pre = super.getOrRestant();
 		int abandonCompteur_pre = super.getAbandonCompteur();
 		ERace etatAppartenance_pre = super.getEtatAppartenance();
 		
-		/* ######## 	Execution  		######### */
 		super.abandoned();
 		
-		// Deuxième check des invariants
 		this.checkInvariants();
 		
-		/* ######## Verification des postcondition ######### */
-		// \pre: orRestant(acceuil(M))=orRestant(M)@pre
+		// post: orRestant() == orRestant()@pre
 		if (super.getOrRestant() != orRestant_pre)                                     
-			throw new PostconditionError("orRestant(acceuil(M))=orRestant(M)@pre"); 
+			throw new PostconditionError("orRestant() == orRestant()@pre"); 
 
-		// \post: abandonCompteur(abandoned(M))=abandonCompteur()+1	
+		// post: abandonCompteur() == abandonCompteur()@pre + 1
 		if (super.getAbandonCompteur() != abandonCompteur_pre + 1)                                     
-			throw new PostconditionError("abandonCompteur(abandoned(M))=abandonCompteur()+1");
+			throw new PostconditionError("abandonCompteur() == abandonCompteur()@pre + 1");
 		
-		// \post: etatAppartenance(abandoned(M)) = etatAppartenance(M)@pre
+		// post: etatAppartenance() == etatAppartenance()@pre
 		if (super.getEtatAppartenance() != etatAppartenance_pre)
-			throw new PostconditionError("etatAppartenance(abandoned(M)) = etatAppartenance(M)@pre");
+			throw new PostconditionError("etatAppartenance() == etatAppartenance()@pre");
 	}
 	
 	public ERace getEtatAppartenance() {
-		// \pre: etatAppartenance(M) require ¬estAbandonnee()
+		// pre: ¬estAbandonnee()
 		if (super.estAbandonne())
-			throw new PreconditionError("etatAppartenance(M) require ¬estAbandonnee()");
+			throw new PreconditionError("¬estAbandonnee()");
 		
 		return super.getEtatAppartenance();
 	}

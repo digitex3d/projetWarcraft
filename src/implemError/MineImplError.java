@@ -14,7 +14,9 @@ public class MineImplError implements IMine {
 	
 		
 	@Override
-	public IMine init(int largeur, int hauteur) {
+	public IMine init(int x, int y, int largeur, int hauteur) {
+		this.posX = x;
+		this.posY = y;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
 		this.orRestant = 45; //BUG
@@ -69,7 +71,7 @@ public class MineImplError implements IMine {
 	//TODO: à revoir
 	@Override
 	public void abandoned() {
-			this.abandonCompteur += 1;
+		this.abandonCompteur += 1;
 	}
 
 	@Override
@@ -80,17 +82,6 @@ public class MineImplError implements IMine {
 	@Override
 	public int getY() {
 		return this.posY;
-	}
-
-	@Override
-	public void setX(int x) {
-		this.posX = x;
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.posY = y;
 	}
 
 	@Override

@@ -53,17 +53,4 @@ public class MurailleImpl implements IMuraille {
 	public void retrait(int s) {
 		this.pointsDeVie -= s;
 	}
-
-	@Override
-	public void setX(int x) {
-		this.x = x;
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.y = y;
-		
-	}
-
 }
