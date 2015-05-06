@@ -25,5 +25,11 @@ public final class Utils {
 
 	    return randomNum;
 	}
+	
+	public static int distance(int x1, int y1, int x2, int y2) {
+		int xdiff = x2 - x1;
+		int ydiff = y2 - y1;
+		return (int) Math.sqrt(xdiff * xdiff + ydiff * ydiff);
+	}
 }
 

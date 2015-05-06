@@ -7,21 +7,21 @@ import enums.EEntite;
 
 public interface ITerrain {
 	/* ########### Observators ########### */	
-	int getLargeur();
-	int getHauteur();
-	List<IMuraille> getListeMuraille();
-	List<IRoute> getListeRoute();
-	List<IVillageois> getListeVillageois();
-	List<IMine> getListeMine();
-	List<IHotelVille> getListeHotelVille();
+	public int getLargeur();
+	public int getHauteur();
+	public List<IMuraille> getListeMuraille();
+	public List<IRoute> getListeRoute();
+	public List<IVillageois> getListeVillageois();
+	public List<IMine> getListeMine();
+	public List<IHotelVille> getListeHotelVille();
 	// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
-	boolean estFranchissable(int x, int y, int l, int h);
+	public boolean estFranchissable(int x, int y, int l, int h);
 	// pre: 0 <= x < largeur() && 0 <= y < hauteur()
-	Set<EEntite> getEntiteAt(int x, int y);
+	public Set<EEntite> getEntiteAt(int x, int y);
 	// pre: 0 <= x < largeur() && 0 <= y < hauteur()
-	int getBonusVitesse(int x, int y);
+	public int getBonusVitesse(int x, int y);
 	// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
-	IRoute getRouteAt(int x, int y, int l, int h);
+	public IRoute getRouteAt(int x, int y, int l, int h);
 
 	/* ########### Constructors ########### */		
 	/**
@@ -63,7 +63,7 @@ public interface ITerrain {
 					\forall Mu.posy() <= y < Mu.posy() + Mu.hauteur()
 						MURAILLE \in getEntiteAt(x, y)
 	 */
-	ITerrain init(int largeur, int hauteur);
+	public ITerrain init(int largeur, int hauteur);
 	
 	/* ########### Operators ########### */
 	/**
@@ -74,7 +74,7 @@ public interface ITerrain {
 			else
 				getEntiteAt(j, k) == getEntiteAt(j, k)@pre \plus {ent}
 	 */
-	void setEntiteAt(EEntite ent, int x, int y, int l, int h);
+	public void setEntiteAt(EEntite ent, int x, int y, int l, int h);
 	
 	/**
 		pre: 0 <= numV < getListeVillageois().size() &&
@@ -86,15 +86,16 @@ public interface ITerrain {
 						getEntiteAt(x, y) == {VILLAGEOIS}
 					else
 						getEntiteAt(x, y) == getEntiteAt(x, y)@pre \plus {VILLAGEOIS}
-			  \forall x \in [Vill@pre.posx(), Vill@pre.posx() + Vill@pre.largeur()[ \and \not \in [xn, xn + Vill@pre.largeur()[,
-			  \forall y \in [Vill@pre.posy(), Vill@pre.posy() + Vill@pre.hauteur()[ \and \not \in [yn, yn + Vill@pre.hauteur()[,
+			  \forall x \in [Vill@pre.posx(), Vill@pre.posx() + Vill@pre.largeur()[,
+			  \forall y \in [Vill@pre.posy(), Vill@pre.posy() + Vill@pre.hauteur()[,
+			  		if x \not \in [xn, xn + Vill@pre.largeur()[ \and y \not \in [yn, yn + Vill@pre.hauteur()[
 					if getEntiteAt(x, y)@pre == {VILLAGEOIS} then
 						getEntiteAt(x, y) == {RIEN}
 					else
 						getEntiteAt(x, y) == getEntiteAt(x, y)@pre \minus {VILLAGEOIS}
 					
 	 */
-	void moveVillageoisAt(int numV, int xn, int yn);
+	public void moveVillageoisAt(int numV, int xn, int yn);
 	
 	/**
 		pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur() &&
@@ -106,7 +107,7 @@ public interface ITerrain {
 					else 
 						getEntiteAt(j, k) == getEntiteAt(j, k)@pre \minus {ent}
 	 */
-	void removeEntiteAt(EEntite ent, int x, int y, int l, int h);
+	public void removeEntiteAt(EEntite ent, int x, int y, int l, int h);
 	
 	/**
 		pre: 0 <= numV < getListeVillageois().size() && 
@@ -117,5 +118,16 @@ public interface ITerrain {
 			\forall y \in [Vill.posy(), Vill.posy() + Vill.hauteur()[,
 				VILLAGEOIS \in getEntiteAt(x, y)
 	 */
-	void reinsertVillageois(int numV);
+	public void reinsertVillageois(int numV);
+	
+	/* ########### Invariants ########### */
+	// inv: getRouteAt(x, y) min= ro \verifies ro \in getListeRoute() && ro.posx() == x && ro.posy() == y
+	// inv: estFranchissable(x, y, l, h) min= \forall i \in [x, x + l[, \forall j \in [y, y + h[,
+	//											getEntiteAt(i, j) == {RIEN} ∨ getEntiteAt(x, y) == {ROUTE}
+	// inv: if \exist j \in [x, x + l[, k \in [y, y + h[ \verifies {ROUTE} == getEntiteAt(j, k) then
+	//			getBonusVitesse(x, y, l, h) min= getRouteAt(j, k).bonusVitesse()
+	//		else getBonusVitesse(x, y, l, h) min= 0
+	// inv:	\forall x \in [0, largeur[, \forall y \in [0, hauteur[
+	//		if getEntiteAt(x, y).size() > 0 &&
+	//		if RIEN \in getEntiteAt(x, y) then getEntiteAt(x, y).size == 1
 }
