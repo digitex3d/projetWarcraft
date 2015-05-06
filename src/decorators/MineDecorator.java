@@ -42,8 +42,8 @@ public class MineDecorator implements IMine{
 	}
 
 	@Override
-	public IMine init(int largeur, int hauteur) {
-		return this.delegate.init(largeur, hauteur);
+	public IMine init(int x, int y, int l, int h) {
+		return this.delegate.init(x, y, l, h);
 	}
 
 	@Override

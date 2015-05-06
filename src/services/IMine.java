@@ -8,54 +8,55 @@ public interface IMine extends IEntite {
 	boolean	estAbandonne();
 	boolean	estLaminee();
 	int		getAbandonCompteur();
-	// \pre etatAppartenance(M) require ¬estAbandonnee()
+	// pre: ¬estAbandonnee()
 	ERace   getEtatAppartenance();
 
 	/* ########### Constructors ########### */		
 
-	/* \pre init(largeur,hauteur) 
-	* 	require 	largeur%2=1 ∧ 
-	* 				hauteur%2=1
+	/** 
+		pre l % 2 = 1 && h % 2 = 1 && x > 0 && y > 0
+		post: posx() == x
+		post: posy() == y
+		post: largeur() == l
+		post: hauteur() == h
+		post: orRestant() == 51
+		post: abandonCompteur() == 51
+		post: etatAppartenance() == ORC
 	*/
-	IMine init(int largeur, int hauteur);
-	// \post: largeur(init(l,h))=l
-	// \post: hauteur(init(l,h))=h
-	// \post: orRestant(init(l,h))=51
-	// \post: abandonCompteur(init(l,h))=51
-	// \post: etatAppartenance(init(l, h)) = ORC
+	IMine init(int x, int y, int l, int h);
 	
 	/* ########### Operators ########### */
 	
-	// [retrait]
-	// \pre retrait(M,s) require ¬estLaminee(M) ∧ s>0
-	
+	/** [retrait]
+		pre: ! estLaminee() && s > 0
+		post: orRestant() == orRestant()@pre - s 
+		post: abandonCompteur() == abandonCompteur()@pre 
+		post: etatAppartenance() == etatAppartenance()@pre
+	 */
 	void retrait(int s);
 	
-	// \post:orRestant(retrait(M,s)) = orRestant(M)-s 
-	// \post: abandonCompteur(retrait(M,s)) = abandonCompteur(M)@pre 
-	// \post: etatAppartenance(retrait(M,s)) = etatAppartenance(M)@pre
 	
-	// [acceuil]
-	// \pre acceuil(M, r) require estAbandonnee(M) v etatAppartenance(M) = r
-
+	/** [acceuil]
+		pre: estAbandonnee() || etatAppartenance() == r
+		post: orRestant() == orRestant()@pre  
+		post: abandonCompteur() == 0 
+		post: etatAppartenance() == race
+	*/
 	void acceuil(ERace race);
 
-	// \post: orRestant(acceuil(M))=orRestant(M)@pre  
-	// \post: abandonCompteur(accueil(M))=0 
-	// \post: etatAppartenance(accueil(M, r)) = r
 	
-	// [abandoned]
-	// \pre abandoned(M) require ¬estAbandonne()
-
+	/** [abandoned]
+		pre: ! estAbandonne()
+		post: orRestant() == orRestant()@pre
+		post: abandonCompteur() == abandonCompteur()@pre + 1
+		post: etatAppartenance() == etatAppartenance()@pre
+	*/
 	void abandoned();
 
-	// \post: orRestant(abandoned(M))=orRestant(M)
-	// \post: abandonCompteur(abandoned(M))=abandonCompteur()+1
-	// \post: etatAppartenance(abandoned(M)) = etatAppartenance(M)@pre
 
 	/* ########### Invariants ########### */
-	// \inv:  estLaminee(M) min = orRestant(M) ≤ 0
-	// \inv:  estAbandonnee(M) min = abandonCompteur = 51
-	// \inv:  0 ≤abandonCompteur(M)≤ 51
+	// inv: estLaminee() min= orRestant() <= 0
+	// inv: estAbandonnee() min= abandonCompteur == 51
+	// inv: 0 <= abandonCompteur() <= 51
 	
 }

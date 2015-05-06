@@ -8,8 +8,6 @@ public class MineImpl implements IMine {
 	int hauteur;
 	int orRestant;
 	int abandonCompteur;
-	boolean estLaminee;
-	boolean estAbandonne;
 	ERace etatAppartenance;
 	int posX;
 	int posY;
@@ -17,13 +15,13 @@ public class MineImpl implements IMine {
 	public MineImpl() {}
 		
 	@Override
-	public IMine init(int largeur, int hauteur) {
+	public IMine init(int x, int y, int largeur, int hauteur) {
+		this.posX = x;
+		this.posY = y;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
 		this.orRestant = 51;
 		this.abandonCompteur = 51;
-		this.estLaminee = false;
-		this.estAbandonne = true;
 		this.etatAppartenance = ERace.ORC;
 		return this;
 	}
@@ -45,12 +43,12 @@ public class MineImpl implements IMine {
 
 	@Override
 	public boolean estAbandonne() {
-		return this.estAbandonne;
+		return abandonCompteur == 51;
 	}
 
 	@Override
 	public boolean estLaminee() {
-		return this.estLaminee;
+		return orRestant <= 0;
 	}
 
 	@Override
@@ -65,7 +63,6 @@ public class MineImpl implements IMine {
 		this.orRestant -= s;
 	}
 
-	//TODO: à revoir
 	@Override
 	public void acceuil(ERace race) {
 		this.etatAppartenance = race;
@@ -73,10 +70,9 @@ public class MineImpl implements IMine {
 		
 	}
 
-	//TODO: à revoir
 	@Override
 	public void abandoned() {
-			this.abandonCompteur += 1;
+		this.abandonCompteur += 1;
 	}
 
 	@Override
@@ -104,6 +100,4 @@ public class MineImpl implements IMine {
 	public ERace getEtatAppartenance() {
 		return etatAppartenance;
 	}
-
-
 }
