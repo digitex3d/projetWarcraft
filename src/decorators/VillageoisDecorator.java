@@ -3,7 +3,6 @@ package decorators;
 import enums.ERace;
 import services.IVillageois;
 
-//TODO: completare e verificare
 public class VillageoisDecorator implements IVillageois {
 	private IVillageois delegate;
 
@@ -109,13 +108,19 @@ public class VillageoisDecorator implements IVillageois {
 	}
 
 	@Override
-	public void setCorvee(int s) {
-		this.delegate.setCorvee(s);
+	public void setCorvee(int s, int corveeX, int corveeY) {
+		this.delegate.setCorvee(s, corveeX,corveeY);
 	}
 
 	@Override
 	public void decrCorvee() {
 		this.delegate.decrCorvee();
+	}
+
+	@Override
+	public void setXY(int x, int y) {
+		this.delegate.setXY(x, y);
+		
 	}
 
 
