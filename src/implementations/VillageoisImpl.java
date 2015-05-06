@@ -3,7 +3,6 @@ package implementations;
 import enums.ERace;
 import services.IVillageois;
 
-// TODO: completare e verificare
 public class VillageoisImpl implements IVillageois {
 	private ERace race;
 	private int largeur;
