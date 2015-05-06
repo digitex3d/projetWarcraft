@@ -29,6 +29,7 @@ observations:
 		estCalcChemin(init(T, V, angle)) = false
 		vill(init(T, V, angle)) = V
 		terr(init(T, V, angle)) = T
+		angle(init(T, V, angle)) = angle
 
 [calcChemin]
 	estCalcChemin(calcChemin(GD)) = true
