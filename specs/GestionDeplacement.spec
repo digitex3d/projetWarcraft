@@ -17,33 +17,33 @@ observators:
 constructors:
 	init: Terrain \per Villageois \per int \larr [GestionDeplacement]
 		pre init(T, V, angle) require 
-\not Villageois::estMort(V) \and 
-\not Villageois::estOccupe(V) \and 
-0 \lte angle \lte 360
+			\not Villageois::estMort(V) \and 
+			\not Villageois::estOccupe(V) \and 
+			0 \lte angle \lte 360
 
 operators:
 	calcChemin: [GestionDeplacement] \larr [GestionDeplacement]
 		
 observations:
-[init]
-estCalcChemin(init(T, V, angle)) = false
-vill(init(T, V, angle)) = V
-terr(init(T, V, angle)) = T
+	[init]
+		estCalcChemin(init(T, V, angle)) = false
+		vill(init(T, V, angle)) = V
+		terr(init(T, V, angle)) = T
 
 [calcChemin]
 	estCalcChemin(calcChemin(GD)) = true
 	|cheminX(calcChemin(GD))| = |cheminY(calcChemin(GD))|
 	Soit bonus \def \sum i \from 0 \to |cheminX(GD)| - 1, 
-Terrain::getBonusVitesse(terr(GD),  get(cheminX(GD), i),  get(cheminY(GD), i))
-|cheminX(calcChemin(GD))| = bonus + Villageois::vitesse(vill(GD))
-Soit lgVill \def  Villageois::largeur(vill(GD))
-Soit htVill \def  Villageois::hauteur(vill(GD))
+	Terrain::getBonusVitesse(terr(GD),  get(cheminX(GD), i),  get(cheminY(GD), i))
+	|cheminX(calcChemin(GD))| = bonus + Villageois::vitesse(vill(GD))
+	Soit lgVill \def  Villageois::largeur(vill(GD))
+	Soit htVill \def  Villageois::hauteur(vill(GD))
 	firstObstacle(calcChemin(GD)) = 
-i si \exist min i \in {i | i \in [0, |cheminX|[ \and 
- \exist x \in [get(cheminX(GD), i), get(cheminX(GD), i) + lgVill[,
- \exist y \in [get(cheminY(GD), i), get(cheminY(GD), i) + htVill[,
-¬Terrain::estFranchissable(terr(GD), x, y)}
--1 sinon
+	i si \exist min i \in {i | i \in [0, |cheminX|[ \and 
+ 	\exist x \in [get(cheminX(GD), i), get(cheminX(GD), i) + lgVill[,
+ 	\exist y \in [get(cheminY(GD), i), get(cheminY(GD), i) + htVill[,
+	¬Terrain::estFranchissable(terr(GD), x, y)}
+	-1 sinon
 	get(cheminX(calcChemin(GD)), |cheminX(calcChemin(GD))|-1)) =  
 				Villageois::posx(vill(GD)) + (bonus + Villageois::vitesse(vill(GD))) * cos( angle(GD) )
 get(cheminY(calcChemin(GD)), |cheminY(calcChemin(GD))|-1)) =  
