@@ -1,3 +1,4 @@
+%%%%%%%%%%%%% Villageois %%%%%%%%%%%%%%%%
 service : Villageois
 types: int, double, boolean, enum ERace {ORC, HUMAN}
 observators :
@@ -17,30 +18,46 @@ observators :
 Constructors :
 	init : int x int x ERace × int × int × int × double × int → [Villageois]
 		pre init(x,y, race,largeur,hauteur,force,vitesse,pointsVie) 
-		require  	largeur%2=1 ∧ 
-					hauteur%2=1 ∧
-					force > 0 ∧ 
-					vitesse > 0 ∧ 
-					pointsVie > 0 ∧
-					x > 0 ∧
-					y > 0
+		require  	largeur % 2=1 ∧ 
+			hauteur % 2=1 ∧
+			force > 0 ∧ 
+			vitesse > 0 ∧ 
+			pointsVie > 0 ∧
+			x \gte 0 ∧
+			y \gte  0
 Operators :
+	setXY: [Villageois] × int → [Villageois]
+		pre setX(V, x) require	
+x \gte 0 ∧
+	y \gte  0
 	retrait : [Villageois] × int → [Villageois]
-		pre retrait(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0
+		pre retrait(V, s) require 
+¬estMort(V) ∧ 
+¬estOccupe(V) ∧ s > 0
 	chargeOr : [Villageois] × int → [Villageois]
-		pre chargeOr(V, s) require ¬estMort(V) ∧ s > 0
+		pre chargeOr(V, s) require 
+¬estMort(V) ∧
+ s > 0
 	dechargeOr : [Villageois] × int → [Villageois]
-		pre dechargeOr(V, s) require ¬estMort(V) ∧ s > 0 ∧ s <= quantiteOr(V)
-	setCorvee: [Villageois] × int → [Villageois]
-		pre setCorvee(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0
+		pre dechargeOr(V, s) require 
+¬estMort(V) ∧ s > 0 ∧ 
+s \lte quantiteOr(V)
+	setCorvee: [Villageois] × int × int × int → [Villageois]
+		pre setCorvee(V, s, corveeX, corveeY) require
+¬estMort(V) ∧ 
+¬estOccupe(V) ∧
+ s > 0 ∧ 
+corveeX ≥ 0 ∧
+corveeY ≥ 0
 	decrCorvee: [Villageois] → [Villageois]
-		pre decrCorvee(V) require ¬estMort(V) ∧ estOccupe(V)
+		pre decrCorvee(V) require
+¬estMort(V) ∧ 
+estOccupe(V)
 
 Observations :
 	[invariants]
 	estMort(V) min = pointsDeVie(V) ≤ 0
 	estOccupe(V) min= corvee > 0
-	corvee(V) >= 0
 
 	[init]
 	posx(init(x,y,s,l,h,f,v,p))=x
@@ -76,11 +93,11 @@ Observations :
 	posy(dechargeOr(V,s)) = posy(V)	
 
 	[setCorvee]
-	pointsDeVie(setCorvee(V,s)) = pointsDeVie(V)
-	quantiteOr(setCorvee(V,s)) = quantiteOr(V)
-	corvee(setCorvee(V,s)) = s
-	posx(setCorvee(V,s)) = posx(V)	
-	posy(setCorvee(V,s)) = posy(V)	
+	pointsDeVie(setCorvee(V, s, x, y)) = pointsDeVie(V)
+	quantiteOr(setCorvee(V, s, x, y)) = quantiteOr(V)
+	corvee(setCorvee(V, s, x, y)) = s
+	posx(setCorvee(V, s, x, y)) = x	
+	posy(setCorvee(V, s, x, y)) = y	
 		
 	[decrCorvee]
 	pointsDeVie(decrCorvee(V)) = pointsDeVie(V)
@@ -88,3 +105,11 @@ Observations :
 	corvee(decrCorvee(V)) = corvee(V) - 1
 	posx(decrCorvee(V)) = posx(V)	
 	posy(decrCorvee(V)) = posy(V)
+
+	[setXY]
+	pointsDeVie(setX(V, x)) = pointsDeVie(V)
+	quantiteOr(setX(V,x)) = quantiteOr(V)
+	corvee(setX(V, x)) = corvee(V)
+	posx(setX(V, x)) = x	
+	posy(setX(V, x)) = y	
+
