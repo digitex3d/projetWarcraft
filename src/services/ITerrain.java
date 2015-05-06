@@ -88,11 +88,11 @@ public interface ITerrain {
 						getEntiteAt(x, y) == getEntiteAt(x, y)@pre \plus {VILLAGEOIS}
 			  \forall x \in [Vill@pre.posx(), Vill@pre.posx() + Vill@pre.largeur()[,
 			  \forall y \in [Vill@pre.posy(), Vill@pre.posy() + Vill@pre.hauteur()[,
-			  		if x \not \in [xn, xn + Vill@pre.largeur()[ \and y \not \in [yn, yn + Vill@pre.hauteur()[
-					if getEntiteAt(x, y)@pre == {VILLAGEOIS} then
-						getEntiteAt(x, y) == {RIEN}
-					else
-						getEntiteAt(x, y) == getEntiteAt(x, y)@pre \minus {VILLAGEOIS}
+			  		if x \not \in [xn, xn + Vill@pre.largeur()[ \and y \not \in [yn, yn + Vill@pre.hauteur()[ then
+						if getEntiteAt(x, y)@pre == {VILLAGEOIS} then
+							getEntiteAt(x, y) == {RIEN}
+						else
+							getEntiteAt(x, y) == getEntiteAt(x, y)@pre \minus {VILLAGEOIS}
 					
 	 */
 	public void moveVillageoisAt(int numV, int xn, int yn);
