@@ -14,7 +14,7 @@ public interface IMine extends IEntite {
 	/* ########### Constructors ########### */		
 
 	/** 
-		pre l % 2 = 1 && h % 2 = 1 && x > 0 && y > 0
+		pre: l % 2 = 1 && h % 2 = 1 && x > 0 && y > 0
 		post: posx() == x
 		post: posy() == y
 		post: largeur() == l
