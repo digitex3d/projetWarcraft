@@ -18,7 +18,7 @@ public interface IVillageois extends IEntite{
 	
 	/* ########### Constructors ########### */		
 	
-	/* init : int x int x ERace × int × int × int × double × int → [Villageois]
+	/** init : int x int x ERace × int × int × int × double × int → [Villageois]
 	* 	\pre: 	largeur % 2=1 && 
 	*       	hauteur % 2=1 &&
 	*       	force > 0 && 
@@ -33,78 +33,77 @@ public interface IVillageois extends IEntite{
 	
 	/* ########### Operators ########### */
 	
-	//	[setXY]
-	//	\pre: x >= 0 &&  
-	//  \pre: y >= 0
-	
+	/**  [setXY]
+	*	 \pre: x >= 0 &&  
+	* 	 \pre: y >= 0
+	* 	 \post: pointsDeVie(setX(x))== pointsDeVie()@pre
+	*    \post: quantiteOr(setX(x)) == quantiteOr()@pre 
+	*    \post: corvee(setX(x)) == corvee()@pre         
+	*    \post: posx(setX(x)) == x	                   
+	*    \post: posy(setX(x)) == y	                   
+	 */
 	void setXY(int x, int y);
 	
-	//  \post: pointsDeVie(setX(x))== pointsDeVie()@pre
-	//	\post: quantiteOr(setX(x)) == quantiteOr()@pre
-	//	\post: corvee(setX(x)) == corvee()@pre
-	//	\post: posx(setX(x)) == x	
-	//	\post: posy(setX(x)) == y	
 	 
-	
-	// [retrait]
-	// \pre: !estMort() && !estOccupe() && s>0
-	
+	/**
+	*  [retrait]
+	*  \pre: !estMort() && !estOccupe() && s>0
+	*  \post: pointsDeVie() == pointsDeVie()@pre - s 
+	*  \post: quantiteOr() == quantiteOr()@pre       
+	*  \post: corvee() == corvee()@pre               
+	*  \post: posx() == posx()@pre                   
+	*  \post: posy() == posy()@pre	                 
+	*/
 	void retrait(int s);
 	
-	// \post: pointsDeVie() == pointsDeVie()@pre - s
-	// \post: quantiteOr() == quantiteOr()@pre
-	// \post: corvee() == corvee()@pre
-	// \post: posx() == posx()@pre
-	// \post: posy() == posy()@pre	
-
-	// [chargeOr]
-	// \pre: !estMort(V) && s>0
-	
+    /**
+	*  [chargeOr]
+	*  \pre: !estMort(V) && s>0
+	*  \post: pointsDeVie() == pointsDeVie()@pre
+	*  \post: quantiteOr() == quantiteOr()@pre + s       
+	*  \post: corvee() == corvee()@pre               
+	*  \post: posx() == posx()@pre                   
+	*  \post: posy() == posy()@pre
+	*/ 
 	void chargeOr(int s);
 	
-	// \post: pointsDeVie() == pointsDeVie()@pre
-	// \post: quantiteOr() == quantiteOr()@pre + s       
-	// \post: corvee() == corvee()@pre               
-	// \post: posx() == posx()@pre                   
-	// \post: posy() == posy()@pre	                
-
-	
-
-	// [dechargeOr]
-	// \pre: !estMort() && s>0 && s <= quantiteOr()
-	
+    /**
+	*  [dechargeOr]
+	*  \pre: !estMort() && s>0 && s <= quantiteOr()
+	*  \post: pointsDeVie() == pointsDeVie()@pre   	
+	*  \post: quantiteOr() == quantiteOr()@pre - s 	
+	*  \post: corvee() == corvee()@pre             	
+	*  \post: posx() == posx()@pre                 	
+	*  \post: posy() == posy()@pre	               
+	*/ 
 	void dechargeOr(int s);
 	
-	// \post: pointsDeVie() == pointsDeVie()@pre   	
-	// \post: quantiteOr() == quantiteOr()@pre - s 	
-	// \post: corvee() == corvee()@pre             	
-	// \post: posx() == posx()@pre                 	
-	// \post: posy() == posy()@pre	               	
-
-	// [setCorvee]
-	// \pre: !estMort(V) && !estOccupe(V) && s > 0 && corveeX >= 
-	// 			and corveeY >= 0
-	
+		
+    /**
+	*  \setCorvee]
+	*  \pre: !estMort(V) && !estOccupe(V) && s > 0 && corveeX >=
+	*  		and corveeY >= 0
+	*  \post: pointsDeVie() == pointsDeVie()@pre   
+	*  \post: quantiteOr() == quantiteOr()@pre 
+	*  \post: corvee() == s          
+	*  \post: posx() == corveeX                 
+ 	*	\post: posy() == corveeY	    
+ 	*/ 
 	void setCorvee(int s, int corveeX, int corveeY);
 	
-	// \post: pointsDeVie() == pointsDeVie()@pre   
-	// \post: quantiteOr() == quantiteOr()@pre 
-	// \post: corvee() == s          
-	// \post: posx() == corveeX                 
-	// \post: posy() == corveeY	               
-
-
-	
-	// [decrCorvee]
-	// \pre: !estMort() && !estOccupe()
-	
+  /**
+	*  
+	*  [decrCorvee]
+	*  \pre: !estMort() && !estOccupe()
+	*  \post: pointsDeVie() == pointsDeVie()@pre 
+	*  \post: quantiteOr() == quantiteOr()@pre   
+	*  \post: corvee() == corvee()@pre -1                     
+	*  \post: posx() == posx()@pre                  
+	*  \post: posy() == posy()@pre	
+	*/	
 	void decrCorvee();
 	
-	// \post: pointsDeVie() == pointsDeVie()@pre 
-	// \post: quantiteOr() == quantiteOr()@pre   
-	// \post: corvee() == corvee()@pre -1                     
-	// \post: posx() == posx()@pre                  
-	// \post: posy() == posy()@pre	                 
+	                 
 	
 	
 	/* ########### Invariants ########### */
