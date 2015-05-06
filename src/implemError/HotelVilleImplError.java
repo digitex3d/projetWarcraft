@@ -1,27 +1,27 @@
 package implemError;
 
+import enums.ERace;
 import services.IHotelVille;
 
 
 public class HotelVilleImplError implements IHotelVille {
-	protected int largeur;
-	protected int hauteur;
-	protected int orRestant;
-	protected int posX;
-	protected int posY;
+	private int largeur;
+	private int hauteur;
+	private int orRestant;
+	private int posX;
+	private int posY;
+	private ERace appartenance;
 	
-	public HotelVilleImplError() {}
-		
 	@Override
-	public IHotelVille init(int x, int y, int largeur, int hauteur, int or) {
+	public IHotelVille init(int x, int y, int largeur, int hauteur, int or, ERace app) {
 		this.posX = x;
 		this.posY = y;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
 		this.orRestant = or - 1; //BUG
+		this.appartenance = app;
 		
 		return this;
-		
 	}
 		
 	@Override
@@ -50,20 +50,12 @@ public class HotelVilleImplError implements IHotelVille {
 	}
 
 	@Override
-	public void setX(int x) {
-		this.posX = x;
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		this.posY = y;
-	}
-
-	@Override
 	public void depot(int s) {
-		this.orRestant += s + 1; //BUG
+		this.orRestant += s + 2; //BUG
 	}
 
-
+	@Override
+	public ERace getEtatAppartenance() {
+		return this.appartenance;
+	}
 }

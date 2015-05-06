@@ -1,5 +1,6 @@
 package decorators;
 
+import enums.ERace;
 import services.IHotelVille;
 
 public class HotelVilleDecorator implements IHotelVille{
@@ -41,8 +42,13 @@ public class HotelVilleDecorator implements IHotelVille{
 	}
 
 	@Override
-	public IHotelVille init(int x, int y, int largeur, int hauteur, int or) {
-		return this.init(x, y, largeur, hauteur, or);
+	public IHotelVille init(int x, int y, int largeur, int hauteur, int or, ERace app) {
+		return this.delegate.init(x, y, largeur, hauteur, or, app);
+	}
+
+	@Override
+	public ERace getEtatAppartenance() {
+		return this.delegate.getEtatAppartenance();
 	}
 
 }
