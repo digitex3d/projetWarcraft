@@ -25,7 +25,6 @@ public class MoteurJeuImpl implements IMoteurJeu{
     
     public MoteurJeuImpl(){}
     
-
 	@Override
 	public int getMaxPasJeu() {
 		return this.maxPasJeu;
@@ -45,7 +44,6 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	public EResultat resultatFinal() {
 		return this.resultatFinal;
 	}
-
 
 	@Override
 	public boolean peutEntrer(int numVillageois, int numMine) {
@@ -137,27 +135,18 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	@Override
 	public ITerrain getTerrain() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.terrain;
 	}
-
-
 
 	@Override
 	public IMuraille getMuraille(int mu) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.terrain.getListeMuraille().get(mu);
 	}
-
-
 
 	@Override
 	public IHotelVille getHotelVille(int hdv) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.terrain.getListeHotelVille().get(hdv);
 	}
-
-
 
 	@Override
 	public boolean peutEntrerHotelVille(int vilNum, int hdvNum) {
@@ -176,30 +165,28 @@ public class MoteurJeuImpl implements IMoteurJeu{
 								hdvCenterY) <= 51;
 	}
 
-
-
 	@Override
-	public boolean peutTaperMuraille(int vilNum, int mur) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean peutTaperMuraille(int vilNum, int murNum) {
+		IVillageois vill = this.getVillageois(vilNum);
+		IMuraille mur = this.getMuraille(murNum);
+		
+		int murCenterX = mur.getX() + ( mur.getLargeur() / 2 );
+		int murCenterY = mur.getY() + ( mur.getHauteur() / 2 );
+		
+		return Utils.distance(	vill.getX(), 
+								vill.getY(),
+								murCenterX, 
+								murCenterY) <= 51;
 	}
-
 
 	@Override
 	public IVillageois getVillageois(int vill) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.terrain.getListeVillageois().get(vill);
 	}
-
 
 	@Override
 	public IMine getMine(int mi) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.terrain.getListeMine().get(mi);
 	}
-
-
-
-
 
 }
