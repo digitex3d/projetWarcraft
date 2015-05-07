@@ -96,7 +96,7 @@ public class TerrainContract extends TerrainDecorator {
 		if (hauteur < 400)
 			throw new PreconditionError("hauteur >= 400");
 
-		ITerrain toRet = super.init(largeur, hauteur);
+		super.init(largeur, hauteur);
 		
 		this.checkInvariants();
 		
@@ -212,7 +212,7 @@ public class TerrainContract extends TerrainDecorator {
 						throw new PostconditionError("MURAILLE \\in getEntiteAt(x, y)");
 		}
 		
-		return toRet;
+		return this;
 	}
 	
 	public void setEntiteAt(EEntite ent, int x, int y, int l, int h) {

@@ -1,5 +1,7 @@
 package enums;
 
 public enum EResultat {
-	GAGNE, PERDU
+	NUL,
+	ORC_GAGNE,
+	HUMAN_GAGNE
 }

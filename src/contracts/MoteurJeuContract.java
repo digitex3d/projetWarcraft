@@ -4,207 +4,127 @@ import java.util.ArrayList;
 
 import decorators.MoteurJeuDecorator;
 import enums.ECommande;
+import enums.ERace;
 import enums.EResultat;
 import exceptions.InvariantError;
 import exceptions.PostconditionError;
 import exceptions.PreconditionError;
+import services.IHotelVille;
 import services.IMine;
 import services.IMoteurJeu;
+import services.ITerrain;
 import services.IVillageois;
 
 public class MoteurJeuContract extends MoteurJeuDecorator{
 	public MoteurJeuContract(IMoteurJeu delegate) {
 		super(delegate);
-		
 	}
 	
 	public void checkInvariants() {
-		//      [invariants]
-		// \inv:0 ≤ pasJeuCourant(M) ≤ maxPasJeu(M)
-		if ( this.getPasJeuCourant() < 0 || this.getPasJeuCourant() > this.getMaxPasJeu())
-			throw new InvariantError("0 ≤ pasJeuCourant(M) ≤ maxPasJeu(M)");
+		// inv: 0 <= pasJeuCourant() <= maxPasJeu()
+		if (super.getPasJeuCourant() < 0 || super.getPasJeuCourant() > super.getMaxPasJeu())
+			throw new InvariantError("0 <= pasJeuCourant() <= maxPasJeu()");
 		
+		// inv: estFini() min= \exist x \verify 0 <= x <= terrain().getListeHotelVille().size() &&
+		//						getHDV(x).orRestant() >= 1664 || pasJeuCourant() == maxPasJeu()
+		if (super.estFini()) {
+			int hv1664 = -1;
+			for (int x = 0; x < getTerrain().getListeHotelVille().size(); x++)
+				if (super.getHotelVille(x).getOrRestant() >= 1664) {
+					hv1664 = x;
+					break;
+				}
+			if (hv1664 == -1 && this.getPasJeuCourant() != this.getMaxPasJeu())
+				throw new InvariantError("getHDV(x).orRestant() >= 1664 || pasJeuCourant() == maxPasJeu()");
+			
+			// inv: if \exist x \verify 0 <= x <= terrain().getListeHotelVille().size() && getHDV(x).orRestant() >= 1664 then
+			//			if getHDV(x).etatAppartenance() == ORC then resultatFinal() min= ORC_GAGNE
+			//			if getHDV(x).etatAppartenance() == HUMAN then resultatFinal() min= HUMAN_GAGNE
+			//		else resultatFinal() min= NUL
+			if (hv1664 == -1 && super.resultatFinal() != EResultat.NUL)
+				throw new InvariantError("resultatFinal() min= NUL");
+			if (getHotelVille(hv1664).getEtatAppartenance() == ERace.ORC && super.resultatFinal() != EResultat.ORC_GAGNE)
+				throw new InvariantError("if getHDV(x).etatAppartenance() == ORC then resultatFinal() min= ORC_GAGNE");
+			if (getHotelVille(hv1664).getEtatAppartenance() == ERace.HUMAN && super.resultatFinal() != EResultat.HUMAN_GAGNE)
+				throw new InvariantError("if getHDV(x).etatAppartenance() == HUMAN then resultatFinal() min= HUMAN_GAGNE");
+		}
+				
+		// inv: getVillageois(vill) min= terrain().getListeVillageois().get(vill)
+		// inv: getMine(mi) min= terrain().getListeMine().get(mi)
+		// inv: getMuraille(mu) min= terrain().getListeMuraille().get(mu)
+		// inv: getHDV(hdv) min= terrain().getListeHotelVille().get(hdv)
 		
-		// \inv:estFini(M) min = HotelVille::orRestant(hotelDeVille(M)) ≥ 1664 ∨ pasJeuCourant(M)=maxPasJeu(M))
-		if ( this.estFini() )
-			if ( this.hotelDeVille.getOrRestant() < 1664 && this.getPasJeuCourant() != this.getMaxPasJeu())
-				throw new InvariantError("estFini(M) min = HotelVille::orRestant(hotelDeVille(M)) ≥ 1664 ∨ pasJeuCourant(M)=maxPasJeu(M))");
-		
-		// \inv:resultatFinal(M)=GAGNE ⇔ HotelVille::orRestant(hotelDeVille(M)) ≥ 1664
-		if ( this.resultatFinal() == EResultat.GAGNE)
-			if ( this.hotelDeVille.getOrRestant() < 1664) 
-				throw new InvariantError("resultatFinal(M)=GAGNE ⇔ HotelVille::orRestant(hotelDeVille(M)) ≥ 1664");
-		if ( this.getHotelDeVille().getOrRestant() >= 1664)
-			if ( this.resultatFinal() != EResultat.GAGNE)			
-				throw new InvariantError("resultatFinal(M)=GAGNE ⇔ HotelVille::orRestant(hotelDeVille(M)) ≥ 1664");
-		
-		//TODO: implémenter
-		// \inv:peutEntrer(M,numVillageois,numMine) min = distance(positionVillageoisX(M,numVillageois),positionVillageoisY(M,numVillageois),
-		//      positionMineX(M,numMine),positionMineY(M,numMine)) ≤ 51
-		// \inv:peutEntrerHotelVille(M,numVillageois) min = distance(positionVillageoisX(M,numVillageois),positionVillageoisY(M,numVillageois),
-		//      positionHotelVilleX(M),positionHotelVilleY(M)) ≤ 51
-		
+		// inv: peutEntrer(vill, mi) min= distance(vilposX, vilposY, mineCenterX, mineCenterY) <= 51 && ! getMine(mi).estLaminee()
+		// inv: peutEntrerHotelVille(vill, hdv) min= distance(vilposX, vilposY, hvCenterX,  hvCenterY)) <= 51 && getVillageois(vill).race() == getHDV(hdv).etatAppartenance()
+		// inv: peutTaperMuraille(vill,mu) min= distance(vilposX, vilposY, murCenterX, murCenterY) ≤ 51		
 	}
 		
 	
-	// --------------------- [init] -----------------------------
-	public IMoteurJeu init(int largeur, int hauteur, int maxPasJeu){
-		// Premier check des invariants
+	public IMoteurJeu init(ITerrain terrain, int maxPas) {
+    	// pre: maxPas > 0
+		if( maxPas <= 0)
+			throw new PreconditionError("maxPas > 0");
+
+		super.init(terrain, maxPas);
+		
 		this.checkInvariants();
-
-		/* ######## Verification des préconditions ######### */
-		// \pre init(largeur,hauteur,maxPas) require 
-		//						largeur≥ 600 
-		//					∧ hauteur≥ 400 
-		//					∧ maxPas≥ 0
-		if( largeur < 600)
-			throw new PreconditionError("pre init(largeur,hauteur,maxPas) require largeur ≥ 600");
-		if( largeur < 400)
-			throw new PreconditionError("pre init(largeur,hauteur,maxPas) require hauteur ≥ 400");
-		if( maxPasJeu < 0)
-			throw new PreconditionError("pre init(largeur,hauteur,maxPas) require maxPas ≥ 0");
-
-
-		/* ######## 	Execution  		######### */
-		super.init(largeur, hauteur, maxPasJeu);
-
-		/* ######## Verification des postcondition ######### */
-		// \post: maxPasJeu(init(l,h,m))=m
-		if( this.getMaxPasJeu() != maxPasJeu )
-			throw new PostconditionError("post: maxPasJeu(init(l,h,m))=m");
-		// \post: pasJeuCourant(init(l,h,m))=0	
+		
+    	//post: terrain() == terrain
+		if (super.getTerrain() != terrain)
+			throw new PostconditionError("terrain() == terrain");
+    	// post: maxPasJeu() == maxPas
+		if (super.getMaxPasJeu() != maxPas)
+			throw new PostconditionError("maxPasJeu() == maxPas");
+    	// post: pasJeuCourant() == 0
 		if( this.getPasJeuCourant() != 0 )
-			throw new PostconditionError("post: pasJeuCourant(init(l,h,m))=0");
-		// \post: largeurTerrain(init(l,h,m))=l
-		if( this.getLargeurTerrain() != largeur)
-			throw new PostconditionError("post: largeurTerrain(init(l,h,m))=l");
-		// \post: hauteurTerrain(init(l,h,m))=h
-		if( this.getHauteurTerrain() != hauteur)
-			throw new PostconditionError("post: hauteurTerrain(init(l,h,m))=h");
-
-		
-		// Initialisation Hotel de ville
-		// \post: HotelVille::orRestant( getHotelVille( init(l,h,m) ) ) = 16
-		if( this.getHotelDeVille().getOrRestant() != 16)
-			throw new PostconditionError("post: HotelVille::orRestant( getHotelVille( init(l,h,m) ) ) = 16");
-		
-		/* Initialisation Villageois
-		 * \forall numV \in numeroesVillageois: peutEntrerHotelVille(M, getVillageois(M, numV))
-		 *  	    Ʌ Villageois::pointsDeVie( getVillageois(M, numV) ) = 100
-		 *     	Ʌ Villageois::quantiteOr( getVillageois(M, numV) ) = 0
-		 */
-		for (int i = 0; i < super.getListVillageois().size(); i++){
-			if ( ! super.peutEntrerHotelVille(i))
-				throw new PostconditionError("post: peutEntrerHotelVille(M, getVillageois(M, numV))");				
-			if( super.getVillageois(i).getQuantiteOr() != 0)
-				throw new PostconditionError("post: Villageois::quantiteOr( getVillageois(M, numV) ) = 0");
-			if( super.getVillageois(i).getPointsDeVie() != 100)
-				throw new PostconditionError("post: Villageois::pointsDeVie( getVillageois(M, numV) ) = 100");
-		}
-		
-		//// Initialisation Mines
-		//\forall numM \in numeroesMine:
-		//	  positionMineX(M, numM) <= largeurTerrain
-		//     	Ʌ  positionMineY(M, numM) <= hauteurTerrain
-		// 	     Ʌ Mine::estAbandonne( getVillageois(M, numV) ) = True
-		for( IMine m : this.getListMines() ){
-			if( m.getX() > this.getLargeurTerrain() )
-				throw new PostconditionError("post: positionMineX(M, numM) <= largeurTerrain ");
-			if( m.getY() > this.getHauteurTerrain() )
-				throw new PostconditionError("post: positionMineY(M, numM) <= hauteurTerrain ");
-			if( m.estAbandonne() != true)
-				throw new PostconditionError("post: Mine::estAbandonne( getMine(M, numM) ) = True");
-		
-		}
-		
-		
-		// Deuxième check des invariants
-		this.checkInvariants();
+			throw new PostconditionError("pasJeuCourant() == 0");
 		
 		return this;
-
 	}
 	
-	// --------------------- [pasJeu] -----------------------------
-public void pasJeu(ECommande commande, int numVillageois, int argument){
-	// Premier check des invariants
-	this.checkInvariants();
-	
-	/* ######## Verification des préconditions ######### */
-	// \pre: pasJeu(M,commmand,numVillgeois,argument) require
-	//          ¬estFini(M)
-	if( this.estFini )
-		throw new PreconditionError(" ¬estFini(M)");
-	//          command=DEPLACER ⇒ 0 ≤argument≤ 360
-	if( commande == ECommande.DEPLACER )
-		if( argument > 360 || argument < 0 )
-			throw new PreconditionError("0 ≤argument≤ 360");
-	//          command=ENTRERMINE ⇒
-	//          		argument∈numeroesMines(M)
-	//          		peutEntrer(M,numVillageois,argument)
-	if( commande == ECommande.ENTREMINE){
-		if( argument > this.mines.size() || argument < 0 )
-			throw new PreconditionError("argument∈numeroesMines(M)");
-		if( ! this.peutEntrer(numVillageois, argument))
-			throw new PreconditionError("peutEntrer(M,numVillageois,argument)");
-	
-	//          command=ENTRERHOTELVILLE ⇒peutEntrerHotelVille(M,numVillageois)
-	if( commande == ECommande.ENTREHOTELVILLE)
-		if( ! this.peutEntrerHotelVille(numVillageois))
-			throw new PreconditionError("peutEntrerHotelVille(M,numVillageois)");
+	public void pasJeu(ECommande command, int vilNum, int arg) {
+		this.checkInvariants();
 		
-	
-	
-	
-	
-	
-	//Sauvegarde contexte  
-	int pasJeuCourant_pre = this.getPasJeuCourant();
-	ArrayList<IVillageois> villageois_pre = new ArrayList<IVillageois>( this.getListVillageois());
-	
-	/* ######## 	Execution  		######### */
-	super.pasJeu(commande, numVillageois, argument);
-	
-	/* ######## Verification des postcondition ######### */
-	// \post: pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1
-	if( this.getPasJeuCourant() != pasJeuCourant_pre +1 )
-		throw new PostconditionError("pasJeuCourant(pasJeu(M,c,numVillageois,arg))=pasJeuCourant(M)+1");
-	// Commande DEPLACER
-	if( commande == ECommande.DEPLACER ){
-
-		// Villageois
-		//\forall numV \in numeroesVillageois:
-		//	getVillageois( pasJeu(M,c,numVillageois,arg), numV) =
-		//		getVillageois( M, numV) si  numVillageois != numV
-		//	
-		//		positionVillageoisX(pasJeu(M,c,numVillageois,arg), numVillageois) = cos(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))
-		//		positionVillageoisY(pasJeu(M,c,numVillageois,arg), numVillageois) = sin(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))	
-		for( int i = 0 ; i < this.getListVillageois().size(); i++){
-			if( i == numVillageois){
-				IVillageois v = this.getVillageois(numVillageois);
-				if ( v.getX() != Math.cos(argument) * v.getVitesse() )
-					throw new PostconditionError("positionVillageoisX(pasJeu(M,c,numVillageois,arg), numVillageois) = cos(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))");
-				if ( v.getY() != Math.cos(argument) * v.getVitesse() )
-					throw new PostconditionError("positionVillageoisY(pasJeu(M,c,numVillageois,arg), numVillageois) = sin(arg) *  Villageois::vitesse(getVillageois(M,numVillageois))");
-
-			}
-			if ( !this.getListVillageois().get(i).equals( villageois_pre.get(i))  )
-				throw new PostconditionError("getMine(  pasJeu(M,c,numVillageois,arg), numM ) = getMine(  M, numM )");
-
-		}
-
-	}
-
-	// Deuxième check des invariants
-	this.checkInvariants();
-	
-	}else if( commande == ECommande.ENTREMINE ){
+		/**
+			pre: ! getVillageois(vilNum).estMort() &&
+			 	 ! getVillageois(vilNum).estOccupe() && ! estFini() &&
+			 	 if command == DEPLACER then
+			 	 	0 <= arg <= 360
+			 	 if command == ENTRERMINE then
+			 	 	peutEntrer(vilNum, arg)
+			 	 if command == ENTRERHOTELVILLE then
+			 	 	peutEntrerHotelVille(vilNum, arg)
+			 	 if command == TAPERMURAILLE then
+			 	 	peutTaperMuraille(vilNum, arg)
+		 */
+		if (getVillageois(vilNum).estMort())
+			throw new PreconditionError("getVillageois(vilNum).estMort()");
+		if (getVillageois(vilNum).estOccupe())
+			throw new PreconditionError("getVillageois(vilNum).estOccupe()");
+		if (super.estFini())
+			throw new PreconditionError("! estFini()");
+		if (command == ECommande.DEPLACER)
+			if( arg > 360 || arg < 0 )
+				throw new PreconditionError("0 <= arg <= 360");
+		if (command == ECommande.ENTREMINE)
+			if ( ! peutEntrer(vilNum, arg))
+				throw new PreconditionError("peutEntrer(vilNum, arg)");
+		if (command == ECommande.ENTREHOTELVILLE)
+			if ( ! peutEntrerHotelVille(vilNum, arg))
+				throw new PreconditionError("peutEntrerHotelVille(vilNum, arg)");
+		if (command == ECommande.TAPERMURAILLE)
+			if ( ! peutTaperMuraille(vilNum, arg))
+				throw new PreconditionError("peutTaperMuraille(vilNum, arg)");
 		
+		int pasJeuCourant_pre = this.getPasJeuCourant();
+		
+		super.pasJeu(command, vilNum, arg);
+		
+		this.checkInvariants();
+		
+		// post: pasJeuCourant() == pasJeuCourant@pre + 1
+		if (super.getPasJeuCourant() != pasJeuCourant_pre + 1)
+			throw new PostconditionError("pasJeuCourant() == pasJeuCourant@pre + 1");
 		
 	}
 }
-}
-	
-
-
-
