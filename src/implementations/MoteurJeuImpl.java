@@ -1,6 +1,7 @@
 package implementations;
 
 import java.awt.event.MouseEvent;
+import java.awt.font.NumericShaper.Range;
 import java.util.ArrayList;
 
 import enums.ECommande;
@@ -37,12 +38,23 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	@Override
 	public boolean estFini() {
-		return this.estFini;
+		for(IHotelVille hv : this.terrain.getListeHotelVille())
+			if( hv.getOrRestant() >= 1664 ) return true;
+		
+		return this.getPasJeuCourant() == this.getMaxPasJeu();
+		
 	}
 
 	@Override
 	public EResultat resultatFinal() {
-		return this.resultatFinal;
+		for(IHotelVille hv : this.terrain.getListeHotelVille())
+			if( hv.getOrRestant() >= 1664 )
+				if( hv.getEtatAppartenance() == ERace.ORC) 
+					return EResultat.ORC_GAGNE;
+				else
+					return EResultat.HUMAN_GAGNE;
+		//TODO: Rivedere spec per il caso di parità
+		return EResultat.NUL;
 	}
 
 	@Override
