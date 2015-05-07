@@ -1,5 +1,8 @@
 package utils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Random;
 
 public final class Utils {
@@ -30,6 +33,23 @@ public final class Utils {
 		int xdiff = x2 - x1;
 		int ydiff = y2 - y1;
 		return (int) Math.sqrt(xdiff * xdiff + ydiff * ydiff);
+	}
+	
+	public static HashMap<String, Object> getServiceAtPre(Object service) {
+		HashMap<String, Object> obs = new HashMap<String, Object>();
+		Class<? extends Object> cl = service.getClass();
+		for (Method m : cl.getMethods()) {
+			if ( ! m.getReturnType().equals(Void.TYPE) &&
+					! m.getName().equals("init") &&
+					m.getDeclaringClass().getName().equals(cl.getName()))
+				try {
+					obs.put(m.getName(), m.invoke(service));
+				} catch (IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException e) {
+					e.printStackTrace();
+				}
+		}
+		return obs;
 	}
 }
 

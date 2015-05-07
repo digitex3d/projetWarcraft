@@ -65,8 +65,8 @@ public class TerrainDecorator implements ITerrain {
 	}
 
 	@Override
-	public int getBonusVitesse(int x, int y) {
-		return delegate.getBonusVitesse(x, y);
+	public int getBonusVitesse(int x, int y, int l, int h) {
+		return delegate.getBonusVitesse(x, y, l, h);
 	}
 
 	@Override

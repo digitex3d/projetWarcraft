@@ -23,7 +23,7 @@ public class TerrainContract extends TerrainDecorator {
 	
 	//TODO implementare invarianti di minimizzazione
 	public void checkInvariants() {
-		// inv: getRouteAt(x, y) min= ro \verifies ro \in getListeRoute() && ro.posx() == x && ro.posy() == y
+		// inv: getRouteAt(x, y) min= ro \verifies ro \in getListeRoute() && ro.posx() \in [x, x + l[ && ro.posy() \in [y, y + h[
 		// inv: estFranchissable(x, y, l, h) min= \forall i \in [x, x + l[, \forall j \in [y, y + h[,
 		//											getEntiteAt(i, j) == {RIEN} ∨ getEntiteAt(x, y) == {ROUTE}
 		// inv: if \exist j \in [x, x + l[, k \in [y, y + h[ \verifies {ROUTE} == getEntiteAt(j, k) then
@@ -65,14 +65,18 @@ public class TerrainContract extends TerrainDecorator {
 		return super.estFranchissable(x, y, l, h);
 	}
 	
-	public int getBonusVitesse(int x, int y) {
-		// pre: 0 <= x < largeur() && 0 <= y < hauteur()
-		if (x < 0 || x > super.getLargeur())
-			throw new PreconditionError("0 <= x < largeur()");
-		if (y < 0 || y > super.getHauteur())
-			throw new PreconditionError("0 <= y < hauteur()");
+	public int getBonusVitesse(int x, int y, int l, int h) {
+		// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+		if (x < 0)
+			throw new PreconditionError("x >= 0");
+		if (y < 0)
+			throw new PreconditionError("y >= 0");
+		if (x + l >= super.getLargeur())
+			throw new PreconditionError("x + l < largeur()");
+		if (y + h >= super.getHauteur())
+			throw new PreconditionError("y + h < hauteur()");
 		
-		return super.getBonusVitesse(x, y);
+		return super.getBonusVitesse(x, y, l, h);
 	}
 	
 	public IRoute getRouteAt(int x, int y, int l, int h) {

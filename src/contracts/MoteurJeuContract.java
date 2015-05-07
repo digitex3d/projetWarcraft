@@ -1,9 +1,18 @@
 package contracts;
 
+import implementations.TerrainImpl;
+import implementations.VillageoisImpl;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 import decorators.MoteurJeuDecorator;
 import enums.ECommande;
+import enums.EEntite;
 import enums.ERace;
 import enums.EResultat;
 import exceptions.InvariantError;
@@ -14,6 +23,7 @@ import services.IMine;
 import services.IMoteurJeu;
 import services.ITerrain;
 import services.IVillageois;
+import utils.Utils;
 
 public class MoteurJeuContract extends MoteurJeuDecorator{
 	public MoteurJeuContract(IMoteurJeu delegate) {
@@ -118,6 +128,16 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		
 		int pasJeuCourant_pre = this.getPasJeuCourant();
 		
+		ArrayList<HashMap<String, Object>> villageois_pre = new ArrayList<HashMap<String, Object>>();
+		for (IVillageois vill : getTerrain().getListeVillageois()) {
+			villageois_pre.add(Utils.getServiceAtPre(vill));
+		}
+		
+		ArrayList<HashMap<String, Object>> mine_pre = new ArrayList<HashMap<String, Object>>();
+		for (IMine mine : getTerrain().getListeMine()) {
+			mine_pre.add(Utils.getServiceAtPre(mine));
+		}
+			
 		super.pasJeu(command, vilNum, arg);
 		
 		this.checkInvariants();
@@ -126,5 +146,52 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		if (super.getPasJeuCourant() != pasJeuCourant_pre + 1)
 			throw new PostconditionError("pasJeuCourant() == pasJeuCourant@pre + 1");
 		
+		/**
+		 post: \forall x \in [0, terrain().getListeVillageois().size()[, 
+					if getVillageois(x)@pre.estOccupe() then
+						getVillageois(x) == getVillageois(x)@pre.decrCorvee())
+					if getVillageois(x)@pre.corvee() == 1 then
+					 	terrain() == terrain()@pre.reinsertVillageois(x)
+		 */
+		for (int i = 0; i < getTerrain().getListeVillageois().size(); i++) {
+			IVillageois vill = getVillageois(i);
+			Boolean vill_pre_occ = (Boolean) villageois_pre.get(i).get("estOccupe");
+			Integer vill_pre_corvee = (Integer) villageois_pre.get(i).get("corvee");
+			if (vill_pre_occ && vill.getCorvee() != vill_pre_corvee - 1)
+				throw new PostconditionError("getVillageois(x) == getVillageois(x)@pre.decrCorvee())");
+			if (vill_pre_corvee == 1)
+				for (int x = vill.getX(); x < vill.getLargeur(); x++)
+					for (int y = vill.getY(); y < vill.getHauteur(); y++)
+						if ( ! getTerrain().getEntiteAt(x, y).contains(EEntite.VILLAGEOIS))
+							throw new PostconditionError("terrain() == terrain()@pre.reinsertVillageois(x)");
+		}
+		/**
+		 post: \forall x \in [0, terrain().getListeMine().size()[, 
+		 			if ! getMine(x)@pre.estAbandonee() then
+		 				if command != ENTRERMINE || x != arg then
+		 					getMine(x) == getMine(x)@pre.abandoned()
+		 */
+		for (int i = 0; i < getTerrain().getListeMine().size(); i++) {
+			IMine mine = getMine(i);
+			Boolean mine_pre_ab = (Boolean) mine_pre.get(i).get("estAbandonee");
+			Integer mine_pre_abcpt = (Integer) mine_pre.get(i).get("estAbandonee");
+			if (mine_pre_ab && (command != ECommande.ENTREMINE || i != arg)) {
+				if (mine.getAbandonCompteur() != mine_pre_abcpt + 1)
+					throw new PostconditionError("getMine(x) == getMine(x)@pre.abandoned()");
+			}
+		}
+		
+	}
+		
+	public static void main (String[] args) {
+		IVillageois villageois = new VillageoisImpl();
+		villageois.setCorvee(10, 2, 3);
+		HashMap<String, Object> atpre = Utils.getServiceAtPre(villageois);
+		for (String m : atpre.keySet())
+			System.out.println(m + ": " + atpre.get(m));
+		TerrainImpl t = new TerrainImpl();
+		ArrayList<Integer[]> r= t.getRing(2, 2, 2);
+		for (Integer[] i : r)
+			System.out.println(i[0] + " " + i[1]);
 	}
 }

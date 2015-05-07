@@ -18,8 +18,8 @@ public interface ITerrain {
 	public boolean estFranchissable(int x, int y, int l, int h);
 	// pre: 0 <= x < largeur() && 0 <= y < hauteur()
 	public Set<EEntite> getEntiteAt(int x, int y);
-	// pre: 0 <= x < largeur() && 0 <= y < hauteur()
-	public int getBonusVitesse(int x, int y);
+	// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+	public int getBonusVitesse(int x, int y, int l, int h);
 	// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
 	public IRoute getRouteAt(int x, int y, int l, int h);
 
@@ -121,7 +121,7 @@ public interface ITerrain {
 	public void reinsertVillageois(int numV);
 	
 	/* ########### Invariants ########### */
-	// inv: getRouteAt(x, y) min= ro \verifies ro \in getListeRoute() && ro.posx() == x && ro.posy() == y
+	// inv: getRouteAt(x, y) min= ro \verifies ro \in getListeRoute() && ro.posx() \in [x, x + l[ && ro.posy() \in [y, y + h[
 	// inv: estFranchissable(x, y, l, h) min= \forall i \in [x, x + l[, \forall j \in [y, y + h[,
 	//											getEntiteAt(i, j) == {RIEN} ∨ getEntiteAt(x, y) == {ROUTE}
 	// inv: if \exist j \in [x, x + l[, k \in [y, y + h[ \verifies {ROUTE} == getEntiteAt(j, k) then
