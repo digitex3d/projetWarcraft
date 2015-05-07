@@ -128,6 +128,20 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	
 	@Override
 	public void pasJeu(ECommande commande, int numVillageois, int argument) {
+		// Décrémente la corvée aux villageois accupés
+		for( IVillageois vill : this.terrain.getListeVillageois()){
+			if(vill.estOccupe()){
+				if( vill.getCorvee() == 1 )
+					this.terrain.reinsertVillageois(
+							this.terrain.getListeVillageois().indexOf(vill));
+				else
+					vill.decrCorvee();
+			}
+		}
+		
+		
+		
+		
 		switch(commande){
 		case DEPLACER:
 			break;

@@ -31,5 +31,7 @@ public final class Utils {
 		int ydiff = y2 - y1;
 		return (int) Math.sqrt(xdiff * xdiff + ydiff * ydiff);
 	}
+	
+	
 }
 
