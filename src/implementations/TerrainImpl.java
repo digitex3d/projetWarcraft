@@ -1,6 +1,7 @@
 package implementations;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -99,6 +100,16 @@ public class TerrainImpl implements ITerrain {
 		this.largeur = largeur;
 		this.hauteur = hauteur;
 		
+		terrain = new ArrayList<ArrayList<Set<EEntite>>>();
+		for (int x = 0; x < largeur; x++) {
+			terrain.add(new ArrayList<Set<EEntite>>());
+			for (int y = 0; y < hauteur; y++) {
+				Set<EEntite> s = new HashSet<EEntite>();
+				s.add(EEntite.RIEN);
+				terrain.get(x).add(s);
+			}
+		}
+				
 		return this;
 	}
 
