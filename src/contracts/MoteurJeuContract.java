@@ -181,17 +181,5 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 			}
 		}
 		
-	}
-		
-	public static void main (String[] args) {
-		IVillageois villageois = new VillageoisImpl();
-		villageois.setCorvee(10, 2, 3);
-		HashMap<String, Object> atpre = Utils.getServiceAtPre(villageois);
-		for (String m : atpre.keySet())
-			System.out.println(m + ": " + atpre.get(m));
-		TerrainImpl t = new TerrainImpl();
-		ArrayList<Integer[]> r= t.getRing(2, 2, 2);
-		for (Integer[] i : r)
-			System.out.println(i[0] + " " + i[1]);
-	}
+	}		
 }
