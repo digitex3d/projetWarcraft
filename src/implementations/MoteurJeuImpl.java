@@ -9,6 +9,7 @@ import enums.ERace;
 import enums.EResultat;
 import gui.EEvent;
 import gui.GuiMainWindow;
+import services.IGestionDeplacement;
 import services.IHotelVille;
 import services.IMine;
 import services.IMoteurJeu;
@@ -128,7 +129,9 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	
 	@Override
 	public void pasJeu(ECommande commande, int numVillageois, int argument) {
-		// Décrémente la corvée aux villageois accupés
+		IVillageois selVill = this.terrain.getListeVillageois().get(numVillageois);
+		
+		// Décrémente la corvée des villageois occupés
 		for( IVillageois vill : this.terrain.getListeVillageois()){
 			if(vill.estOccupe()){
 				if( vill.getCorvee() == 1 )
@@ -139,11 +142,20 @@ public class MoteurJeuImpl implements IMoteurJeu{
 			}
 		}
 		
+		// On récupère le point d'arrivée
+		// TODO: bind?
+		IGestionDeplacement gd = new GestionDeplacementImpl();
 		
+		gd = gd.init(this.terrain, selVill, argument );
 		
+		ArrayList<Integer> pArrive = gd.getPointArrivee();
 		
 		switch(commande){
 		case DEPLACER:
+			selVill.setXY(pArrive.get(0), pArrive.get(1));
+			this.terrain.moveVillageoisAt(	numVillageois,
+											pArrive.get(0),
+											pArrive.get(1));
 			break;
 		case ENTREHOTELVILLE:
 			break;
