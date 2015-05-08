@@ -1,14 +1,7 @@
 package contracts;
 
-import implementations.TerrainImpl;
-import implementations.VillageoisImpl;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 import decorators.MoteurJeuDecorator;
 import enums.ECommande;
@@ -18,7 +11,6 @@ import enums.EResultat;
 import exceptions.InvariantError;
 import exceptions.PostconditionError;
 import exceptions.PreconditionError;
-import services.IHotelVille;
 import services.IMine;
 import services.IMoteurJeu;
 import services.ITerrain;
@@ -75,7 +67,7 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		if( maxPas <= 0)
 			throw new PreconditionError("maxPas > 0");
 
-		super.init(terrain, maxPas);
+		super.init(maxPas);
 		
 		this.checkInvariants();
 		
