@@ -19,49 +19,4 @@ public class VillageoisContractTest extends AbstractVillageoisTest {
 		villageois = new VillageoisContract(new VillageoisImpl());
 
 	}
-	
-	@Test(expected=PreconditionError.class)
-	public void testInitFail() {
-		// condition initiale : aucune
-
-		// opération
-		villageois.init(10,10,ERace.HUMAN, 78, 75,10,10.0,10 );
-
-		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
-	}
-	
-	@Test(expected=PreconditionError.class)
-	public void testInitFail2() {
-		// condition initiale : aucune
-
-		// opération
-		villageois.init(10,10,ERace.HUMAN, 77, 76,10,10.0,10 );
-
-		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
-	}
-	
-	@Test(expected=PreconditionError.class)
-	public void testInitFail3() {
-		// condition initiale : aucune
-
-		// opération
-		villageois.init(10,10,ERace.HUMAN, 78, 75,10,10.0,10 );
-
-		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
-	}
-	
-	@Test(expected=PreconditionError.class)
-	public void testDeChargeOrFail() {
-		// condition initiale : aucune
-		villageois.init(10,10,ERace.HUMAN, 78, 75,10,10.0,10 );
-		
-		// opération
-		villageois.dechargeOr(10);
-
-		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
-	}
-	
-	
-	
-
 }

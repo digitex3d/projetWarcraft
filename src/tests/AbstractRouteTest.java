@@ -27,11 +27,11 @@ public abstract class AbstractRouteTest extends AbstractAssertion{
 		route.init(0, 10, 1, 1, 1);
 		
 		// oracle
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getX() == 0);
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getY() == 10);
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getLargeur() == 1);
-		assertPerso("init, La route est crée avec une mauvaise hauteur", route.getHauteur() == 1);
-		assertPerso("init, La route est crée avec un mauvais bonusVitesse", route.getBonusVitesse() == 1);
+		assertPerso("init, La route est créé avec une mauvaise x", route.getX() == 0);
+		assertPerso("init, La route est créé avec une mauvaise y", route.getY() == 10);
+		assertPerso("init, La route est créé avec une mauvaise largeur", route.getLargeur() == 1);
+		assertPerso("init, La route est créé avec une mauvaise hauteur", route.getHauteur() == 1);
+		assertPerso("init, La route est créé avec un mauvais bonusVitesse", route.getBonusVitesse() == 1);
 	}
 	
 	@Test
@@ -39,11 +39,11 @@ public abstract class AbstractRouteTest extends AbstractAssertion{
 		route.init(10, 0, 1, 1, 1);
 		
 		// oracle
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getX() == 10);
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getY() == 0);
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getLargeur() == 1);
-		assertPerso("init, La route est crée avec une mauvaise hauteur", route.getHauteur() == 1);
-		assertPerso("init, La route est crée avec un mauvais bonusVitesse", route.getBonusVitesse() == 1);
+		assertPerso("init, La route est créé avec une mauvaise x", route.getX() == 10);
+		assertPerso("init, La route est créé avec une mauvaise y", route.getY() == 0);
+		assertPerso("init, La route est créé avec une mauvaise largeur", route.getLargeur() == 1);
+		assertPerso("init, La route est créé avec une mauvaise hauteur", route.getHauteur() == 1);
+		assertPerso("init, La route est créé avec un mauvais bonusVitesse", route.getBonusVitesse() == 1);
 	}
 
 	@Test
@@ -107,11 +107,11 @@ public abstract class AbstractRouteTest extends AbstractAssertion{
 		route.init(10, 10, 1, 1, 1);
 		
 		// oracle
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getX() == 10);
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getY() == 10);
-		assertPerso("init, La route est crée avec une mauvaise largeur", route.getLargeur() == 1);
-		assertPerso("init, La route est crée avec une mauvaise hauteur", route.getHauteur() == 1);
-		assertPerso("init, La route est crée avec un mauvais bonusVitesse", route.getBonusVitesse() == 1);
+		assertPerso("init, La route est créé avec une mauvaise largeur", route.getX() == 10);
+		assertPerso("init, La route est créé avec une mauvaise largeur", route.getY() == 10);
+		assertPerso("init, La route est créé avec une mauvaise largeur", route.getLargeur() == 1);
+		assertPerso("init, La route est créé avec une mauvaise hauteur", route.getHauteur() == 1);
+		assertPerso("init, La route est créé avec un mauvais bonusVitesse", route.getBonusVitesse() == 1);
 	}
 	
 	@Test

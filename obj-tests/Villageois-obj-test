@@ -1,99 +1,372 @@
 Cas de test 0.1 : cas positif Villageois::testInit1
-	Condition initiales : 
-		aucune
-	Opérations : 
-		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
-	Oracle OK: 
-		getType(L0) == TYPE.VIDE
-		getTresor(L0) == TRESOR.BOMB_UP
-		getRace() == ERace.HUMAN);
-		getLargeur() == 77        
-		getHauteur() == 75        
-		getForce() == 10            
-		getForce() == 10.0        
-		getVitesse() == 10 
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(0, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Oracle:
+        posx(L0) = 0
+        posy(L0) = 10
+        race(L0) = ERace.ORC
+        largeur(L0) = 1
+        hauteur(L0) = 1
+        force(L0) = 1
+        pointsDeVie(L0) = 1
+        vitesse(L0) = 1
+        quantiteOr(L0) = 0
 ***********************************************************
-Cas de test 1.1 : cas positif Villageois::testInitPre1
-	Condition initiales : 
-		aucune
-	Opérations : 
-		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
-	Oracle OK: 
-		getType(L0) == TYPE.VIDE
-		getTresor(L0) == TRESOR.BOMB_UP
-		getRace() == ERace.HUMAN);
-		getLargeur() == 77        
-		getHauteur() == 75        
-		getForce() == 10            
-		getForce() == 10.0        
-		getVitesse() == 10 
+Cas de test 0.2 : cas positif Villageois::testInit2
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 0, ERace.ORC, 1, 1, 1, 1, 1)
+    Oracle:
+        posx(L0) = 10
+        posy(L0) = 0
+        race(L0) = ERace.ORC
+        largeur(L0) = 1
+        hauteur(L0) = 1
+        force(L0) = 1
+        pointsDeVie(L0) = 1
+        vitesse(L0) = 1
+        quantiteOr(L0) = 0
 ***********************************************************
-Cas de test 1.2 : cas negatif Villageois::testInitPre2
-	Condition initiales : 
-		aucune
-	Opérations : 
-		L0 = init(ERace.HUMAN, 78, 75,10,10.0,10 )
-	Oracle Exception:
-		Precondition error
-	Rapport:
-		La largeur n'est pas paire
+Cas de test 0.3 : cas negatif Villageois::testInit3
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(-1, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Oracle:
+        Exception
 ***********************************************************
-Cas de test 2.1 : cas positif Villageois::testRetrait1
-	Condition initiales : 
-		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
-	Opérations : 
-		L2.1 = retrait(5)
-	Oracle OK: 
-		getPointsDeVie=5
-		getQuantiteOr=0
-		estMort=False
+Cas de test 0.4 : cas negatif Villageois::testInit4
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, -1, ERace.ORC, 1, 1, 1, 1, 1)
+    Oracle:
+        Exception
 ***********************************************************
-Cas de test 2.2 : cas negatif Villageois::testRetrait2
-	Condition initiales : 
-		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
-	Opérations : 
-		L2.2 = retrait(-5)
-	Oracle Exception:
-		Precondition error
-	Rapport:
-		s est negatif
+Cas de test 0.5 : cas negatif Villageois::testInit5
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, ERace.ORC, 2, 1, 1, 1, 1)
+    Oracle:
+        Exception
 ***********************************************************
-Cas de test 3.1 : cas positif Villageois::testChargeOr1
-	Condition initiales : 
-		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
-	Opérations : 
-		L3.1 = chargeOr(5)
-	Oracle OK: 
-		getPointsDeVie=10
-		getQuantiteOr=5
-		estMort=False
+Cas de test 0.6 : cas negatif Villageois::testInit6
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, ERace.ORC, 1, 2, 1, 1, 1)
+    Oracle:
+        Exception
 ***********************************************************
-Cas de test 3.2 : cas negatif Villageois::testChargeOr2
-	Condition initiales : 
-		L0 = init(ERace.HUMAN, 77, 75,10,10.0,10 )
-	Opérations : 
-		L3.2 = chargeOr(-5)
-	Oracle Exception:
-		Precondition error
-	Rapport:
-		s est negatif
+Cas de test 0.7 : cas negatif Villageois::testInit7
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 0, 1, 1)
+    Oracle:
+        Exception
 ***********************************************************
-Cas de test 4.1 : cas positif Villageois::testdeChargeOr1
-	Condition initiales : 
-		L0 = chargeOr(init(ERace.HUMAN, 77, 75,10,10.0,10 ),5)
-	Opérations : 
-		L4.1 = dechargeOr(5)
-	Oracle OK: 
-		getPointsDeVie=10
-		getQuantiteOr=0
-		estMort=False
+Cas de test 0.8 : cas negatif Villageois::testInit8
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 0, 1)
+    Oracle:
+        Exception
 ***********************************************************
-Cas de test 4.2 : cas negatif Villageois::testdeChargeOr1
-	Condition initiales : 
-		L0 = chargeOr(init(ERace.HUMAN, 77, 75,10,10.0,10 ),5)
-	Opérations : 
-		L4.2 = dechargeOr(-5)
-	Oracle Exception:
-		Precondition error
-	Rapport:
-		s est negatif
+Cas de test 0.9 : cas negatif Villageois::testInit9
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 0)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.0 : cas positif Villageois::testSetXY1
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setXY(L0, 0, 10)
+    Oracle: 
+        posx(L1) = 0
+        posy(L1) = 10
+        corvee(L1) = 0
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 1.1 : cas positif Villageois::testSetXY2
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setXY(L0, 10, 0)
+    Oracle: 
+        posx(L1) = 10
+        posy(L1) = 0
+        corvee(L1) = 0
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 1.2 : cas negatif Villageois::testSetXY3
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setXY(L0, -1, 10)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 1.3 : cas negatif Villageois::testSetXY4
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setXY(L0, 10, -1)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 2.0 : cas positif Villageois::testRetrait1
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = retrait(L0, 1)
+    Oracle: 
+        posx(L1) = 10
+        posy(L1) = 10
+        corvee(L1) = 0
+        pointsDeVie(L1) = 0
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 2.1 : cas positif Villageois::testRetrait2
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = retrait(L0, 10)
+    Oracle: 
+        posx(L1) = 10
+        posy(L1) = 10
+        corvee(L1) = 0
+        pointsDeVie(L1) = -9
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 2.2 : cas negatif Villageois::testRetrait3
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = retrait(L0, 0)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 2.3 : cas negatif Villageois::testRetrait4
+    Condition initiales : 
+        L0 = retrait(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
+    Opérations : 
+        L1 = retrait(L0, 1)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 2.4 : cas negatif Villageois::testRetrait5
+    Condition initiales : 
+        L0 = setCorvee(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1, 10, 10)
+    Opérations : 
+        L1 = retrait(L0, 1)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 3.0 : cas positif Villageois::testChargeOr1
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = chargeOr(L0, 1)
+    Oracle: 
+        posx(L1) = 10
+        posy(L1) = 10
+        corvee(L1) = 0
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 1
+***********************************************************
+Cas de test 3.1 : cas positif Villageois::testChargeOr2
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = chargeOr(L0, 10)
+    Oracle: 
+        posx(L1) = 10
+        posy(L1) = 10
+        corvee(L1) = 0
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 10
+***********************************************************
+Cas de test 3.2 : cas negatif Villageois::testChargeOr3
+    Condition initiales : 
+        L0 = retrait(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
+    Opérations : 
+        L1 = chargeOr(L0, 10)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 4.0 : cas positif Villageois::testDechargeOr1
+    Condition initiales : 
+        L0 = chargeOr(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
+    Opérations : 
+        L1 = dechargeOr(L0, 1)
+    Oracle: 
+        posx(L1) = 10
+        posy(L1) = 10
+        corvee(L1) = 0
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 4.1 : cas positif Villageois::testDechargeOr2
+    Condition initiales : 
+        L0 = chargeOr(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 10)
+    Opérations : 
+        L1 = dechargeOr(L0, 8)
+    Oracle: 
+        posx(L1) = 10
+        posy(L1) = 10
+        corvee(L1) = 0
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 2
+***********************************************************
+Cas de test 4.2 : cas negatif Villageois::testDechargeOr3
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = dechargeOr(L0, 8)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 4.3 : cas negatif Villageois::testDechargeOr4
+    Condition initiales : 
+        L0 = chargeOr(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
+    Opérations : 
+        L1 = dechargeOr(L0, 0)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 4.3 : cas negatif Villageois::testDechargeOr5
+    Condition initiales : 
+        L0 = retrait(chargeOr(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 10), 1)
+    Opérations : 
+        L1 = dechargeOr(L0, 4)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 5.0 : cas positif Villageois::testSetCorvee1
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setCorvee(L0, 1, 12, 12)
+    Oracle: 
+        posx(L1) = 12
+        posy(L1) = 12
+        corvee(L1) = 1
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 5.1 : cas positif Villageois::testSetCorvee2
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setCorvee(L0, 10, 12, 12)
+    Oracle: 
+        posx(L1) = 12
+        posy(L1) = 12
+        corvee(L1) = 10
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 5.2 : cas positif Villageois::testSetCorvee3
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setCorvee(L0, 10, 0, 12)
+    Oracle: 
+        posx(L1) = 0
+        posy(L1) = 12
+        corvee(L1) = 10
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 5.3 : cas positif Villageois::testSetCorvee4
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setCorvee(L0, 10, 12, 0)
+    Oracle: 
+        posx(L1) = 12
+        posy(L1) = 0
+        corvee(L1) = 10
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 5.4 : cas negatif Villageois::testSetCorvee5
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setCorvee(L0, 0, 10, 10)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 5.5 : cas negatif Villageois::testSetCorvee6
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setCorvee(L0, 10, -1, 10)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 5.6 : cas negatif Villageois::testSetCorvee7
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = setCorvee(L0, 10, 10, -1)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 5.7 : cas negatif Villageois::testSetCorvee7
+    Condition initiales : 
+        L0 = retrait(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
+    Opérations : 
+        L1 = setCorvee(L0, 10, 10, 10)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 5.8 : cas negatif Villageois::testSetCorvee8
+    Condition initiales : 
+        L0 = setCorvee(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1, 10, 10)
+    Opérations : 
+        L1 = setCorvee(L0, 10, 10, 10)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 6.0 : cas positif Villageois::testDecrCorvee1
+    Condition initiales : 
+        L0 = setCorvee(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
+    Opérations : 
+        L1 = decrCorvee(L0)
+    Oracle: 
+        posx(L1) = 10
+        posy(L1) = 10
+        corvee(L1) = 0
+        pointsDeVie(L1) = 1
+        quantiteOr(L1) = 0
+***********************************************************
+Cas de test 6.1 : cas negatif Villageois::testDecrCorvee2
+    Condition initiales : 
+        L0 = init(10, 10, ERace.ORC, 1, 1, 1, 1, 1)
+    Opérations : 
+        L1 = decrCorvee(L0)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 6.2 : cas negatif Villageois::testDecrCorvee3
+    Condition initiales : 
+        L0 = retrait(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
+    Opérations : 
+        L1 = decrCorvee(L0)
+    Oracle: 
+        Exception
+***********************************************************

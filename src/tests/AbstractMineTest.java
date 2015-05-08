@@ -28,12 +28,12 @@ public abstract class AbstractMineTest extends AbstractAssertion{
 		mine.init(0, 10, 1, 1);
 		
 		// oracle
-		assertPerso("init, La mine est crée avec une mauvaise largeur", mine.getX() == 0);
-		assertPerso("init, La mine est crée avec une mauvaise largeur", mine.getY() == 10);
-		assertPerso("init, La mine est crée avec une mauvaise largeur", mine.getLargeur() == 1);
-		assertPerso("init, La mine est crée avec une mauvaise hauteur", mine.getHauteur() == 1);
-		assertPerso("init, La mine est crée avec un mauvais orRestant", mine.getOrRestant() == 51);
-		assertPerso("init, La mine est crée avec un mauvais abandonCompteur", mine.getHauteur() == 51);	
+		assertPerso("init, La mine est créé avec une mauvaise x", mine.getX() == 0);
+		assertPerso("init, La mine est créé avec une mauvaise y", mine.getY() == 10);
+		assertPerso("init, La mine est créé avec une mauvaise largeur", mine.getLargeur() == 1);
+		assertPerso("init, La mine est créé avec une mauvaise hauteur", mine.getHauteur() == 1);
+		assertPerso("init, La mine est créé avec un mauvais orRestant", mine.getOrRestant() == 51);
+		assertPerso("init, La mine est créé avec un mauvais abandonCompteur", mine.getAbandonCompteur() == 51);	
 	}
 	
 	@Test
@@ -41,12 +41,12 @@ public abstract class AbstractMineTest extends AbstractAssertion{
 		mine.init(10, 0, 1, 1);
 		
 		// oracle
-		assertPerso("init, La mine est crée avec une mauvaise largeur", mine.getX() == 10);
-		assertPerso("init, La mine est crée avec une mauvaise largeur", mine.getY() == 0);
-		assertPerso("init, La mine est crée avec une mauvaise largeur", mine.getLargeur() == 1);
-		assertPerso("init, La mine est crée avec une mauvaise hauteur", mine.getHauteur() == 1);
-		assertPerso("init, La mine est crée avec un mauvais orRestant", mine.getOrRestant() == 51);
-		assertPerso("init, La mine est crée avec un mauvais abandonCompteur", mine.getHauteur() == 51);	
+		assertPerso("init, La mine est créé avec une mauvaise x", mine.getX() == 10);
+		assertPerso("init, La mine est créé avec une mauvaise y", mine.getY() == 0);
+		assertPerso("init, La mine est créé avec une mauvaise largeur", mine.getLargeur() == 1);
+		assertPerso("init, La mine est créé avec une mauvaise hauteur", mine.getHauteur() == 1);
+		assertPerso("init, La mine est créé avec un mauvais orRestant", mine.getOrRestant() == 51);
+		assertPerso("init, La mine est créé avec un mauvais abandonCompteur", mine.getAbandonCompteur() == 51);	
 	}
 
 	@Test
