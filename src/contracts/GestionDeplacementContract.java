@@ -24,13 +24,13 @@ public class GestionDeplacementContract extends GestionDeplacementDecorator {
 
 		/* ######## Verification des préconditions ######### */
 
-		// \pre: !vill.estMort() && !vill.estOccupe() && 0 <= angle  &&  angle <= 360
-		if (!( !vill.estMort() && !vill.estOccupe() && 0 <= angle  &&  angle <= 360)) 
-			throw new PreconditionError("!vill.estMort() && !vill.estOccupe() && 0 <= angle  &&  angle <= 360");
+		// \pre: 0 <= angle  &&  angle <= 360
+		if (!( 0 <= angle  &&  angle <= 360)) 
+			throw new PreconditionError("0 <= angle  &&  angle <= 360");
 
 
 		/* ######## 	Execution  		######### */
-		super.init(terr, vill, angle);
+		super.init(angle);
 
 		// Deuxième check des invariants
 		this.checkInvariants();

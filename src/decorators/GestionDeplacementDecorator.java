@@ -60,8 +60,8 @@ public class GestionDeplacementDecorator implements IGestionDeplacement {
 	}
 
 	@Override
-	public IGestionDeplacement init(ITerrain terr, IVillageois vill, int angle) {
-		return this.delegate.init(terr, vill, angle);
+	public IGestionDeplacement init(int angle) {
+		return this.delegate.init(angle);
 	}
 
 	@Override
@@ -69,6 +69,16 @@ public class GestionDeplacementDecorator implements IGestionDeplacement {
 		this.delegate.calcChemin();
 
 
+	}
+
+	@Override
+	public void bind(IVillageois vill) {
+		this.delegate.bind(vill);
+	}
+
+	@Override
+	public void bindTerrain(ITerrain terr) {
+		this.delegate.bindTerrain(terr);
 	}
 
 }

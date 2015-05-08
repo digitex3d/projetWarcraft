@@ -136,4 +136,8 @@ public class GestionDeplacementImplError implements IGestionDeplacement {
 		this.vill = vill;
 	}
 
+	@Override
+	public void bindTerrain(ITerrain terr) {
+		this.terr = terr;
+	}
 }
