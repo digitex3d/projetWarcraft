@@ -96,22 +96,22 @@ peutTaperMuraille(M, vill,mu) min= distance(vilposX, vilposY, murCenterX, murCen
 	pasJeuCourant(Mpj) = pasJeuCourant(M) + 1
 
 	∀ x \in [0, |Terrain::getListeVillageois(terrain(M))|[, soit Vill \def getVillageois(M, x), 
-(Villageois::estOccupe(Vill) ⇒ getVillageois(Mpj, x) = Villageois::decrCorvee(Vill)) ∧ (Villageois::corvee(Vill) = 1 ⇒ terrain(Mpj) = Terrain::reinsertVillageois(terrain(M), x))
+	(Villageois::estOccupe(Vill) ⇒ getVillageois(Mpj, x) = Villageois::decrCorvee(Vill)) ∧ (Villageois::corvee(Vill) = 1 ⇒ terrain(Mpj) = Terrain::reinsertVillageois(terrain(M), x))
 
-∀ x \in [0, |Terrain::getListeMine(terrain(M))|[, soit Mi def= getMine(M, x),
-(\not Mine::estAbandonee(Mi) \and 
-(c = ENTRERMINE \a x != arg)) \impl getMine(Mpj, x) = Mine::abandoned(Mi)
+	∀ x \in [0, |Terrain::getListeMine(terrain(M))|[, soit Mi def= getMine(M, x),
+	(\not Mine::estAbandonee(Mi) \and 
+	(c = ENTRERMINE \a x != arg)) \impl getMine(Mpj, x) = Mine::abandoned(Mi)
 
-Soit Villpre \def getVillageois(M, vilNum)
+	Soit Villpre \def getVillageois(M, vilNum)
 	Soit Villpost \def getVillageois(Mpj, vilNum)
 	Soit pArrivee \def GestionDeplacement::getPointArrivee(GestionDeplacement::calcChemin(GestionDeplacement::init(terrain(M), Villpre, arg)))
 	c = DEPLACER \impl 
-Villpost = Villageois::setXY(Villpre, get(pArrivee, 0), get(pArrivee, 1)) \and 
-terrain(Mpj) = Terrain::moveVillageoisAt(terrain(M), vilNum, get(pArrivee, 0), get(pArrivee, 1))
+	Villpost = Villageois::setXY(Villpre, get(pArrivee, 0), get(pArrivee, 1)) \and 
+	terrain(Mpj) = Terrain::moveVillageoisAt(terrain(M), vilNum, get(pArrivee, 0), get(pArrivee, 1))
 
 	c = ENTRERHOTELVILLE \impl 
-getHDV(Mpj, arg) = HotelVille::depot(getHDV(M, arg), Villageois::quantiteOr(Villpre)) \and 
-Villpost = Villageois::dechargeOr(Villpre, Villageois::quantiteOr(Villpre))
+	getHDV(Mpj, arg) = HotelVille::depot(getHDV(M, arg), Villageois::quantiteOr(Villpre)) \and 
+	Villpost = Villageois::dechargeOr(Villpre, Villageois::quantiteOr(Villpre))
 
 	c = ENTRERMINE \impl 
 getMine(Mpj, arg) = Mine::retrait(Mine::accueil(getMine(M, arg)) \and
@@ -119,14 +119,14 @@ getMine(Mpj, arg) = Mine::retrait(Mine::accueil(getMine(M, arg)) \and
 terrain(Mpj) = Terrain::removeEntiteAt(terrain(M), EEntite.VILLAGEOIS, Villageois::posx(Villpre), Villageois::posy(Villpre), Villageois::largeur(Villpre), Villageois::hauteur(Villpre)) ∧ 
 Villageois::posx(Villpost) = Mine::posx(getMine(M, arg)) ∧ 
 Villageois::posy(Villpost) = Mine::posy(getMine(M, arg))
-	Soit Mur def= getMuraille(M, arg)
 	c = TAPERMURAILLE \impl
- getMuraille(Mpj, arg) = 	Muraille::retrait(Mur, Villageois::force(Villpre)) \and
-Muraille::estDetruite(getMuraille(Mpj, arg)) ⇒ 
-terrain(Mpj) =  Terrain::removeEntiteAt(terrain(M), 
-EEntite.MURAILLE,
-Muraille::posx(Mur), 
-Muraille::posy(Mur), 
-Muraille::largeur(Mur), 
-Muraille::hauteur(Mur))
+		Soit Mur def= getMuraille(M, arg)
+ 		getMuraille(Mpj, arg) = 	Muraille::retrait(Mur, Villageois::force(Villpre)) \and
+		Muraille::estDetruite(getMuraille(Mpj, arg)) ⇒ 
+		terrain(Mpj) =  Terrain::removeEntiteAt(terrain(M), 
+						MURAILLE,
+						Muraille::posx(Mur), 
+						Muraille::posy(Mur), 
+						Muraille::largeur(Mur), 
+						Muraille::hauteur(Mur))
 	
