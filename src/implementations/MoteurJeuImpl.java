@@ -1,14 +1,13 @@
 package implementations;
 
 import java.awt.event.MouseEvent;
-import java.awt.font.NumericShaper.Range;
 import java.util.ArrayList;
 
 import enums.ECommande;
+import enums.EEntite;
 import enums.ERace;
 import enums.EResultat;
 import gui.EEvent;
-import gui.GuiMainWindow;
 import services.IGestionDeplacement;
 import services.IHotelVille;
 import services.IMine;
@@ -158,8 +157,34 @@ public class MoteurJeuImpl implements IMoteurJeu{
 											pArrive.get(1));
 			break;
 		case ENTREHOTELVILLE:
+			IHotelVille hdv = this.terrain.getListeHotelVille().get(argument);
+			hdv.depot(selVill.getQuantiteOr());
+			selVill.dechargeOr(selVill.getQuantiteOr());
+			//TODO: peutEntrer à che livello lo verifichiamo?
 			break;
 		case ENTREMINE:
+			IMine mine = this.terrain.getListeMine().get(argument);
+			mine.acceuil(selVill.getRace());
+			mine.retrait(1);
+			selVill.chargeOr(1);
+			this.terrain.removeEntiteAt(EEntite.VILLAGEOIS,
+										selVill.getX(), 
+										selVill.getY(), 
+										selVill.getLargeur(),
+										selVill.getHauteur());
+			selVill.setXY(mine.getX(), mine.getY());
+			break;
+		case TAPERMURAILLE:
+			IMuraille mur = this.terrain.getListeMuraille().get(argument);
+			mur.retrait(selVill.getForce());
+			if(mur.estDetruite())
+				this.terrain.removeEntiteAt(	EEntite.MURAILLE, 
+												mur.getX(),
+												mur.getY(),
+												mur.getLargeur(),
+												mur.getHauteur());
+			
+			
 			break;
 		case RIEN:
 			break;
