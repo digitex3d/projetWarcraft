@@ -83,11 +83,11 @@ public class GestionDeplacementContract extends GestionDeplacementDecorator {
 			throw new PostconditionError("super.getCheminX().size() == super.getCheminY().size() ");
 
 		// \post: let bonus = \sum i \from 0 \to cheminX().size() - 1 in 
-		//			terr.getBonusVitesse(cheminX().get(i),  cheminY().get(i))
+		//			terr.getBonusVitesse(cheminX().get(i),  cheminY().get(i), vill.largeur(), vill.hauteur())
 		//			cheminX().size() == bonus + vill.vitesse()	
 		int bonus = 0;
 		for (int i = 0; i < getCheminX().size(); i++) {
-			bonus += super.getTerr().getBonusVitesse(super.getCheminX().get(i), super.getCheminX().get(i) );
+			bonus += super.getTerr().getBonusVitesse(super.getCheminX().get(i), super.getCheminX().get(i), super.getVill().getLargeur(), super.getVill().getHauteur());
 		}
 
 		if ( ! (super.getCheminX().size() == bonus + super.getVill().getVitesse() ) ) 

@@ -35,7 +35,7 @@ public interface IGestionDeplacement {
 	 * [ calcChemin ]
 	 * \post: estCalcChemin() == true
 	 * \post: getCheminX().size() == getCheminY().size()
-	 * \post: bonus = \sum i \from 0 \to getCheminX().size()- 1, terr.getBonusVitesse( getCheminX().get(i), getCheminY().get(i))
+	 * \post: bonus = \sum i \from 0 \to getCheminX().size()- 1, terr.getBonusVitesse( getCheminX().get(i), getCheminY().get(i), vill.largeur(), vill.hauteur())
 	 * \post: cheminX().size() = bonus + getVill().getVitesse()
 	 * Soit lgVill =getVill().getLargeur()
 	 * Soit htVill = getVill().getHauteur()
