@@ -2,7 +2,9 @@ package services;
 
 import java.util.ArrayList;
 
-public interface IGestionDeplacement {
+import require.IRequireVillageois;
+
+public interface IGestionDeplacement extends IRequireVillageois {
 	/* ########### Observators ########### */	
 	ITerrain 	getTerr();
 	IVillageois	getVill();
@@ -24,12 +26,10 @@ public interface IGestionDeplacement {
 	/* ########### Constructors ########### */	
 	
 	/**
-	 * \pre: !V.estMort() && !V.estOccupe() && 0 <= angle <= 360
+	 * \pre: 0 <= angle <= 360
 	 * \post: estCalcChemin() == false
-	 * \post: getVill() = V
-	 * \post: getTerr() = T
 	 */
-	IGestionDeplacement init(ITerrain terr, IVillageois vill, int angle);
+	IGestionDeplacement init(int angle);
 	
 	/**
 	 * [ calcChemin ]

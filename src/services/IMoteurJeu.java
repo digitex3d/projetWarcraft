@@ -37,11 +37,10 @@ public interface IMoteurJeu {
 	
     /**
     	pre: maxPas > 0
-    	post: terrain() == terrain
     	post: maxPasJeu() == maxPas
     	post: pasJeuCourant() == 0
      */
-	IMoteurJeu init(ITerrain terrain, int maxPas);
+	IMoteurJeu init(int maxPas);
 		
 
 	/* ########### Operators ########### */

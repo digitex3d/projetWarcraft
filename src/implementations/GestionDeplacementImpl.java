@@ -57,10 +57,14 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 	}
 
 	@Override
-	public IGestionDeplacement init(ITerrain terr, IVillageois vill, int angle) {
+	public IGestionDeplacement init(int angle) {
 		this.estCalcChemin = false;
-		this.vill = vill;
 		this.angle = angle;
+		
+		if (vill == null)
+			throw new Error("Le villageois n'est pas bindé");
+		if (terr == null)
+			throw new Error("Le terrain n'est pas bindé");
 		
 		return this;
 	}
@@ -127,6 +131,11 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 		else if ( this.firstObstacle == 0  )
 			this.getPointArrive.add(vill.getX(),vill.getY()	);
 
+	}
+
+	@Override
+	public void bind(IVillageois vill) {
+		this.vill = vill;
 	}
 
 }
