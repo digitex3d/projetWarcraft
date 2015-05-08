@@ -326,7 +326,7 @@ Cas de test 5.6 : cas negatif Villageois::testSetCorvee7
     Oracle: 
         Exception
 ***********************************************************
-Cas de test 5.7 : cas negatif Villageois::testSetCorvee7
+Cas de test 5.7 : cas negatif Villageois::testSetCorvee8
     Condition initiales : 
         L0 = retrait(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
     Opérations : 
@@ -334,7 +334,7 @@ Cas de test 5.7 : cas negatif Villageois::testSetCorvee7
     Oracle: 
         Exception
 ***********************************************************
-Cas de test 5.8 : cas negatif Villageois::testSetCorvee8
+Cas de test 5.8 : cas negatif Villageois::testSetCorvee9
     Condition initiales : 
         L0 = setCorvee(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1, 10, 10)
     Opérations : 
@@ -344,7 +344,7 @@ Cas de test 5.8 : cas negatif Villageois::testSetCorvee8
 ***********************************************************
 Cas de test 6.0 : cas positif Villageois::testDecrCorvee1
     Condition initiales : 
-        L0 = setCorvee(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1)
+        L0 = setCorvee(init(10, 10, ERace.ORC, 1, 1, 1, 1, 1), 1, 10, 10)
     Opérations : 
         L1 = decrCorvee(L0)
     Oracle: 
