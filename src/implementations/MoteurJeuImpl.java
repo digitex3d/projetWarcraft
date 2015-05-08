@@ -87,6 +87,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	}
 
+	//TODO: rimuovere
 	public void eventListener(MouseEvent e, EEvent click){
 		switch( click ){
 		case CLICK:
@@ -110,16 +111,14 @@ public class MoteurJeuImpl implements IMoteurJeu{
 			}
 		}
 		
-		// On récupère le point d'arrivée
-		// TODO: bind?
-		IGestionDeplacement gd = new GestionDeplacementImpl();
-		
-		gd = gd.init(this.terrain, selVill, argument );
-		
-		ArrayList<Integer> pArrive = gd.getPointArrivee();
-		
 		switch(commande){
 		case DEPLACER:
+			IGestionDeplacement gd = new GestionDeplacementImpl();
+			gd.bind(selVill);
+			gd.bindTerrain(this.terrain);
+			gd = gd.init(argument);
+			ArrayList<Integer> pArrive = gd.getPointArrivee();
+			
 			selVill.setXY(pArrive.get(0), pArrive.get(1));
 			this.terrain.moveVillageoisAt(	numVillageois,
 											pArrive.get(0),
