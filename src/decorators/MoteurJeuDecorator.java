@@ -1,5 +1,6 @@
 package decorators;
 
+import services.IGestionDeplacement;
 import services.IHotelVille;
 import services.IMine;
 import services.IMoteurJeu;
@@ -93,5 +94,10 @@ public class MoteurJeuDecorator implements IMoteurJeu{
 	public void bindTerrain(ITerrain terr) {
 		this.delegate.bindTerrain(terr);
 		
+	}
+
+	@Override
+	public IGestionDeplacement getGestDepl() {
+		return this.delegate.getGestDepl();
 	}
 }

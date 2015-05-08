@@ -11,6 +11,7 @@ public interface IMoteurJeu extends
 	public ITerrain getTerrain();
 	public int getPasJeuCourant();
 	public boolean estFini();
+	public IGestionDeplacement getGestDepl();
 	// pre: estFini()
 	public EResultat resultatFinal();
 	

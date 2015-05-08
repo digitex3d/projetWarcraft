@@ -59,6 +59,11 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 	public void calcChemin(int numVill, int angle) {
 		IVillageois vill = this.terr.getListeVillageois().get(numVill);
 		
+		// init les listes
+		this.cheminX = new ArrayList<Integer>();
+		this.cheminY = new ArrayList<Integer>();
+		this.getPointArrive = new ArrayList<Integer>();
+		
 		this.estCalcChemin = true;
 		int bonus = 0;
 		
