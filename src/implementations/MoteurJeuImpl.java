@@ -2,7 +2,6 @@ package implementations;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 
 import enums.ECommande;
 import enums.EEntite;
@@ -77,46 +76,15 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	}
 
 	@Override
-	public IMoteurJeu init(ITerrain terrain, int maxPas) {
-		this.terrain = terrain;
+	public IMoteurJeu init(int maxPas) {
+		if (this.terrain == null)
+			throw new Error("Le terrain n'est pas bindé!");
+
 		this.maxPasJeu =     maxPas;                            
 		this.pasJeuCourant= 0;                             
 
-		//TODO: à faire dans l'impl de terrain
-////		if (this.hotelDeVille == null)
-////			throw new Error("Vous devez binder le Hotel de ville avant de faire appel a init");
-////		if (this.villageois == null)
-////			throw new Error("Vous devez binder les villageois avent de faire appel a init");
-////		if (this.mines == null)
-////			throw new Error("Vous devez binder les Mines  ville avant de faire appel a init");
-//
-//		// Initialisation Hotel de ville
-//		int hvx = Utils.randInt(0, 51);
-//		int hvy = Utils.randInt(0, 51);
-//		this.hotelDeVille.init(hvx,hvy, 20, 20, 16);
-//
-//		// Initialisation Villageois
-//		int poshx = this.hotelDeVille.getX();
-//		int poshy = this.hotelDeVille.getY();
-//		for( IVillageois villageois : this.villageois){
-//			int vx = poshx + Utils.randInt(0, 51);
-//			int vy = poshy + Utils.randInt(0, 51);
-//			villageois.init(vx,vy,ERace.HUMAN, 4, 4, 10, 10.0, 100);
-//
-//
-//		}
-//
-//		// Initialisation Mines
-//		for( IMine mine: this.mines){
-//			mine.init(7,7);
-//			mine.setX(Utils.randInt(0, this.getLargeurTerrain()));
-//			mine.setY(Utils.randInt(0, this.getLargeurTerrain()));
-//
-//		}
+		return this;
 
-		 
-		 return this;
-		                                                
 	}
 
 	public void eventListener(MouseEvent e, EEvent click){

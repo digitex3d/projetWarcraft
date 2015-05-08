@@ -69,8 +69,8 @@ public class MoteurJeuDecorator implements IMoteurJeu{
 	}
 
 	@Override
-	public IMoteurJeu init(ITerrain terrain, int maxPas) {
-		 return this.delegate.init(terrain, maxPas);
+	public IMoteurJeu init(int maxPas) {
+		 return this.delegate.init( maxPas);
 	}
 
 	@Override
@@ -87,5 +87,11 @@ public class MoteurJeuDecorator implements IMoteurJeu{
 	@Override
 	public IMuraille getMuraille(int mu) {
 		return this.delegate.getMuraille(mu);
+	}
+
+	@Override
+	public void bindTerrain(ITerrain terr) {
+		this.delegate.bindTerrain(terr);
+		
 	}
 }
