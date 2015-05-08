@@ -1,9 +1,11 @@
 package services;
 
+import require.IRequireTerrain;
 import enums.ECommande;
 import enums.EResultat;
 
-public interface IMoteurJeu {
+public interface IMoteurJeu extends 
+	IRequireTerrain{
 	/* ########### Observators ########### */	
 	public int getMaxPasJeu();
 	public ITerrain getTerrain();

@@ -2,6 +2,7 @@ package implementations;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import enums.ECommande;
 import enums.EEntite;
@@ -250,6 +251,12 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	@Override
 	public IMine getMine(int mi) {
 		return this.terrain.getListeMine().get(mi);
+	}
+	
+	@Override
+	public void bindTerrain(ITerrain terr) {
+		this.terrain = terr;
+		
 	}
 
 }
