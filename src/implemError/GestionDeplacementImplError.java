@@ -72,7 +72,7 @@ public class GestionDeplacementImplError implements IGestionDeplacement {
 		int bonus = 2; // BUG 4
 		
 		for (int i = 0; i < getCheminX().size(); i++) {
-			bonus += this.terr.getBonusVitesse(getCheminX().get(i), getCheminX().get(i) );
+			bonus += this.terr.getBonusVitesse(getCheminX().get(i), getCheminX().get(i),2,3 ); //BUG
 		}
 		
 		// Position finale max
