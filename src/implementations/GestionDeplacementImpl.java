@@ -72,7 +72,10 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 		int bonus = 0;
 		
 		for (int i = 0; i < getCheminX().size(); i++) {
-			bonus += this.terr.getBonusVitesse(getCheminX().get(i), getCheminX().get(i) );
+			bonus += this.terr.getBonusVitesse(	getCheminX().get(i),
+												getCheminY().get(i),
+												vill.getLargeur(),
+												vill.getHauteur());
 		}
 		
 		// Position finale max
