@@ -6,12 +6,13 @@ import implemError.MineImplError;
 
 import org.junit.Before;
 
+import contracts.MineContract;
 import tests.AbstractMineTest;
 
 public class MineTestError extends AbstractMineTest{
 	@Override
 	@Before
 	public void before() {
-		moteur = new MineImplError();
+		mine = new MineContract(new MineImplError());
 	}
 }

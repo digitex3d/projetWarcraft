@@ -15,16 +15,5 @@ public class RouteContractTest   extends AbstractRouteTest {
 	@Before
 	public void before() {
 		route = new RouteContract(new RouteImpl());
-
-	}
-	
-	@Test(expected=PreconditionError.class)
-	public void testInitFail() {
-		// condition initiale : aucune
-
-		// opération
-		route.init(11, 11, 11, 11, -2 );
-
-		// oracle un message d'erreur est attendu : Cf. @Test(expected=PreconditionError.class)	
 	}
 }

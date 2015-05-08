@@ -1,23 +1,76 @@
-Cas de test 1.1 : cas positif Route::testInitPre1
-	Condition initiales : 
-		aucune
-	Opérations : 
-		L0 = init(10, 10, 10, 10, 2 )
-	Oracle OK: 
-		getX() == 10
-		getY() == 10
-		getLargeur() == 10
-		getHauteur() == 10        
-		getMult() == 2       
-	
+Cas de test 0.1 : cas positif Route::testInit1
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(0, 10, 1, 1, 1)
+    Oracle:
+        posx(L0) == 0
+        posy(L0) == 10
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        getBonusVitesse(L0) == 1
 ***********************************************************
-Cas de test 1.2 : cas negatif Villageois::testInitPre2
-	Condition initiales : 
-		aucune
-	Opérations : 
-		L0 = init(11, 11, 10, 10, -2 )
-	Oracle Exception:
-	 	PreconditionError
-	Rapport:
-	 	La variable mult doit etre positive
+Cas de test 0.2 : cas positif Route::testInit2
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 0, 1, 1, 1)
+    Oracle:
+        posx(L0) == 10
+        posy(L0) == 0
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        getBonusVitesse(L0) == 1
+***********************************************************
+Cas de test 0.3 : cas negatif Route::testInit3
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(-1, 10, 1, 1, 1)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 0.4 : cas negatif Route::testInit4
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, -1, 1, 1, 1)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 0.5 : cas negatif Route::testInit5
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, 2, 1, 1)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 0.6 : cas negatif Route::testInit6
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, 1, 2, 1)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 0.7 : cas positif Route::testInit7
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, 1, 1, 1)
+    Oracle:
+        posx(L0) == 10
+        posy(L0) == 10
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        getBonusVitesse(L0) == 1
+***********************************************************
+Cas de test 0.8 : cas negatif Route::testInit8
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, 1, 1, 0)
+    Oracle:
+        Exception
 ***********************************************************
