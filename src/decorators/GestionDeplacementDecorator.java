@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import services.IGestionDeplacement;
 import services.ITerrain;
-import services.IVillageois;
 
 public class GestionDeplacementDecorator implements IGestionDeplacement {
 	private IGestionDeplacement delegate;
@@ -18,17 +17,6 @@ public class GestionDeplacementDecorator implements IGestionDeplacement {
 	public ITerrain getTerr() {
 		return this.delegate.getTerr();
 		
-	}
-
-	@Override
-	public IVillageois getVill() {
-		return this.delegate.getVill();
-	
-	}
-
-	@Override
-	public int getAngle() {
-		return this.delegate.getAngle();
 	}
 
 	@Override
@@ -60,21 +48,17 @@ public class GestionDeplacementDecorator implements IGestionDeplacement {
 	}
 
 	@Override
-	public IGestionDeplacement init(int angle) {
-		return this.delegate.init(angle);
+	public IGestionDeplacement init() {
+		return this.delegate.init();
 	}
 
 	@Override
-	public void calcChemin() {
-		this.delegate.calcChemin();
+	public void calcChemin(int numVill, int angle) {
+		this.delegate.calcChemin(numVill, angle);
 
 
 	}
 
-	@Override
-	public void bind(IVillageois vill) {
-		this.delegate.bind(vill);
-	}
 
 	@Override
 	public void bindTerrain(ITerrain terr) {

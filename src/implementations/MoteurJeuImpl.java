@@ -23,6 +23,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
     protected boolean estFini;
     protected EResultat resultatFinal;
     protected ITerrain terrain;
+    protected IGestionDeplacement gd;
     
     public MoteurJeuImpl(){}
     
@@ -79,6 +80,8 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	public IMoteurJeu init(int maxPas) {
 		if (this.terrain == null)
 			throw new Error("Le terrain n'est pas bindé!");
+		if (this.gd == null)
+			throw new Error("La gestion de déplacement n'est pas bindé!");
 
 		this.maxPasJeu =     maxPas;                            
 		this.pasJeuCourant= 0;                             
@@ -87,6 +90,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	}
 
+	//TODO: rimuovere
 	public void eventListener(MouseEvent e, EEvent click){
 		switch( click ){
 		case CLICK:
@@ -110,16 +114,11 @@ public class MoteurJeuImpl implements IMoteurJeu{
 			}
 		}
 		
-		// On récupère le point d'arrivée
-		// TODO: bind?
-		IGestionDeplacement gd = new GestionDeplacementImpl();
-		
-		gd = gd.init(this.terrain, selVill, argument );
-		
-		ArrayList<Integer> pArrive = gd.getPointArrivee();
-		
 		switch(commande){
 		case DEPLACER:
+			gd.calcChemin(numVillageois, argument);
+			ArrayList<Integer> pArrive = this.gd.getPointArrivee();
+			
 			selVill.setXY(pArrive.get(0), pArrive.get(1));
 			this.terrain.moveVillageoisAt(	numVillageois,
 											pArrive.get(0),
@@ -225,6 +224,11 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	public void bindTerrain(ITerrain terr) {
 		this.terrain = terr;
 		
+	}
+
+	@Override
+	public IGestionDeplacement getGestDepl() {
+		return this.gd;
 	}
 
 }

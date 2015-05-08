@@ -8,8 +8,6 @@ import services.IVillageois;
 
 public class GestionDeplacementImplError implements IGestionDeplacement {
 	private ITerrain terr;
-	private IVillageois vill;
-	private int angle;
 	private boolean estCalcChemin;
 	private ArrayList<Integer> cheminX;
 	private ArrayList<Integer> cheminY;
@@ -21,15 +19,6 @@ public class GestionDeplacementImplError implements IGestionDeplacement {
 		return this.terr;
 	}
 
-	@Override
-	public IVillageois getVill() {
-		return this.vill;
-	}
-
-	@Override
-	public int getAngle() {
-		return this.angle+1; // BUG 1
-	}
 
 	@Override
 	public boolean estCalcChemin() {
@@ -57,12 +46,9 @@ public class GestionDeplacementImplError implements IGestionDeplacement {
 	}
 
 	@Override
-	public IGestionDeplacement init(int angle) {
+	public IGestionDeplacement init() {
 		this.estCalcChemin = false;
-		this.angle = angle;
 		
-		if (vill == null)
-			throw new Error("Le villageois n'est pas bindé");
 		if (terr == null)
 			throw new Error("Le terrain n'est pas bindé");
 
@@ -71,7 +57,8 @@ public class GestionDeplacementImplError implements IGestionDeplacement {
 
 
 	@Override
-	public void calcChemin() {
+	public void calcChemin(int numVill, int angle) {
+		IVillageois vill = this.terr.getListeVillageois().get(numVill);
 		this.estCalcChemin = true;
 		int bonus = 2; // BUG 4
 		
@@ -129,11 +116,6 @@ public class GestionDeplacementImplError implements IGestionDeplacement {
 				this.getPointArrive.add(vill.getX(),vill.getY()	);
 		}
 
-	}
-
-	@Override
-	public void bind(IVillageois vill) {
-		this.vill = vill;
 	}
 
 	@Override
