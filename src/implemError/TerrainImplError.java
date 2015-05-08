@@ -1,4 +1,4 @@
-package implementations;
+package implemError;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +13,7 @@ import services.IRoute;
 import services.ITerrain;
 import services.IVillageois;
 
-public class TerrainImpl implements ITerrain {
+public class TerrainImplError implements ITerrain {
 	private int largeur;
 	private int hauteur;
 	private List<IMuraille> listeMuraille;
@@ -63,7 +63,7 @@ public class TerrainImpl implements ITerrain {
 		for (int j = x; j < x + l; j++)
 			for (int k = y; k < y + h; k++) {
 				Set<EEntite> atjk = getEntiteAt(j, k);
-				if (atjk.size() > 1 || ! (atjk.contains(EEntite.RIEN) || atjk.contains(EEntite.ROUTE)))
+				if (atjk.size() > 1 || ! (atjk.contains(EEntite.RIEN))) //BUG
 					return false;
 			}
 		return true;
@@ -151,9 +151,7 @@ public class TerrainImpl implements ITerrain {
 		setEntiteAt(EEntite.VILLAGEOIS, xn, yn, vill.getLargeur(), vill.getHauteur());
 		for (int j = vill.getX(); j < vill.getX() + vill.getLargeur(); j++)
 			for (int k = vill.getY(); k < vill.getY() + vill.getHauteur(); k++) {
-				if (j >= xn && j < xn + vill.getLargeur())
-					if (k >= yn && k < yn + vill.getHauteur())
-						continue;
+				//BUG
 				Set<EEntite> jk = terrain.get(j).get(k);
 				jk.remove(EEntite.VILLAGEOIS);
 				if (jk.size() == 0)
@@ -167,8 +165,7 @@ public class TerrainImpl implements ITerrain {
 			for (int k = y; k < y + h; k++) {
 				Set<EEntite> jk = terrain.get(j).get(k);
 				jk.remove(ent);
-				if (jk.size() == 0)
-					jk.add(EEntite.RIEN);
+				//BUG
 			}
 	}
 

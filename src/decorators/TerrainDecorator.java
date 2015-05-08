@@ -99,4 +99,29 @@ public class TerrainDecorator implements ITerrain {
 		delegate.reinsertVillageois(numV);
 	}
 
+	@Override
+	public void bindHDV(List<IHotelVille> hdvs) {
+		delegate.bindHDV(hdvs);
+	}
+
+	@Override
+	public void bindMine(List<IMine> mines) {
+		delegate.bindMine(mines);
+	}
+
+	@Override
+	public void bindMur(List<IMuraille> murailles) {
+		delegate.bindMur(murailles);
+	}
+
+	@Override
+	public void bindRoute(List<IRoute> routes) {
+		delegate.bindRoute(routes);
+	}
+
+	@Override
+	public void bindVill(List<IVillageois> villageois) {
+		delegate.bindVill(villageois);
+	}
+
 }

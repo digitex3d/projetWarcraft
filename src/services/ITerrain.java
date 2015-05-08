@@ -3,9 +3,20 @@ package services;
 import java.util.List;
 import java.util.Set;
 
+import require.IRequireListHotelVille;
+import require.IRequireListMine;
+import require.IRequireListMuraille;
+import require.IRequireListRoute;
+import require.IRequireListVillageois;
 import enums.EEntite;
 
-public interface ITerrain {
+public interface ITerrain extends 
+	IRequireListHotelVille, 
+	IRequireListMine,
+	IRequireListMuraille,
+	IRequireListRoute,
+	IRequireListVillageois {
+	
 	/* ########### Observators ########### */	
 	public int getLargeur();
 	public int getHauteur();
