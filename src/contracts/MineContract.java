@@ -29,12 +29,16 @@ public class MineContract extends MineDecorator {
 	
 	public IMine init(int x, int y, int l, int h){
 		/** 
-		 * pre l % 2 = 1 && h % 2 = 1 && x > 0 && y > 0
+		 * pre l % 2 = 1 && h % 2 = 1 && x >= 0 && y >= 0
 		 */
 		if (l % 2 != 1) 
 			throw new PreconditionError("l % 2 = 1");
 		if (h % 2 != 1) 
 			throw new PreconditionError("h % 2 = 1");
+		if (x < 0)
+			throw new PreconditionError("x >= 0");
+		if (y < 0)
+			throw new PreconditionError("y >= 0");
 
 		super.init(x, y, l, h);
 
@@ -68,9 +72,9 @@ public class MineContract extends MineDecorator {
 	public void retrait(int s){
 		this.checkInvariants();
 
-		// pre: ! estLaminee() && s > 0
-		if( super.estLaminee() || s <= 0)
-			throw new PreconditionError(" ! estLaminee() && s > 0");
+		// pre: ! estAbandonnee() && 0 < s <= orRestant()
+		if( super.estAbandonne() || s <= 0 || s > super.getOrRestant())
+			throw new PreconditionError(" ! estAbandonnee() && 0 < s <= orRestant()");
 
 		int abandonCompteur_pre = super.getAbandonCompteur();
 		int OrRestant_pre = super.getOrRestant();

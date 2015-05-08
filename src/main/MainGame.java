@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import implementations.HotelVilleImpl;
 import implementations.MineImpl;
@@ -26,7 +27,7 @@ public class MainGame {
 
 		moteurJeu.bind(hotelVille);
 		
-		ArrayList<IVillageois> villageois =
+		List<IVillageois> villageois =
 				 new ArrayList<IVillageois>();
 		
 		for (int i=0; i < 3; i++)
@@ -34,7 +35,7 @@ public class MainGame {
 		
 
 		
-		ArrayList<IMine> mines =
+		List<IMine> mines =
 				 new ArrayList<IMine>();
 		
 		for (int i=0; i < 3; i++)

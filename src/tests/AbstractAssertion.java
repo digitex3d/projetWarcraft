@@ -6,10 +6,6 @@ import com.sun.istack.internal.logging.Logger;
 
 
 public class AbstractAssertion {
-	
-
-	
-
 
 	protected void assertPerso(String message, boolean expression) {
 		if(!expression)

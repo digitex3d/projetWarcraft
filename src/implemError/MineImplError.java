@@ -60,15 +60,13 @@ public class MineImplError implements IMine {
 		this.orRestant -= s - 1; //BUG
 	}
 
-	//TODO: à revoir
 	@Override
 	public void acceuil(ERace race) {
 		this.etatAppartenance = race;
 		this.abandonCompteur = 0;
-		
+		this.orRestant--;
 	}
 
-	//TODO: à revoir
 	@Override
 	public void abandoned() {
 		this.abandonCompteur += 1;

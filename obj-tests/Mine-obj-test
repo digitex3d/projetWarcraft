@@ -2,16 +2,157 @@ Cas de test 0.1 : cas positif Mine::testInit1
 	Condition initiales : 
 		aucune
 	Opérations : 
-		L0 = init(77, 75)
-	Oracle OK: 
-		getLargeur() == 77        
-		getHauteur() == 75        
+		L0 = init(0, 10, 1, 1)
+	Oracle:
+        posx(L0) == 0
+        posy(L0) == 10
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        orRestant(L0) == 51
+        abandonCompteur(L0) == 51
 ***********************************************************
-Cas de test 1.0 : cas positif Villageois::testRetrait1
+Cas de test 0.2 : cas positif Mine::testInit2
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 0, 1, 1)
+    Oracle:
+        posx(L0) == 10
+        posy(L0) == 0
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        orRestant(L0) == 51
+        abandonCompteur(L0) == 51
+***********************************************************
+Cas de test 0.3 : cas negatif Mine::testInit3
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(-1, 10, 1, 1)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 0.4 : cas negatif Mine::testInit4
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, -1, 1, 1)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 0.5 : cas negatif Mine::testInit5
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, 2, 1)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 0.6 : cas negatif Mine::testInit6
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(10, 10, 1, 2)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.0 : cas positif Mine::testAccueil1
+    Condition initiales : 
+        L0 = init(10, 10, 1, 1)
+    Opérations : 
+        L1 = accueil(L0, HUMAN)
+    Oracle: 
+        orRestant(L1) = 51
+        abandonCompteur(L1) = 0
+        etatAppartenance(L1) = HUMAN
+***********************************************************
+Cas de test 1.1 : cas positif Mine::testAccueil2
+    Condition initiales : 
+        L0 = accueil(init(10, 10, 1, 1), HUMAN)
+    Opérations : 
+        L1 = accueil(L0, HUMAN)
+    Oracle: 
+        orRestant(L1) = 51
+        abandonCompteur(L1) = 0
+        etatAppartenance(L1) = HUMAN
+***********************************************************
+Cas de test 1.2 : cas negatif Mine::testAccueil3
+    Condition initiales : 
+        L0 = accueil(init(10, 10, 1, 1), ORC)
+    Opérations : 
+        L1 = accueil(L0, HUMAN)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 2.0 : cas positif Mine::testRetrait1
 	Condition initiales : 
-		L0 = init(77, 75)
+		L0 = accueil(init(10, 10, 1, 1), ORC)
 	Opérations : 
-		L1.0 = retrait(1)
-	Oracle OK: 
-		getQuantiteOr=50
+		L1 = retrait(L0, 1)
+	Oracle: 
+		orRestant(L1) = 50
+		abandonCompteur(L1) = 0
+		etatAppartenance(L1) = ORC
+***********************************************************
+Cas de test 2.1 : cas positif Mine::testRetrait2
+    Condition initiales : 
+        L0 = accueil(init(10, 10, 1, 1), ORC)
+    Opérations : 
+        L1 = retrait(L0, 51)
+    Oracle: 
+        orRestant(L1) = 0
+        abandonCompteur(L1) = 0
+        etatAppartenance(L1) = ORC
+***********************************************************
+Cas de test 2.2 : cas positif Mine::testRetrait3
+    Condition initiales : 
+        L0 = accueil(init(10, 10, 1, 1), ORC)
+    Opérations : 
+        L1 = retrait(L0, 5)
+    Oracle: 
+        orRestant(L1) = 46
+        abandonCompteur(L1) = 0
+        etatAppartenance(L1) = ORC
+***********************************************************
+Cas de test 2.3 : cas negatif Mine::testRetrait4
+    Condition initiales : 
+        L0 = accueil(init(10, 10, 1, 1), ORC)
+    Opérations : 
+        L1 = retrait(L0, -1)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 2.4 : cas negatif Mine::testRetrait5
+    Condition initiales : 
+        L0 = accueil(init(10, 10, 1, 1), ORC)
+    Opérations : 
+        L1 = retrait(L0, 100)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 2.5 : cas negatif Mine::testRetrait6
+    Condition initiales : 
+        L0 = init(10, 10, 1, 1)
+    Opérations : 
+        L1 = retrait(L0, 5)
+    Oracle: 
+        Exception
+***********************************************************
+Cas de test 3.0 : cas positif Mine::testAbandoned1
+    Condition initiales : 
+        L0 = accueil(init(10, 10, 1, 1), ORC)
+    Opérations : 
+        L1 = abandoned(L0)
+    Oracle: 
+        orRestant(L1) = 51
+        abandonCompteur(L1) = 1
+        etatAppartenance(L1) = ORC
+***********************************************************
+Cas de test 3.1 : cas negatif Mine::testAbandoned2
+    Condition initiales : 
+        L0 = init(10, 10, 1, 1)
+    Opérations : 
+        L1 = abandoned(L0)
+    Oracle: 
+        Exception
 ***********************************************************
