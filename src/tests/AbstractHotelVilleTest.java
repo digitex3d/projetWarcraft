@@ -43,7 +43,6 @@ public abstract class AbstractHotelVilleTest extends AbstractAssertion{
 	}
 
 	@Test
-	
 	public void testInit2() {
 		hdv.init(10, 0, 1, 1, 0, ERace.ORC);
 
@@ -65,6 +64,7 @@ public abstract class AbstractHotelVilleTest extends AbstractAssertion{
 	}
 
 	// ################ Depot ###################
+	@Test
 	public void testDepotPre1() {
 		// condition initiale : 
 		hdv.init(10, 10, 1,1, 10, ERace.ORC);
@@ -77,7 +77,7 @@ public abstract class AbstractHotelVilleTest extends AbstractAssertion{
 				+ " une mauvaise quantité d'or", 
 				hdv.getOrRestant() == 15);
 	}
-	
+	@Test
 	public void testDepotPre2() {
 		// condition initiale : 
 		hdv.init(10, 10, 1,1, 10, ERace.ORC);

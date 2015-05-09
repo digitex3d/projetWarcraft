@@ -54,6 +54,7 @@ public abstract class AbstractMurailleTest extends AbstractAssertion{
 				+ " avec un mauvaise  points de vie", mur.getPointsDeVie() == 1);
 	}
 
+	@Test
 	public void testRetraitPre1() {
 		// condition initiale : 
 		mur.init(10, 10, 1,1, 100);

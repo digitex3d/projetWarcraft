@@ -13,7 +13,5 @@ public class HotelVilleTestError extends AbstractHotelVilleTest{
 	public void before() {
 		hdv = new HotelVilleContract(new HotelVilleImplError());
 	}
-	
-	
 
 }
