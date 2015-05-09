@@ -16,7 +16,6 @@ import tests.AbstractGestionDeplacementTests;
 import utils.Utils;
 import contracts.GestionDeplacementContract;
 import contracts.TerrainContract;
-import enums.EEntite;
 import enums.ERace;
 import exceptions.PreconditionError;
 import implementations.GestionDeplacementImpl;
