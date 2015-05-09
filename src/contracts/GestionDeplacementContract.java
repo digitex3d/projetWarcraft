@@ -56,17 +56,25 @@ public class GestionDeplacementContract extends GestionDeplacementDecorator {
 		// Premier check des invariants
 		this.checkInvariants();
 
-		/* ######## Verification des préconditions ######### */
-
-		// \pre: estCalcChemin() == true
-		if ( ! (super.estCalcChemin()) ) 
-			throw new PreconditionError("estCalcChemin() == true");
+		/* ######## Verification des preconditions ######### */
+		// \pre: 0 <= angle <= 360
+		if ( angle > 360 || angle < 0 ) 
+				throw new PreconditionError(" 0 <= angle <= 360");
+		
+		// \pre: numVill <= getTerr().getListeVillageois().size()
+		if ( numVill > this.getTerr().getListeVillageois().size() ) 
+				throw new PreconditionError("numVill <= getTerr().getListeVillageois().size()");
 
 		/* ######## 	Execution  		######### */
 		super.calcChemin(numVill, angle);
 
 
 		/* ######## Verification des postcondition ######### */
+		
+		// \post: estCalcChemin() == true
+		if ( ! (super.estCalcChemin()) ) 
+			throw new PostconditionError("estCalcChemin() == true");
+		
 		IVillageois vill = super.getTerr().getListeVillageois().get(numVill);
 		// \post: super.getCheminX().size() == super.getCheminY().size() 
 		if ( ! (super.getCheminX().size() == super.getCheminY().size() ) ) 
@@ -81,9 +89,11 @@ public class GestionDeplacementContract extends GestionDeplacementDecorator {
 		//			cheminX().size() == bonus + vill.vitesse()	
 		int bonus = 0;
 		for (int i = 0; i < getCheminX().size(); i++) {
-			bonus += super.getTerr().getBonusVitesse(super.getCheminX().get(i), super.getCheminX().get(i), vill.getLargeur(), vill.getHauteur());
+			bonus += super.getTerr().getBonusVitesse(super.getCheminX().get(i), super.getCheminY().get(i), vill.getLargeur(), vill.getHauteur());
 		}
 
+		System.out.println(bonus);
+		
 		if ( ! (super.getCheminX().size() == bonus + vill.getVitesse() ) ) 
 			throw new PostconditionError("cheminX().size() == bonus + vill.vitesse() ");
 
@@ -109,13 +119,13 @@ public class GestionDeplacementContract extends GestionDeplacementDecorator {
 
 			}
 
-		if ( ! (this.getFirstObstacle() != -1)  ) 
-			throw new PostconditionError("getFirstObstacle() != -1");
-
+		int cosO= (int) Math.cos( Math.toRadians(angle)); 
+		int sinO= (int) Math.sin( Math.toRadians(angle));
+		
 		// \post: getCheminX().get( super.getCheminX().size() -1 ) ==  
 		//	   vill.getX() + bonus + vill.getVitesse() * cos(angle)
 		if ( super.getCheminX().get( super.getCheminX().size() -1 )  != 
-				vill.getX() + bonus + vill.getVitesse() * Math.cos(angle)
+				(int) (vill.getX() + (bonus + vill.getVitesse()) * cosO)
 				) 
 			throw new PostconditionError("getCheminX().get( super.getCheminX().size() -1 ) == "
 					+ "vill.getX() + bonus + vill.getVitesse() * cos(angle)");
@@ -123,7 +133,7 @@ public class GestionDeplacementContract extends GestionDeplacementDecorator {
 		// \post:	   get(cheminY(calcChemin(GD)), |cheminY(calcChemin(GD))|-1)) =  
 		//	   	Villageois::posy(vill(GD)) + (bonus + Villageois::vitesse(vill(GD))) * -sin( angle(GD) )
 		if ( super.getCheminY().get( super.getCheminY().size() -1 )  != 
-				vill.getY() + bonus + vill.getVitesse() * -Math.sin(angle)
+				(int) (vill.getY() + (bonus + vill.getVitesse()) * -sinO)
 				) 
 			throw new PostconditionError("getCheminY().get( super.getCheminY().size() -1 ) == "
 					+ "vill.getY() + bonus + vill.getVitesse() * -sin(angle)");

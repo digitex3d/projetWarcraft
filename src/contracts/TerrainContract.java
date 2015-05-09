@@ -53,15 +53,15 @@ public class TerrainContract extends TerrainDecorator {
 	}
 	
 	public boolean estFranchissable(int x, int y, int l, int h) {
-		// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+		// pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur()
 		if (x < 0)
 			throw new PreconditionError("x >= 0");
 		if (y < 0)
 			throw new PreconditionError("y >= 0");
-		if (x + l >= super.getLargeur())
-			throw new PreconditionError("x + l < largeur()");
-		if (y + h >= super.getHauteur())
-			throw new PreconditionError("y + h < hauteur()");
+		if (x + l > super.getLargeur())
+			throw new PreconditionError("x + l <= largeur()");
+		if (y + h > super.getHauteur())
+			throw new PreconditionError("y + h <= hauteur()");
 		return super.estFranchissable(x, y, l, h);
 	}
 	
@@ -71,10 +71,10 @@ public class TerrainContract extends TerrainDecorator {
 			throw new PreconditionError("x >= 0");
 		if (y < 0)
 			throw new PreconditionError("y >= 0");
-		if (x + l >= super.getLargeur())
-			throw new PreconditionError("x + l < largeur()");
-		if (y + h >= super.getHauteur())
-			throw new PreconditionError("y + h < hauteur()");
+		if (x + l > super.getLargeur())
+			throw new PreconditionError("x + l <= largeur()");
+		if (y + h > super.getHauteur())
+			throw new PreconditionError("y + h <= hauteur()");
 		
 		return super.getBonusVitesse(x, y, l, h);
 	}
@@ -85,10 +85,10 @@ public class TerrainContract extends TerrainDecorator {
 			throw new PreconditionError("x >= 0");
 		if (y < 0)
 			throw new PreconditionError("y >= 0");
-		if (x + l >= super.getLargeur())
-			throw new PreconditionError("x + l < largeur()");
-		if (y + h >= super.getHauteur())
-			throw new PreconditionError("y + h < hauteur()");
+		if (x + l > super.getLargeur())
+			throw new PreconditionError("x + l <= largeur()");
+		if (y + h > super.getHauteur())
+			throw new PreconditionError("y + h <= hauteur()");
 		
 		return super.getRouteAt(x, y, l, h);
 	}
