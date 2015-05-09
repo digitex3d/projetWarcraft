@@ -17,7 +17,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 	}
 
 	@Test(expected=PreconditionError.class)
-	public void testInitPre3() {
+	public void testInitFailPre3() {
 		// condition initiale : aucune
 
 		// opération
@@ -28,7 +28,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 	}
 
 	@Test(expected=PreconditionError.class)
-	public void testInitPre4() {
+	public void testInitFailPre4() {
 		// condition initiale : aucune
 
 		// opération
@@ -40,7 +40,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 
 
 	@Test(expected=PreconditionError.class)
-	public void testInitPre5() {
+	public void testInitFailPre5() {
 		// condition initiale : aucune
 
 		// opération
@@ -51,7 +51,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 	}
 
 	@Test(expected=PreconditionError.class)
-	public void testInitPre6() {
+	public void testInitFailPre6() {
 		// condition initiale : aucune
 
 		// opération
@@ -62,7 +62,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 	}
 
 	@Test(expected=PreconditionError.class)
-	public void testInitPre7() {
+	public void testInitFailPre7() {
 		// condition initiale : aucune
 
 		// opération
@@ -75,7 +75,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 	// ################ Retrait ###################
 
 	@Test(expected=PreconditionError.class)
-	public void testRetraitPre2() {
+	public void testRetraitFailPre2() {
 		// condition initiale : 
 		mur.init(10, 10, 1,1, 100);
 
@@ -87,7 +87,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 		// Exception PreconditionError
 	}
 
-	public void testRetraitPre3() {
+	public void testRetraitFailPre3() {
 		// condition initiale : 
 		mur.init(10, 10, 1,1, 100);
 		mur.retrait(100);

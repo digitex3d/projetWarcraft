@@ -26,6 +26,13 @@ public class MurailleContract extends MurailleDecorator {
 			throw new PreconditionError("hauteur % 2 == 1");
 		if (pointsVie <= 0)
 			throw new PreconditionError("pointsVie > 0");
+		
+		// pre: x >= 0
+		if (x < 0)
+			throw new PreconditionError("x >= 0");
+		// pre: x >= 0
+		if (y < 0)
+			throw new PreconditionError("y >= 0");
 			
 		super.init(x, y, largeur, hauteur, pointsVie);
 		
