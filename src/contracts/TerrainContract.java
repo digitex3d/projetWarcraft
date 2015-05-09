@@ -1,6 +1,7 @@
 package contracts;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import services.IHotelVille;
@@ -53,42 +54,42 @@ public class TerrainContract extends TerrainDecorator {
 	}
 	
 	public boolean estFranchissable(int x, int y, int l, int h) {
-		// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+		// pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur()
 		if (x < 0)
 			throw new PreconditionError("x >= 0");
 		if (y < 0)
 			throw new PreconditionError("y >= 0");
-		if (x + l >= super.getLargeur())
-			throw new PreconditionError("x + l < largeur()");
-		if (y + h >= super.getHauteur())
-			throw new PreconditionError("y + h < hauteur()");
+		if (x + l > super.getLargeur())
+			throw new PreconditionError("x + l <= largeur()");
+		if (y + h > super.getHauteur())
+			throw new PreconditionError("y + h <= hauteur()");
 		return super.estFranchissable(x, y, l, h);
 	}
 	
 	public int getBonusVitesse(int x, int y, int l, int h) {
-		// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+		// pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur()
 		if (x < 0)
 			throw new PreconditionError("x >= 0");
 		if (y < 0)
 			throw new PreconditionError("y >= 0");
-		if (x + l >= super.getLargeur())
-			throw new PreconditionError("x + l < largeur()");
-		if (y + h >= super.getHauteur())
-			throw new PreconditionError("y + h < hauteur()");
+		if (x + l > super.getLargeur())
+			throw new PreconditionError("x + l <= largeur()");
+		if (y + h > super.getHauteur())
+			throw new PreconditionError("y + h <= hauteur()");
 		
 		return super.getBonusVitesse(x, y, l, h);
 	}
 	
 	public IRoute getRouteAt(int x, int y, int l, int h) {
-		// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+		// pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur()
 		if (x < 0)
 			throw new PreconditionError("x >= 0");
 		if (y < 0)
 			throw new PreconditionError("y >= 0");
-		if (x + l >= super.getLargeur())
-			throw new PreconditionError("x + l < largeur()");
-		if (y + h >= super.getHauteur())
-			throw new PreconditionError("y + h < hauteur()");
+		if (x + l > super.getLargeur())
+			throw new PreconditionError("x + l <= largeur()");
+		if (y + h > super.getHauteur())
+			throw new PreconditionError("y + h <= hauteur()");
 		
 		return super.getRouteAt(x, y, l, h);
 	}
@@ -253,81 +254,12 @@ public class TerrainContract extends TerrainDecorator {
 			}
 		}
 	}
-	
-	public void moveVillageoisAt(int numV, int xn, int yn) {
-		this.checkInvariants();
 		
-		/**
-			pre: 0 <= numV < getListeVillageois().size() &&
-			 	estFranchissable(xn, yn, getListeVillageois().get(numV).largeur(), getListeVillageois().get(numV).hauteur())
-		*/
-		if (numV < 0 || numV >= getListeVillageois().size())
-			throw new PreconditionError("0 <= numV < getListeVillageois().size()");
-		IVillageois vill = getListeVillageois().get(numV);
-		if ( ! estFranchissable(xn, yn, vill.getLargeur(), vill.getHauteur()))
-			throw new PreconditionError("estFranchissable(xn, yn, getListeVillageois().get(numV).largeur(), getListeVillageois().get(numV).hauteur())");
-		
-		int vill_x_pre = vill.getX();
-		int vill_y_pre = vill.getY();
-		ArrayList<ArrayList<Set<EEntite>>> getEntite_pre = getEntite_pre(xn, yn, vill.getLargeur(), vill.getHauteur());
-		ArrayList<ArrayList<Set<EEntite>>> getEntite_pre2 = getEntite_pre(vill_x_pre, vill_y_pre, vill.getLargeur(), vill.getHauteur());
-		
-		super.moveVillageoisAt(numV, xn, yn);
-		
-		this.checkInvariants();
-		
-		/**
-		post: Vill@pre :=  getListeVillageois()@pre.get(numV)
-			  \forall x \in [xn, xn + Vill@pre.largeur()[,
-			  \forall y \in [yn, yn + Vill@pre.hauteur()[,
-					if getEntiteAt(x, y)@pre == {RIEN} then
-						getEntiteAt(x, y) == {VILLAGEOIS}
-					else
-						getEntiteAt(x, y) == getEntiteAt(x, y)@pre \plus {VILLAGEOIS}
-			  \forall x \in [Vill@pre.posx(), Vill@pre.posx() + Vill@pre.largeur()[,
-			  \forall y \in [Vill@pre.posy(), Vill@pre.posy() + Vill@pre.hauteur()[,
-			  		if x \not \in [xn, xn + Vill@pre.largeur()[ \or y \not \in [yn, yn + Vill@pre.hauteur()[ then
-						if getEntiteAt(x, y)@pre == {VILLAGEOIS} then
-							getEntiteAt(x, y) == {RIEN}
-						else
-							getEntiteAt(x, y) == getEntiteAt(x, y)@pre \minus {VILLAGEOIS}
-		 */
-		for (int x = xn; x < xn + vill.getLargeur(); x++)
-			for (int y = yn; y < yn + vill.getHauteur(); y++) {
-				Set<EEntite> getEntxy_pre = getEntite_pre.get(x - xn).get(y - yn);
-				Set<EEntite> getEntxy = getEntiteAt(x, y);
-				if (getEntxy_pre.contains(EEntite.RIEN) && getEntxy_pre.size() == 1) {
-					if ( ! (getEntxy.contains(EEntite.VILLAGEOIS) && getEntxy.size() == 1))
-						throw new PostconditionError("getEntiteAt(x, y) == {VILLAGEOIS}");
-				}
-				else
-					if ( ! (getEntxy.containsAll(getEntxy_pre) && getEntxy.contains(EEntite.VILLAGEOIS) && getEntxy.size() == getEntite_pre.size() + 1))
-						throw new PostconditionError("getEntiteAt(x, y) == getEntiteAt(x, y)@pre \\plus {VILLAGEOIS}");
-			}
-		
-		for (int x = vill_x_pre; x < vill_x_pre + vill.getLargeur(); x++) {
-			for (int y = vill_y_pre; y < vill_y_pre + vill.getHauteur(); y++) {
-				if (x >= xn && x < xn + vill.getLargeur() && y >= yn && y < yn + vill.getHauteur())
-					continue;
-				
-				Set<EEntite> getEntxy_pre = getEntite_pre2.get(x - vill_x_pre).get(y - vill_y_pre);
-				Set<EEntite> getEntxy = getEntiteAt(x, y);
-				if (getEntxy_pre.contains(EEntite.VILLAGEOIS) && getEntxy_pre.size() == 1) {
-					if ( ! (getEntxy.contains(EEntite.RIEN) && getEntxy.size() == 1))
-						throw new PostconditionError("getEntiteAt(x, y) == {RIEN}");
-				}
-				else
-					if ( ! (getEntxy_pre.containsAll(getEntxy) && ! getEntxy.contains(EEntite.VILLAGEOIS) && getEntxy.size() == getEntite_pre.size() - 1))
-						throw new PostconditionError("getEntiteAt(x, y) == getEntiteAt(x, y)@pre \\minus {VILLAGEOIS}");
-			}
-		}
-	}
-	
 	public void removeEntiteAt(EEntite ent, int x, int y, int l, int h) {
 		this.checkInvariants();
 		
 		/**
-			pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur() &&
+			pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur() &&
 				\forall j \in [x, x + l[, \forall k \in [y, y + h[
 					ent \in getEntiteAt(j, k)
 		 */
@@ -335,10 +267,10 @@ public class TerrainContract extends TerrainDecorator {
 			throw new PreconditionError("x >= 0");
 		if (y < 0)
 			throw new PreconditionError("y >= 0");
-		if (x + l >= super.getLargeur())
-			throw new PreconditionError("x + l < largeur()");
-		if (y + h >= super.getHauteur())
-			throw new PreconditionError("y + h < hauteur()");
+		if (x + l > super.getLargeur())
+			throw new PreconditionError("x + l <= largeur()");
+		if (y + h > super.getHauteur())
+			throw new PreconditionError("y + h <= hauteur()");
 		for (int j = x; j < x + l; j++)
 			for (int k = y; k < y + h; k++)
 				if ( ! getEntiteAt(j, k).contains(ent))
@@ -360,7 +292,7 @@ public class TerrainContract extends TerrainDecorator {
 			for (int k = y; k < y + h; k++) {
 				Set<EEntite> getEntjk_pre = getEntite_pre.get(j - x).get(k - y);
 				Set<EEntite> getEntjk = getEntiteAt(j, k);
-				if (getEntite_pre.size() == 1) {
+				if (getEntjk_pre.size() == 1) {
 					if ( ! (getEntjk.contains(EEntite.RIEN) && getEntjk.size() == 1))
 						throw new PostconditionError("getEntiteAt(j, k) == {RIEN}");
 				}
@@ -381,9 +313,9 @@ public class TerrainContract extends TerrainDecorator {
 		if (numV < 0 || numV >= getListeVillageois().size())
 			throw new PreconditionError("0 <= numV < getListeVillageois().size()");
 		IVillageois vill = getListeVillageois().get(numV);
-		if ( ! (getEntiteAt(vill.getX(), vill.getY()).contains(EEntite.MINE)))
+		if ( ! (getEntiteAt(vill.getX(), vill.getY()).contains(EEntite.MINE))) {
 			throw new PreconditionError("MINE \\in getEntiteAt(getListeVillageois().get(numV).posx(), getListeVillageois().get(numV).posy())");
-			
+		}
 		super.reinsertVillageois(numV);
 		
 		this.checkInvariants();
@@ -404,8 +336,9 @@ public class TerrainContract extends TerrainDecorator {
 		ArrayList<ArrayList<Set<EEntite>>> getEntite_pre = new ArrayList<ArrayList<Set<EEntite>>>(); 
 		for (int j = x; j < x + l; j++) {
 			ArrayList<Set<EEntite>> jlist = new ArrayList<Set<EEntite>>();
-			for (int k = y; k < y + h; k++)
-				jlist.add(getEntiteAt(j, k));
+			for (int k = y; k < y + h; k++) {
+				jlist.add(new HashSet<EEntite>(getEntiteAt(j, k)));
+			}
 			getEntite_pre.add(jlist);
 		}
 		return getEntite_pre;

@@ -75,7 +75,8 @@ public interface IMoteurJeu extends
 		 Soit Villpre := getVillageois(vilNum)@pre
 		 if command == DEPLACER then
 		 	getVillageois(vilNum) == Villpre.setXY(pArrivee.get(0), pArrivee.get(1)) && 
-			terrain() = terrain()@pre.moveVillageoisAt(vilNum, pArrivee.get(0), pArrivee.get(1))
+			terrain() = terrain()@pre.removeEntiteAt(VILLAGEOIS, Villpre.posx(), Villpre.posy(), Villpre.largeur(), Villpre.hauteur())
+									 .setEntiteAt(VILLAGEOIS, pArrivee.get(0), pArrivee.get(1), Villpost.largeur(), Villpost.hauteur())
 		 if command == ENTRERHOTELVILLE then
 		 	getHDV(arg) == getHDV(arg)@pre.depot(Villpre.quantiteOr()) && 
 			getVillageois(vilNum) == Villpre.dechargeOr(Villpre.quantiteOr())

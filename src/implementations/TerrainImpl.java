@@ -111,6 +111,7 @@ public class TerrainImpl implements ITerrain {
 		if (listeVillageois == null)
 			throw new Error("Les villageois ne sont pas bindé!");
 		
+		terrain = new ArrayList<List<Set<EEntite>>>();
 		for (int x = 0; x < largeur; x++) {
 			terrain.add(new ArrayList<Set<EEntite>>());
 			for (int y = 0; y < hauteur; y++) {
@@ -119,7 +120,6 @@ public class TerrainImpl implements ITerrain {
 				terrain.get(x).add(s);
 			}
 		}
-		terrain = new ArrayList<List<Set<EEntite>>>();
 		
 		for (IHotelVille hdv : listeHotelVille)
 			setEntiteAt(EEntite.HDV, hdv.getX(), hdv.getY(), hdv.getLargeur(), hdv.getHauteur());
@@ -142,22 +142,6 @@ public class TerrainImpl implements ITerrain {
 				Set<EEntite> jk = terrain.get(j).get(k);
 				jk.remove(EEntite.RIEN);
 				jk.add(ent);
-			}
-	}
-
-	@Override
-	public void moveVillageoisAt(int numV, int xn, int yn) {
-		IVillageois vill = listeVillageois.get(numV);
-		setEntiteAt(EEntite.VILLAGEOIS, xn, yn, vill.getLargeur(), vill.getHauteur());
-		for (int j = vill.getX(); j < vill.getX() + vill.getLargeur(); j++)
-			for (int k = vill.getY(); k < vill.getY() + vill.getHauteur(); k++) {
-				if (j >= xn && j < xn + vill.getLargeur())
-					if (k >= yn && k < yn + vill.getHauteur())
-						continue;
-				Set<EEntite> jk = terrain.get(j).get(k);
-				jk.remove(EEntite.VILLAGEOIS);
-				if (jk.size() == 0)
-					jk.add(EEntite.RIEN);
 			}
 	}
 

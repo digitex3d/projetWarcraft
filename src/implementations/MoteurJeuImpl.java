@@ -116,13 +116,12 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		
 		switch(commande){
 		case DEPLACER:
+			this.terrain.removeEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
 			gd.calcChemin(numVillageois, argument);
 			ArrayList<Integer> pArrive = this.gd.getPointArrivee();
 			
 			selVill.setXY(pArrive.get(0), pArrive.get(1));
-			this.terrain.moveVillageoisAt(	numVillageois,
-											pArrive.get(0),
-											pArrive.get(1));
+			this.terrain.setEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
 			break;
 		case ENTREHOTELVILLE:
 			IHotelVille hdv = this.terrain.getListeHotelVille().get(argument);

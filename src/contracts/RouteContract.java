@@ -26,7 +26,7 @@ public class RouteContract extends RouteDecorator {
 			throw new PreconditionError("largeur % 2 == 1");
 		if (hauteur % 2 != 1)           
 			throw new PreconditionError("hauteur % 2 == 1");
-		if (bv < 0)                   
+		if (bv <= 0)                   
 			throw new PreconditionError("bv > 0");
 			
 		 super.init(x, y, largeur, hauteur, bv);

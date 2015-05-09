@@ -25,13 +25,13 @@ public interface ITerrain extends
 	public List<IVillageois> getListeVillageois();
 	public List<IMine> getListeMine();
 	public List<IHotelVille> getListeHotelVille();
-	// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+	// pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur()
 	public boolean estFranchissable(int x, int y, int l, int h);
 	// pre: 0 <= x < largeur() && 0 <= y < hauteur()
 	public Set<EEntite> getEntiteAt(int x, int y);
-	// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+	// pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur()
 	public int getBonusVitesse(int x, int y, int l, int h);
-	// pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur()
+	// pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur()
 	public IRoute getRouteAt(int x, int y, int l, int h);
 
 	/* ########### Constructors ########### */		
@@ -87,29 +87,9 @@ public interface ITerrain extends
 	 */
 	public void setEntiteAt(EEntite ent, int x, int y, int l, int h);
 	
-	/**
-		pre: 0 <= numV < getListeVillageois().size() &&
-		 	estFranchissable(xn, yn, getListeVillageois().get(numV).largeur(), getListeVillageois().get(numV).hauteur())
-		post: Vill@pre :=  getListeVillageois()@pre.get(numV)
-			  \forall x \in [xn, xn + Vill@pre.largeur()[,
-			  \forall y \in [yn, yn + Vill@pre.hauteur()[,
-					if getEntiteAt(x, y)@pre == {RIEN} then
-						getEntiteAt(x, y) == {VILLAGEOIS}
-					else
-						getEntiteAt(x, y) == getEntiteAt(x, y)@pre \plus {VILLAGEOIS}
-			  \forall x \in [Vill@pre.posx(), Vill@pre.posx() + Vill@pre.largeur()[,
-			  \forall y \in [Vill@pre.posy(), Vill@pre.posy() + Vill@pre.hauteur()[,
-			  		if x \not \in [xn, xn + Vill@pre.largeur()[ \or y \not \in [yn, yn + Vill@pre.hauteur()[ then
-						if getEntiteAt(x, y)@pre == {VILLAGEOIS} then
-							getEntiteAt(x, y) == {RIEN}
-						else
-							getEntiteAt(x, y) == getEntiteAt(x, y)@pre \minus {VILLAGEOIS}
-					
-	 */
-	public void moveVillageoisAt(int numV, int xn, int yn);
 	
 	/**
-		pre: x >= 0 && y >= 0 && x + l < largeur() && y + h < hauteur() &&
+		pre: x >= 0 && y >= 0 && x + l <= largeur() && y + h <= hauteur() &&
 				\forall j \in [x, x + l[, \forall k \in [y, y + h[
 					ent \in getEntiteAt(j, k)
 		post: \forall j \in [x, x + l[, \forall k \in [y, y + h[,

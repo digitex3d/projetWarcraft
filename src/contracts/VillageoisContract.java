@@ -325,7 +325,7 @@ public void setXY(int x, int y){
 	if (super.getQuantiteOr() != quantiteOr_pre)
 		throw new PostconditionError("quantiteOr(decrCorvee(V))= quantiteOr(V)@pre");
 	// \post: corvee(decrCorvee(V)) = corvee(V) - 1
-	if (super.getCorvee() != corvee_pre - 1)
+	if (super.getCorvee() != corvee_pre)
 		throw new PostconditionError("corvee(decrCorvee(V)) = corvee(V)@pre");
 	// \post: posx(setCorvee(V,s)) = posx(V)
 	if (super.getX() != x)

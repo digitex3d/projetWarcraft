@@ -85,11 +85,6 @@ public class TerrainDecorator implements ITerrain {
 	}
 
 	@Override
-	public void moveVillageoisAt(int numV, int xn, int yn) {
-		delegate.moveVillageoisAt(numV, xn, yn);
-	}
-
-	@Override
 	public void removeEntiteAt(EEntite ent, int x, int y, int l, int h) {
 		delegate.removeEntiteAt(ent, x, y, l, h);
 	}

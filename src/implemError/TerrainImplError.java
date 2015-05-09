@@ -146,20 +146,6 @@ public class TerrainImplError implements ITerrain {
 	}
 
 	@Override
-	public void moveVillageoisAt(int numV, int xn, int yn) {
-		IVillageois vill = listeVillageois.get(numV);
-		setEntiteAt(EEntite.VILLAGEOIS, xn, yn, vill.getLargeur(), vill.getHauteur());
-		for (int j = vill.getX(); j < vill.getX() + vill.getLargeur(); j++)
-			for (int k = vill.getY(); k < vill.getY() + vill.getHauteur(); k++) {
-				//BUG
-				Set<EEntite> jk = terrain.get(j).get(k);
-				jk.remove(EEntite.VILLAGEOIS);
-				if (jk.size() == 0)
-					jk.add(EEntite.RIEN);
-			}
-	}
-
-	@Override
 	public void removeEntiteAt(EEntite ent, int x, int y, int l, int h) {
 		for (int j = x; j < x + l; j++)
 			for (int k = y; k < y + h; k++) {
