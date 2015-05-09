@@ -113,8 +113,8 @@ public class TerrainContract extends TerrainDecorator {
 			throw new PostconditionError("hauteur() == hauteur");
 		/**
 			post: \forall HV \in getListeHotelVille():
-					HV.posx() + HV.largeur() < largeur && 
-					HV.posy() + HV.hauteur() < hauteur &&
+					HV.posx() + HV.largeur() <= largeur && 
+					HV.posy() + HV.hauteur() <= hauteur &&
 					HV.orRestant() == 16 &&
 					\forall HV.posx() <= x < HV.posx() + HV.largeur()
 					\forall HV.posy() <= y < HV.posy() + HV.hauteur()
@@ -122,9 +122,9 @@ public class TerrainContract extends TerrainDecorator {
 
 		 */
 		for (IHotelVille hv : super.getListeHotelVille()) {
-			if (hv.getX() + hv.getLargeur() >= largeur)
+			if (hv.getX() + hv.getLargeur() > largeur)
 				throw new PostconditionError("HV.posx() + HV.largeur() < largeur");
-			if (hv.getY() + hv.getHauteur() >= hauteur)
+			if (hv.getY() + hv.getHauteur() > hauteur)
 				throw new PostconditionError("HV.posy() + HV.hauteur() < hauteur");
 			if (hv.getOrRestant() != 16)
 				throw new PostconditionError("HV.orRestant() == 16");
@@ -136,8 +136,8 @@ public class TerrainContract extends TerrainDecorator {
 		/**
 			post: \forall Vill \in getListeVillageois():
 			HDV := HDV \in getListeHotelVille() && HDV.etatAppartenance() == Vill.race()
-				Vill.posx() + Vill.largeur() < largeur && 
-				Vill.posy() + Vill.hauteur() < hauteur &&
+				Vill.posx() + Vill.largeur() <= largeur && 
+				Vill.posy() + Vill.hauteur() <= hauteur &&
 				distance(Vill.posx(), Vill.posy(), HDV.posx(), HDV.posy()) <= 51 &&
 				Vill.pointsDeVie() == 100 &&
 				\forall Vill.posx() <= x < Vill.posx() + Vill.largeur()
@@ -149,9 +149,9 @@ public class TerrainContract extends TerrainDecorator {
 			for (IHotelVille h : getListeHotelVille())
 				if (h.getEtatAppartenance() == vill.getRace())
 					hdv = h;
-			if (vill.getX() + vill.getLargeur() >= largeur)
+			if (vill.getX() + vill.getLargeur() > largeur)
 				throw new PostconditionError("Vill.posx() + Vill.largeur() < largeur");
-			if (vill.getY() + vill.getHauteur() >= hauteur)
+			if (vill.getY() + vill.getHauteur() > hauteur)
 				throw new PostconditionError("Vill.posy() + Vill.hauteur() < hauteur");
 			if (Utils.distance(vill.getX(), vill.getY(), hdv.getX(), hdv.getY()) > 51)
 				throw new PostconditionError("distance(Vill.posx(), Vill.posy(), HDV.posx(), HDV.posy()) <= 51");
@@ -164,16 +164,16 @@ public class TerrainContract extends TerrainDecorator {
 		}
 		/**
 			post: \forall Mi \in getListeMine():
-			Mi.posx() + Mi.largeur() < largeur && 
-			Mi.posy() + Mi.hauteur() < hauteur &&
+			Mi.posx() + Mi.largeur() <= largeur && 
+			Mi.posy() + Mi.hauteur() <= hauteur &&
 			\forall Mi.posx() <= x < Mi.posx() + Mi.largeur()
 			\forall Mi.posy() <= y < Mi.posy() + Mi.hauteur()
 				MINE \in getEntiteAt(x, y)
 		 */
 		for (IMine mi : super.getListeMine()) {
-			if (mi.getX() + mi.getLargeur() >= largeur)
+			if (mi.getX() + mi.getLargeur() > largeur)
 				throw new PostconditionError("Mi.posx() + Mi.largeur() < largeur");
-			if (mi.getY() + mi.getHauteur() >= hauteur)
+			if (mi.getY() + mi.getHauteur() > hauteur)
 				throw new PostconditionError("Mi.posy() + Mi.hauteur() < hauteur");
 			for (int x = mi.getX(); x < mi.getX() + mi.getLargeur(); x++)
 				for (int y = mi.getY(); y < mi.getY() + mi.getHauteur(); y++)
@@ -182,16 +182,16 @@ public class TerrainContract extends TerrainDecorator {
 		}
 		/**
 			post: \forall Ro \in getListeRoute():
-					Ro.posx() + Ro.largeur() < largeur && 
-					Ro.posy() + Ro.hauteur() < hauteur &&
+					Ro.posx() + Ro.largeur() <= largeur && 
+					Ro.posy() + Ro.hauteur() <= hauteur &&
 					\forall Ro.posx() <= x < Ro.posx() + Ro.largeur()
 					\forall Ro.posy() <= y < Ro.posy() + Ro.hauteur()
 						ROUTE \in getEntiteAt(x, y)		
 		 */
 		for (IRoute ro : super.getListeRoute()) {
-			if (ro.getX() + ro.getLargeur() >= largeur)
+			if (ro.getX() + ro.getLargeur() > largeur)
 				throw new PostconditionError("Ro.posx() + Ro.largeur() < largeur");
-			if (ro.getY() + ro.getHauteur() >= hauteur)
+			if (ro.getY() + ro.getHauteur() > hauteur)
 				throw new PostconditionError("Ro.posy() + Ro.hauteur() < hauteur");
 			for (int x = ro.getX(); x < ro.getX() + ro.getLargeur(); x++)
 				for (int y = ro.getY(); y < ro.getY() + ro.getHauteur(); y++)
@@ -200,16 +200,16 @@ public class TerrainContract extends TerrainDecorator {
 		}
 		/**
 			post: \forall Mu \in getListeMuraille():
-					Mu.posx() + Mu.largeur() < largeur && 
-					Mu.posy() + Mu.hauteur() < hauteur &&
+					Mu.posx() + Mu.largeur() <= largeur && 
+					Mu.posy() + Mu.hauteur() <= hauteur &&
 					\forall Mu.posx() <= x < Mu.posx() + Mu.largeur()
 					\forall Mu.posy() <= y < Mu.posy() + Mu.hauteur()
 						MURAILLE \in getEntiteAt(x, y)
 		 */
 		for (IMuraille mu : super.getListeMuraille()) {
-			if (mu.getX() + mu.getLargeur() >= largeur)
+			if (mu.getX() + mu.getLargeur() > largeur)
 				throw new PostconditionError("Mu.posx() + Mu.largeur() < largeur");
-			if (mu.getY() + mu.getHauteur() >= hauteur)
+			if (mu.getY() + mu.getHauteur() > hauteur)
 				throw new PostconditionError("Mu.posy() + Mu.hauteur() < hauteur");
 			for (int x = mu.getX(); x < mu.getX() + mu.getLargeur(); x++)
 				for (int y = mu.getY(); y < mu.getY() + mu.getHauteur(); y++)

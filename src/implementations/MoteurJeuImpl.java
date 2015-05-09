@@ -1,13 +1,11 @@
 package implementations;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import enums.ECommande;
 import enums.EEntite;
 import enums.ERace;
 import enums.EResultat;
-import gui.EEvent;
 import services.IGestionDeplacement;
 import services.IHotelVille;
 import services.IMine;
@@ -54,7 +52,6 @@ public class MoteurJeuImpl implements IMoteurJeu{
 					return EResultat.ORC_GAGNE;
 				else
 					return EResultat.HUMAN_GAGNE;
-		//TODO: Rivedere spec per il caso di parità
 		return EResultat.NUL;
 	}
 
@@ -89,15 +86,6 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		return this;
 
 	}
-
-	//TODO: rimuovere
-	public void eventListener(MouseEvent e, EEvent click){
-		switch( click ){
-		case CLICK:
-			this.pasJeu( ECommande.DEPLACER, 0, 90);
-			break;
-		}
-	}
 	
 	@Override
 	public void pasJeu(ECommande commande, int numVillageois, int argument) {
@@ -123,13 +111,12 @@ public class MoteurJeuImpl implements IMoteurJeu{
 			selVill.setXY(pArrive.get(0), pArrive.get(1));
 			this.terrain.setEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
 			break;
-		case ENTREHOTELVILLE:
+		case ENTRERHOTELVILLE:
 			IHotelVille hdv = this.terrain.getListeHotelVille().get(argument);
 			hdv.depot(selVill.getQuantiteOr());
 			selVill.dechargeOr(selVill.getQuantiteOr());
-			//TODO: peutEntrer à che livello lo verifichiamo?
 			break;
-		case ENTREMINE:
+		case ENTRERMINE:
 			IMine mine = this.terrain.getListeMine().get(argument);
 			mine.acceuil(selVill.getRace());
 			mine.retrait(1);
@@ -139,7 +126,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
 										selVill.getY(), 
 										selVill.getLargeur(),
 										selVill.getHauteur());
-			selVill.setXY(mine.getX(), mine.getY());
+			selVill.setCorvee(16, mine.getX(), mine.getY());
 			break;
 		case TAPERMURAILLE:
 			IMuraille mur = this.terrain.getListeMuraille().get(argument);
@@ -186,6 +173,9 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		// Si la race n'est pas la bonne retourne false
 		if( hdv.getEtatAppartenance() != vill.getRace() ) return false;
 		
+		if (vill.getQuantiteOr() <= 0)
+			return false;
+		
 		int hdvCenterX = hdv.getX() + ( hdv.getLargeur() / 2 );
 		int hdvCenterY = hdv.getY() + ( hdv.getHauteur() / 2 );
 		
@@ -228,6 +218,11 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	@Override
 	public IGestionDeplacement getGestDepl() {
 		return this.gd;
+	}
+
+	@Override
+	public void bindGD(IGestionDeplacement gd) {
+		this.gd = gd;
 	}
 
 }

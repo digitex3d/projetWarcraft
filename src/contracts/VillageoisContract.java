@@ -233,27 +233,25 @@ public class VillageoisContract extends VillageoisDecorator {
 		//Sauvegarde contexte  
 		int pointsDeVie_pre = super.getPointsDeVie();
 		int quantiteOr_pre = super.getQuantiteOr();
-		int x_pre = super.getX();
-		int y_pre = super.getY();
 
 		super.setCorvee(s, corveeX, corveeY);
 		
 		/* ######## Verification des postcondition ######### */
-		// \post: pointsDeVie(setCorvee(V,s))= pointsDeVie(V)@pre
+		// \post: pointsDeVie() = pointsDeVie(V)@pre
 		if (super.getPointsDeVie() != pointsDeVie_pre)
 			throw new PostconditionError("pointsDeVie(setCorvee(V,s))= pointsDeVie(V)@pre");
 		
-		// \post: quantiteOr(setCorvee(V,s))= quantiteOr(V)@pre
+		// \post: quantiteOr() = quantiteOr(V)@pre
 		if (super.getQuantiteOr() != quantiteOr_pre)
 			throw new PostconditionError("quantiteOr(setCorvee(V,s))= quantiteOr(V)@pre");
-		// \post: corvee(setCorvee(V,s)) = corvee(V)
+		// \post: corvee() = corvee(V)
 		if (super.getCorvee() != s)
 			throw new PostconditionError("corvee(setCorvee(V,s)) = s");
-		// \post: posx(setCorvee(V,s)) = posx(V)
-		if (super.getX() != x_pre)
+		// \post: posx() = corveeX
+		if (super.getX() != corveeX)
 			throw new PostconditionError("posx(setCorvee(V,s)) = posx(V)");
-		// \post: posy(setCorvee(V,s)) = posy(V)
-		if (super.getY() != y_pre)
+		// \post: posy() = corveeY
+		if (super.getY() != corveeY)
 			throw new PostconditionError("posy(setCorvee(V,s)) = posy(V)");
 		
 	}

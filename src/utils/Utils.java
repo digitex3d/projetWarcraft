@@ -39,6 +39,10 @@ public final class Utils {
 	public static HashMap<String, Object> getServiceAtPre(Object service) {
 		HashMap<String, Object> obs = new HashMap<String, Object>();
 		Class<? extends Object> cl = service.getClass();
+		
+		if (cl.getName().contains("Contract"))
+			cl = cl.getSuperclass();
+		
 		for (Method m : cl.getMethods()) {
 			if ( ! m.getReturnType().equals(Void.TYPE) &&
 					! m.getName().equals("init") &&
@@ -47,6 +51,7 @@ public final class Utils {
 					obs.put(m.getName(), m.invoke(service));
 				} catch (IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException e) {
+					System.out.println(m);
 					e.printStackTrace();
 				}
 		}

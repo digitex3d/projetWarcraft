@@ -149,13 +149,5 @@ public class MineContract extends MineDecorator {
 		// post: etatAppartenance() == etatAppartenance()@pre
 		if (super.getEtatAppartenance() != etatAppartenance_pre)
 			throw new PostconditionError("etatAppartenance() == etatAppartenance()@pre");
-	}
-	
-	public ERace getEtatAppartenance() {
-		// pre: ¬estAbandonnee()
-		if (super.estAbandonne())
-			throw new PreconditionError("¬estAbandonnee()");
-		
-		return super.getEtatAppartenance();
-	}
+	}	
 }

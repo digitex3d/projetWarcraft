@@ -100,4 +100,9 @@ public class MoteurJeuDecorator implements IMoteurJeu{
 	public IGestionDeplacement getGestDepl() {
 		return this.delegate.getGestDepl();
 	}
+
+	@Override
+	public void bindGD(IGestionDeplacement gd) {
+		this.delegate.bindGD(gd);
+	}
 }

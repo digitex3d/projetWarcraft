@@ -1,0 +1,99 @@
+Cas de test 0.1 : cas positif MoteurJeu::testInit1
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(100)
+    Oracle:
+        maxPasJeu(L0) == 100
+        pasJeuCourant(L0) == 0
+***********************************************************
+Cas de test 0.2 : cas positif MoteurJeu::testInit2
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(1)
+    Oracle:
+        maxPasJeu(L0) == 1
+        pasJeuCourant(L0) == 0
+***********************************************************
+Cas de test 0.3 : cas negatif MoteurJeu::testInit3
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(0)
+    Oracle:
+       Exception
+***********************************************************
+Cas de test 1.0 : cas positif MoteurJeu::testPasJeu1
+    Condition initiales : 
+        L0 = init(100)
+    Opérations : 
+        L1 = pasJeu(L0, DEPLACER, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 1
+***********************************************************
+Cas de test 1.1 : cas positif MoteurJeu::testPasJeu2
+    Condition initiales : 
+        L0 = init(100)
+    Opérations : 
+        L1 = pasJeu(L0, DEPLACER, 0, 90)
+    Oracle:
+        pasJeuCourant(L0) == 1
+***********************************************************
+Cas de test 1.2 : cas positif MoteurJeu::testPasJeu3
+    Condition initiales : 
+        L0 = init(100)
+    Opérations : 
+        L1 = pasJeu(L0, DEPLACER, 0, 180)
+    Oracle:
+        pasJeuCourant(L0) == 1
+***********************************************************
+Cas de test 1.3 : cas positif MoteurJeu::testPasJeu4
+    Condition initiales : 
+        L0 = init(100)
+    Opérations : 
+        L1 = pasJeu(L0, DEPLACER, 1, 270)
+    Oracle:
+        pasJeuCourant(L0) == 1
+***********************************************************
+Cas de test 1.4 : cas negatif MoteurJeu::testPasJeu5
+    Condition initiales : 
+        L0 = init(100)
+    Opérations : 
+        L1 = pasJeu(L0, DEPLACER, 0, -1)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.5 : cas positif MoteurJeu::testPasJeu6
+    Condition initiales : 
+        L0 = init(100)
+    Opérations : 
+        L1 = pasJeu(L0, ENTRERMINE, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 1
+***********************************************************
+Cas de test 1.6 : cas negatif MoteurJeu::testPasJeu7
+    Condition initiales : 
+        L0 = init(100)
+    Opérations : 
+        L1 = pasJeu(L0, ENTRERMINE, 1, 0)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.7 : cas negatif MoteurJeu::testPasJeu8
+    Condition initiales : 
+        L0 = pasJeu(init(100), ENTRERMINE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, ENTRERMINE, 0, 0)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.8 : cas negatif MoteurJeu::testPasJeu9
+    Condition initiales : 
+        L0 = pasJeu(init(100), ENTRERMINE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, DEPLACER, 0, 0)
+    Oracle:
+        Exception
+***********************************************************
+

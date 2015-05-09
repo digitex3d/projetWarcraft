@@ -1,11 +1,13 @@
 package services;
 
+import require.IRequireGestionDeplacement;
 import require.IRequireTerrain;
 import enums.ECommande;
 import enums.EResultat;
 
 public interface IMoteurJeu extends 
-	IRequireTerrain{
+	IRequireTerrain,
+	IRequireGestionDeplacement {
 	/* ########### Observators ########### */	
 	public int getMaxPasJeu();
 	public ITerrain getTerrain();
@@ -71,7 +73,7 @@ public interface IMoteurJeu extends
 		 				if command != ENTRERMINE || x != arg then
 		 					getMine(x) == getMine(x)@pre.abandoned()
 		 					
-		 Soit pArrivee := init(terrain(), getVillageois(vilNum)@pre, arg).calcChemin().getPointArrivee()
+		 Soit pArrivee := gestDepl().calcChemin(vilNum, arg).getPointArrivee()
 		 Soit Villpre := getVillageois(vilNum)@pre
 		 if command == DEPLACER then
 		 	getVillageois(vilNum) == Villpre.setXY(pArrivee.get(0), pArrivee.get(1)) && 
@@ -118,6 +120,6 @@ public interface IMoteurJeu extends
 	// murCenterY := (getMuraille(mu).posy() + getMuraille(mu).hauteur()) / 2
 	
 	// inv: peutEntrer(vill, mi) min= distance(vilposX, vilposY, mineCenterX, mineCenterY) <= 51 && ! getMine(mi).estLaminee()
-	// inv: peutEntrerHotelVille(vill, hdv) min= distance(vilposX, vilposY, hvCenterX,  hvCenterY)) <= 51 && getVillageois(vill).race() == getHDV(hdv).etatAppartenance()
+	// inv: peutEntrerHotelVille(vill, hdv) min= distance(vilposX, vilposY, hvCenterX,  hvCenterY)) <= 51 && getVillageois(vill).race() == getHDV(hdv).etatAppartenance() && getVillageois(vill).quantiteOr() > 0
 	// inv: peutTaperMuraille(vill,mu) min= distance(vilposX, vilposY, murCenterX, murCenterY) ≤ 51
 }

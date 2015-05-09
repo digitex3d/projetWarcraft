@@ -40,36 +40,36 @@ public interface ITerrain extends
 		post: largeur() == largeur
 		post: hauteur() == hauteur
 		post: \forall HV \in getListeHotelVille():
-					HV.posx() + HV.largeur() < largeur && 
-					HV.posy() + HV.hauteur() < hauteur &&
+					HV.posx() + HV.largeur() <= largeur && 
+					HV.posy() + HV.hauteur() <= hauteur &&
 					HV.orRestant() == 16 &&
 					\forall HV.posx() <= x < HV.posx() + HV.largeur()
 					\forall HV.posy() <= y < HV.posy() + HV.hauteur()
 						HDV \in getEntiteAt(x, y)
 		post: \forall Vill \in getListeVillageois():
 				HDV := HDV \in getListeHotelVille() && HDV.etatAppartenance() == Vill.race()
-					Vill.posx() + Vill.largeur() < largeur && 
-					Vill.posy() + Vill.hauteur() < hauteur &&
+					Vill.posx() + Vill.largeur() <= largeur && 
+					Vill.posy() + Vill.hauteur() <= hauteur &&
 					distance(Vill.posx(), Vill.posy(), HDV.posx(), HDV.posy()) <= 51 &&
 					Vill.pointsDeVie() == 100 &&
 					\forall Vill.posx() <= x < Vill.posx() + Vill.largeur()
 					\forall Vill.posy() <= y < Vill.posy() + Vill.hauteur()
 						VILLAGEOIS \in getEntiteAt(x, y)
 		post: \forall Mi \in getListeMine():
-					Mi.posx() + Mi.largeur() < largeur && 
-					Mi.posy() + Mi.hauteur() < hauteur &&
+					Mi.posx() + Mi.largeur() <= largeur && 
+					Mi.posy() + Mi.hauteur() <= hauteur &&
 					\forall Mi.posx() <= x < Mi.posx() + Mi.largeur()
 					\forall Mi.posy() <= y < Mi.posy() + Mi.hauteur()
 						MINE \in getEntiteAt(x, y)
 		post: \forall Ro \in getListeRoute():
-					Ro.posx() + Ro.largeur() < largeur && 
-					Ro.posy() + Ro.hauteur() < hauteur &&
+					Ro.posx() + Ro.largeur() <= largeur && 
+					Ro.posy() + Ro.hauteur() <= hauteur &&
 					\forall Ro.posx() <= x < Ro.posx() + Ro.largeur()
 					\forall Ro.posy() <= y < Ro.posy() + Ro.hauteur()
 						ROUTE \in getEntiteAt(x, y)
 		post: \forall Mu \in getListeMuraille():
-					Mu.posx() + Mu.largeur() < largeur && 
-					Mu.posy() + Mu.hauteur() < hauteur &&
+					Mu.posx() + Mu.largeur() <= largeur && 
+					Mu.posy() + Mu.hauteur() <= hauteur &&
 					\forall Mu.posx() <= x < Mu.posx() + Mu.largeur()
 					\forall Mu.posy() <= y < Mu.posy() + Mu.hauteur()
 						MURAILLE \in getEntiteAt(x, y)
