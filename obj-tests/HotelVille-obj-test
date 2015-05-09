@@ -1,0 +1,104 @@
+
+Cas de test 0.1 : cas positif HotelVille::testInit1
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(0, 10, 1, 1, 10, ORC)
+ Oracle:
+        posx(L0) == 0
+        posy(L0) == 10
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        orRestant(L0) == 10
+        etatAppartenance == ORC
+
+_____________________________________________________
+
+Cas de test 0.2 : cas positif HotelVille::testInit2
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, 0, 1, 1, 0, ORC)
+ Oracle:
+        posx(L0) == 10
+        posy(L0) == 0
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        orRestant(L0) == 10
+        etatAppartenance == ORC
+
+____________________________________________________
+
+Cas de test 0.3 : cas negatif HotelVille::testInit3
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, 0, 2, 1, 0, ORC)
+ Oracle:
+        Exception
+____________________________________________________
+
+Cas de test 0.4 : cas negatif HotelVille::testInit4
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, 0, 1, 2, 0, ORC)
+ Oracle:
+        Exception
+________________________________________
+
+Cas de test 0.5 : cas negatif HotelVille::testInit5
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(-1, 0, 1, 2, 0, ORC)
+ Oracle:
+        Exception
+___________________________________
+
+Cas de test 0.6 : cas negatif HotelVille::testInit6
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, -1, 1, 2, 0, ORC)
+ Oracle:
+        Exception
+____________________________________________________
+
+Cas de test 0.7 : cas negatif HotelVille::testInit7
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, 0, 1, 2, -1, ORC)
+ Oracle:
+        Exception
+____________________________________________________
+
+Cas de test 1.1 : cas positif  HotelVille::testdepotPre1
+Condition initiales : 
+         L0 = init(10, 10, 1, 1, 10, ORC)
+ Opérations : 
+        L1.1 = depot(L0, 5)
+ Oracle:
+orRestant(L0) == 15       
+____________________________________________________
+
+Cas de test 1.2 : cas positif  HotelVille::testdepotPre2
+Condition initiales : 
+         L0 = init(10, 10, 1, 1, 10, ORC)
+ Opérations : 
+        L1.2 = depot(L0, 1)
+ Oracle:
+orRestant(L0) == 11       
+____________________________________________________
+
+Cas de test 1.3: cas negatif HotelVille::testdepotPre3
+Condition initiales : 
+         L0 = init(10, 10, 1, 1, 10, ORC)
+ Opérations : 
+        L1.3 = depot(L0, 0)
+ Oracle:
+     Exception
+
+____________________________________________________
+
