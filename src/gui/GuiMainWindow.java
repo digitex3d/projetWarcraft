@@ -1,25 +1,19 @@
 package gui;
 
 
-import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JFrame;
 
-import services.IMoteurJeu;
-import services.IVillageois;
+import services.ITerrain;
 
 @SuppressWarnings("serial")
 public class GuiMainWindow extends JFrame {
 	Terrain terrain;
 	
 
-	public GuiMainWindow(int largeur, int hauteur) {
-		this.terrain = new Terrain();
-		
+	public GuiMainWindow(ITerrain terrainJeu, EventListener listener) {
+		this.terrain = new Terrain(listener);
 	
-		initUI(largeur, hauteur);
+		initUI(terrainJeu.getLargeur(),terrainJeu.getHauteur());
 	}
 
 	private void initUI(int largeur, int hauteur) {
@@ -33,8 +27,8 @@ public class GuiMainWindow extends JFrame {
 		setLocationRelativeTo(null);
 	}    
 
-	public void updateMoteur(IMoteurJeu moteur){
-		this.terrain.updateMoteur( moteur);
+	public void updateTerrain(ITerrain terrainJeu){
+		this.terrain.updateTerrain( terrainJeu);
 	}
 	
 	

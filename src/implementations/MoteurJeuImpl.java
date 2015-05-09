@@ -90,14 +90,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
 
 	}
 
-	//TODO: rimuovere
-	public void eventListener(MouseEvent e, EEvent click){
-		switch( click ){
-		case CLICK:
-			this.pasJeu( ECommande.DEPLACER, 0, 90);
-			break;
-		}
-	}
+
 	
 	@Override
 	public void pasJeu(ECommande commande, int numVillageois, int argument) {
@@ -228,6 +221,12 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	@Override
 	public IGestionDeplacement getGestDepl() {
 		return this.gd;
+	}
+
+	@Override
+	public void bindGD(IGestionDeplacement gd) {
+		this.gd = gd;
+		
 	}
 
 }
