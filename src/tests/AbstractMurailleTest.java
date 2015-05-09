@@ -8,7 +8,7 @@ import services.IMuraille;
 
 public abstract class AbstractMurailleTest extends AbstractAssertion{
 
-	protected IMuraille mur;
+	protected IMuraille hdv;
 
 
 	@Before
@@ -16,62 +16,62 @@ public abstract class AbstractMurailleTest extends AbstractAssertion{
 
 	@After
 	public void after() {
-		mur = null;
+		hdv = null;
 	}
 
 
 	@Test
 	public void testInit1() {
-		mur.init(0, 10, 1, 1, 10);
+		hdv.init(0, 10, 1, 1, 10);
 
 		// oracle
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise x", mur.getX() == 0);
+				+ " avec une mauvaise x", hdv.getX() == 0);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise y", mur.getY() == 10);
+				+ " avec une mauvaise y", hdv.getY() == 10);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise largeur", mur.getLargeur() == 1);
+				+ " avec une mauvaise largeur", hdv.getLargeur() == 1);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise hauteur", mur.getHauteur() == 1);
+				+ " avec une mauvaise hauteur", hdv.getHauteur() == 1);
 		assertPerso("init, La muraille est créé"
-				+ " avec des mauvaise  points de vie", mur.getPointsDeVie() == 10);
+				+ " avec des mauvaise  points de vie", hdv.getPointsDeVie() == 10);
 	}
 
 	@Test
 	public void testInit2() {
-		mur.init(10, 0, 1, 1, 1);
+		hdv.init(10, 0, 1, 1, 1);
 
 		// oracle
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise x", mur.getX() == 10);
+				+ " avec une mauvaise x", hdv.getX() == 10);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise y", mur.getY() == 0);
+				+ " avec une mauvaise y", hdv.getY() == 0);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise largeur", mur.getLargeur() == 1);
+				+ " avec une mauvaise largeur", hdv.getLargeur() == 1);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise hauteur", mur.getHauteur() == 1);
+				+ " avec une mauvaise hauteur", hdv.getHauteur() == 1);
 		assertPerso("init, La muraille est créé"
-				+ " avec un mauvaise  points de vie", mur.getPointsDeVie() == 1);
+				+ " avec un mauvaise  points de vie", hdv.getPointsDeVie() == 1);
 	}
 
 	public void testRetraitPre1() {
 		// condition initiale : 
-		mur.init(10, 10, 1,1, 100);
+		hdv.init(10, 10, 1,1, 100);
 
 		// opération
-		mur.retrait(5);
+		hdv.retrait(5);
 
 		// oracle
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise x", mur.getX() == 10);
+				+ " avec une mauvaise x", hdv.getX() == 10);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise y", mur.getY() == 10);
+				+ " avec une mauvaise y", hdv.getY() == 10);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise largeur", mur.getLargeur() == 1);
+				+ " avec une mauvaise largeur", hdv.getLargeur() == 1);
 		assertPerso("init, La muraille est créé"
-				+ " avec une mauvaise hauteur", mur.getHauteur() == 1);
+				+ " avec une mauvaise hauteur", hdv.getHauteur() == 1);
 		assertPerso("init, La muraille est créé"
-				+ " avec un mauvaise  points de vie", mur.getPointsDeVie() == 95);
+				+ " avec un mauvaise  points de vie", hdv.getPointsDeVie() == 95);
 	}
 
 }

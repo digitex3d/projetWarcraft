@@ -13,7 +13,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 	@Override
 	@Before
 	public void before() {
-		mur = new MurailleContract(new MurailleImpl());
+		hdv = new MurailleContract(new MurailleImpl());
 	}
 
 	@Test(expected=PreconditionError.class)
@@ -21,7 +21,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 		// condition initiale : aucune
 
 		// opération
-		mur.init(-1, 0, 1, 1, 10);
+		hdv.init(-1, 0, 1, 1, 10);
 
 		// oracle
 		// Exception PreconditionError
@@ -32,7 +32,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 		// condition initiale : aucune
 
 		// opération
-		mur.init(10, -1, 1, 1, 10);
+		hdv.init(10, -1, 1, 1, 10);
 
 		// oracle
 		// Exception PreconditionError
@@ -44,7 +44,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 		// condition initiale : aucune
 
 		// opération
-		mur.init(10, 1, 1,2, 1);
+		hdv.init(10, 1, 1,2, 1);
 
 		// oracle
 		// Exception PreconditionError
@@ -55,7 +55,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 		// condition initiale : aucune
 
 		// opération
-		mur.init(10, 1, 2,1, 1);
+		hdv.init(10, 1, 2,1, 1);
 
 		// oracle
 		// Exception PreconditionError
@@ -66,7 +66,7 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 		// condition initiale : aucune
 
 		// opération
-		mur.init(10, 10, 1,1, 0);
+		hdv.init(10, 10, 1,1, 0);
 
 		// oracle
 		// Exception PreconditionError
@@ -77,10 +77,10 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 	@Test(expected=PreconditionError.class)
 	public void testRetraitFailPre2() {
 		// condition initiale : 
-		mur.init(10, 10, 1,1, 100);
+		hdv.init(10, 10, 1,1, 100);
 
 		// opération
-		mur.retrait(-5);
+		hdv.retrait(-5);
 
 
 		// oracle
@@ -89,11 +89,11 @@ public class MurailleContractTest   extends AbstractMurailleTest {
 
 	public void testRetraitFailPre3() {
 		// condition initiale : 
-		mur.init(10, 10, 1,1, 100);
-		mur.retrait(100);
+		hdv.init(10, 10, 1,1, 100);
+		hdv.retrait(100);
 
 		// opération
-		mur.retrait(1);
+		hdv.retrait(1);
 
 		// oracle
 		// Exception PreconditionError
