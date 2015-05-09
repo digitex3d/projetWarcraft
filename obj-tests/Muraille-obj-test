@@ -1,0 +1,115 @@
+
+Cas de test 0.1 : cas positif Muraille::testInit1
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(0, 10, 1, 1, 10)
+ Oracle:
+        posx(L0) == 0
+        posy(L0) == 10
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        pointsDeVie(L0) == 10
+      
+________________________________________________________
+
+Cas de test 0.2 : cas positif Muraille::testInit2
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, 0, 1, 1, 10)
+ Oracle:
+        posx(L0) == 10
+        posy(L0) == 0
+        largeur(L0) == 1
+        hauteur(L0) == 1
+        pointsDeVie(L0) == 1
+
+________________________________________________________        
+
+Cas de test 0.3 : cas negatif Muraille::testInitPre3
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(-1, 0, 1, 1, 10)
+ Oracle:
+    Exception
+________________________________________________________    
+
+Cas de test 0.4 : cas negatif Muraille::PretestInit4
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, -1, 1, 1, 10)
+ Oracle:
+    Exception
+
+________________________________________________________  
+
+Cas de test 0.5 : cas negatif Muraille::PretestInit5
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, 1, 1,2, 1)
+ Oracle:
+    Exception
+ 
+________________________________________________________ 
+
+Cas de test 0.6 : cas negatif Muraille::PretestInit6
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, 1, 2,1, 1)
+ Oracle:
+    Exception
+  
+________________________________________________________ 
+
+Cas de test 0.7 : cas negatif Muraille::PretestInit7
+Condition initiales : 
+        aucune
+ Opérations : 
+        L0 = init(10, 10, 1,1, 0)
+ Oracle:
+    Exception
+   
+
+________________________________________________________  
+
+Cas de test  1.1 : cas positif Muraille::testRetraitPre1
+Condition initiales : 
+        5L0 = init(10, 10, 1,1, 100)
+ Opérations : 
+        L1.1 = retrait(L0, 5)
+ Oracle:
+      posx(L1.1) == 10
+      posy(L1.1) == 10
+      largeur(L1.1) == 1
+      hauteur(L1.1) == 1
+      pointsDeVie(L1.1) == 95
+
+________________________________________________________  
+
+Cas de test  1.2 : cas négatif  Muraille::testRetraitPre2
+Condition initiales : 
+          L0 = init(10, 10, 1,1, 100)
+ Opérations : 
+        L1.2 = retrait(L0, -5)
+ Oracle:
+      Exception
+
+________________________________________________________  
+
+Cas de test  1.3 : cas négatif  Muraille::testRetraitPre3
+Condition initiales : 
+          L0 =  retrait(init(10, 10, 1,1, 100), 100)
+
+
+ Opérations : 
+        L1.3 = retrait(L0, 1)
+ Oracle:
+      Exception
+________________________________________________________  
+
+  

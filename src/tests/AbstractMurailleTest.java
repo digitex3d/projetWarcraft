@@ -9,7 +9,7 @@ import services.IMuraille;
 public abstract class AbstractMurailleTest extends AbstractAssertion{
 
 	protected IMuraille mur;
-	
+
 
 	@Before
 	public abstract void before();
@@ -36,11 +36,11 @@ public abstract class AbstractMurailleTest extends AbstractAssertion{
 		assertPerso("init, La muraille est créé"
 				+ " avec des mauvaise  points de vie", mur.getPointsDeVie() == 10);
 	}
-	
+
 	@Test
 	public void testInit2() {
 		mur.init(10, 0, 1, 1, 1);
-		
+
 		// oracle
 		assertPerso("init, La muraille est créé"
 				+ " avec une mauvaise x", mur.getX() == 10);
@@ -53,5 +53,25 @@ public abstract class AbstractMurailleTest extends AbstractAssertion{
 		assertPerso("init, La muraille est créé"
 				+ " avec un mauvaise  points de vie", mur.getPointsDeVie() == 1);
 	}
-	
+
+	public void testRetraitPre1() {
+		// condition initiale : 
+		mur.init(10, 10, 1,1, 100);
+
+		// opération
+		mur.retrait(5);
+
+		// oracle
+		assertPerso("init, La muraille est créé"
+				+ " avec une mauvaise x", mur.getX() == 10);
+		assertPerso("init, La muraille est créé"
+				+ " avec une mauvaise y", mur.getY() == 10);
+		assertPerso("init, La muraille est créé"
+				+ " avec une mauvaise largeur", mur.getLargeur() == 1);
+		assertPerso("init, La muraille est créé"
+				+ " avec une mauvaise hauteur", mur.getHauteur() == 1);
+		assertPerso("init, La muraille est créé"
+				+ " avec un mauvaise  points de vie", mur.getPointsDeVie() == 95);
+	}
+
 }
