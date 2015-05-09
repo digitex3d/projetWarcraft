@@ -2,6 +2,7 @@ package utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -50,6 +51,15 @@ public final class Utils {
 				}
 		}
 		return obs;
+	}
+	
+	public static boolean areEqualValues( ArrayList<?> l1, ArrayList<?> l2){
+		if(l1.size() != l2.size()) return false;
+		
+		for (int i = 0; i <  l1.size() ; i++) 
+			if( l1.get(i) != l2.get(i)) return false;
+		
+		return true;
 	}
 }
 

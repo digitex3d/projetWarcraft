@@ -112,6 +112,7 @@ public class TerrainImpl implements ITerrain {
 			throw new Error("Les villageois ne sont pas bindé!");
 		
 		terrain = new ArrayList<List<Set<EEntite>>>();
+
 		for (int x = 0; x < largeur; x++) {
 			terrain.add(new ArrayList<Set<EEntite>>());
 			for (int y = 0; y < hauteur; y++) {
@@ -120,7 +121,7 @@ public class TerrainImpl implements ITerrain {
 				terrain.get(x).add(s);
 			}
 		}
-		
+ 		
 		for (IHotelVille hdv : listeHotelVille)
 			setEntiteAt(EEntite.HDV, hdv.getX(), hdv.getY(), hdv.getLargeur(), hdv.getHauteur());
 		for (IMine mine : listeMine)

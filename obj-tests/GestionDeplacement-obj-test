@@ -1,0 +1,182 @@
+Cas de test 0.1 : cas positif  
+GestionDeplacement::testCalcCheminPre1
+Condition initiales : 
+       L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2=  Terrain:: getEntite(x,y, 600, 400) = {RIEN}
+       L3 = get(Terrain:: getListeVillageois(L2), 0) =
+       Villageois::init(0,0,ORC,1,1,10,2,100)
+ Opérations : 
+        L0.1 = calcChemin(L0,0, 270 )
+ Oracle:
+        cheminX = {0,0}
+        cheminY = {1,2}
+        getPointArrivee == {0,2}
+        firstObstacle == -1
+        estCalcChemin == true
+__________________________________________________________
+
+Cas de test 0.2 : cas positif  GestionDeplacement::testCalcCheminPre2
+Condition initiales : 
+       L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2= getEntite(0,0,600,400) = {RIEN}
+       L3 = get(Terrain:: getListeVillageois(L2), 0) =
+       Villageois::init(0,0,ORC,1,1,10,2,100)
+
+
+Opérations : 
+        L0.2 = calcChemin(L0, 360 )
+
+
+Oracle:
+        cheminX = {1,2}
+        cheminY = {0,0}
+        getPointArrivee == {2,0}
+        firstObstacle == -1
+        estCalcChemin == true
+
+__________________________________________________________
+Cas de test 0.3 : cas positif  GestionDeplacement::testCalcCheminPre3
+Condition initiales : 
+       L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2= getEntite(0,0,600,400) = {RIEN}
+       L3 = get(Terrain:: getListeVillageois(L2), 0) =
+       Villageois::init(0,0,ORC,1,1,10,2,100)
+
+
+
+ Opérations : 
+        L0.3 = calcChemin(L0, 0 )
+ Oracle:
+        cheminX = {1,2}
+        cheminY = {0,0}
+        getPointArrivee == {2,0}
+        firstObstacle == -1
+        estCalcChemin == true
+_____________________________________________________
+
+
+Cas de test 0.4 : cas negatif  
+Angle hors de la borne inférieure
+GestionDeplacement::testCalcCheminPre4
+Condition initiales : 
+             L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2= getEntite(0,0,600,400) = {RIEN}
+       L3 = get(Terrain:: getListeVillageois(L2), 0) =
+       Villageois::init(0,0,ORC,1,1,10,2,100)
+
+
+Opérations : 
+        L0.4 = calcChemin(L0, -5 )
+
+
+Oracle:
+      Exception
+
+____________________________________________________
+
+Cas de test 0.5 : cas  negatif  
+Angle hors de la borne supérieure
+GestionDeplacement::testCalcCheminPre5
+Condition initiales : 
+       L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2= getEntite(0,0,600,400) = {RIEN}
+       L3 = get(Terrain:: getListeVillageois(L2), 0) =
+       Villageois::init(0,0,ORC,1,1,10,2,100)
+
+
+ Opérations : 
+        L0.5 = calcChemin(L0, 370 )
+ Oracle:
+      Exception
+       
+__________________________________________________________
+
+Cas de test 0.6 : cas negatif  
+Villageois  hors de la borne supérieure
+GestionDeplacement::testCalcCheminPre6
+Condition initiales : 
+       L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2= |Terrain:: getListeVillageois(L1)| == 1
+Opérations : 
+        L0.6 = calcChemin(L0, 5, 60 )
+
+
+Oracle:
+      Exception
+
+__________________________________________________________
+
+
+Cas de test 0.8 : cas positif 
+Détection obstacle
+GestionDeplacement::testCalcChemin8
+Condition initiales : 
+        L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2= Terrain:: getEntite(L1, 2,0,1,1) = {MURAILLE}
+       L3 = get(Terrain:: getListeVillageois(L2), 0) =
+       Villageois::init(0,0,ORC,1,1,10,4,100)
+Opérations : 
+        L0.8 = calcChemin(L0,0, 360 )
+
+
+Oracle:
+        cheminX = {1,2,3,4}
+        cheminY = {0,0,0,0}
+        getPointArrivee == {1,0}
+        firstObstacle == 1
+ estCalcChemin == true
+
+
+__________________________________________________________
+
+Cas de test 0.9 : cas positif 
+Détection obstacle premier pas
+GestionDeplacement::testCalcChemin9
+Condition initiales : 
+       L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2= Terrain:: getEntite(L1, 1,0) = {MURAILLE}
+       L3 = get(Terrain:: getListeVillageois(L2), 0) =
+       		Villageois::init(0,0,ORC,1,1,10,4,100)
+Opérations : 
+        L0.9 = calcChemin(L0,0, 360 )
+
+Oracle:
+        cheminX = {1,2,3,4}
+        cheminY = {0,0,0,0}
+        getPointArrivee == {0,0}
+        firstObstacle == 0
+        estCalcChemin == true
+___________________________________________________________
+
+
+Cas de test 0.10 : cas positif 
+Route dans le chemin
+GestionDeplacement::testCalcChemin9
+Condition initiales : 
+       L0 = init()
+       L1 = Terrain::init( 600, 400 )
+       L2=  Terrain:: getEntite(L1, 2,0,1) = {Route}
+       L3 = get(Terrain:: getListeVillageois(L2), 0) =
+       Villageois::init(0,0,ORC,1,1,10,4,100)
+       L4 = get(Terrain:: getListeRoute(L2), 0)=
+                Route::init(2,0,1,1,1)  
+Opérations : 
+        L0.10 = calcChemin(L0,0, 360 )
+
+
+Oracle:
+        cheminX = {1,2,3,4,5}
+        cheminY = {0,0,0,0,5}
+        getPointArrivee == {5,0}
+        firstObstacle == -1
+         estCalcChemin == true
+        
+       

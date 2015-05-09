@@ -63,26 +63,18 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 		this.cheminX = new ArrayList<Integer>();
 		this.cheminY = new ArrayList<Integer>();
 		this.getPointArrive = new ArrayList<Integer>();
-		
-		this.estCalcChemin = true;
-		int bonus = 0;
-		
-		for (int i = 0; i < getCheminX().size(); i++) {
-			bonus += this.terr.getBonusVitesse(	getCheminX().get(i),
-												getCheminY().get(i),
-												vill.getLargeur(),
-												vill.getHauteur());
-		}
-		
-		// Position finale max
-		int destX = (int) (vill.getX() + (( bonus + vill.getVitesse() ) * Math.cos( angle )));
-		int destY = (int) (vill.getY() + (( bonus + vill.getVitesse() ) * -Math.sin( angle )));
+					
+		int cosO= (int) Math.cos( Math.toRadians(angle)); 
+		int sinO= (int) Math.sin( Math.toRadians(angle));
+		// Position finale sans bonus
+		int destX =   (int) (vill.getX() + (vill.getVitesse() * cosO)) ;
+		int destY =   (int) (vill.getY() + (vill.getVitesse() * -sinO));
 			
 		int currentX = vill.getX();
 		int currentY = vill.getY();
 		
 		// Construction liste du chemin
-		while( currentX != destX && currentY != destX ){
+		while( true ){
 			if( currentX > destX )
 				currentX--;
 			else if( currentX < destX )
@@ -96,9 +88,50 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 			this.cheminX.add(currentX);
 			this.cheminY.add(currentY);
 			
-		
-		
+			if( currentX == destX && currentY== destY) break;
 		}
+		
+		
+		int bonus = 0;
+		
+		for (int i = 0; i < getCheminX().size(); i++) {
+			bonus += this.terr.getBonusVitesse(	getCheminX().get(i),
+												getCheminY().get(i),
+												vill.getLargeur(),
+												vill.getHauteur());
+		}
+		
+		// Position finale avec bonus
+		
+		
+		destX =   (int) (vill.getX() + (bonus + vill.getVitesse()) * cosO);
+		destY =   (int) (vill.getY() + (bonus + vill.getVitesse()) * -sinO);
+			
+		this.cheminX = new ArrayList<Integer>();
+		this.cheminY = new ArrayList<Integer>();
+		
+		currentX = vill.getX();
+		currentY = vill.getY();
+		
+		// Construction liste du chemin avec bonus
+		while( true ){
+			if( currentX > destX )
+				currentX--;
+			else if( currentX < destX )
+				currentX++;	
+
+			if( currentY > destY )
+				currentY--;
+			else if( currentY < destY )
+				currentY++;	
+
+			this.cheminX.add(currentX);
+			this.cheminY.add(currentY);
+
+			if( currentX == destX && currentY== destY) break;
+		}
+		
+	
 		
 		
 		// Détection premier obstacle
@@ -110,18 +143,22 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 												vill.getLargeur(),
 												vill.getHauteur())){
 				this.firstObstacle = i;
-				this.getPointArrive.add(cheminX.get(i-1),
-						cheminY.get(i-1));
-					
+				if(i == 0){
+					this.getPointArrive.add(vill.getX()	);
+					this.getPointArrive.add(vill.getY() );
+				}else{
+					this.getPointArrive.add(cheminX.get(i-1));
+					this.getPointArrive.add(cheminY.get(i-1));
+				}
 			}
 		
 		// Pas d'obstacles, position max atteignable
-		if( this.firstObstacle == -1 )
-			this.getPointArrive.add(cheminX.get( cheminX.size() - 1),
-					cheminY.get( cheminY.size() - 1));
-		// Obstacle au premier pas, la position ne change pas
-		else if ( this.firstObstacle == 0  )
-			this.getPointArrive.add(vill.getX(),vill.getY()	);
+		if( this.firstObstacle == -1 ){
+			this.getPointArrive.add( getCheminX().get(getCheminX().size()-1));
+			this.getPointArrive.add( getCheminY().get(getCheminY().size()-1));
+		}
+		
+		this.estCalcChemin = true;
 
 	}
 
