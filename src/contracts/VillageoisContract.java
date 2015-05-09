@@ -55,6 +55,8 @@ public class VillageoisContract extends VillageoisDecorator {
 		// execute fonction
 		super.init(x,y,race, largeur, hauteur, force, vitesse, pointsDeVie);
 		
+		this.checkInvariants();
+		
 		/* ######## Verification des postcondition ######### */
 		
 		// \post: posx(init(x,y,s,l,h,f,v,p))=x
@@ -84,12 +86,9 @@ public class VillageoisContract extends VillageoisDecorator {
 		// \post: quantiteOr(init(x,y,s,l,h,f,v,p))=0
 		if (super.getQuantiteOr() != 0)
 			throw new PostconditionError("quantiteOr(init(x,y,s,l,h,f,v,p))=0");
-		// \post: corvee(init(x,y,s,l,h,f,v,p))
+		// \post: corvee(init(x,y,s,l,h,f,v,p)) = 0
 		if (super.getCorvee() != 0)
 			throw new PostconditionError("corvee(init(x,y,s,l,h,f,v,p))");
-		
-		// Deuxième check des invariants
-		this.checkInvariants();
 		
 		return this;
 	}

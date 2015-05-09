@@ -25,7 +25,17 @@ public interface IVillageois extends IEntite{
 	*     		vitesse > 0 && 
 	* 			pointsVie > 0 &&
 	* 			x >= 0 &&
-	*		 	y >= 0 &&
+	*		 	y >= 0
+	*	post: posx() == x
+	*	post: posy() == y
+	*	post: race() == s
+	*	post: largeur() == l
+	*	post: hauteur() == h
+	*	post: force() == f
+	*	post: vitesse() == v
+	*	post: pointsDeVie() == p
+	*	post: quantiteOr() == 0
+	*	post: corvee() == 0
 	*/
 
 	IVillageois init(int x, int y, ERace race, int largeur, int hauteur, int force, 

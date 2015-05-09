@@ -1,0 +1,287 @@
+Cas de test 0.1 : cas positif Terrain::testInit1
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(600, 500)
+    Oracle:
+        largeur(L0) == 600
+        hauteur(L0) == 500
+***********************************************************
+Cas de test 0.2 : cas positif Terrain::testInit2
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(800, 400)
+    Oracle:
+        largeur(L0) == 800
+        hauteur(L0) == 400
+***********************************************************
+Cas de test 0.3 : cas positif Terrain::testInit3
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(800, 600)
+    Oracle:
+        largeur(L0) == 800
+        hauteur(L0) == 600
+***********************************************************
+Cas de test 0.4 : cas negatif Terrain::testInit4
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(500, 600)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 0.5 : cas negatif Terrain::testInit5
+    Condition initiales : 
+        aucune
+    Opérations : 
+        L0 = init(800, 210)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.0 : cas positif Terrain::testSetEntiteAt1
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, 0, 10, 21, 21)
+    Oracle:
+        \forall x \in [0, 21[, \forall y \in [10, 31[ 
+            EEntite.ROUTE \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 1.1 : cas positif Terrain::testSetEntiteAt2
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, 10, 0, 21, 21)
+    Oracle:
+        \forall x \in [10, 31[, \forall y \in [0, 21[ 
+            EEntite.ROUTE \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 1.2 : cas positif Terrain::testSetEntiteAt3
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, 790, 590, 10, 5)
+    Oracle:
+        \forall x \in [790, 800[, \forall y \in [590, 595[ 
+            EEntite.ROUTE \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 1.3 : cas positif Terrain::testSetEntiteAt4
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, 790, 590, 5, 10)
+    Oracle:
+        \forall x \in [790, 795[, \forall y \in [590, 600[ 
+            EEntite.ROUTE \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 1.4 : cas negatif Terrain::testSetEntiteAt5
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, 0, 0, 800, 600)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.5 : cas negatif Terrain::testSetEntiteAt6
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, -1, 10, 31, 31)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.6 : cas negatif Terrain::testSetEntiteAt7
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, 10, -1, 31, 31)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.7 : cas negatif Terrain::testSetEntiteAt8
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, 790, 590, 31, 5)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.8 : cas negatif Terrain::testSetEntiteAt9
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = setEntiteAt(L0, EEntite.ROUTE, 790, 590, 5, 31)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 2.0 : cas positif Terrain::testMoveVillageoisAt1
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, 0, 50, 40)
+    Oracle:
+        \forall x \in [50, 61[, \forall y \in [40, 51[ 
+            EEntite.VILLAGEOIS \in getEntiteAt(L1, x, y)
+        \forall x \in [40, 51[, \forall y \in [40, 51[ 
+            EEntite.VILLAGEOIS \not \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 2.1 : cas positif Terrain::testMoveVillageoisAt2
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, 0, 40, 50)
+    Oracle:
+        \forall x \in [40, 51[, \forall y \in [50, 61[ 
+            EEntite.VILLAGEOIS \in getEntiteAt(L1, x, y)
+        \forall x \in [40, 51[, \forall y \in [40, 51[ 
+            EEntite.VILLAGEOIS \not \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 2.2 : cas positif Terrain::testMoveVillageoisAt3
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, 0, 50, 50)
+    Oracle:
+        \forall x \in [50, 61[, \forall y \in [50, 61[ 
+            EEntite.VILLAGEOIS \in getEntiteAt(L1, x, y)
+        \forall x \in [40, 51[, \forall y \in [40, 51[ 
+            EEntite.VILLAGEOIS \not \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 2.3 : cas negatif Terrain::testMoveVillageoisAt4
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, -1, 60, 50)
+    Oracle:
+       Exception
+***********************************************************
+Cas de test 2.4 : cas negatif Terrain::testMoveVillageoisAt5
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, 0, -1, 50)
+    Oracle:
+       Exception
+***********************************************************
+Cas de test 2.5 : cas negatif Terrain::testMoveVillageoisAt6
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, 0, 50, -1)
+    Oracle:
+       Exception
+***********************************************************
+Cas de test 2.6 : cas negatif Terrain::testMoveVillageoisAt7
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, 0, 795, 50)
+    Oracle:
+       Exception
+***********************************************************
+Cas de test 2.7 : cas negatif Terrain::testMoveVillageoisAt8
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, 0, 50, 595)
+    Oracle:
+       Exception
+***********************************************************
+Cas de test 2.8 : cas negatif Terrain::testMoveVillageoisAt9
+    Condition initiales : 
+        L0 = setEntiteAt(init(800, 600), EEntite.MURAILLE, 0, 0, 21, 21)
+    Opérations : 
+        L1 = moveVillageoisAt(L0, 0, 10, 10)
+    Oracle:
+       Exception
+***********************************************************
+Cas de test 3.0 : cas positif Terrain::testRemoveEntiteAt1
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = removeEntiteAt(L0, EEntite.VILLAGEOIS, 40, 40, 11, 11)
+    Oracle:
+        \forall x \in [40, 51[, \forall y \in [40, 51[ 
+            EEntite.VILLAGEOIS \not \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 3.1 : cas positif Terrain::testRemoveEntiteAt2
+    Condition initiales : 
+        L0 = setEntiteAt(init(800, 600), EEntite.ROUTE, 10, 10, 11, 11)
+    Opérations : 
+        L1 = removeEntiteAt(L0, EEntite.ROUTE, 10, 10, 11, 11)
+    Oracle:
+        \forall x \in [10, 21[, \forall y \in [10, 21[ 
+            EEntite.ROUTE \not \in getEntiteAt(L1, x, y)
+***********************************************************
+Cas de test 3.2 : cas negatif Terrain::testRemoveEntiteAt3
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = removeEntiteAt(L0, EEntite.VILLAGEOIS, 10, 10, 11, 11)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 3.3 : cas negatif Terrain::testRemoveEntiteAt4
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = removeEntiteAt(L0, EEntite.VILLAGEOIS, -1, 10, 11, 11)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 3.4 : cas negatif Terrain::testRemoveEntiteAt5
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = removeEntiteAt(L0, EEntite.VILLAGEOIS, 10, -1, 11, 11)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 3.5 : cas negatif Terrain::testRemoveEntiteAt6
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = removeEntiteAt(L0, EEntite.VILLAGEOIS, 10, 10, 799, 11)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 3.6 : cas negatif Terrain::testRemoveEntiteAt7
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = removeEntiteAt(L0, EEntite.VILLAGEOIS, 10, 10, 11, 599)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 4.0 : cas positif Terrain::testReinsertVillageoisAt1
+    Condition initiales : 
+        L0 = init(800, 600)
+        L1 = get(getListeVillageois(L0), 0)
+        L2 = setXY(L1, 80, 80)
+        L3 = removeEntiteAt(L0, EEntite.VILLAGEOIS, 40, 40, 11, 11)
+    Opérations : 
+        L4 = reinsertVillageois(L3, 0)
+    Oracle:
+        L5 = get(getListeVillageois(L0), 0)
+        \forall x \in [posx(L5), posx(L5) + 11[, \forall y \in [posy(L5), posy(L5) + 11[ 
+            EEntite.VILLAGEOIS \in getEntiteAt(L4, x, y)
+***********************************************************
+Cas de test 4.1 : cas negatif Terrain::testReinsertVillageoisAt2
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = reinsertVillageois(L0, 0)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 4.2 : cas negatif Terrain::testReinsertVillageoisAt3
+    Condition initiales : 
+        L0 = init(800, 600)
+    Opérations : 
+        L1 = reinsertVillageois(L0, -1)
+    Oracle:
+        Exception
+***********************************************************

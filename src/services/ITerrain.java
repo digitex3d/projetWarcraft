@@ -99,7 +99,7 @@ public interface ITerrain extends
 						getEntiteAt(x, y) == getEntiteAt(x, y)@pre \plus {VILLAGEOIS}
 			  \forall x \in [Vill@pre.posx(), Vill@pre.posx() + Vill@pre.largeur()[,
 			  \forall y \in [Vill@pre.posy(), Vill@pre.posy() + Vill@pre.hauteur()[,
-			  		if x \not \in [xn, xn + Vill@pre.largeur()[ \and y \not \in [yn, yn + Vill@pre.hauteur()[ then
+			  		if x \not \in [xn, xn + Vill@pre.largeur()[ \or y \not \in [yn, yn + Vill@pre.hauteur()[ then
 						if getEntiteAt(x, y)@pre == {VILLAGEOIS} then
 							getEntiteAt(x, y) == {RIEN}
 						else
