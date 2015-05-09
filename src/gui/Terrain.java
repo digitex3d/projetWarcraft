@@ -10,11 +10,16 @@ import java.awt.geom.Ellipse2D;
 
 
 
+
+
+
 import javax.swing.JPanel;
 
 import services.IHotelVille;
 import services.IMine;
-import services.IMoteurJeu;
+import services.IMuraille;
+import services.IRoute;
+import services.ITerrain;
 import services.IVillageois;
 
 
@@ -23,11 +28,11 @@ import services.IVillageois;
 
 @SuppressWarnings("serial")
 public class Terrain extends JPanel implements MouseListener {
+	EventListener listener;
+	ITerrain terrainJeu;
 
-	IMoteurJeu moteurJeu;
-
-    public  Terrain() {
-
+    public  Terrain(EventListener listener) {
+    	this.listener = listener;
     	addMouseListener(this);
         setFocusable(true);
         setBackground(Color.GREEN);
@@ -44,32 +49,45 @@ public class Terrain extends JPanel implements MouseListener {
 	        
 	        // Paint Hotel de Ville
 	        g.setColor(Color.RED);
-	        IHotelVille hv = moteurJeu.getHotelDeVille();
-	        Ellipse2D.Double circle = new Ellipse2D.Double(hv.getX(),
-	        		hv.getY(), hv.getLargeur(), hv.getHauteur());
-	        g2d.fill(circle); 
+	        for(IHotelVille hv : terrainJeu.getListeHotelVille()){
+	        	   Ellipse2D.Double circle = new Ellipse2D.Double(hv.getX(),
+	   	        hv.getY(), hv.getLargeur(), hv.getHauteur());
+	   	        g2d.fill(circle); 
+	        }
+	     
 	      
 	        
 	        
-	        for( IVillageois v : moteurJeu.getListVillageois()){
+	        for( IVillageois v : terrainJeu.getListeVillageois()){
 	        	g.setColor(Color.BLACK);
 	        	g.drawOval(v.getX(), v.getY(), v.getLargeur(), v.getHauteur());    
 
 	        }
 	        
-	        for( IMine m : moteurJeu.getListMines()){
+	        for( IMine m : terrainJeu.getListeMine()){
 	        	g.setColor(Color.gray);
 	        	g.drawOval(m.getX(), m.getY(), m.getLargeur(), m.getHauteur());    
 
 	        }
 	        
+	        for( IMuraille m : terrainJeu.getListeMuraille()){
+	        	g.setColor(Color.PINK);
+	        	g.drawOval(m.getX(), m.getY(), m.getLargeur(), m.getHauteur());    
+
+	        }
+	        
+	        for( IRoute r : terrainJeu.getListeRoute()){
+	        	g.setColor(Color.ORANGE);
+	        	g.drawOval(r.getX(), r.getY(), r.getLargeur(), r.getHauteur());    
+
+	        }
 	        
 	    }
 	 
 	
 	 
-	 public void updateMoteur(IMoteurJeu moteurJeu){
-			this.moteurJeu = moteurJeu;
+	 public void updateTerrain(ITerrain terrainJeu){
+			this.terrainJeu = terrainJeu;
 			this.repaint();
 
 	}
@@ -78,7 +96,7 @@ public class Terrain extends JPanel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Click");
-		this.moteurJeu.eventListener(e, EEvent.CLICK);
+		this.listener.gererClick(e.getX(), e.getY());
 		
 	}
 
