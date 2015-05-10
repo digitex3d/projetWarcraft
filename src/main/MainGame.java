@@ -128,7 +128,7 @@ public class MainGame {
 		moteurJeu.bindGD(gd);
 		moteurJeu.init(1000);
 		
-		EventListener listener = new EventListener(terrain);
+		EventListener listener = new EventListener(terrain, moteurJeu);
 		
 		ThreadListener tlist = new ThreadListener(listener, terrain);
 		tlist.start();
@@ -145,7 +145,7 @@ public class MainGame {
 							listener.getLastArg());
 				}
 		
-				tlist.updateTerrain(terrain);
+				tlist.updateTerrain();
 				System.out.println("PasDeJeu:" + moteurJeu.getPasJeuCourant());
 				System.out.println("Or Orc:" + moteurJeu.getHotelVille(0).getOrRestant());
 				System.out.println("Or Humains:" + moteurJeu.getHotelVille(1).getOrRestant());

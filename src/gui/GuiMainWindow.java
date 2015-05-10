@@ -11,7 +11,7 @@ public class GuiMainWindow extends JFrame {
 	
 
 	public GuiMainWindow(ITerrain terrainJeu, EventListener listener) {
-		this.terrain = new Terrain(listener);
+		this.terrain = new Terrain(listener, terrainJeu);
 	
 		initUI(terrainJeu.getLargeur(),terrainJeu.getHauteur());
 	}
@@ -27,8 +27,8 @@ public class GuiMainWindow extends JFrame {
 		setLocationRelativeTo(null);
 	}    
 
-	public void updateTerrain(ITerrain terrainJeu){
-		this.terrain.updateTerrain( terrainJeu);
+	public void updateTerrain(){
+		this.terrain.updateTerrain();
 	}
 	
 	
