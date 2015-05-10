@@ -86,9 +86,9 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 			else if( currentY < destY )
 				currentY++;	
 			
-			if( currentX <= this.terr.getLargeur() && currentX >= 0  )
+			if( currentX+ vill.getLargeur() < this.terr.getLargeur() && currentX >= 0  )
 				this.cheminX.add(currentX);
-			if( currentY <= this.terr.getHauteur() && currentY >= 0  )
+			if( currentY+ vill.getHauteur() < this.terr.getHauteur() && currentY >= 0  )
 				this.cheminY.add(currentY);
 			
 			if( currentX == destX && currentY== destY) break;
@@ -129,9 +129,9 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 				currentY++;	
 
 			
-			if( currentX <= this.terr.getLargeur() && currentX >= 0  )
+			if( currentX+ vill.getLargeur() < this.terr.getLargeur() && currentX >= 0  )
 				this.cheminX.add(currentX);
-			if( currentY <= this.terr.getHauteur() && currentY >= 0  )
+			if( currentY + vill.getHauteur() < this.terr.getHauteur() && currentY >= 0  )
 				this.cheminY.add(currentY);
 
 			if( currentX == destX && currentY== destY) break;
