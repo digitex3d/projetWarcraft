@@ -75,6 +75,7 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 		
 		// Construction liste du chemin
 		while( true ){
+			
 			if( currentX > destX )
 				currentX--;
 			else if( currentX < destX )
@@ -85,8 +86,10 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 			else if( currentY < destY )
 				currentY++;	
 			
-			this.cheminX.add(currentX);
-			this.cheminY.add(currentY);
+			if( currentX <= this.terr.getLargeur() && currentX >= 0  )
+				this.cheminX.add(currentX);
+			if( currentY <= this.terr.getHauteur() && currentY >= 0  )
+				this.cheminY.add(currentY);
 			
 			if( currentX == destX && currentY== destY) break;
 		}
