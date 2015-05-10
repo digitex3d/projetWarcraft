@@ -93,7 +93,7 @@ public class GestionDeplacementContract extends GestionDeplacementDecorator {
 		}
 
 		
-		if ( ! (super.getCheminX().size() == bonus + vill.getVitesse() ) ) 
+		if ( ! (super.getCheminX().size() <= bonus + vill.getVitesse() ) ) 
 			throw new PostconditionError("cheminX().size() == bonus + vill.vitesse() ");
 
 
