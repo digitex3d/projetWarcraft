@@ -10,7 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	MineTestError.class, 
 	RouteTestError.class, 
 	VillageoisTestError.class, 
-	MoteurJeuTestError.class, 
+//	MoteurJeuTestError.class, 
 	TerrainTestError.class,
 	MurailleTestError.class,
 	HotelVilleTestError.class,
