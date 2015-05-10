@@ -1,5 +1,4 @@
 <project name="Warcraft" default="compile" basedir=".">
-    <description>Fichier de construction pour le projet BomberMan</description>
 	<property name="src" location="src"/>
     <property name="build" location="bin"/>
     <property name="junit" location="jar/junit.jar:jar/org.hamcrest.jar"/>
@@ -19,29 +18,38 @@
 	
 	<target name="run" depends="compile" description="Play a game ! ">
 		<echo>================ Let's go ! ================</echo>
-		    <java classname="main.Jeu" classpath="${build}"></java>
+		    <java classname="main.MainGame" classpath="${build}"></java>
 	</target>
 
 	  <target name="ctest" depends="compile"
-	          description="run all tests">
-	    <echo>================ Run All Tests ================</echo>
-	    <java classname="org.junit.runner.JUnitCore" classpath="${build}:${junit}">
-	        <arg value="tests.contracts.AllTestsContracts"/>
-	    </java>
-	  </target>
+	          description="run all tests with contracts">
+	    <echo>================ Run All Tests with contracts ================</echo>
+	  	<junit haltonfailure="false" printsummary="true">
+	  		<classpath>
+	  		   <pathelement path="${build}:${junit}"/>
+	  		</classpath>
+	  	      <test name="tests.contracts.AllTestsContracts"/>
+	  	</junit>
+	 </target>
     <target name="test" depends="compile"
-            description="run all tests with bugged implementation">
-      <echo>================ Run All Tests with bugged implementation ================</echo>
-      <java classname="org.junit.runner.JUnitCore" classpath="${build}:${junit}">
-          <arg value="tests.implem.AllTestsImpl"/>
-      </java>
+            description="run all tests without contracts ">
+      <echo>================ Run All Tests without contracts ================</echo>
+        <junit haltonfailure="false" printsummary="true">
+            <classpath>
+               <pathelement path="${build}:${junit}"/>
+            </classpath>
+              <test name="tests.implem.AllTestsImpl"/>
+        </junit>
     </target>
 	  <target name="etest" depends="compile"
 	          description="run all tests with bugged implementation">
 	    <echo>================ Run All Tests with bugged implementation ================</echo>
-	    <java classname="org.junit.runner.JUnitCore" classpath="${build}:${junit}">
-	        <arg value="tests.implemError.AllTestsError"/>
-	    </java>
+        <junit haltonfailure="false" printsummary="true">
+            <classpath>
+               <pathelement path="${build}:${junit}"/>
+            </classpath>
+              <test name="tests.implemError.AllTestsError"/>
+        </junit>
 	  </target>
 
   <target name="dist" depends="init1,clean"
