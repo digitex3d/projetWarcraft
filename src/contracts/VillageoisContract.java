@@ -226,8 +226,8 @@ public class VillageoisContract extends VillageoisDecorator {
 	public void setCorvee(int s, int corveeX, int corveeY) {
 		this.checkInvariants();
 		
-		// \pre setCorvee(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0
-		if (super.estMort() || super.estOccupe() || s <= 0)
+		// \pre !estMort() && !estOccupe() && s > 0 && corveeX >= 0 && corveeY >= 0
+		if (super.estMort() || super.estOccupe() || s <= 0 || corveeX < 0 || corveeY < 0)
 			throw new PreconditionError("setCorvee(V, s) require ¬estMort(V) ∧ ¬estOccupe(V) ∧ s > 0");
 		
 		//Sauvegarde contexte  

@@ -161,7 +161,11 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 				}
 			}
 		
-		if(getCheminX().size() == 0 ) this.firstObstacle = 0;
+		if(getCheminX().size() == 0 ) {
+			this.firstObstacle = 0;
+			this.getPointArrive.add(vill.getX());
+			this.getPointArrive.add(vill.getY());
+		}
 		
 		// Pas d'obstacles, position max atteignable
 		if( this.firstObstacle == -1 ){

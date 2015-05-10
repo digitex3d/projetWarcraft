@@ -117,25 +117,7 @@ public class GestionDeplacementContract extends GestionDeplacementDecorator {
 					throw new PostconditionError("this.firstObstacle == i ");
 
 			}
-
-		int cosO= (int) Math.cos( Math.toRadians(angle)); 
-		int sinO= (int) Math.sin( Math.toRadians(angle));
 		
-		// \post: getCheminX().get( super.getCheminX().size() -1 ) ==  
-		//	   vill.getX() + bonus + vill.getVitesse() * cos(angle)
-		if ( super.getCheminX().get( super.getCheminX().size() -1 )  != 
-				(int) (vill.getX() + (bonus + vill.getVitesse()) * cosO)
-				) 
-			throw new PostconditionError("getCheminX().get( super.getCheminX().size() -1 ) == "
-					+ "vill.getX() + bonus + vill.getVitesse() * cos(angle)");
-
-		// \post:	   get(cheminY(calcChemin(GD)), |cheminY(calcChemin(GD))|-1)) =  
-		//	   	Villageois::posy(vill(GD)) + (bonus + Villageois::vitesse(vill(GD))) * -sin( angle(GD) )
-		if ( super.getCheminY().get( super.getCheminY().size() -1 )  != 
-				(int) (vill.getY() + (bonus + vill.getVitesse()) * -sinO)
-				) 
-			throw new PostconditionError("getCheminY().get( super.getCheminY().size() -1 ) == "
-					+ "vill.getY() + bonus + vill.getVitesse() * -sin(angle)");
 
 		// \post: getPointArrivee(calcChemin(GD)) = 
 		// if firstObstacle() == -1 

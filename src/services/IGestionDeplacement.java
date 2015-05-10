@@ -44,8 +44,6 @@ public interface IGestionDeplacement extends
 	 *								!getTerrain.estFranchissable( x, y)) i } ) 
 	 *								else -1 
 	 * 
-	 * \post: getCheminX().get( cheminX().size()-1)) == vill.getX() + bonus + vill.getVitesse() * cos( angle(GD) )
-	 * \post: getCheminY().get( cheminY().size()-1)) == vill.getY() + bonus + vill.getVitesse() * -sin( angle(GD) )
 	 * 
 	 * \post: getPointArrivee(calcChemin(villNum, angle)) = 
 	 *		if(firstObstacle(calcChemin(villNum, angle)) == -1), 
