@@ -47,9 +47,10 @@ public class EventListener {
 			IVillageois vill = this.terrain.getListeVillageois().get(lastSelectedID);
 			
 			this.lastCommand = ECommande.DEPLACER;
-			int dX = vill.getX() - x;
-			int dY = vill.getY() - y;
-			this.lastArg = (int) Math.toDegrees(Math.atan(dX/dY));
+			int dX = x- vill.getX();
+			int dY = y - vill.getY();
+			int angl = (int) Math.toDegrees(Math.atan2(-dX, -dY))+90;  
+			this.lastArg =  (angl < 0) ? angl + 360: angl;
 	
 			System.out.println(this.lastArg);
 		}

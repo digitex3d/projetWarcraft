@@ -64,8 +64,8 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 		this.cheminY = new ArrayList<Integer>();
 		this.getPointArrive = new ArrayList<Integer>();
 					
-		int cosO= (int) Math.cos( Math.toRadians(angle)); 
-		int sinO= (int) Math.sin( Math.toRadians(angle));
+		double cosO= Math.cos( Math.toRadians(angle)); 
+		double sinO=  Math.sin( Math.toRadians(angle));
 		// Position finale sans bonus
 		int destX =   (int) (vill.getX() + (vill.getVitesse() * cosO)) ;
 		int destY =   (int) (vill.getY() + (vill.getVitesse() * -sinO));
