@@ -28,6 +28,9 @@ public class Terrain extends JPanel implements MouseListener {
 	ITerrain terrainJeu;
 
     public  Terrain(EventListener listener) {
+    	if(this.terrainJeu == null){
+    		System.out.println("Il faut binder le terrain de jeu!");
+    	}
     	this.listener = listener;
     	addMouseListener(this);
         setFocusable(true);

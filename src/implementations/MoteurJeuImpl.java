@@ -89,6 +89,10 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	
 	@Override
 	public void pasJeu(ECommande command, int numVillageois, int argument) {
+		if(command == ECommande.RIEN){
+			this.pasJeuCourant += 1;
+			return ;
+		}
 		IVillageois selVill = this.terrain.getListeVillageois().get(numVillageois);
 		
 		// Décrémente la corvée des villageois occupés
@@ -146,10 +150,6 @@ public class MoteurJeuImpl implements IMoteurJeu{
 												mur.getHauteur());
 			
 			
-			break;
-		case RIEN:
-			break;
-		default:
 			break;
 		}
 		

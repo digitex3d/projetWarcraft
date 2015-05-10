@@ -12,18 +12,21 @@ public class EventListener {
 	IMoteurJeu moteur;
 	ITerrain terrain;
 	int lastSelectedID;
+	ECommande lastCommand;
+	int lastArg;
 	
-	public EventListener(ITerrain terrain, IMoteurJeu moteur) {
+	public EventListener(ITerrain terrain) {
 		super();
 		this.terrain = terrain;
-		this.moteur = moteur;
 		this.lastSelectedID = -1;
+		this.lastCommand = ECommande.RIEN;
+		this.lastArg = 360;
 	}
 	
 	public IVillageois getVillageoisAt(int x, int y) {
 		for (IVillageois vill : terrain.getListeVillageois())
-			if (vill.getX() >= x &&  x <= vill.getX()+vill.getLargeur() )
-				if (vill.getY() <= y && y >= vill.getY()+ vill.getHauteur() )
+			if ( x < x + vill.getLargeur() &&  x >= vill.getX() )
+				if ( y < y + vill.getHauteur() &&  y >= vill.getY() )
 					return vill;
 		return null;
 	}
@@ -35,16 +38,38 @@ public class EventListener {
 		System.out.println(  getVillageoisAt(x, y) );
 		
 		if (entiteClique.contains(EEntite.VILLAGEOIS)){
+			
 			this.lastSelectedID = terrain.getListeVillageois().indexOf( getVillageoisAt(x, y));
 			
 		}
 		
 		if (entiteClique.contains(EEntite.RIEN)){
-			this.moteur.pasJeu(ECommande.DEPLACER, lastSelectedID, 360);
+			IVillageois vill = this.terrain.getListeVillageois().get(lastSelectedID);
 			
+			this.lastCommand = ECommande.DEPLACER;
+			int dX = vill.getX() - x;
+			int dY = vill.getY() - y;
+			this.lastArg = (int) Math.toDegrees(Math.atan(dX/dY));
+	
+			System.out.println(this.lastArg);
 		}
 		
 		
+	}
+	
+	public ECommande getLastCommand(){
+		ECommande tmp = this.lastCommand;
+		this.lastCommand = ECommande.RIEN;
+		return tmp;
+		
+	}
+	
+	public int getLastID(){
+		return this.lastSelectedID;
+	}
+	
+	public int getLastArg(){
+		return this.lastArg;
 	}
 	
 }

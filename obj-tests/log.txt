@@ -1,0 +1,138 @@
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testAccueil1
+INFO: orRestant modifié après accueil
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testAccueil2
+INFO: orRestant modifié après accueil
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testAccueil3
+INFO: accueil, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testInit1
+INFO: init, La mine est créé avec un mauvais orRestant
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testInit2
+INFO: init, La mine est créé avec un mauvais orRestant
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testInit3
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testInit4
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testInit5
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testInit6
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testAbandoned1
+INFO: mauvais orRestant après abandoned
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testAbandoned2
+INFO: abandoned, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testRetrait1
+INFO: mauvais orRestant après retrait
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testRetrait2
+INFO: mauvais orRestant après retrait
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testRetrait3
+INFO: mauvais orRestant après retrait
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testRetrait4
+INFO: retrait, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testRetrait5
+INFO: retrait, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MineTestError]  testRetrait6
+INFO: retrait, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.RouteTestError]  testInit1
+INFO: init, La route est créé avec une mauvaise hauteur
+May 10, 2015 5:08:16 PM [tests.implemError.RouteTestError]  testInit2
+INFO: init, La route est créé avec une mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.RouteTestError]  testInit3
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.RouteTestError]  testInit4
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.RouteTestError]  testInit5
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.RouteTestError]  testInit6
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.RouteTestError]  testInit7
+INFO: init, La route est créé avec une mauvaise largeur
+May 10, 2015 5:08:16 PM [tests.implemError.RouteTestError]  testInit8
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testChargeOr1
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testChargeOr2
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testChargeOr3
+INFO: chargeOr, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testDecrCorvee1
+INFO: mauvaise corvee
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testDecrCorvee2
+INFO: decrCorvee, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit1
+INFO: init, Le villageois est créé avec une mauvaise y
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit2
+INFO: init, Le villageois est créé avec une mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit3
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit4
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit5
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit6
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit7
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit8
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testInit9
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetCorvee3
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetCorvee4
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetCorvee5
+INFO: setCorvee, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetCorvee6
+INFO: setCorvee, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetCorvee7
+INFO: setCorvee, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetCorvee8
+INFO: setCorvee, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetCorvee9
+INFO: setCorvee, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testDechargeOr1
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testDechargeOr2
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testDechargeOr3
+INFO: dechargeOr, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testDechargeOr4
+INFO: dechargeOr, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testDechargeOr5
+INFO: dechargeOr, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testRetrait1
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testRetrait2
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testRetrait3
+INFO: retrait, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testRetrait4
+INFO: retrait, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testRetrait5
+INFO: retrait, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetXY2
+INFO: mauvaise x
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetXY3
+INFO: setXY, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.VillageoisTestError]  testSetXY4
+INFO: setXY, Pas d'exception levée
+May 10, 2015 5:08:16 PM [tests.implemError.MoteurJeuTestError]  testInit1
+INFO: init, Le terrain est créé avec un mauvais pasJeuCourant
+May 10, 2015 5:08:16 PM [tests.implemError.MoteurJeuTestError]  testInit2
+INFO: init, Le terrain est créé avec un mauvais pasJeuCourant
+May 10, 2015 5:08:16 PM [tests.implemError.MoteurJeuTestError]  testInit3
+INFO: init, Pas d'exception levée
+May 10, 2015 5:08:17 PM [tests.implemError.MurailleTestError]  testInit1
+INFO: init, La muraille est créé avec une mauvaise largeur
+May 10, 2015 5:08:17 PM [tests.implemError.MurailleTestError]  testInit2
+INFO: init, La muraille est créé avec une mauvaise largeur
+May 10, 2015 5:08:17 PM [tests.implemError.MurailleTestError]  testRetraitPre1
+INFO: init, La muraille est créé avec une mauvaise largeur
+May 10, 2015 5:08:17 PM [tests.implemError.HotelVilleTestError]  testInit1
+INFO: init, le hotel de ville est créé avec une mauvaise quantité d'or
+May 10, 2015 5:08:17 PM [tests.implemError.HotelVilleTestError]  testInit2
+INFO: init, le hotel de ville est créé avec une mauvaise quantité d'or
+May 10, 2015 5:08:17 PM [tests.implemError.HotelVilleTestError]  testDepotPre1
+INFO: depot, contient  une mauvaise quantité d'or
+May 10, 2015 5:08:17 PM [tests.implemError.HotelVilleTestError]  testDepotPre2
+INFO: depot, contient  une mauvaise quantité d'or

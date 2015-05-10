@@ -23,7 +23,8 @@ import enums.ERace;
 import gui.EventListener;
 import gui.GuiMainWindow;
 import gui.Terrain;
-
+import gui.ThreadListener;
+import services.IEntite;
 
 
 public class MainGame {
@@ -47,54 +48,63 @@ public class MainGame {
 		// Init Villageois Humains
 		int poshx = hvHumain.getX();
 		int poshy = hvHumain.getY();
-		for (int i = 0; i < 3; i++) {
-			IVillageois vill = new VillageoisImpl();
-			vill.init(poshx + Utils.randInt(10, 30) , 
-					  poshy + Utils.randInt(10, 30),
-					ERace.HUMAN, 10, 10, 10, 4.0, 100);
-			villageoisListe.add(vill);
-			
-		}		
+		IVillageois vill = new VillageoisImpl();
+		vill.init(poshx + 30 , 
+				  poshy ,
+				ERace.HUMAN, 10, 10, 10, 10.0, 100);
+		villageoisListe.add(vill);	
 		
 		// Init Villageois Orcs
 		poshx = hvORC.getX();
 		poshy = hvORC.getY();
-		for (int i = 0; i < 3; i++) {
-			IVillageois vill = new VillageoisImpl();
-			vill.init(poshx + Utils.randInt(10, 30) , 
-					  poshy + Utils.randInt(10, 30),
-					ERace.ORC, 10, 10, 10, 4.0, 100);
-			villageoisListe.add(vill);
-		}		
+		
+		vill = new VillageoisImpl();
+		vill.init(poshx + 30 , 
+				  poshy ,
+				ERace.ORC, 10, 10, 10, 10.0, 100);
+		villageoisListe.add(vill);
+			
 		 
 
 		// Initialisation Mines
 		ArrayList<IMine> minesListe = new ArrayList<IMine>();
 
-		for (int i = 0; i < 8; i++) {
-			IMine mine = new MineImpl();
+	
+		IMine mine = new MineImpl();
 
-
-			mine.init(Utils.randInt(0, winLargeur), Utils.randInt(0, winHauteur), 12, 12);
-			minesListe.add(mine);
-		}
+		mine.init(300, 100, 12, 12);
+		minesListe.add(mine);
+		
+		mine = new MineImpl();
+		
+		mine.init(160, 100, 12, 12);
+		minesListe.add(mine);
 
 		// Initialisation Murailles
 		ArrayList<IMuraille> muraillesListe = new ArrayList<IMuraille>();
 
-		for (int i = 0; i < 15; i++) {
-			IMuraille mur = new MurailleImpl();
-			mur.init(Utils.randInt(0, winLargeur), Utils.randInt(0, winHauteur), 8, 8, 100);
-			muraillesListe.add(mur);
-		}
+		
+		IMuraille mur = new MurailleImpl();
+		mur.init(200,300, 8, 8, 100);
+		muraillesListe.add(mur);
+	
+		mur = new MurailleImpl();
+		mur.init(100,250, 8, 8, 100);
+		muraillesListe.add(mur);
+	
+		
 		// Initialisation Routes
 		ArrayList<IRoute> routesListe = new ArrayList<IRoute>();
 
-		for (int i = 0; i < 20; i++) {
-			IRoute route = new RouteImpl();
-			route.init(Utils.randInt(0, winLargeur), Utils.randInt(0, winHauteur), 4, 16,1);
-			routesListe.add(route);
-		}
+	
+		IRoute route = new RouteImpl();
+		route.init(150, 150, 4, 16,1);
+		routesListe.add(route);
+		
+		route = new RouteImpl();
+		route.init(60, 100, 4, 16,1);
+		routesListe.add(route);
+		
 
 		// init terrain
 		ITerrain terrain = new TerrainImpl();
@@ -116,20 +126,37 @@ public class MainGame {
 		gd = gd.init();
 		
 		moteurJeu.bindGD(gd);
-		moteurJeu.init(10);
+		moteurJeu.init(1000);
 		
-		EventListener listener = new EventListener(terrain, moteurJeu);
+		EventListener listener = new EventListener(terrain);
+		
+		ThreadListener tlist = new ThreadListener(listener, terrain);
+		tlist.start();
+		
+		
+		while (!moteurJeu.estFini())
+		{
+			try {
+				
+				synchronized (moteurJeu) {
+
+					moteurJeu.pasJeu(listener.getLastCommand(), 
+							listener.getLastID(), 
+							listener.getLastArg());
+				}
+		
+				tlist.updateTerrain(terrain);
+				System.out.println(moteurJeu.getPasJeuCourant());
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(moteurJeu.resultatFinal());
 		
 	
-
-
-		
-		
-		
-		GuiMainWindow window = new GuiMainWindow(terrain, listener);
-
-		window.updateTerrain(terrain);
-		window.setVisible(true);
 		
 	}
+	
+	
 }
