@@ -96,4 +96,110 @@ Cas de test 1.8 : cas negatif MoteurJeu::testPasJeu9
     Oracle:
         Exception
 ***********************************************************
+Cas de test 1.9 : cas negatif MoteurJeu::testPasJeu10
+    Condition initiales : 
+        L0 = pasJeu(init(100), ENTRERMINE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, ENTRERHOTELVILLE, 0, 0)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.10 : cas negatif MoteurJeu::testPasJeu11
+    Condition initiales : 
+        L0 = pasJeu(init(100), ENTRERMINE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, TAPERMURAILLE, 0, 0)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.11 : cas positif MoteurJeu::testPasJeu12
+    Condition initiales : 
+        L0 = pasJeu(init(100), ENTRERMINE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, RIEN, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 2
+***********************************************************
+Cas de test 1.12 : cas positif MoteurJeu::testPasJeu13
+    Condition initiales : 
+        L0 = pasJeu(init(100), RIEN, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, RIEN, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 2
+***********************************************************
+Cas de test 1.13 : cas positif MoteurJeu::testPasJeu14
+    Condition initiales : 
+        L0 = pasJeu(init(100), RIEN, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, ENTRERMINE, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 2
+***********************************************************
+Cas de test 1.14 : cas negatif MoteurJeu::testPasJeu15
+    Condition initiales : 
+        L0 = pasJeu(init(100), RIEN, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, ENTRERHOTELVILLE, 0, 0)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.15 : cas positif MoteurJeu::testPasJeu16
+    Condition initiales : 
+        L0 = init(100)
+    Opérations : 
+        L1 = pasJeu(L0, TAPERMURAILLE, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 1
+***********************************************************
+Cas de test 1.16 : cas positif MoteurJeu::testPasJeu17
+    Condition initiales : 
+        L0 = pasJeu(init(100), TAPERMURAILLE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, TAPERMURAILLE, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 2
+***********************************************************
+Cas de test 1.17 : cas positif MoteurJeu::testPasJeu18
+    Condition initiales : 
+        L0 = pasJeu(init(100), TAPERMURAILLE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, ENTRERMINE, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 2
+***********************************************************
+Cas de test 1.18 : cas positif MoteurJeu::testPasJeu19
+    Condition initiales : 
+        L0 = pasJeu(init(100), TAPERMURAILLE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, RIEN, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 2
+***********************************************************
+Cas de test 1.19 : cas positif MoteurJeu::testPasJeu20
+    Condition initiales : 
+        L0 = pasJeu(pasJeu(init(100), TAPERMURAILLE, 0, 0), TAPERMURAILLE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, ENTRERMINE, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 3
+***********************************************************
+Cas de test 1.20 : cas negatif MoteurJeu::testPasJeu21
+    Condition initiales : 
+        L0 = pasJeu(pasJeu(init(100), TAPERMURAILLE, 0, 0), TAPERMURAILLE, 0, 0)
+    Opérations : 
+        L1 = pasJeu(L0, TAPERMURAILLE, 0, 0)
+    Oracle:
+        Exception
+***********************************************************
+Cas de test 1.21 : cas positif MoteurJeu::testPasJeu22
+    Condition initiales : 
+        L0 = pasJeu(init(100), ENTRERMINE, 0, 0)
+        \for i = 1 \to 16
+        Li =  pasJeu(L(i-1), RIEN, 0, 0)
+    Opérations : 
+        L17 = pasJeu(L0, ENTRERHOTELVILLE, 0, 0)
+    Oracle:
+        pasJeuCourant(L0) == 18
+***********************************************************
 

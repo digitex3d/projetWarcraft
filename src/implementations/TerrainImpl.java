@@ -160,14 +160,13 @@ public class TerrainImpl implements ITerrain {
 	@Override
 	public void reinsertVillageois(int numV) {
 		IVillageois vill = listeVillageois.get(numV);
-		boolean placed = false;
 		int side = 1;
 		
-		while ( ! placed) {
+		while (true) {
 			ArrayList<Integer[]> ring = getRing(vill.getX(), vill.getY(), side);
 			int skipped = 0;
 			for (Integer[] coord : ring) {
-				if (coord[0] < 0 || coord[1] < 0 || coord[0] + vill.getLargeur() >= largeur || coord[1] + vill.getHauteur() >= hauteur) {
+				if (coord[0] < 0 || coord[1] < 0 || coord[0] + vill.getLargeur() > largeur || coord[1] + vill.getHauteur() > hauteur) {
 					skipped++;
 					continue;
 				}
@@ -175,6 +174,7 @@ public class TerrainImpl implements ITerrain {
 				if (estFranchissable(coord[0], coord[1], vill.getLargeur(), vill.getHauteur())) {
 					setEntiteAt(EEntite.VILLAGEOIS, coord[0], coord[1], vill.getLargeur(), vill.getHauteur());
 					vill.setXY(coord[0], coord[1]);
+					return;
 				}
 			}
 			

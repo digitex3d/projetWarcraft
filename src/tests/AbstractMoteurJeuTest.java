@@ -161,4 +161,161 @@ public abstract class AbstractMoteurJeuTest extends AbstractAssertion{
 		// oracle
 		assertPerso("pasJeu, Pas d'exception levée", exc);
 	}
+
+	@Test
+	public void testPasJeu10() {
+		boolean exc = false;
+		moteur.init(100);
+			moteur.pasJeu(ECommande.ENTRERMINE, 0, 0);
+		try {
+			moteur.pasJeu(ECommande.ENTRERHOTELVILLE, 0, 0);
+		}
+		catch (ContractError e) {
+			exc = true;
+		}
+		
+		// oracle
+		assertPerso("pasJeu, Pas d'exception levée", exc);
+	}
+
+	@Test
+	public void testPasJeu11() {
+		boolean exc = false;
+		moteur.init(100);
+			moteur.pasJeu(ECommande.ENTRERMINE, 0, 0);
+		try {
+			moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+		}
+		catch (ContractError e) {
+			exc = true;
+		}
+		
+		// oracle
+		assertPerso("pasJeu, Pas d'exception levée", exc);
+	}
+
+	@Test
+	public void testPasJeu12() {
+		moteur.init(100);
+		moteur.pasJeu(ECommande.ENTRERMINE, 0, 0);
+
+		moteur.pasJeu(ECommande.RIEN, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 2);
+	}
+
+	@Test
+	public void testPasJeu13() {
+		moteur.init(100);
+		moteur.pasJeu(ECommande.RIEN, 0, 0);
+
+		moteur.pasJeu(ECommande.RIEN, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 2);
+	}
+
+	@Test
+	public void testPasJeu14() {
+		moteur.init(100);
+		moteur.pasJeu(ECommande.RIEN, 0, 0);
+
+		moteur.pasJeu(ECommande.ENTRERMINE, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 2);
+	}
+
+	@Test
+	public void testPasJeu15() {
+		boolean exc = false;
+		moteur.init(100);
+		moteur.pasJeu(ECommande.RIEN, 0, 0);
+		try {
+			moteur.pasJeu(ECommande.ENTRERHOTELVILLE, 0, 0);
+		}
+		catch (ContractError e) {
+			exc = true;
+		}
+		
+		// oracle
+		assertPerso("pasJeu, Pas d'exception levée", exc);
+	}
+	
+	@Test
+	public void testPasJeu16() {
+		moteur.init(100);
+
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 1);
+	}
+	
+	@Test
+	public void testPasJeu17() {
+		moteur.init(100);
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 2);
+	}
+
+	@Test
+	public void testPasJeu18() {
+		moteur.init(100);
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+
+		moteur.pasJeu(ECommande.ENTRERMINE, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 2);
+	}
+
+	@Test
+	public void testPasJeu19() {
+		moteur.init(100);
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+
+		moteur.pasJeu(ECommande.RIEN, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 2);
+	}
+
+	@Test
+	public void testPasJeu20() {
+		moteur.init(100);
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+
+		moteur.pasJeu(ECommande.ENTRERMINE, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 3);
+	}
+
+	@Test
+	public void testPasJeu21() {
+		boolean exc = false;
+		moteur.init(100);
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+		moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+		try {
+			moteur.pasJeu(ECommande.TAPERMURAILLE, 0, 0);
+		}
+		catch (ContractError e) {
+			exc = true;
+		}
+		
+		// oracle
+		assertPerso("pasJeu, Pas d'exception levée", exc);
+	}
+
+	@Test
+	public void testPasJeu22() {
+		moteur.init(100);
+		moteur.pasJeu(ECommande.ENTRERMINE, 0, 0);
+		for (int i = 1; i <= 16; i++)
+			moteur.pasJeu(ECommande.RIEN, 0, 0);
+
+		moteur.pasJeu(ECommande.ENTRERHOTELVILLE, 0, 0);
+		// oracle
+		assertPerso("pasJeu, mauvais pasJeuCourant", moteur.getPasJeuCourant() == 18);
+	}
 }

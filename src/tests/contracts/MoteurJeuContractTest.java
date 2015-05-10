@@ -7,6 +7,7 @@ import implementations.GestionDeplacementImpl;
 import implementations.HotelVilleImpl;
 import implementations.MineImpl;
 import implementations.MoteurJeuImpl;
+import implementations.MurailleImpl;
 import implementations.TerrainImpl;
 import implementations.VillageoisImpl;
 
@@ -16,6 +17,7 @@ import contracts.GestionDeplacementContract;
 import contracts.HotelVilleContract;
 import contracts.MineContract;
 import contracts.MoteurJeuContract;
+import contracts.MurailleContract;
 import contracts.TerrainContract;
 import contracts.VillageoisContract;
 import enums.ERace;
@@ -60,6 +62,9 @@ public class MoteurJeuContractTest extends AbstractMoteurJeuTest {
 		lm.add(mine);
 		
 		List<IMuraille> lmu = new ArrayList<IMuraille>();
+		IMuraille mu = new MurailleContract(new MurailleImpl());
+		mu.init(20, 20, 5, 5, 10);
+		lmu.add(mu);
 		List<IRoute> lr = new ArrayList<IRoute>();
 		terrain.bindVill(lv);
 		terrain.bindHDV(lh);

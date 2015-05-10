@@ -87,8 +87,10 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 		this.checkInvariants();
 		
 		/**
-			pre: ! getVillageois(vilNum).estMort() &&
-			 	 ! getVillageois(vilNum).estOccupe() && ! estFini() &&
+			pre: ! estFini() &&
+				 if command != RIEN then
+					! getVillageois(vilNum).estMort() &&
+			 	 	! getVillageois(vilNum).estOccupe()
 			 	 if command == DEPLACER then
 			 	 	0 <= arg <= 360
 			 	 if command == ENTRERMINE then
@@ -96,14 +98,17 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 			 	 if command == ENTRERHOTELVILLE then
 			 	 	peutEntrerHotelVille(vilNum, arg)
 			 	 if command == TAPERMURAILLE then
-			 	 	peutTaperMuraille(vilNum, arg)
+			 	 	peutTaperMuraille(vilNum, arg) &&
+			 	 	! getMuraille(arg).estDetruite()
 		 */
-		if (getVillageois(vilNum).estMort())
-			throw new PreconditionError("getVillageois(vilNum).estMort()");
-		if (getVillageois(vilNum).estOccupe())
-			throw new PreconditionError("getVillageois(vilNum).estOccupe()");
 		if (super.estFini())
 			throw new PreconditionError("! estFini()");
+		if (command != ECommande.RIEN) {
+			if (getVillageois(vilNum).estMort())
+				throw new PreconditionError("getVillageois(vilNum).estMort()");
+			if (getVillageois(vilNum).estOccupe())
+				throw new PreconditionError("getVillageois(vilNum).estOccupe()");
+		}
 		if (command == ECommande.DEPLACER)
 			if( arg > 360 || arg < 0 )
 				throw new PreconditionError("0 <= arg <= 360");
@@ -111,10 +116,12 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 			if ( ! peutEntrer(vilNum, arg))
 				throw new PreconditionError("peutEntrer(vilNum, arg)");
 		if (command == ECommande.ENTRERHOTELVILLE)
-			if ( ! peutEntrerHotelVille(vilNum, arg))
+			if ( ! peutEntrerHotelVille(vilNum, arg)) {
+				System.out.println(Utils.distance(getVillageois(vilNum).getX(), getVillageois(vilNum).getY(), getHotelVille(arg).getX(), getHotelVille(arg).getY()));
 				throw new PreconditionError("peutEntrerHotelVille(vilNum, arg)");
+			}
 		if (command == ECommande.TAPERMURAILLE)
-			if ( ! peutTaperMuraille(vilNum, arg))
+			if ( ! peutTaperMuraille(vilNum, arg) || getMuraille(arg).estDetruite())
 				throw new PreconditionError("peutTaperMuraille(vilNum, arg)");
 		
 		int pasJeuCourant_pre = this.getPasJeuCourant();
