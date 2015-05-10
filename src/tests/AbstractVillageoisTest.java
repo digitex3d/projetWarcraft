@@ -42,8 +42,8 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		villageois.init(10, 0, ERace.ORC, 1, 1, 1, 1, 1);
 		
 		// oracle
-		assertPerso("init, Le villageois est créé avec une mauvaise x", villageois.getX() == 0);
-		assertPerso("init, Le villageois est créé avec une mauvaise y", villageois.getY() == 10);
+		assertPerso("init, Le villageois est créé avec une mauvaise x", villageois.getX() == 10);
+		assertPerso("init, Le villageois est créé avec une mauvaise y", villageois.getY() == 0);
 		assertPerso("init, Le villageois est créé avec une mauvaise race", villageois.getRace() == ERace.ORC);
 		assertPerso("init, Le villageois est créé avec une mauvaise largeur", villageois.getLargeur() == 1);
 		assertPerso("init, Le villageois est créé avec une mauvaise hauteur", villageois.getHauteur() == 1);
@@ -217,7 +217,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		
 		// oracle
 		assertPerso("mauvaise x", villageois.getX() == 10);
-		assertPerso("mauvaise y", villageois.getY() == 0);
+		assertPerso("mauvaise y", villageois.getY() == 10);
 		assertPerso("mauvaise corvee", villageois.getCorvee() == 0);
 		assertPerso("mauvaise quantiteOr", villageois.getQuantiteOr() == 0);	
 		assertPerso("mauvais pointsDeVie", villageois.getPointsDeVie() == 0);	
@@ -231,7 +231,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		
 		// oracle
 		assertPerso("mauvaise x", villageois.getX() == 10);
-		assertPerso("mauvaise y", villageois.getY() == 0);
+		assertPerso("mauvaise y", villageois.getY() == 10);
 		assertPerso("mauvaise corvee", villageois.getCorvee() == 0);
 		assertPerso("mauvaise quantiteOr", villageois.getQuantiteOr() == 0);	
 		assertPerso("mauvais pointsDeVie", villageois.getPointsDeVie() == -9);	
@@ -308,7 +308,7 @@ public abstract class AbstractVillageoisTest extends AbstractAssertion{
 		assertPerso("mauvaise x", villageois.getX() == 10);
 		assertPerso("mauvaise y", villageois.getY() == 10);
 		assertPerso("mauvaise corvee", villageois.getCorvee() == 0);
-		assertPerso("mauvaise quantiteOr", villageois.getQuantiteOr() == 1);	
+		assertPerso("mauvaise quantiteOr", villageois.getQuantiteOr() == 10);	
 		assertPerso("mauvais pointsDeVie", villageois.getPointsDeVie() == 1);	
 	}
 
