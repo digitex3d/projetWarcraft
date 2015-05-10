@@ -116,10 +116,8 @@ public class MoteurJeuContract extends MoteurJeuDecorator{
 			if ( ! peutEntrer(vilNum, arg))
 				throw new PreconditionError("peutEntrer(vilNum, arg)");
 		if (command == ECommande.ENTRERHOTELVILLE)
-			if ( ! peutEntrerHotelVille(vilNum, arg)) {
-				System.out.println(Utils.distance(getVillageois(vilNum).getX(), getVillageois(vilNum).getY(), getHotelVille(arg).getX(), getHotelVille(arg).getY()));
+			if ( ! peutEntrerHotelVille(vilNum, arg))
 				throw new PreconditionError("peutEntrerHotelVille(vilNum, arg)");
-			}
 		if (command == ECommande.TAPERMURAILLE)
 			if ( ! peutTaperMuraille(vilNum, arg) || getMuraille(arg).estDetruite())
 				throw new PreconditionError("peutTaperMuraille(vilNum, arg)");
