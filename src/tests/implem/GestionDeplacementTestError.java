@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import implemError.GestionDeplacementImplError;
 import implementations.GestionDeplacementImpl;
 import implementations.MurailleImpl;
 import implementations.RouteImpl;
@@ -21,8 +20,6 @@ import services.IRoute;
 import services.IVillageois;
 import tests.AbstractGestionDeplacementTests;
 import utils.Utils;
-import contracts.GestionDeplacementContract;
-import contracts.TerrainContract;
 import enums.ERace;
 import exceptions.PreconditionError;
 
