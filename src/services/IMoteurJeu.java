@@ -51,8 +51,10 @@ public interface IMoteurJeu extends
 	/* ########### Operators ########### */
 	
 	/**
-		pre: ! getVillageois(vilNum).estMort() &&
-		 	 ! getVillageois(vilNum).estOccupe() && ! estFini() &&
+		pre: ! estFini() &&
+			 if command != RIEN then
+				! getVillageois(vilNum).estMort() &&
+		 	 	! getVillageois(vilNum).estOccupe()
 		 	 if command == DEPLACER then
 		 	 	0 <= arg <= 360
 		 	 if command == ENTRERMINE then
@@ -60,7 +62,8 @@ public interface IMoteurJeu extends
 		 	 if command == ENTRERHOTELVILLE then
 		 	 	peutEntrerHotelVille(vilNum, arg)
 		 	 if command == TAPERMURAILLE then
-		 	 	peutTaperMuraille(vilNum, arg)
+		 	 	peutTaperMuraille(vilNum, arg) &&
+		 	 	! getMuraille(arg).estDetruite()
 
 		 post: pasJeuCourant() == pasJeuCourant@pre + 1
 		 post: \forall x \in [0, terrain().getListeVillageois().size()[, 

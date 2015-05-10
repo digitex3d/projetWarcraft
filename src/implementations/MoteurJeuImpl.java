@@ -88,21 +88,28 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	}
 	
 	@Override
-	public void pasJeu(ECommande commande, int numVillageois, int argument) {
+	public void pasJeu(ECommande command, int numVillageois, int argument) {
 		IVillageois selVill = this.terrain.getListeVillageois().get(numVillageois);
 		
 		// Décrémente la corvée des villageois occupés
 		for( IVillageois vill : this.terrain.getListeVillageois()){
 			if(vill.estOccupe()){
-				if( vill.getCorvee() == 1 )
+				vill.decrCorvee();
+				if (vill.getCorvee() == 0)
 					this.terrain.reinsertVillageois(
 							this.terrain.getListeVillageois().indexOf(vill));
-				else
-					vill.decrCorvee();
 			}
 		}
 		
-		switch(commande){
+		for (int i = 0; i < terrain.getListeMine().size(); i++) {
+			IMine mine = getMine(i);
+			if ( ! mine.estAbandonne())
+				if (command != ECommande.ENTRERMINE || i != argument)
+					mine.abandoned();
+					
+		}
+		
+		switch(command){
 		case DEPLACER:
 			this.terrain.removeEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
 			gd.calcChemin(numVillageois, argument);
