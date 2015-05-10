@@ -1,6 +1,7 @@
-package tests.implemError;
+package tests.implem;
 
 import implemError.MurailleImplError;
+import implementations.MurailleImpl;
 
 import org.junit.Before;
 
@@ -11,7 +12,7 @@ public class MurailleTestError extends AbstractMurailleTest{
 	@Override
 	@Before
 	public void before() {
-		mur = new MurailleImplError();
+		mur = new MurailleImpl();
 	}
 	
 	

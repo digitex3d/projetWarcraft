@@ -1,4 +1,4 @@
-package tests.implemError;
+package tests.implem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public class GestionDeplacementTestError extends AbstractGestionDeplacementTests
 		List<IMine> listeMine=new   ArrayList<IMine>();
 		List<IVillageois> listeVillageois=new   ArrayList<IVillageois>();
 		List<IHotelVille> listeHotelVille=new   ArrayList<IHotelVille>();
-		terrain = new TerrainContract(new TerrainImpl());
+		terrain = new TerrainImpl();
 		
 		terrain.bindHDV(listeHotelVille);
 		terrain.bindMine(listeMine);
@@ -46,7 +46,7 @@ public class GestionDeplacementTestError extends AbstractGestionDeplacementTests
 		
 		terrain = terrain.init(600, 400);
 		
-		gd = new GestionDeplacementImplError();
+		gd = new GestionDeplacementImpl();
 
 		gd.bindTerrain(terrain);
 		gd.init();

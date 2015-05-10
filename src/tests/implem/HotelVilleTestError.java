@@ -1,6 +1,7 @@
-package tests.implemError;
+package tests.implem;
 
 import implemError.HotelVilleImplError;
+import implementations.HotelVilleImpl;
 
 import org.junit.Before;
 
@@ -11,7 +12,7 @@ public class HotelVilleTestError extends AbstractHotelVilleTest{
 	@Override
 	@Before
 	public void before() {
-		hdv = new HotelVilleImplError();
+		hdv = new HotelVilleImpl();
 	}
 
 }
