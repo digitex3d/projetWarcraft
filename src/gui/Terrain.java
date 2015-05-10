@@ -2,25 +2,21 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.Ellipse2D;
 
 
 
 
 
 
+
+import java.util.HashSet;
 
 import javax.swing.JPanel;
 
-import services.IHotelVille;
-import services.IMine;
-import services.IMuraille;
-import services.IRoute;
+import enums.EEntite;
 import services.ITerrain;
-import services.IVillageois;
 
 
 
@@ -45,43 +41,27 @@ public class Terrain extends JPanel implements MouseListener {
 	 public void paint(Graphics g) {
 	        super.paint(g);
 	        
-	        Graphics2D g2d = (Graphics2D)g;
-	        
-	        // Paint Hotel de Ville
-	        g.setColor(Color.RED);
-	        for(IHotelVille hv : terrainJeu.getListeHotelVille()){
-	        	   Ellipse2D.Double circle = new Ellipse2D.Double(hv.getX(),
-	   	        hv.getY(), hv.getLargeur(), hv.getHauteur());
-	   	        g2d.fill(circle); 
-	        }
-	     
-	      
-	        
-	        
-	        for( IVillageois v : terrainJeu.getListeVillageois()){
-	        	g.setColor(Color.BLACK);
-	        	g.drawOval(v.getX(), v.getY(), v.getLargeur(), v.getHauteur());    
-
-	        }
-	        
-	        for( IMine m : terrainJeu.getListeMine()){
-	        	g.setColor(Color.gray);
-	        	g.drawOval(m.getX(), m.getY(), m.getLargeur(), m.getHauteur());    
-
-	        }
-	        
-	        for( IMuraille m : terrainJeu.getListeMuraille()){
-	        	g.setColor(Color.PINK);
-	        	g.drawOval(m.getX(), m.getY(), m.getLargeur(), m.getHauteur());    
-
-	        }
-	        
-	        for( IRoute r : terrainJeu.getListeRoute()){
-	        	g.setColor(Color.ORANGE);
-	        	g.drawOval(r.getX(), r.getY(), r.getLargeur(), r.getHauteur());    
-
-	        }
-	        
+	        for (int x = 0; x < terrainJeu.getLargeur(); x++) {
+	        	   for (int y = 0; y < terrainJeu.getHauteur(); y++) {
+	        		   HashSet<EEntite> entitees=  (HashSet<EEntite>) this.terrainJeu.getEntiteAt(x, y);
+	        		   if(entitees.contains(EEntite.VILLAGEOIS))
+	        			   g.setColor(Color.PINK);
+	        		   else if(entitees.contains(EEntite.HDV)) 
+	        			   g.setColor(Color.RED);
+	        		   else if(entitees.contains(EEntite.MINE)) 
+	        			   g.setColor(Color.GRAY);
+	        		   else if(entitees.contains(EEntite.MURAILLE)) 
+	        			   g.setColor(Color.yellow);
+	        		   else if(entitees.contains(EEntite.ROUTE)) 
+	        			   g.setColor(Color.orange);
+	        		   else
+	        			   g.setColor(Color.GREEN);
+	        		
+	        		   g.drawOval(x, y, 1, 1);    
+	        			   
+	   			}
+			}
+   
 	    }
 	 
 	
