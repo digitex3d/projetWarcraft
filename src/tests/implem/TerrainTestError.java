@@ -1,4 +1,4 @@
-package tests.implemError;
+package tests.implem;
 
 
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import implemError.TerrainImplError;
 import implementations.MineImpl;
+import implementations.TerrainImpl;
 import implementations.VillageoisImpl;
 
 import org.junit.Before;
@@ -26,14 +27,14 @@ public class TerrainTestError extends AbstractTerrainTest {
 	@Override
 	@Before
 	public void before() {
-		terrain = new TerrainImplError();
+		terrain = new TerrainImpl();
 
-		IVillageois vill = new VillageoisContract(new VillageoisImpl());
+		IVillageois vill = new VillageoisImpl();
 		vill.init(40, 40, ERace.ORC, 11, 11, 5, 5, 5);
 		List<IVillageois> lv = new ArrayList<IVillageois>();
 		List<IHotelVille> lh = new ArrayList<IHotelVille>();
 		
-		IMine mine = new MineContract(new MineImpl());
+		IMine mine = new MineImpl();
 		mine.init(80, 80, 5, 5);
 		List<IMine> lm = new ArrayList<IMine>();
 		List<IMuraille> lmu = new ArrayList<IMuraille>();

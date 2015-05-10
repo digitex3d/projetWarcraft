@@ -1,8 +1,9 @@
-package tests.implemError;
+package tests.implem;
 
 
 
 import implemError.MineImplError;
+import implementations.MineImpl;
 
 import org.junit.Before;
 
@@ -13,6 +14,6 @@ public class MineTestError extends AbstractMineTest{
 	@Override
 	@Before
 	public void before() {
-		mine = new MineImplError();
+		mine = new MineImpl();
 	}
 }

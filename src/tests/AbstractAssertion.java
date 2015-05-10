@@ -9,7 +9,7 @@ public class AbstractAssertion {
 
 	protected void assertPerso(String message, boolean expression) {
 		if(!expression)
-			this.getLogger().info(message);
+			System.out.println(message);
 		assertTrue(message, expression);
 	}
 	
