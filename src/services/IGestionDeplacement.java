@@ -3,7 +3,6 @@ package services;
 import java.util.ArrayList;
 
 import require.IRequireTerrain;
-import require.IRequireVillageois;
 
 public interface IGestionDeplacement extends 
 	IRequireTerrain {
