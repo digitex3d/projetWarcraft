@@ -4,6 +4,8 @@ import java.util.HashSet;
 
 import enums.ECommande;
 import enums.EEntite;
+import services.IHotelVille;
+import services.IMine;
 import services.IMoteurJeu;
 import services.ITerrain;
 import services.IVillageois;
@@ -31,11 +33,24 @@ public class EventListener {
 		return null;
 	}
 	
+	public IMine getMineAt(int x, int y) {
+		for (IMine mine : terrain.getListeMine())
+			if ( x < x + mine.getLargeur() &&  x >= mine.getX() )
+				if ( y < y + mine.getHauteur() &&  y >= mine.getY() )
+					return mine;
+		return null;
+	}
+	
+	public IHotelVille getHDVAt(int x, int y) {
+		for (IHotelVille  hdv : terrain.getListeHotelVille())
+			if ( x < x + hdv.getLargeur() &&  x >= hdv.getX() )
+				if ( y < y + hdv.getHauteur() &&  y >= hdv.getY() )
+					return hdv;
+		return null;
+	}
+	
 	public void gererClick(int x, int y){
 		HashSet<EEntite> entiteClique = (HashSet<EEntite>) terrain.getEntiteAt(x, y);
-		
-		System.out.println( entiteClique.toString() );
-		System.out.println(  getVillageoisAt(x, y) );
 		
 		if (entiteClique.contains(EEntite.VILLAGEOIS)){
 			
@@ -43,7 +58,27 @@ public class EventListener {
 			
 		}
 		
-		if (entiteClique.contains(EEntite.RIEN)){
+		if (entiteClique.contains(EEntite.MINE)  && 
+				this.lastSelectedID != -1){
+	
+			
+			this.lastCommand = ECommande.ENTRERMINE;
+			this.lastArg = terrain.getListeMine().indexOf( getMineAt(x, y));
+			
+		}
+		
+		
+		if (entiteClique.contains(EEntite.HDV)  && 
+				this.lastSelectedID != -1){
+
+			
+			this.lastCommand = ECommande.ENTRERHOTELVILLE;
+			this.lastArg = terrain.getListeHotelVille().indexOf( getHDVAt(x, y) );
+			
+		}
+		
+		if (entiteClique.contains(EEntite.RIEN) && 
+				this.lastSelectedID != -1){
 			IVillageois vill = this.terrain.getListeVillageois().get(lastSelectedID);
 			
 			this.lastCommand = ECommande.DEPLACER;

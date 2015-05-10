@@ -130,5 +130,6 @@ public class VillageoisImpl implements IVillageois {
 		this.corvee = s;
 		this.posX = corveeX;
 		this.posY = corveeY;
+		
 	}
 }

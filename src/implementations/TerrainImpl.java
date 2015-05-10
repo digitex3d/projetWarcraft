@@ -80,20 +80,25 @@ public class TerrainImpl implements ITerrain {
 		for (int j = x; j < x + l; j++)
 			for (int k = y; k < y + h; k++)
 				if (getEntiteAt(j, k).contains(EEntite.ROUTE)) {
-					bv = getRouteAt(x, y, l, h).getBonusVitesse();
+					IRoute route = getRouteAt(x, y, l, h);
+					if (route != null)
+						bv = route.getBonusVitesse();
 					break;
 				}
 		return bv;
 	}
-
+	
 	@Override
 	public IRoute getRouteAt(int x, int y, int l, int h) {
-		for (IRoute route : listeRoute)
-			if (route.getX() >= x && route.getX() < x + l)
-				if (route.getY() >= y && route.getY() < y + h)
-					return route;
+		for (IRoute  r: this.getListeRoute()){
+			if ( x < x + r.getLargeur() &&  x > r.getX() )
+				if ( y < y + r.getHauteur() &&  y > r.getY() )
+					return r;
+		}
 		return null;
+		
 	}
+	
 
 	@Override
 	public ITerrain init(int largeur, int hauteur) {
@@ -219,5 +224,7 @@ public class TerrainImpl implements ITerrain {
 	public void bindVill(List<IVillageois> villageois) {
 		this.listeVillageois = villageois;
 	}
+
+	
 	
 }

@@ -7,14 +7,13 @@ import services.ITerrain;
 public class ThreadListener extends Thread {
 
 
-	private EventListener lis;
-	private ITerrain terrain;
+
 	private GuiMainWindow window; 
 
 	public ThreadListener(EventListener l, ITerrain terr) {
-		this.lis = l;
-		this.terrain = terr;
-		this.window = new GuiMainWindow(terrain, lis);
+
+		this.window = new GuiMainWindow(terr, l);
+		window.updateTerrain(terr);
 	}
 	
 	@Override
@@ -22,7 +21,7 @@ public class ThreadListener extends Thread {
 	{
 
 	
-		window.updateTerrain(terrain);
+		
 		window.setVisible(true);
 	}
 	

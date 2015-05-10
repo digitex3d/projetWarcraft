@@ -90,44 +90,51 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	@Override
 	public void pasJeu(ECommande command, int numVillageois, int argument) {
 		if(command == ECommande.RIEN){
-			this.pasJeuCourant += 1;
-			return ;
-		}
-		IVillageois selVill = this.terrain.getListeVillageois().get(numVillageois);
-		
-		// Décrémente la corvée des villageois occupés
-		for( IVillageois vill : this.terrain.getListeVillageois()){
-			if(vill.estOccupe()){
-				vill.decrCorvee();
-				if (vill.getCorvee() == 0)
-					this.terrain.reinsertVillageois(
-							this.terrain.getListeVillageois().indexOf(vill));
+			// Décrémente la corvée des villageois occupés
+			for( IVillageois vill : this.terrain.getListeVillageois()){
+				if(vill.estOccupe()){
+					if( vill.getCorvee() == 1){
+						this.terrain.reinsertVillageois(
+								this.terrain.getListeVillageois().indexOf(vill));
+						
+					}
+				
+					vill.decrCorvee();
+				}
 			}
+			
+			for (int i = 0; i < terrain.getListeMine().size(); i++) {
+				IMine mine = getMine(i);
+				if ( ! mine.estAbandonne())
+					if (command != ECommande.ENTRERMINE || i != argument)
+						mine.abandoned();
+						
+			}
+		
+			this.pasJeuCourant += 1;
+			return;
 		}
 		
-		for (int i = 0; i < terrain.getListeMine().size(); i++) {
-			IMine mine = getMine(i);
-			if ( ! mine.estAbandonne())
-				if (command != ECommande.ENTRERMINE || i != argument)
-					mine.abandoned();
-					
-		}
+		IVillageois selVill = this.terrain.getListeVillageois().get(numVillageois);
 		
 		switch(command){
 		case DEPLACER:
-			this.terrain.removeEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
-			gd.calcChemin(numVillageois, argument);
-			ArrayList<Integer> pArrive = this.gd.getPointArrivee();
-			
-			selVill.setXY(pArrive.get(0), pArrive.get(1));
-			this.terrain.setEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
+				this.terrain.removeEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
+				gd.calcChemin(numVillageois, argument);
+				ArrayList<Integer> pArrive = this.gd.getPointArrivee();
+				
+				selVill.setXY(pArrive.get(0), pArrive.get(1));
+				this.terrain.setEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
 			break;
 		case ENTRERHOTELVILLE:
-			IHotelVille hdv = this.terrain.getListeHotelVille().get(argument);
-			hdv.depot(selVill.getQuantiteOr());
-			selVill.dechargeOr(selVill.getQuantiteOr());
+			if(!this.peutEntrerHotelVille(numVillageois, argument)) return;
+				IHotelVille hdv = this.terrain.getListeHotelVille().get(argument);
+				hdv.depot(selVill.getQuantiteOr());
+				selVill.dechargeOr(selVill.getQuantiteOr());
+			
 			break;
 		case ENTRERMINE:
+			if(!this.peutEntrer(numVillageois, argument)) return;
 			IMine mine = this.terrain.getListeMine().get(argument);
 			mine.acceuil(selVill.getRace());
 			mine.retrait(1);
@@ -153,7 +160,6 @@ public class MoteurJeuImpl implements IMoteurJeu{
 			break;
 		}
 		
-		this.pasJeuCourant += 1;
 		
 	}
 
