@@ -26,7 +26,7 @@ import contracts.TerrainContract;
 import enums.ERace;
 import exceptions.PreconditionError;
 
-public class GestionDeplacementTestError extends AbstractGestionDeplacementTests{
+public class GestionDeplacementTestImpl extends AbstractGestionDeplacementTests{
 	@Override
 	@Before
 	public void before() {

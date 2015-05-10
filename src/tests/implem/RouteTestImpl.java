@@ -8,7 +8,7 @@ import org.junit.Before;
 import tests.AbstractRouteTest;
 import contracts.RouteContract;
 
-public class RouteTestError   extends AbstractRouteTest {
+public class RouteTestImpl   extends AbstractRouteTest {
 	@Override
 	@Before
 	public void before() {

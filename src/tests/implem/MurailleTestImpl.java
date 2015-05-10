@@ -8,7 +8,7 @@ import org.junit.Before;
 import tests.AbstractMurailleTest;
 import contracts.MurailleContract;
 
-public class MurailleTestError extends AbstractMurailleTest{
+public class MurailleTestImpl extends AbstractMurailleTest{
 	@Override
 	@Before
 	public void before() {

@@ -7,7 +7,7 @@ import org.junit.Before;
 
 import tests.AbstractHotelVilleTest;
 
-public class HotelVilleTestError extends AbstractHotelVilleTest{
+public class HotelVilleTestImpl extends AbstractHotelVilleTest{
 	@Override
 	@Before
 	public void before() {

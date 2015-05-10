@@ -10,7 +10,7 @@ import org.junit.Before;
 
 import tests.AbstractMineTest;
 
-public class MineTestError extends AbstractMineTest{
+public class MineTestImpl extends AbstractMineTest{
 	@Override
 	@Before
 	public void before() {

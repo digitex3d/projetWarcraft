@@ -22,7 +22,7 @@ import services.IRoute;
 import services.IVillageois;
 import tests.AbstractTerrainTest;
 
-public class TerrainTestError extends AbstractTerrainTest {
+public class TerrainTestImpl extends AbstractTerrainTest {
 
 	@Override
 	@Before
