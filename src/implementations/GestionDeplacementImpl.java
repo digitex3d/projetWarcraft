@@ -86,10 +86,11 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 			else if( currentY < destY )
 				currentY++;	
 			
-			if( currentX+ vill.getLargeur() < this.terr.getLargeur() && currentX >= 0  )
+			if( currentX+ vill.getLargeur() < this.terr.getLargeur() && currentX >= 0  && 
+					currentY+ vill.getHauteur() < this.terr.getHauteur() && currentY >= 0){
 				this.cheminX.add(currentX);
-			if( currentY+ vill.getHauteur() < this.terr.getHauteur() && currentY >= 0  )
 				this.cheminY.add(currentY);
+			}
 			
 			if( currentX == destX && currentY== destY) break;
 		}
@@ -129,10 +130,11 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 				currentY++;	
 
 			
-			if( currentX+ vill.getLargeur() < this.terr.getLargeur() && currentX >= 0  )
+			if( currentX+ vill.getLargeur() < this.terr.getLargeur() && currentX >= 0  && 
+					currentY+ vill.getHauteur() < this.terr.getHauteur() && currentY >= 0){
 				this.cheminX.add(currentX);
-			if( currentY + vill.getHauteur() < this.terr.getHauteur() && currentY >= 0  )
 				this.cheminY.add(currentY);
+		}
 
 			if( currentX == destX && currentY== destY) break;
 		}
@@ -142,6 +144,7 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 		
 		// Détection premier obstacle
 		this.firstObstacle = -1;
+		
 		
 		for (int i = 0; i < cheminX.size(); i++) 
 			if( !this.terr.estFranchissable(	cheminX.get(i), 
@@ -158,10 +161,15 @@ public class GestionDeplacementImpl implements IGestionDeplacement {
 				}
 			}
 		
+		if(getCheminX().size() == 0 ) this.firstObstacle = 0;
+		
 		// Pas d'obstacles, position max atteignable
 		if( this.firstObstacle == -1 ){
-			this.getPointArrive.add( getCheminX().get(getCheminX().size()-1));
-			this.getPointArrive.add( getCheminY().get(getCheminY().size()-1));
+
+				this.getPointArrive.add( getCheminX().get(getCheminX().size()-1));
+				this.getPointArrive.add( getCheminY().get(getCheminY().size()-1));
+		
+			
 		}
 		
 		this.estCalcChemin = true;
