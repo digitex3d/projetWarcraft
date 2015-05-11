@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,9 +14,11 @@ import java.awt.event.MouseListener;
 
 import java.util.HashSet;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import enums.EEntite;
+import services.IMoteurJeu;
 import services.ITerrain;
 
 
@@ -26,15 +29,17 @@ import services.ITerrain;
 public class Terrain extends JPanel implements MouseListener {
 	EventListener listener;
 	ITerrain terrainJeu;
+	IMoteurJeu moteur;
 
-    public Terrain(EventListener listener, ITerrain terrain) {
-    	this.terrainJeu = terrain;
+    public Terrain(EventListener listener, IMoteurJeu moteur) {
+    	this.terrainJeu = moteur.getTerrain();
     	this.listener = listener;
     	addMouseListener(this);
         setFocusable(true);
         setBackground(Color.GREEN);
         setDoubleBuffered(true);
-        
+        this.moteur = moteur;
+     
  
   
     }
@@ -62,6 +67,12 @@ public class Terrain extends JPanel implements MouseListener {
 	        			   
 	   			}
 			}
+	      g.setColor(Color.BLACK);
+	      g.setFont(new Font(null, Font.PLAIN, 18));
+	      g.drawString("Pas de jeu:" + this.moteur.getPasJeuCourant(), 50, 440);
+	      g.drawString("Or orc:" + this.moteur.getHotelVille(0).getOrRestant() , 50, 460);
+	      g.drawString("Or humain:"  + this.moteur.getHotelVille(1).getOrRestant()  , 50, 480);
+	     
    
 	    }
 	 

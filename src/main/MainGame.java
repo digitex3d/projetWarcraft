@@ -85,11 +85,11 @@ public class MainGame {
 
 		
 		IMuraille mur = new MurailleImpl();
-		mur.init(200,300, 8, 8, 100);
+		mur.init(200,300, 8, 200, 100);
 		muraillesListe.add(mur);
 	
 		mur = new MurailleImpl();
-		mur.init(100,250, 8, 8, 100);
+		mur.init(100,250, 200, 8, 100);
 		muraillesListe.add(mur);
 	
 		
@@ -98,11 +98,11 @@ public class MainGame {
 
 	
 		IRoute route = new RouteImpl();
-		route.init(150, 150, 4, 16,1);
+		route.init(60, 90, 20, 200,3);
 		routesListe.add(route);
 		
 		route = new RouteImpl();
-		route.init(60, 100, 4, 16,1);
+		route.init(60, 100, 20, 16,3);
 		routesListe.add(route);
 		
 
@@ -128,9 +128,9 @@ public class MainGame {
 		moteurJeu.bindGD(gd);
 		moteurJeu.init(1000);
 		
-		EventListener listener = new EventListener(terrain, moteurJeu);
+		EventListener listener = new EventListener(moteurJeu);
 		
-		ThreadListener tlist = new ThreadListener(listener, terrain);
+		ThreadListener tlist = new ThreadListener(listener,moteurJeu);
 		tlist.start();
 		
 		

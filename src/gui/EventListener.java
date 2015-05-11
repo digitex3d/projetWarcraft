@@ -17,9 +17,9 @@ public class EventListener {
 	ECommande lastCommand;
 	int lastArg;
 	
-	public EventListener(ITerrain terrain, IMoteurJeu moteur) {
+	public EventListener(IMoteurJeu moteur) {
 		super();
-		this.terrain = terrain;
+		this.terrain = moteur.getTerrain();
 		this.lastSelectedID = -1;
 		this.lastCommand = ECommande.RIEN;
 		this.lastArg = 360;

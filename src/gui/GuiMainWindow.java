@@ -2,7 +2,9 @@ package gui;
 
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
+import services.IMoteurJeu;
 import services.ITerrain;
 
 @SuppressWarnings("serial")
@@ -10,10 +12,12 @@ public class GuiMainWindow extends JFrame {
 	Terrain terrain;
 	
 
-	public GuiMainWindow(ITerrain terrainJeu, EventListener listener) {
-		this.terrain = new Terrain(listener, terrainJeu);
+	public GuiMainWindow(IMoteurJeu moteur, EventListener listener) {
+		this.terrain = new Terrain(listener, moteur);
 	
-		initUI(terrainJeu.getLargeur(),terrainJeu.getHauteur());
+	        
+		initUI(moteur.getTerrain().getLargeur(),moteur.getTerrain().getHauteur());
+	
 	}
 
 	private void initUI(int largeur, int hauteur) {
@@ -24,6 +28,7 @@ public class GuiMainWindow extends JFrame {
 
 		setTitle("Warcraft");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
 		setLocationRelativeTo(null);
 	}    
 

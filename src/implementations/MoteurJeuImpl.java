@@ -220,6 +220,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		return this.terrain.getListeMine().get(mi);
 	}
 	
+	
 	@Override
 	public void bindTerrain(ITerrain terr) {
 		this.terrain = terr;
@@ -237,3 +238,4 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	}
 
 }
+
