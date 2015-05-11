@@ -1,5 +1,6 @@
 package gui;
 
+import services.IMoteurJeu;
 import services.ITerrain;
 
 
@@ -10,9 +11,9 @@ public class ThreadListener extends Thread {
 
 	private GuiMainWindow window; 
 
-	public ThreadListener(EventListener l, ITerrain terr) {
+	public ThreadListener(EventListener l, IMoteurJeu moteur) {
 
-		this.window = new GuiMainWindow(terr, l);
+		this.window = new GuiMainWindow(moteur, l);
 		window.updateTerrain();
 	}
 	

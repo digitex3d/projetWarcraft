@@ -128,9 +128,9 @@ public class MainGame {
 		moteurJeu.bindGD(gd);
 		moteurJeu.init(1000);
 		
-		EventListener listener = new EventListener(terrain, moteurJeu);
+		EventListener listener = new EventListener(moteurJeu);
 		
-		ThreadListener tlist = new ThreadListener(listener, terrain);
+		ThreadListener tlist = new ThreadListener(listener,moteurJeu);
 		tlist.start();
 		
 		
