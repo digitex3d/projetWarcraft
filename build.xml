@@ -55,7 +55,7 @@
   <target name="dist" depends="init1,clean"
         description="Generer la distribution" >
     <!-- tout mettre dans l'archive -->
-    <jar basedir=".." jarfile="../Projet_Warcraft_${nom1}_${nom2}_${DSTAMP}.jar" />
+    <jar basedir="." jarfile="../Projet_Warcraft_${nom1}_${nom2}_${DSTAMP}.jar" />
   </target>
 
   <target name="clean" description="clean up">	

@@ -135,7 +135,7 @@ public class MainGame {
 		gd = gd.init();
 		
 		moteurJeu.bindGD(gd);
-		moteurJeu.init(1000);
+		moteurJeu.init(2000);
 		
 		EventListener listener = new EventListener(moteurJeu);
 		
@@ -153,7 +153,7 @@ public class MainGame {
 							listener.getLastID(), 
 							listener.getLastArg());
 				}
-		
+				
 				tlist.updateTerrain();
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
