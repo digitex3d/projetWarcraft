@@ -69,9 +69,9 @@ public class Terrain extends JPanel implements MouseListener {
 			}
 	      g.setColor(Color.BLACK);
 	      g.setFont(new Font(null, Font.PLAIN, 18));
-	      g.drawString("Pas:" + this.moteur.getPasJeuCourant(), 50, 440);
+	      g.drawString("Pas de jeu:" + this.moteur.getPasJeuCourant(), 50, 440);
 	      g.drawString("Or orc:" + this.moteur.getHotelVille(0).getOrRestant() , 50, 460);
-	      g.drawString("Or humain:"  + this.moteur.getHotelVille(1).getOrRestant()  , 40, 480);
+	      g.drawString("Or humain:"  + this.moteur.getHotelVille(1).getOrRestant()  , 50, 480);
 	     
    
 	    }
