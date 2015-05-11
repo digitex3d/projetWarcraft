@@ -84,7 +84,7 @@ public class EventListener {
 			
 		}
 		
-		if (entiteClique.contains(EEntite.RIEN) && 
+		if ((entiteClique.contains(EEntite.RIEN) || entiteClique.contains(EEntite.ROUTE)) && 
 				this.lastSelectedID != -1){
 			IVillageois vill = this.terrain.getListeVillageois().get(lastSelectedID);
 			

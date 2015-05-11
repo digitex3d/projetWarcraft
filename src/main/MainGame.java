@@ -146,9 +146,6 @@ public class MainGame {
 				}
 		
 				tlist.updateTerrain();
-				System.out.println("PasDeJeu:" + moteurJeu.getPasJeuCourant());
-				System.out.println("Or Orc:" + moteurJeu.getHotelVille(0).getOrRestant());
-				System.out.println("Or Humains:" + moteurJeu.getHotelVille(1).getOrRestant());
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

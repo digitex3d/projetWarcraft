@@ -24,7 +24,7 @@
 	  <target name="ctest" depends="compile"
 	          description="run all tests with contracts">
 	    <echo>================ Run All Tests with contracts ================</echo>
-	  	<junit haltonfailure="false" printsummary="true">
+	  	<junit haltonfailure="false" printsummary="true" showoutput="true">
 	  		<classpath>
 	  		   <pathelement path="${build}:${junit}"/>
 	  		</classpath>
@@ -34,7 +34,7 @@
     <target name="test" depends="compile"
             description="run all tests without contracts ">
       <echo>================ Run All Tests without contracts ================</echo>
-        <junit haltonfailure="false" printsummary="true">
+        <junit haltonfailure="false" printsummary="true" showoutput="true">
             <classpath>
                <pathelement path="${build}:${junit}"/>
             </classpath>
@@ -44,7 +44,7 @@
 	  <target name="etest" depends="compile"
 	          description="run all tests with bugged implementation">
 	    <echo>================ Run All Tests with bugged implementation ================</echo>
-        <junit haltonfailure="false" printsummary="true">
+        <junit haltonfailure="false" printsummary="true" showoutput="true">
             <classpath>
                <pathelement path="${build}:${junit}"/>
             </classpath>
