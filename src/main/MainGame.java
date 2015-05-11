@@ -89,7 +89,16 @@ public class MainGame {
 		muraillesListe.add(mur);
 	
 		mur = new MurailleImpl();
-		mur.init(100,250, 200, 8, 100);
+		mur.init(100,250, 50, 8, 100);
+		muraillesListe.add(mur);
+		mur = new MurailleImpl();
+		mur.init(150,250, 50, 8, 100);
+		muraillesListe.add(mur);
+		mur = new MurailleImpl();
+		mur.init(200,250, 50, 8, 100);
+		muraillesListe.add(mur);
+		mur = new MurailleImpl();
+		mur.init(250,250, 50, 8, 100);
 		muraillesListe.add(mur);
 	
 		
