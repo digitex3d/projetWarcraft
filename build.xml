@@ -18,7 +18,7 @@
 	
 	<target name="run" depends="compile" description="Play a game ! ">
 		<echo>================ Let's go ! ================</echo>
-		    <java classname="main.MainGame" classpath="${build}"></java>
+		    <java classname="main.MainGame" classpath="${build}" fork="true"></java>
 	</target>
 
 	  <target name="ctest" depends="compile"
