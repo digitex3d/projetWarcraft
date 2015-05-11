@@ -89,31 +89,31 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	
 	@Override
 	public void pasJeu(ECommande command, int numVillageois, int argument) {
-		if(command == ECommande.RIEN){
-			// Décrémente la corvée des villageois occupés
-			for( IVillageois vill : this.terrain.getListeVillageois()){
-				if(vill.estOccupe()){
-					if( vill.getCorvee() == 1){
-						this.terrain.reinsertVillageois(
-								this.terrain.getListeVillageois().indexOf(vill));
-						
-					}
-				
-					vill.decrCorvee();
+		// Décrémente la corvée des villageois occupés
+		for( IVillageois vill : this.terrain.getListeVillageois()){
+			if(vill.estOccupe()){
+				if( vill.getCorvee() == 1){
+					this.terrain.reinsertVillageois(
+							this.terrain.getListeVillageois().indexOf(vill));
+					
 				}
-			}
 			
-			for (int i = 0; i < terrain.getListeMine().size(); i++) {
-				IMine mine = getMine(i);
-				if ( ! mine.estAbandonne())
-					if (command != ECommande.ENTRERMINE || i != argument)
-						mine.abandoned();
-						
+				vill.decrCorvee();
 			}
-		
-			this.pasJeuCourant += 1;
-			return;
 		}
+		
+		for (int i = 0; i < terrain.getListeMine().size(); i++) {
+			IMine mine = getMine(i);
+			if ( ! mine.estAbandonne())
+				if (command != ECommande.ENTRERMINE || i != argument)
+					mine.abandoned();
+					
+		}
+	
+		this.pasJeuCourant += 1;
+		
+		if (command == ECommande.RIEN)
+			return;
 		
 		IVillageois selVill = this.terrain.getListeVillageois().get(numVillageois);
 		
@@ -222,6 +222,7 @@ public class MoteurJeuImpl implements IMoteurJeu{
 		return this.terrain.getListeMine().get(mi);
 	}
 	
+	
 	@Override
 	public void bindTerrain(ITerrain terr) {
 		this.terrain = terr;
@@ -239,3 +240,4 @@ public class MoteurJeuImpl implements IMoteurJeu{
 	}
 
 }
+
