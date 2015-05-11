@@ -127,14 +127,12 @@ public class MoteurJeuImpl implements IMoteurJeu{
 				this.terrain.setEntiteAt(EEntite.VILLAGEOIS, selVill.getX(), selVill.getY(), selVill.getLargeur(), selVill.getHauteur());
 			break;
 		case ENTRERHOTELVILLE:
-			if(!this.peutEntrerHotelVille(numVillageois, argument)) return;
 				IHotelVille hdv = this.terrain.getListeHotelVille().get(argument);
 				hdv.depot(selVill.getQuantiteOr());
 				selVill.dechargeOr(selVill.getQuantiteOr());
 			
 			break;
 		case ENTRERMINE:
-			if(!this.peutEntrer(numVillageois, argument)) return;
 			IMine mine = this.terrain.getListeMine().get(argument);
 			mine.acceuil(selVill.getRace());
 			mine.retrait(1);

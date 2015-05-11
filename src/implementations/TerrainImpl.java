@@ -91,8 +91,8 @@ public class TerrainImpl implements ITerrain {
 	@Override
 	public IRoute getRouteAt(int x, int y, int l, int h) {
 		for (IRoute  r: this.getListeRoute()){
-			if ( x < x + r.getLargeur() &&  x > r.getX() )
-				if ( y < y + r.getHauteur() &&  y > r.getY() )
+			if ( x < x + r.getLargeur() &&  x >= r.getX() )
+				if ( y < y + r.getHauteur() &&  y >= r.getY() )
 					return r;
 		}
 		return null;

@@ -13,7 +13,7 @@ public class ThreadListener extends Thread {
 	public ThreadListener(EventListener l, ITerrain terr) {
 
 		this.window = new GuiMainWindow(terr, l);
-		window.updateTerrain(terr);
+		window.updateTerrain();
 	}
 	
 	@Override
@@ -25,9 +25,9 @@ public class ThreadListener extends Thread {
 		window.setVisible(true);
 	}
 	
-	public void updateTerrain( ITerrain terr ){
+	public void updateTerrain(){
 		
-		window.updateTerrain(terr);
+		window.updateTerrain();
 	}
 }
 

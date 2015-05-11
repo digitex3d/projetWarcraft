@@ -17,12 +17,13 @@ public class EventListener {
 	ECommande lastCommand;
 	int lastArg;
 	
-	public EventListener(ITerrain terrain) {
+	public EventListener(ITerrain terrain, IMoteurJeu moteur) {
 		super();
 		this.terrain = terrain;
 		this.lastSelectedID = -1;
 		this.lastCommand = ECommande.RIEN;
 		this.lastArg = 360;
+		this.moteur = moteur;
 	}
 	
 	public IVillageois getVillageoisAt(int x, int y) {
@@ -50,6 +51,8 @@ public class EventListener {
 	}
 	
 	public void gererClick(int x, int y){
+		synchronized (moteur) {
+			
 		HashSet<EEntite> entiteClique = (HashSet<EEntite>) terrain.getEntiteAt(x, y);
 		
 		if (entiteClique.contains(EEntite.VILLAGEOIS)){
@@ -65,6 +68,8 @@ public class EventListener {
 			this.lastCommand = ECommande.ENTRERMINE;
 			this.lastArg = terrain.getListeMine().indexOf( getMineAt(x, y));
 			
+			if(!moteur.peutEntrer(lastSelectedID, lastArg))
+				this.lastCommand = ECommande.RIEN;
 		}
 		
 		
@@ -74,6 +79,8 @@ public class EventListener {
 			
 			this.lastCommand = ECommande.ENTRERHOTELVILLE;
 			this.lastArg = terrain.getListeHotelVille().indexOf( getHDVAt(x, y) );
+			if(!this.moteur.peutEntrerHotelVille(lastSelectedID, lastArg))
+				this.lastCommand = ECommande.RIEN;
 			
 		}
 		
@@ -90,6 +97,7 @@ public class EventListener {
 			System.out.println(this.lastArg);
 		}
 		
+		}
 		
 	}
 	
